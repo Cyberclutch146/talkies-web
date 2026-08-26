@@ -1,0 +1,77 @@
+{
+  "name": "RCC Talkies",
+  "tagline": "The Voice of RCCIIT",
+  "established": 1999,
+  "college": {
+    "name": "RCC Institute of Information Technology",
+    "shortName": "RCCIIT",
+    "affiliation": "MAKAUT",
+    "stats": [
+      { "label": "Years", "value": "25+" },
+      { "label": "Alumni", "value": "5000+" },
+      { "label": "Departments", "value": "10+" }
+    ]
+  },
+  "contact": {
+    "email": "rcctalkies@rcciit.org",
+    "address": "RCC Institute of Information Technology, Canal South Road, Beliaghata, Kolkata – 700015, West Bengal",
+    "social": {
+      "instagram": "https://instagram.com/rcctalkies",
+      "facebook": "https://facebook.com/rcctalkies",
+      "youtube": "https://youtube.com/@rcctalkies"
+    }
+  },
+  "focusAreas": [
+    {
+      "title": "Campus News",
+      "description": "Exam schedules, placement news, faculty announcements — everything that matters on campus.",
+      "icon": "newspaper"
+    },
+    {
+      "title": "Interviews & Reports",
+      "description": "In-depth student, faculty, and industry interviews alongside detailed event reports.",
+      "icon": "mic"
+    },
+    {
+      "title": "Photography & Media",
+      "description": "Covering fests, seminars, and campus life through compelling visual storytelling.",
+      "icon": "camera"
+    },
+    {
+      "title": "Magazine & Posters",
+      "description": "Quarterly magazine editions and event posters that define the visual identity of RCCIIT.",
+      "icon": "book"
+    },
+    {
+      "title": "Social Engagement",
+      "description": "Active across Instagram, Facebook, and YouTube — connecting with the RCCIIT community online.",
+      "icon": "share"
+    },
+    {
+      "title": "Awards & Recognition",
+      "description": "One of the most active journalism clubs in Kolkata's engineering college circuit.",
+      "icon": "trophy"
+    }
+  ],
+  "desks": [
+    "Editorial",
+    "Reporting",
+    "Research",
+    "Photo & Art",
+    "PR & Social"
+  ],
+  "sisterClubs": [
+    { "name": "RCC Techz", "focus": "Technology" },
+    { "name": "Ignitex", "focus": "Innovation" },
+    { "name": "GDG on Campus RCCIIT", "focus": "Google Dev Group" },
+    { "name": "Art & Culture Club", "focus": "Art & Culture" }
+  ],
+  "navLinks": [
+    { "label": "Home", "href": "/" },
+    { "label": "Events", "href": "/events" },
+    { "label": "Magazine", "href": "/magazine" },
+    { "label": "Reports", "href": "/reports" },
+    { "label": "Members", "href": "/members" },
+    { "label": "Contact", "href": "/contact" }
+  ]
+}

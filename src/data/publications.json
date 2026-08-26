@@ -1,0 +1,40 @@
+{
+  "magazines": [
+    {
+      "title": "The Beginning",
+      "volume": "Vol. I",
+      "year": 2024,
+      "description": "Issue #1 — The inaugural edition of the RCC Talkies magazine, covering campus life, student voices, and the birth of a new editorial tradition.",
+      "link": "#",
+      "cover": null
+    },
+    {
+      "title": "Tech & Culture",
+      "volume": "Vol. II",
+      "year": 2025,
+      "description": "Issue #2 — Exploring the intersection of technology and culture at RCCIIT, with features on student startups and creative expression.",
+      "link": "#",
+      "cover": null
+    }
+  ],
+  "reports": [
+    {
+      "title": "GOT 2024 Sports Report",
+      "event": "Game Of Trophies",
+      "year": 2024,
+      "link": "#"
+    },
+    {
+      "title": "TechTrix 2024 Report",
+      "event": "TechTrix",
+      "year": 2024,
+      "link": "#"
+    },
+    {
+      "title": "Regalia 2024 Report",
+      "event": "Regalia",
+      "year": 2024,
+      "link": "#"
+    }
+  ]
+}

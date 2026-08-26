@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #ECE7D8;
+  --color-cream-dark: #DDD7C5;
+  --color-ink: #16140F;
+  --color-red: #B23B22;
+  --color-red-dark: #8F2E1A;
+  --color-muted: #8A8478;
+  --color-rule: #C5BFB0;
+  --color-cream-light: #F5F1E8;
+
+  --font-display: var(--font-anton);
+  --font-body: var(--font-space-grotesk);
+}
+
+/* ───────── Base ───────── */
+
+* {
+  border-color: var(--color-rule);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* ───────── Typography ───────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+/* ───────── Focus ───────── */
+
+*:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* ───────── Scrollbar ───────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-rule);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* ───────── Selection ───────── */
+
+::selection {
+  background-color: var(--color-red);
+  color: var(--color-cream);
+}
+
+/* ───────── Skip Link ───────── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--color-red);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 16px;
+}

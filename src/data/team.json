@@ -1,0 +1,32 @@
+{
+  "core": [
+    { "name": "Samprit Rup", "role": "President" },
+    { "name": "Raunshan Pandey", "role": "Secretary" },
+    { "name": "Shreya Dutta", "role": "Student Advisor" },
+    { "name": "Pritam Mondal", "role": "Tech Lead" },
+    { "name": "Sutanuka Chakraborty", "role": "Editor-in-Chief" },
+    { "name": "Kankona Chakraborty", "role": "PR Head" },
+    { "name": "Soumyadeep Sardar", "role": "Alumni POC" },
+    { "name": "Meghna Santra", "role": "Media Journalist Lead" },
+    { "name": "Soham Dey", "role": "Art Work Lead" },
+    { "name": "Aritree Saha", "role": "Content Lead" },
+    { "name": "Antara Malik", "role": "Social Media Lead" },
+    { "name": "Sohom Sarkar", "role": "Graphics Lead" },
+    { "name": "Kaushiki Baidya", "role": "Lead Journalist" },
+    { "name": "Aditya Chakraborty", "role": "Event Management Lead" },
+    { "name": "Debarghya Aich", "role": "Research Wing Associate" }
+  ],
+  "website": [
+    { "name": "Pritam Mondal", "role": "Lead Web Designer" },
+    { "name": "Shreya Chakraborty", "role": "Co-Lead Web Designer" },
+    { "name": "Baidantik Das", "role": "Web Designer" },
+    { "name": "Swapnil Mukherjee", "role": "Web Designer" },
+    { "name": "Samadrita Saha", "role": "Web Designer" }
+  ],
+  "faculty": [
+    { "name": "Anwesha Basu", "role": "Faculty Advisor" },
+    { "name": "Dr. Anirban Mukherjee", "role": "Faculty Advisor" },
+    { "name": "Sohini Sen", "role": "Faculty Coordinator" },
+    { "name": "Tasmina Yasmin", "role": "Faculty Coordinator" }
+  ]
+}
