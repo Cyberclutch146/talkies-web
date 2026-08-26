@@ -1,20 +1,25 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-cream: #ECE7D8;
-  --color-cream-dark: #DDD7C5;
-  --color-ink: #16140F;
-  --color-red: #B23B22;
-  --color-red-dark: #8F2E1A;
-  --color-muted: #8A8478;
-  --color-rule: #C5BFB0;
-  --color-cream-light: #F5F1E8;
+  --color-paper: #e5e0d3;
+  --color-paper-light: #ece7da;
+  --color-paper-dark: #dad4c3;
+  --color-ink: #14120e;
+  --color-ink-soft: #2e2a23;
+  --color-muted: #6e685c;
+  --color-rule: rgba(20, 18, 14, 0.18);
+  --color-rule-dark: rgba(20, 18, 14, 0.35);
+  --color-vermillion: #c83a1a;
+  --color-vermillion-dark: #a82e13;
 
+  --font-gothic: var(--font-gothic);
+  --font-serif: var(--font-serif);
+  --font-display-serif: var(--font-display-serif);
   --font-display: var(--font-anton);
   --font-body: var(--font-space-grotesk);
 }
 
-/* ───────── Base ───────── */
+/* ───────── Base Paper & Ink Styling ───────── */
 
 * {
   border-color: var(--color-rule);
@@ -22,6 +27,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-paper);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -36,47 +42,95 @@ html {
 }
 
 body {
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
   color: var(--color-ink);
-  font-family: var(--font-body);
+  font-family: var(--font-serif);
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* ───────── Typography ───────── */
+/* Subtle newspaper grain overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: radial-gradient(#14120e 0.75px, transparent 0.75px), radial-gradient(#14120e 0.75px, #e5e0d3 0.75px);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+}
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  line-height: 0.9;
+/* ───────── Typography System ───────── */
+
+.font-gothic {
+  font-family: var(--font-gothic), serif;
+}
+
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-display-serif {
+  font-family: var(--font-display-serif), Georgia, serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Impact, sans-serif;
   letter-spacing: -0.02em;
 }
 
-/* ───────── Focus ───────── */
+.font-sans {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* ───────── Interactive & UI Utilities ───────── */
 
 *:focus-visible {
-  outline: 2px solid var(--color-red);
+  outline: 2px solid var(--color-vermillion);
   outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-paper-light);
+}
+
+/* ───────── Marquee Animation ───────── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* ───────── Scrollbar ───────── */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-cream);
+  background: var(--color-paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-rule);
+  background: var(--color-rule-dark);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
-}
-
-/* ───────── Selection ───────── */
-
-::selection {
-  background-color: var(--color-red);
-  color: var(--color-cream);
+  background: var(--color-ink);
 }
 
 /* ───────── Skip Link ───────── */
@@ -87,10 +141,12 @@ h1, h2, h3, h4, h5, h6 {
   left: 16px;
   z-index: 9999;
   padding: 8px 16px;
-  background: var(--color-red);
-  color: var(--color-cream);
+  background: var(--color-ink);
+  color: var(--color-paper);
   font-family: var(--font-body);
-  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   text-decoration: none;
 }
 .skip-link:focus {

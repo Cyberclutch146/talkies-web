@@ -1,87 +1,208 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ScrollReveal } from "@/components/ScrollReveal";
-import { SectionHeading } from "@/components/SectionHeading";
-import { EventCard } from "@/components/EventCard";
+import { motion, AnimatePresence } from "framer-motion";
 import eventsData from "@/data/events.json";
 
 type TabKey = "got" | "techtrix" | "regalia" | "external";
 
-const tabs: { key: TabKey; label: string }[] = [
-  { key: "got", label: "GOT" },
-  { key: "techtrix", label: "TechTrix" },
-  { key: "regalia", label: "Regalia" },
-  { key: "external", label: "External" },
+const tabs: { key: TabKey; label: string; code: string }[] = [
+  { key: "got", label: "Game Of Trophies", code: "01 // GOT" },
+  { key: "techtrix", label: "TechTrix Fest", code: "02 // TECH" },
+  { key: "regalia", label: "Regalia Cultural", code: "03 // REGALIA" },
+  { key: "external", label: "External Fests", code: "04 // EXTERNAL" },
 ];
+
+const eventImages: Record<string, string> = {
+  got: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=80",
+  techtrix: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1000&q=80",
+  regalia: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80",
+};
 
 export default function EventsPage() {
   const [activeTab, setActiveTab] = useState<TabKey>("got");
+  const [activeYear, setActiveYear] = useState<number>(2025);
+
   const activeEvent = eventsData.flagship.find((e) => e.slug === activeTab);
+  const activeYearData = activeEvent?.years.find((y) => y.year === activeYear) || activeEvent?.years[0];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-      <ScrollReveal>
-        <SectionHeading title="Events" tag="Archive" />
-      </ScrollReveal>
+    <div className="w-full bg-[#e5e0d3] text-[#14120e]">
+      {/* Inverted Black Header Banner */}
+      <section className="w-full bg-[#14120e] text-[#e5e0d3] py-6 sm:py-10 px-4 sm:px-8 border-b border-[#14120e]">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#c83a1a] font-bold block mb-1">
+              CHRONICLES & FESTIVALS
+            </span>
+            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tighter text-[#e5e0d3]">
+              EVENT ARCHIVE
+            </h1>
+          </div>
+          <p className="font-serif text-sm sm:text-base text-[#e5e0d3]/70 max-w-sm">
+            Comprehensive annual records of RCCIIT's flagship sports meets, technical hackathons, and cultural fests.
+          </p>
+        </div>
+      </section>
 
-      {/* Tab bar */}
-      <div className="flex border border-rule mb-10 overflow-x-auto">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`relative flex-1 min-w-[100px] py-3 px-4 text-sm font-body font-medium uppercase tracking-wider text-center transition-colors border-r border-rule last:border-r-0 ${
-              activeTab === tab.key
-                ? "bg-ink text-cream"
-                : "bg-cream text-muted hover:text-ink"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      {/* Editorial Statement */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 border-b border-[#14120e]/20">
+        <div className="flex items-baseline gap-3 text-sm font-sans uppercase tracking-[0.2em] text-[#14120e]/70">
+          <span className="text-[#c83a1a]">✦</span>
+          <span>Coverage from 2023 to 2025 · Verified by RCC Talkies Reporting Wing</span>
+        </div>
       </div>
 
-      {/* Flagship event */}
-      {activeTab !== "external" && activeEvent && (
-        <ScrollReveal key={activeEvent.slug}>
-          <EventCard
-            name={activeEvent.name}
-            shortName={activeEvent.shortName}
-            tagline={activeEvent.tagline}
-            description={activeEvent.description}
-            years={activeEvent.years}
-          />
-        </ScrollReveal>
-      )}
-
-      {/* External events */}
-      {activeTab === "external" && (
-        <div className="space-y-4">
-          {eventsData.external.map((event, i) => (
-            <ScrollReveal key={event.name} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.2 }}
-                className="border border-rule p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-3 group hover:border-red transition-colors"
+      {/* 4-Tab Bar */}
+      <div className="w-full border-b border-[#14120e]/20 bg-[#eae5d9]/80 overflow-x-auto">
+        <div className="max-w-7xl mx-auto flex divide-x divide-[#14120e]/20">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => {
+                  setActiveTab(tab.key);
+                  setActiveYear(2025);
+                }}
+                className={`px-6 py-4 text-xs font-sans uppercase tracking-widest font-bold text-left transition-all min-w-[180px] sm:min-w-0 flex-1 ${
+                  isActive
+                    ? "bg-[#14120e] text-[#e5e0d3]"
+                    : "hover:bg-[#ded8c7] text-[#14120e]"
+                }`}
               >
-                <div className="flex-1">
-                  <h3 className="font-display text-xl text-ink group-hover:text-red transition-colors">
-                    {event.name}
+                <span className={`block text-[10px] tracking-wider mb-1 ${isActive ? "text-[#c83a1a]" : "text-[#14120e]/50"}`}>
+                  {tab.code}
+                </span>
+                <span className="text-sm">{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Event Details Content */}
+      <div className="max-w-7xl mx-auto">
+        {activeTab !== "external" && activeEvent && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20">
+            {/* Left: Event Poster & Year Switcher */}
+            <div className="lg:col-span-5 p-6 sm:p-10 space-y-6">
+              <div className="relative aspect-[16/10] w-full overflow-hidden border border-[#14120e]/30 bg-[#14120e]">
+                <img
+                  src={eventImages[activeEvent.slug] || eventImages.got}
+                  alt={activeEvent.name}
+                  className="w-full h-full object-cover grayscale contrast-125"
+                />
+                <div className="absolute top-3 left-3 bg-[#c83a1a] text-[#e5e0d3] text-[9px] font-sans font-bold uppercase tracking-widest px-2 py-0.5">
+                  {activeEvent.tagline}
+                </div>
+              </div>
+
+              <div>
+                <h2 className="font-display text-4xl sm:text-5xl uppercase tracking-tight text-[#14120e] mb-3">
+                  {activeEvent.name}
+                </h2>
+                <p className="font-serif text-base text-[#14120e]/80 leading-relaxed">
+                  {activeEvent.description}
+                </p>
+              </div>
+
+              {/* Year Selectors */}
+              <div className="pt-4 border-t border-[#14120e]/20">
+                <span className="text-[10px] font-sans uppercase tracking-[0.2em] font-bold text-[#14120e]/60 block mb-3">
+                  Select Edition Year
+                </span>
+                <div className="flex gap-2">
+                  {activeEvent.years.map((y) => (
+                    <button
+                      key={y.year}
+                      onClick={() => setActiveYear(y.year)}
+                      className={`px-4 py-2 text-xs font-sans uppercase tracking-widest font-bold border transition-colors ${
+                        activeYear === y.year
+                          ? "bg-[#14120e] text-[#e5e0d3] border-[#14120e]"
+                          : "border-[#14120e]/30 text-[#14120e] hover:border-[#14120e]"
+                      }`}
+                    >
+                      {y.year}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Highlights Breakdown */}
+            <div className="lg:col-span-7 p-6 sm:p-10 space-y-8 bg-[#eae5d9]/40">
+              <div className="border-b border-[#14120e]/20 pb-4 flex justify-between items-end">
+                <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-tight text-[#14120e]">
+                  {activeEvent.shortName} // {activeYear} HIGHLIGHTS
+                </h3>
+                <span className="text-xs font-sans uppercase tracking-widest text-[#c83a1a] font-bold">
+                  ✦ 3 STORIES
+                </span>
+              </div>
+
+              <div className="space-y-6">
+                {activeYearData?.highlights.map((h, i) => (
+                  <div
+                    key={i}
+                    className="p-6 border border-[#14120e]/20 bg-[#e5e0d3] hover:border-[#14120e] transition-colors space-y-2"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="font-display text-2xl text-[#c83a1a]">
+                        0{i + 1}
+                      </span>
+                      <h4 className="font-display text-xl sm:text-2xl uppercase tracking-tight text-[#14120e]">
+                        {h.title}
+                      </h4>
+                    </div>
+                    <p className="font-serif text-base text-[#14120e]/85 leading-relaxed pl-8">
+                      {h.blurb}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* External Events Grid */}
+        {activeTab === "external" && (
+          <div className="p-6 sm:p-12 space-y-6">
+            <div className="max-w-2xl mb-8">
+              <h2 className="font-display text-4xl uppercase tracking-tight text-[#14120e] mb-2">
+                INTER-COLLEGE & EXTERNAL PARTICIPATION
+              </h2>
+              <p className="font-serif text-base text-[#14120e]/80">
+                Competitions, state-level hackathons, and university fests covered by RCC Talkies journalists outside our campus.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {eventsData.external.map((ext, idx) => (
+                <div
+                  key={ext.name}
+                  className="border border-[#14120e]/20 p-6 bg-[#e0dbcd]/40 hover:bg-[#e0dbcd] transition-colors space-y-3"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-sans uppercase tracking-[0.2em] font-bold text-[#c83a1a]">
+                      EXTERNAL // 0{idx + 1}
+                    </span>
+                    <span className="text-[10px] font-sans uppercase tracking-widest px-2 py-0.5 border border-[#14120e]/30 bg-[#e5e0d3]">
+                      WEST BENGAL
+                    </span>
+                  </div>
+                  <h3 className="font-display text-2xl uppercase text-[#14120e]">
+                    {ext.name}
                   </h3>
-                  <p className="text-sm text-muted leading-relaxed mt-1">
-                    {event.description}
+                  <p className="font-serif text-sm text-[#14120e]/85 leading-relaxed">
+                    {ext.description}
                   </p>
                 </div>
-                <span className="text-[10px] font-body font-bold uppercase tracking-widest text-muted bg-cream-light border border-rule px-3 py-1 shrink-0 self-start">
-                  External
-                </span>
-              </motion.div>
-            </ScrollReveal>
-          ))}
-        </div>
-      )}
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

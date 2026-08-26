@@ -1,8 +1,34 @@
 import type { Metadata } from "next";
-import { Anton, Space_Grotesk } from "next/font/google";
+import {
+  UnifrakturMaguntia,
+  Newsreader,
+  Playfair_Display,
+  Anton,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+
+const unifraktur = UnifrakturMaguntia({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-gothic",
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-display-serif",
+  display: "swap",
+});
 
 const anton = Anton({
   weight: "400",
@@ -19,14 +45,15 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "RCC Talkies — The Voice of RCCIIT",
-    template: "%s | RCC Talkies",
+    default: "The RCC Talkies — The Paper Portfolio & Journalism Society",
+    template: "%s | The RCC Talkies",
   },
   description:
-    "RCC Talkies is the official journalism club of RCC Institute of Information Technology, Kolkata. Campus news, interviews, photography, magazines, and more.",
+    "The Voice of RCCIIT. Kolkata-based independent student journalism, media society, and campus archive.",
   keywords: [
     "RCC Talkies",
     "RCCIIT",
+    "The Paper Portfolio",
     "journalism club",
     "Kolkata",
     "campus news",
@@ -34,13 +61,13 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${unifraktur.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-body">
+      <body className="min-h-full flex flex-col font-serif bg-[#e7e3d8] text-[#14120e] selection:bg-[#14120e] selection:text-[#e7e3d8]">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
