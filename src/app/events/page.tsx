@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import eventsData from "@/data/events.json";
+import AccordionGallery, { AccordionGalleryItem } from "@/components/AccordionGallery";
+import DecryptedText from "@/components/DecryptedText";
 
 type TabKey = "got" | "techtrix" | "regalia" | "external";
 
@@ -18,6 +19,39 @@ const eventImages: Record<string, string> = {
   techtrix: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1000&q=80",
   regalia: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80",
 };
+
+const galleryItems: (AccordionGalleryItem & { tab: TabKey })[] = [
+  {
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
+    label: "GOT // Football Finals",
+    alt: "Game of Trophies Football match",
+    tab: "got"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1200&q=80",
+    label: "TechTrix // 24h Hackathon",
+    alt: "TechTrix coding marathon",
+    tab: "techtrix"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80",
+    label: "Regalia // Music Night",
+    alt: "Regalia live band performance",
+    tab: "regalia"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
+    label: "TechTrix // Robo-Wars",
+    alt: "Robotics battle competition",
+    tab: "techtrix"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
+    label: "Regalia // Dance Battle",
+    alt: "Choreography dance performance",
+    tab: "regalia"
+  }
+];
 
 export default function EventsPage() {
   const [activeTab, setActiveTab] = useState<TabKey>("got");
@@ -36,7 +70,16 @@ export default function EventsPage() {
               CHRONICLES & FESTIVALS
             </span>
             <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tighter text-[#e5e0d3]">
-              EVENT ARCHIVE
+              <DecryptedText
+                text="EVENT ARCHIVE"
+                animateOn="view"
+                speed={40}
+                maxIterations={8}
+                sequential={true}
+                revealDirection="start"
+                className="text-[#e5e0d3]"
+                encryptedClassName="text-[#c83a1a]"
+              />
             </h1>
           </div>
           <p className="font-serif text-sm sm:text-base text-[#e5e0d3]/70 max-w-sm">
@@ -45,11 +88,44 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Interactive Accordion Gallery Showcase */}
+      <section className="w-full border-b border-[#14120e]/20 bg-[#ded8c7]/50 p-4 sm:p-8">
+        <div className="max-w-7xl mx-auto space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#14120e]/20 pb-3">
+            <div className="flex items-center gap-3">
+              <span className="font-sans text-[11px] uppercase tracking-[0.25em] font-bold text-[#c83a1a]">
+                INTERACTIVE GALLERY
+              </span>
+              <span className="text-xs font-sans uppercase tracking-widest text-[#14120e]/60">
+                // Hover or tap panels to expand highlights
+              </span>
+            </div>
+            <span className="text-[11px] font-sans uppercase tracking-widest text-[#14120e]/50">
+              Coverage 2023–2025
+            </span>
+          </div>
+
+          <AccordionGallery
+            items={galleryItems}
+            defaultIndex={2}
+            accentColor="#c83a1a"
+            overlayColor="#14120e"
+            textColor="#e5e0d3"
+            height={460}
+            gap={8}
+            radius={0}
+            expandRatio={0.52}
+            trigger="hover"
+            grayscale={true}
+          />
+        </div>
+      </section>
+
       {/* Editorial Statement */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 border-b border-[#14120e]/20">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-6 border-b border-[#14120e]/20">
         <div className="flex items-baseline gap-3 text-sm font-sans uppercase tracking-[0.2em] text-[#14120e]/70">
           <span className="text-[#c83a1a]">✦</span>
-          <span>Coverage from 2023 to 2025 · Verified by RCC Talkies Reporting Wing</span>
+          <span>Official festival dossiers · Verified by RCC Talkies Reporting & Media Wings</span>
         </div>
       </div>
 

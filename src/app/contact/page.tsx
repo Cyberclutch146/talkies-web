@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import siteData from "@/data/site.json";
+import DecryptedText from "@/components/DecryptedText";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -22,7 +23,16 @@ export default function ContactPage() {
               EDITORIAL DESK & TIPLINE
             </span>
             <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tighter text-[#e5e0d3]">
-              GET IN TOUCH
+              <DecryptedText
+                text="GET IN TOUCH"
+                animateOn="view"
+                speed={40}
+                maxIterations={8}
+                sequential={true}
+                revealDirection="center"
+                className="text-[#e5e0d3]"
+                encryptedClassName="text-[#c83a1a]"
+              />
             </h1>
           </div>
           <p className="font-serif text-sm sm:text-base text-[#e5e0d3]/70 max-w-sm">
@@ -123,7 +133,7 @@ export default function ContactPage() {
                     id="contact-name"
                     type="text"
                     required
-                    className="w-full bg-[#eae5d9] border border-[#14120e]/30 p-3 text-sm font-serif text-[#14120e] focus:border-[#14120e] focus:outline-none"
+                    className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors"
                     placeholder="e.g. Kaushiki Sen"
                   />
                 </div>
@@ -139,7 +149,7 @@ export default function ContactPage() {
                     id="contact-email"
                     type="email"
                     required
-                    className="w-full bg-[#eae5d9] border border-[#14120e]/30 p-3 text-sm font-serif text-[#14120e] focus:border-[#14120e] focus:outline-none"
+                    className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors"
                     placeholder="your@rcciit.org"
                   />
                 </div>
@@ -154,7 +164,7 @@ export default function ContactPage() {
                 </label>
                 <select
                   id="contact-desk"
-                  className="w-full bg-[#eae5d9] border border-[#14120e]/30 p-3 text-sm font-sans uppercase tracking-wider text-[#14120e] focus:border-[#14120e] focus:outline-none"
+                  className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-sans uppercase tracking-wider text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors cursor-pointer"
                 >
                   <option>General Inquiry</option>
                   <option>Campus News & Tipline</option>
@@ -175,7 +185,7 @@ export default function ContactPage() {
                   id="contact-message"
                   rows={5}
                   required
-                  className="w-full bg-[#eae5d9] border border-[#14120e]/30 p-3 text-sm font-serif text-[#14120e] focus:border-[#14120e] focus:outline-none resize-none"
+                  className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none resize-none transition-colors"
                   placeholder="Provide story details, dates, relevant departments, or your query..."
                 />
               </div>

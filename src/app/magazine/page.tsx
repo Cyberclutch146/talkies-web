@@ -2,6 +2,7 @@
 
 import pubsData from "@/data/publications.json";
 import Link from "next/link";
+import DecryptedText from "@/components/DecryptedText";
 
 export default function MagazinePage() {
   return (
@@ -14,7 +15,16 @@ export default function MagazinePage() {
               CAMPUS PRINT & DIGITAL ARCHIVES
             </span>
             <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tighter text-[#e5e0d3]">
-              THE MAGAZINE
+              <DecryptedText
+                text="THE MAGAZINE"
+                animateOn="view"
+                speed={40}
+                maxIterations={8}
+                sequential={true}
+                revealDirection="center"
+                className="text-[#e5e0d3]"
+                encryptedClassName="text-[#c83a1a]"
+              />
             </h1>
           </div>
           <p className="font-serif text-sm sm:text-base text-[#e5e0d3]/70 max-w-sm">
