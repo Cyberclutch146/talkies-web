@@ -6,6 +6,7 @@ import siteData from "@/data/site.json";
 import HalftoneReveal from "@/components/HalftoneReveal";
 import DecryptedText from "@/components/DecryptedText";
 import IntroOverlay from "@/components/IntroOverlay";
+import AboutCollege from "@/components/AboutCollege";
 
 export default function HomePage() {
   const [introKey, setIntroKey] = useState(0);
@@ -59,7 +60,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           HERO: Full-bleed Halftone + Overlaid Giant Title
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[100svh] min-h-[500px] max-h-[1000px] overflow-hidden bg-[#14120e] border-b-2 border-[#14120e]">
+      <section className="relative w-full h-[100svh] min-h-[500px] overflow-hidden bg-[#14120e] border-b-2 border-[#14120e]">
         {/* Full-bleed Halftone Canvas */}
         <div className="absolute inset-0 z-0">
           <HalftoneReveal
@@ -81,14 +82,14 @@ export default function HomePage() {
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#14120e]/30 via-transparent to-[#14120e]/60 pointer-events-none" />
 
         {/* Top dateline */}
-        <div className="absolute top-0 left-0 right-0 z-10 px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between text-[10px] sm:text-xs font-sans uppercase tracking-[0.18em] text-[#e5e0d3]/80">
+        <div className="absolute top-0 left-0 right-0 z-10 px-4 sm:px-8 py-4 flex flex-col sm:flex-row flex-wrap items-center justify-between gap-2 text-[9px] sm:text-xs font-sans uppercase tracking-[0.18em] text-[#e5e0d3]/80">
           <div className="flex items-center gap-2">
             <span className="text-[#c83a1a]">✦</span>
             <span className="font-bold">EST. 1999</span>
-            <span className="text-[#e5e0d3]/40 hidden sm:inline">·</span>
-            <span className="hidden sm:inline">RCCIIT, KOLKATA</span>
+            <span className="text-[#e5e0d3]/40">·</span>
+            <span>RCCIIT, KOLKATA</span>
           </div>
-          <span className="hidden md:inline font-serif italic text-[#e5e0d3]/50 normal-case tracking-normal text-sm">
+          <span className="font-serif italic text-[#e5e0d3]/50 normal-case tracking-normal text-xs sm:text-sm text-center">
             &ldquo;The Voice of RCCIIT&rdquo;
           </span>
           <div className="flex items-center gap-2 sm:gap-3">
@@ -111,21 +112,23 @@ export default function HomePage() {
 
         {/* Center: Giant overlaid title with mix-blend */}
         <div className="absolute inset-0 z-[5] flex flex-col items-center justify-center pointer-events-none select-none px-4">
-          <h1 className="font-display text-[18vw] sm:text-[16vw] lg:text-[14vw] leading-[0.82] tracking-tighter uppercase text-[#e5e0d3] mix-blend-difference text-center drop-shadow-2xl">
+          <h1 className="font-display text-[22vw] sm:text-[16vw] lg:text-[14vw] leading-[0.85] tracking-tighter uppercase text-[#e5e0d3] mix-blend-difference text-center drop-shadow-2xl">
             RCC
             <br />
             TALKIES
           </h1>
-          <p className="mt-4 sm:mt-6 font-sans text-xs sm:text-sm uppercase tracking-[0.3em] text-[#e5e0d3]/70 mix-blend-difference text-center">
+          <p className="mt-4 sm:mt-6 font-sans text-[9px] sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#e5e0d3]/70 mix-blend-difference text-center max-w-[90%] mx-auto leading-relaxed">
             THE OFFICIAL JOURNALISM CLUB OF RCCIIT
           </p>
         </div>
 
         {/* Bottom bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 px-4 sm:px-8 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-2 bg-[#14120e]/70 backdrop-blur-sm text-[10px] sm:text-xs font-sans uppercase tracking-widest text-[#e5e0d3]/90">
-          <div className="flex items-center gap-2 text-center sm:text-left">
-            <span className="w-2 h-2 rounded-full bg-[#c83a1a] animate-pulse flex-shrink-0" />
-            <span className="font-bold">LATEST //</span>
+        <div className="absolute bottom-0 left-0 right-0 z-10 px-4 sm:px-8 py-4 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#14120e]/70 backdrop-blur-sm text-[9px] sm:text-xs font-sans uppercase tracking-widest text-[#e5e0d3]/90">
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-center sm:text-left">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#c83a1a] animate-pulse flex-shrink-0" />
+              <span className="font-bold">LATEST //</span>
+            </div>
             <span className="text-[#e5e0d3]/70">GOT 2025 & TechTrix registrations live</span>
           </div>
           <div className="flex items-center gap-3 sm:gap-4 font-bold pointer-events-auto">
@@ -139,9 +142,15 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Loupe hint */}
-        <div className="absolute bottom-14 sm:bottom-16 right-4 sm:right-8 z-10 bg-[#c83a1a] text-[#e5e0d3] px-3 py-1.5 text-[9px] sm:text-[10px] font-sans uppercase tracking-widest font-bold pointer-events-none">
-          ✦ HOVER TO REVEAL
+        {/* Scroll indicator */}
+        <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none animate-bounce">
+          <span className="text-[9px] sm:text-[10px] font-sans uppercase tracking-[0.25em] text-[#e5e0d3]/70 font-bold">
+            SCROLL DOWN
+          </span>
+          <div className="w-[1px] h-6 sm:h-8 bg-[#e5e0d3]/40" />
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-[#e5e0d3]/70">
+            <path d="M1 4L6 9L11 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       </section>
 
@@ -243,60 +252,45 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SPLIT: THE VOICE + Fest Photography
+          ABOUT THE COLLEGE
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="w-full border-b border-[#14120e]/20 bg-[#eae5d9]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20">
-          <div className="lg:col-span-5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-[#e5e0d3]">
-            <div className="flex items-start justify-between">
-              <div>
-                <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold text-[#c83a1a] mb-4 sm:mb-6 block">
-                  CAMPUS SPOTLIGHT // 2025
-                </span>
-                <h2 className="font-display text-6xl sm:text-7xl lg:text-[100px] leading-[0.82] uppercase text-[#14120e] tracking-tighter mb-6 sm:mb-8">
-                  THE
-                  <br />
-                  VOICE
-                </h2>
-              </div>
-              <div className="hidden sm:flex flex-col items-center justify-center p-3 border-2 border-[#14120e] bg-[#eae5d9] shadow-[3px_3px_0px_#14120e]">
-                <img
-                  src="/logo.png"
-                  alt="RCC Talkies Official Emblem"
-                  className="w-14 h-auto object-contain"
-                />
-                <span className="text-[8px] font-sans font-bold uppercase tracking-widest text-[#14120e] mt-1.5">
-                  OFFICIAL SEAL
-                </span>
-              </div>
-            </div>
+      <AboutCollege />
 
-            <div className="space-y-3 pt-5 border-t border-[#14120e]/20">
-              <p className="font-serif text-base sm:text-lg text-[#14120e]/80 leading-snug">
-                From the roar of the football stadium in Game of Trophies to the 24-hour glow of Hackathons — we capture every milestone of RCCIIT.
-              </p>
-              <div className="flex items-center gap-3 text-[10px] sm:text-xs font-sans uppercase tracking-widest text-[#14120e]">
-                <span>25+ Years</span>
-                <span>•</span>
-                <span>5000+ Alumni</span>
-              </div>
-            </div>
+      {/* ═══════════════════════════════════════════════════════════════
+          MAGAZINE REDIRECT
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="w-full border-b border-[#14120e]/20 bg-[#14120e] text-[#e5e0d3]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#e5e0d3]/20">
+          <div className="lg:col-span-8 p-8 sm:p-12 lg:p-20 flex flex-col justify-center">
+            <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold text-[#c83a1a] mb-6 block">
+              OFFICIAL PUBLICATIONS
+            </span>
+            <h2 className="font-display text-5xl sm:text-7xl lg:text-[110px] leading-[0.85] uppercase tracking-tighter mb-8 text-[#e5e0d3]">
+              THE<br/>MAGAZINE
+            </h2>
+            <p className="font-serif text-lg sm:text-xl text-[#e5e0d3]/80 leading-relaxed max-w-2xl mb-10">
+              Dive into our archives. Explore the stories, features, and reports curated by the RCC Talkies editorial board. Tech, culture, campus life, and everything in between.
+            </p>
+            <Link
+              href="/magazine"
+              className="inline-flex items-center gap-3 w-fit border border-[#e5e0d3]/30 px-6 py-4 hover:bg-[#c83a1a] hover:border-[#c83a1a] transition-all group"
+            >
+              <span className="font-sans text-xs sm:text-sm uppercase tracking-widest font-bold text-[#e5e0d3]">
+                Browse All Issues
+              </span>
+              <span className="group-hover:translate-x-1 transition-transform text-[#e5e0d3]">→</span>
+            </Link>
           </div>
-
-          <div className="lg:col-span-7 p-4 sm:p-8 flex items-center justify-center bg-[#8f7560]/20">
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden border-2 border-[#14120e] shadow-2xl bg-[#14120e]">
-              <img
-                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80"
-                alt="RCCIIT Fest Stage Celebration"
-                className="w-full h-full object-cover contrast-[1.15] sepia-[0.15]"
-              />
-              <div className="absolute top-3 left-3 bg-[#14120e] text-[#e5e0d3] px-2.5 py-1 text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] font-bold">
-                REGALIA '25
-              </div>
-              <div className="absolute bottom-3 right-3 bg-[#c83a1a] text-[#e5e0d3] px-2.5 py-1 text-[10px] sm:text-xs font-sans uppercase tracking-widest font-bold">
-                ✦ LIVE COVERAGE
-              </div>
-            </div>
+          <div className="lg:col-span-4 p-8 sm:p-12 bg-[#c83a1a] flex items-center justify-center relative overflow-hidden">
+             <div className="absolute inset-0 opacity-10 flex flex-wrap content-start overflow-hidden pointer-events-none select-none">
+                {Array.from({ length: 40 }).map((_, i) => (
+                  <span key={i} className="font-display text-6xl leading-[0.8] text-[#14120e] mix-blend-multiply">READ </span>
+                ))}
+             </div>
+             <div className="relative z-10 text-center">
+                <span className="font-display text-8xl lg:text-[140px] leading-none block text-[#14120e]">VOL</span>
+                <span className="font-serif italic text-4xl lg:text-6xl block mt-2 text-[#e5e0d3]">I & II</span>
+             </div>
           </div>
         </div>
       </section>

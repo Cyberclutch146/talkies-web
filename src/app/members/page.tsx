@@ -16,7 +16,6 @@ interface TeamYear {
   year: string;
   label: string;
   core: TeamMember[];
-  website: TeamMember[];
   faculty: TeamMember[];
 }
 
@@ -151,7 +150,7 @@ export default function MembersPage() {
           ))}
           <div className="ml-auto hidden sm:flex items-center gap-2 text-[11px] font-sans uppercase tracking-widest text-[#14120e]/50">
             <span className="w-2 h-2 bg-[#c83a1a] rounded-full" />
-            {activeYear.core.length + activeYear.website.length + activeYear.faculty.length} MEMBERS
+            {activeYear.core.length + activeYear.faculty.length} MEMBERS
           </div>
         </div>
       </div>
@@ -182,37 +181,12 @@ export default function MembersPage() {
           </div>
         </section>
 
-        {/* 2. Website Builders */}
+        {/* 2. Faculty Advisors */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
             <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
               <DecryptedText
-                text="02 // Website Builders"
-                animateOn="view"
-                speed={30}
-                maxIterations={6}
-                className="text-[#14120e]"
-                encryptedClassName="text-[#c83a1a]/60 font-sans uppercase text-2xl"
-              />
-            </h2>
-            <span className="font-sans text-xs uppercase tracking-widest text-[#c83a1a] font-bold whitespace-nowrap">
-              DIGITAL ARCHITECTS
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
-            {activeYear.website.map((builder, i) => (
-              <MemberCard key={`${activeYear.year}-web-${builder.name}`} member={builder} index={i} />
-            ))}
-          </div>
-        </section>
-
-        {/* 3. Faculty Advisors */}
-        <section className="space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
-            <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
-              <DecryptedText
-                text="03 // Faculty Advisors"
+                text="02 // Faculty Advisors"
                 animateOn="view"
                 speed={30}
                 maxIterations={6}

@@ -2,43 +2,65 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import siteData from "@/data/site.json";
 
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // Only apply hide-on-hero behavior on the homepage
+    if (pathname !== "/") {
+      setVisible(true);
+      return;
+    }
+
+    const handleScroll = () => {
+      // Show header after scrolling past ~90vh (the hero section)
+      setVisible(window.scrollY > window.innerHeight * 0.85);
+    };
+
+    handleScroll(); // Check initial position
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#e5e0d3]/95 backdrop-blur-md border-b border-[#14120e]/15">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#e5e0d3]/95 backdrop-blur-md border-b border-[#14120e]/15 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="w-full px-4 sm:px-8 py-3.5 flex items-center justify-between">
         {/* Left: Location / Dateline */}
-        <div className="w-1/4 flex items-center gap-2 text-[11px] sm:text-xs font-serif tracking-wider text-[#14120e]/80">
+        <div className="w-[30%] sm:w-1/4 flex items-center gap-2 text-[10px] sm:text-xs font-serif tracking-wider text-[#14120e]/80">
           <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#c83a1a] animate-pulse" />
-          <span>Kolkata, WB</span>
+          <span className="whitespace-nowrap">Kolkata, WB</span>
           <span className="hidden md:inline text-[#14120e]/40">· Est. 1999</span>
         </div>
 
         {/* Center: Gothic Masthead Brand Logo with Official Insignia */}
-        <div className="w-2/4 text-center">
+        <div className="flex-1 text-center">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2.5 group"
+            className="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 group"
           >
             <img
               src="/logo.png"
               alt="RCC Talkies Emblem"
-              className="h-6 sm:h-7 w-auto object-contain transition-transform group-hover:scale-105"
+              className="h-5 sm:h-7 w-auto object-contain transition-transform group-hover:scale-105 hidden sm:block"
             />
-            <span className="font-gothic text-2xl sm:text-3xl lg:text-[32px] tracking-wide text-[#14120e] group-hover:opacity-75 transition-opacity">
+            <span className="font-gothic text-xl sm:text-3xl lg:text-[32px] tracking-wide text-[#14120e] group-hover:opacity-75 transition-opacity whitespace-nowrap">
               The RCC Talkies
             </span>
           </Link>
         </div>
 
         {/* Right: Minimalist Hamburger Menu Trigger */}
-        <div className="w-1/4 flex justify-end items-center gap-6">
+        <div className="w-[30%] sm:w-1/4 flex justify-end items-center gap-6">
           {/* Desktop Quick Nav Links */}
           <nav className="hidden lg:flex items-center gap-5 text-xs font-sans uppercase tracking-[0.18em] font-medium" aria-label="Quick navigation">
             {siteData.navLinks.slice(1, 6).map((link) => {
@@ -87,7 +109,7 @@ export function Header() {
             animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-0 top-[53px] bottom-0 z-40 bg-[#e5e0d3] border-b border-[#14120e] overflow-y-auto"
+            className="absolute top-full inset-x-0 z-40 bg-[#e5e0d3] border-b border-[#14120e] overflow-y-auto"
           >
             <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col justify-between min-h-[calc(100vh-80px)]">
               {/* Top Banner inside Menu */}
