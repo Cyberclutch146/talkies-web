@@ -41,7 +41,7 @@ export function Header() {
         <div className="w-1/4 flex justify-end items-center gap-6">
           {/* Desktop Quick Nav Links */}
           <nav className="hidden lg:flex items-center gap-5 text-xs font-sans uppercase tracking-[0.18em] font-medium" aria-label="Quick navigation">
-            {siteData.navLinks.slice(1, 5).map((link) => {
+            {siteData.navLinks.slice(1, 6).map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link

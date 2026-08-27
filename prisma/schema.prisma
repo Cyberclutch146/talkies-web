@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Application {
+  id                 String   @id @default(cuid())
+  type               String   // "LEAD" or "TEAM"
+  name               String
+  collegeEmail       String
+  rollNumber         String
+  yearOfStudy        String
+  phoneNumber        String
+  positionAppliedFor String
+  portfolioLink      String?
+  whyJoin            String?
+  status             String   @default("PENDING") // PENDING, REVIEWED, ACCEPTED, REJECTED
+  createdAt          DateTime @default(now())
+}

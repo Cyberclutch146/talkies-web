@@ -34,8 +34,8 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
 
   return (
     <SpotlightCard
-      className="p-0 flex flex-col h-full transition-all duration-300 hover:shadow-[4px_4px_0px_#14120e] hover:-translate-y-0.5"
-      spotlightColor="rgba(200, 58, 26, 0.1)"
+      className="group p-0 flex flex-col h-full transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
+      spotlightColor="rgba(200, 58, 26, 0.15)"
     >
       {/* Photo Area */}
       <div className="relative w-full aspect-[4/5] bg-[#dad4c3] overflow-hidden border-b border-[#14120e]/15">
@@ -43,7 +43,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
           src={photoSrc}
           alt={member.name}
           fill
-          className="object-cover grayscale contrast-110 hover:grayscale-0 transition-all duration-500"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
         {/* Number badge */}
@@ -72,8 +72,8 @@ function FacultyCard({ member }: { member: TeamMember }) {
 
   return (
     <SpotlightCard
-      className="p-0 flex flex-row items-center gap-0 transition-all duration-300 hover:shadow-[4px_4px_0px_#14120e] hover:-translate-y-0.5"
-      spotlightColor="rgba(200, 58, 26, 0.06)"
+      className="group p-0 flex flex-row items-center gap-0 transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
+      spotlightColor="rgba(200, 58, 26, 0.1)"
     >
       {/* Photo */}
       <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 bg-[#dad4c3] overflow-hidden border-r border-[#14120e]/15">
@@ -81,7 +81,7 @@ function FacultyCard({ member }: { member: TeamMember }) {
           src={photoSrc}
           alt={member.name}
           fill
-          className="object-cover grayscale contrast-110"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="96px"
         />
       </div>
@@ -160,14 +160,14 @@ export default function MembersPage() {
         {/* 1. Core Members */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-[#14120e]">
+            <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
               <DecryptedText
-                text="01 // CORE MEMBERS"
+                text="01 // Core Members"
                 animateOn="view"
                 speed={30}
                 maxIterations={6}
                 className="text-[#14120e]"
-                encryptedClassName="text-[#c83a1a]/60"
+                encryptedClassName="text-[#c83a1a]/60 font-sans uppercase text-2xl"
               />
             </h2>
             <span className="font-sans text-xs uppercase tracking-widest text-[#c83a1a] font-bold whitespace-nowrap">
@@ -185,14 +185,14 @@ export default function MembersPage() {
         {/* 2. Website Builders */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-[#14120e]">
+            <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
               <DecryptedText
-                text="02 // WEBSITE BUILDERS"
+                text="02 // Website Builders"
                 animateOn="view"
                 speed={30}
                 maxIterations={6}
                 className="text-[#14120e]"
-                encryptedClassName="text-[#c83a1a]/60"
+                encryptedClassName="text-[#c83a1a]/60 font-sans uppercase text-2xl"
               />
             </h2>
             <span className="font-sans text-xs uppercase tracking-widest text-[#c83a1a] font-bold whitespace-nowrap">
@@ -210,14 +210,14 @@ export default function MembersPage() {
         {/* 3. Faculty Advisors */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-[#14120e]">
+            <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
               <DecryptedText
-                text="03 // FACULTY ADVISORS"
+                text="03 // Faculty Advisors"
                 animateOn="view"
                 speed={30}
                 maxIterations={6}
                 className="text-[#14120e]"
-                encryptedClassName="text-[#c83a1a]/60"
+                encryptedClassName="text-[#c83a1a]/60 font-sans uppercase text-2xl"
               />
             </h2>
             <span className="font-sans text-xs uppercase tracking-widest text-[#c83a1a] font-bold whitespace-nowrap">

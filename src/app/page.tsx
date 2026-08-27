@@ -1,11 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import siteData from "@/data/site.json";
 import HalftoneReveal from "@/components/HalftoneReveal";
 import DecryptedText from "@/components/DecryptedText";
+import IntroOverlay from "@/components/IntroOverlay";
 
 export default function HomePage() {
+  const [introKey, setIntroKey] = useState(0);
+  const [showIntro, setShowIntro] = useState(true);
+
   const featuredStories = [
     {
       id: "got",
@@ -42,6 +47,16 @@ export default function HomePage() {
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
       {/* ═══════════════════════════════════════════════════════════════
+          INTRO: Masked Heading Cinematic Overlay
+      ═══════════════════════════════════════════════════════════════ */}
+      {showIntro && (
+        <IntroOverlay
+          key={introKey}
+          onComplete={() => setShowIntro(false)}
+        />
+      )}
+
+      {/* ═══════════════════════════════════════════════════════════════
           HERO: Full-bleed Halftone + Overlaid Giant Title
       ═══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full h-[100svh] min-h-[500px] max-h-[1000px] overflow-hidden bg-[#14120e] border-b-2 border-[#14120e]">
@@ -77,6 +92,16 @@ export default function HomePage() {
             &ldquo;The Voice of RCCIIT&rdquo;
           </span>
           <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => {
+                setIntroKey((k) => k + 1);
+                setShowIntro(true);
+              }}
+              className="hover:text-[#c83a1a] transition-colors border border-[#e5e0d3]/25 px-2 py-0.5 text-[9px] uppercase tracking-widest hidden sm:inline-block"
+              title="Replay front-page intro"
+            >
+              ✦ REPLAY
+            </button>
             <span className="bg-[#c83a1a] text-[#e5e0d3] text-[9px] px-2 py-0.5 font-bold">
               LIVE
             </span>

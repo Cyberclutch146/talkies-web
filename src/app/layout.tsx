@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   UnifrakturMaguntia,
+  Pirata_One,
   Newsreader,
   Playfair_Display,
   Anton,
@@ -14,6 +15,13 @@ const unifraktur = UnifrakturMaguntia({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-gothic",
+  display: "swap",
+});
+
+const pirata = Pirata_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pirata",
   display: "swap",
 });
 
@@ -63,9 +71,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
+      <html
       lang="en"
-      className={`${unifraktur.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${unifraktur.variable} ${pirata.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-serif bg-[#e7e3d8] text-[#14120e] selection:bg-[#14120e] selection:text-[#e7e3d8]">
         <a href="#main-content" className="skip-link">
