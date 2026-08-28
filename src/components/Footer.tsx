@@ -16,7 +16,7 @@ export function Footer() {
               </h3>
             </div>
             <p className="text-base text-[#14120e]/80 leading-relaxed max-w-md">
-              The official independent journalism society of RCC Institute of Information Technology, Kolkata. Documenting campus chronicles, fests, debates, and visual culture since 1999.
+              The official independent journalism society of RCC Institute of Information Technology, Kolkata. Documenting campus chronicles, fests, debates, and visual culture since 2022.
             </p>
           </div>
 
@@ -60,7 +60,7 @@ export function Footer() {
         <div className="flex items-center gap-3">
           <span className="font-bold tracking-[0.22em] text-[#14120e]">TALKIES ©</span>
           <Link href="/admin" className="inline-flex items-center justify-center px-1.5 py-0.5 border border-[#14120e]/30 bg-[#e0dbcd] text-[9px] font-mono no-underline text-inherit">
-            EST. 1999
+            EST. 2022
           </Link>
           <Link href="/contact" className="hover:text-[#c83a1a] transition-colors text-[11px]">
             Masthead & Legal

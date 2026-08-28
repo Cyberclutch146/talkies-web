@@ -86,7 +86,7 @@ const IntroOverlay: React.FC<IntroOverlayProps> = ({
                 <span className="w-1.5 h-1.5 rounded-full bg-[#c83a1a] animate-pulse" />
                 <span>Kolkata, WB</span>
               </div>
-              <span className="hidden sm:inline">Est. 1999 · RCCIIT</span>
+              <span className="hidden sm:inline">Est. 2022 · RCCIIT</span>
               <div className="flex items-center gap-2">
                 <span className="text-[#c83a1a]">✦</span>
                 <span>Vol. II · 2025</span>

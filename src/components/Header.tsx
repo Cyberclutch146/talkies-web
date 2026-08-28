@@ -51,7 +51,7 @@ export function Header() {
         <div className="w-[30%] sm:w-1/4 flex items-center gap-2 text-[10px] sm:text-xs font-serif tracking-wider text-[#14120e]/80">
           <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#c83a1a] animate-pulse" />
           <span className="whitespace-nowrap">Kolkata, WB</span>
-          <span className="hidden md:inline text-[#14120e]/40">· Est. 1999</span>
+          <span className="hidden md:inline text-[#14120e]/40">· Est. 2022</span>
         </div>
 
         {/* Center: Gothic Masthead Brand Logo with Official Insignia */}
