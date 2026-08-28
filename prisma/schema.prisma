@@ -39,3 +39,12 @@ model Magazine {
   coverImage  String?
   createdAt   DateTime @default(now())
 }
+
+model InstagramPost {
+  id        String   @id @default(cuid())
+  imageUrl  String
+  postUrl   String
+  caption   String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}

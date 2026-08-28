@@ -38,9 +38,9 @@
       ],
 
       "faculty": [
-        { "name": "Anwesha Basu", "role": "Faculty Advisor", "photo": null },
-        { "name": "Sohini Sen", "role": "Faculty Coordinator", "photo": null },
-        { "name": "Tasmina Yasmin", "role": "Faculty Coordinator", "photo": null }
+        { "name": "Anwesha Basu", "role": "Faculty Advisor", "photo": "/faculty/anwesha.webp" },
+        { "name": "Sohini Sen", "role": "Faculty Coordinator", "photo": "/faculty/sohini.webp" },
+        { "name": "Tasmina Yasmin", "role": "Faculty Coordinator", "photo": "/faculty/tasnima.webp" }
       ]
     }
   ]

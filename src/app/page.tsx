@@ -8,12 +8,9 @@ import HalftoneReveal from "@/components/HalftoneReveal";
 import DecryptedText from "@/components/DecryptedText";
 import AboutCollege from "@/components/AboutCollege";
 import CircularText from "@/components/CircularText";
+import InstagramFeed from "@/components/InstagramFeed";
 
-const facultyMembers = [
-  { name: "Anwesha Basu", role: "Faculty Advisor", photo: "/faculty/anwesha.webp", dept: "CSE Department" },
-  { name: "Sohini Sen", role: "Faculty Coordinator", photo: "/faculty/sohini.webp", dept: "CSE Department" },
-  { name: "Tasmina Yasmin", role: "Faculty Coordinator", photo: "/faculty/tasnima.webp", dept: "CSE Department" },
-];
+
 
 const missionPillars = [
   {
@@ -408,78 +405,116 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          FACULTY MENTORS — Full-width cards, paper theme
+          CTA — Get In Touch
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="w-full border-b border-[#14120e]/20 bg-[#eae5d9]/50">
-        {/* Section header bar */}
-        <div className="px-4 sm:px-10 py-6 sm:py-8 border-b border-[#14120e]/20 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-          <div>
-            <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-1">
-              ADVISORY BOARD
+      <section className="w-full border-b border-[#14120e]/20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20">
+
+          {/* Left: Headline + Contact Links */}
+          <div className="lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+            <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold text-[#c83a1a] mb-4 block">
+              GET IN TOUCH
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-[#14120e]">
+            <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tighter text-[#14120e] leading-[0.9] mb-6">
               <DecryptedText
-                text="OUR MENTORS"
+                text="WANT TO COLLABORATE?"
                 animateOn="view"
                 speed={35}
                 maxIterations={7}
                 sequential={true}
-                revealDirection="center"
+                revealDirection="start"
                 className="text-[#14120e]"
                 encryptedClassName="text-[#c83a1a]"
               />
             </h2>
-          </div>
-          <p className="font-serif text-sm text-[#14120e]/60 max-w-sm italic">
-            The guiding force behind RCC Talkies — our faculty advisors from RCCIIT&apos;s CSE department.
-          </p>
-        </div>
+            <p className="font-serif text-base sm:text-lg text-[#14120e]/75 leading-relaxed max-w-xl mb-10">
+              Whether you&apos;re a student looking to join our editorial team, a club wanting cross-coverage, or anyone with a story worth telling — reach out. We&apos;re always listening.
+            </p>
 
-        {/* Faculty cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#14120e]/20">
-          {facultyMembers.map((faculty, idx) => (
-            <motion.div
-              key={faculty.name}
-              className="group p-5 sm:p-8 flex flex-col hover:bg-[#e0dbcd]/50 transition-colors"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={fadeUp}
-              custom={idx}
-            >
-              {/* Large portrait */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#14120e]/30 bg-[#dad4c3] mb-5">
-                <Image
-                  src={faculty.photo}
-                  alt={faculty.name}
-                  fill
-                  className="object-cover md:grayscale md:contrast-110 md:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                {/* Hover gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14120e]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                {/* Number badge */}
-                <div className="absolute top-3 left-3 bg-[#c83a1a] text-[#e5e0d3] text-[9px] font-sans font-bold uppercase tracking-widest px-2 py-0.5">
-                  0{idx + 1} // FACULTY
+            {/* Contact Links */}
+            <div className="space-y-4">
+              {/* Email */}
+              <a
+                href="mailto:rcctalkies@gmail.com"
+                className="group flex items-center gap-4 p-5 border border-[#14120e]/20 hover:border-[#14120e] hover:shadow-[4px_4px_0px_#14120e] hover:-translate-y-0.5 transition-all duration-300 bg-[#e5e0d3]"
+              >
+                <div className="w-12 h-12 bg-[#14120e] text-[#e5e0d3] flex items-center justify-center flex-shrink-0 group-hover:bg-[#c83a1a] transition-colors">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
                 </div>
-              </div>
+                <div className="flex-1 min-w-0">
+                  <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#14120e]/50 font-bold block mb-0.5">
+                    EMAIL US
+                  </span>
+                  <span className="font-display text-lg sm:text-xl uppercase tracking-tight text-[#14120e] group-hover:text-[#c83a1a] transition-colors">
+                    rcctalkies@gmail.com
+                  </span>
+                </div>
+                <span className="text-[#14120e]/30 group-hover:text-[#c83a1a] group-hover:translate-x-1 transition-all text-xl">
+                  →
+                </span>
+              </a>
 
-              {/* Info */}
-              <div className="space-y-1">
-                <h3 className="font-display text-xl sm:text-2xl uppercase tracking-tight text-[#14120e] leading-tight">
-                  {faculty.name}
-                </h3>
-                <p className="text-[11px] font-sans uppercase tracking-[0.15em] text-[#c83a1a] font-bold">
-                  {faculty.role}
-                </p>
-                <p className="text-[11px] font-sans uppercase tracking-[0.15em] text-[#14120e]/50 font-semibold">
-                  {faculty.dept}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/rcc_talkies/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 p-5 border border-[#14120e]/20 hover:border-[#14120e] hover:shadow-[4px_4px_0px_#14120e] hover:-translate-y-0.5 transition-all duration-300 bg-[#e5e0d3]"
+              >
+                <div className="w-12 h-12 bg-[#14120e] text-[#e5e0d3] flex items-center justify-center flex-shrink-0 group-hover:bg-[#c83a1a] transition-colors">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#14120e]/50 font-bold block mb-0.5">
+                    FOLLOW US
+                  </span>
+                  <span className="font-display text-lg sm:text-xl uppercase tracking-tight text-[#14120e] group-hover:text-[#c83a1a] transition-colors">
+                    @rcc_talkies
+                  </span>
+                </div>
+                <span className="text-[#14120e]/30 group-hover:text-[#c83a1a] group-hover:translate-x-1 transition-all text-xl">
+                  ↗
+                </span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Bold Accent Block */}
+          <div className="lg:col-span-5 bg-[#c83a1a] p-8 sm:p-12 flex flex-col items-center justify-center relative overflow-hidden min-h-[300px]">
+            {/* Repeating background text */}
+            <div className="absolute inset-0 opacity-10 flex flex-wrap content-start overflow-hidden pointer-events-none select-none">
+              {Array.from({ length: 30 }).map((_, i) => (
+                <span key={i} className="font-display text-5xl sm:text-6xl leading-[0.85] text-[#14120e] mix-blend-multiply">WRITE </span>
+              ))}
+            </div>
+            <div className="relative z-10 text-center space-y-4">
+              <span className="font-display text-7xl sm:text-8xl lg:text-[120px] leading-none block text-[#14120e]">
+                JOIN
+              </span>
+              <span className="font-serif italic text-3xl sm:text-4xl lg:text-5xl block text-[#e5e0d3]">
+                the desk
+              </span>
+              <div className="w-16 h-[2px] bg-[#e5e0d3]/40 mx-auto" />
+              <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#e5e0d3]/60 max-w-xs mx-auto">
+                Writers · Photographers · Designers · Video Editors · Anchors
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
+
+      {/* ═══════════════════════════════════════════════════════════════
+          INSTAGRAM FEED
+      ═══════════════════════════════════════════════════════════════ */}
+      <InstagramFeed />
 
       {/* ═══════════════════════════════════════════════════════════════
           MARQUEE

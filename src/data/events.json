@@ -12,7 +12,7 @@
           "highlights": [
             {
               "title": "Football Finals",
-              "blurb": "CSE department wins in a thrilling final that went to penalties.",
+              "blurb": "RCCIIT wins in a thrilling final that went to penalties.",
               "image": "/events/footballl.webp"
             },
             {
@@ -51,7 +51,7 @@
             },
             {
               "title": "Project Expo",
-              "blurb": "Final-year projects showcased to industry judges and recruiters.",
+              "blurb": "Innovative projects showcased to industry judges and recruiters.",
               "image": "/events/projectexpo.webp"
             }
           ]
@@ -69,8 +69,8 @@
           "year": 2025,
           "highlights": [
             {
-              "title": "Dance Battle",
-              "blurb": "High-energy performances from all departments — crowd goes wild.",
+              "title": "Nrityam - Dance Showdown",
+              "blurb": "A high-octane dance competition that lit up the stage with electrifying performances and fierce competition.",
               "image": "/events/regaliadance.webp"
             },
             {
@@ -80,7 +80,7 @@
             },
             {
               "title": "Drama & Skit",
-              "blurb": "Award-winning dramatic performances that left the audience speechless.",
+              "blurb": "Dramatic performances that left the audience speechless.",
               "image": "/events/regaliadrama.webp"
             }
           ]

@@ -13,12 +13,10 @@
     ]
   },
   "contact": {
-    "email": "rcctalkies@rcciit.org",
+    "email": "rcctalkies@gmail.com",
     "address": "RCC Institute of Information Technology, Canal South Road, Beliaghata, Kolkata – 700015, West Bengal",
     "social": {
-      "instagram": "https://instagram.com/rcctalkies",
-      "facebook": "https://facebook.com/rcctalkies",
-      "youtube": "https://youtube.com/@rcctalkies"
+      "instagram": "https://www.instagram.com/rcc_talkies/"
     }
   },
   "focusAreas": [
@@ -44,7 +42,7 @@
     },
     {
       "title": "Social Engagement",
-      "description": "Active across Instagram, Facebook, and YouTube — connecting with the RCCIIT community online.",
+      "description": "Active on Instagram — connecting with the RCCIIT community through visual storytelling and campus updates.",
       "icon": "share"
     },
     {

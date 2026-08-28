@@ -59,9 +59,9 @@ export function Footer() {
         {/* Left: Brand Copyright & Stamp */}
         <div className="flex items-center gap-3">
           <span className="font-bold tracking-[0.22em] text-[#14120e]">TALKIES ©</span>
-          <span className="inline-flex items-center justify-center px-1.5 py-0.5 border border-[#14120e]/30 bg-[#e0dbcd] text-[9px] font-mono">
+          <Link href="/admin" className="inline-flex items-center justify-center px-1.5 py-0.5 border border-[#14120e]/30 bg-[#e0dbcd] text-[9px] font-mono no-underline text-inherit">
             EST. 1999
-          </span>
+          </Link>
           <Link href="/contact" className="hover:text-[#c83a1a] transition-colors text-[11px]">
             Masthead & Legal
           </Link>
@@ -69,32 +69,19 @@ export function Footer() {
 
         {/* Right: Social Links with bullet separators */}
         <div className="flex flex-wrap items-center gap-3 text-[11px]">
-          <a
-            href={siteData.contact.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#c83a1a] transition-colors"
-          >
-            INSTAGRAM
-          </a>
-          <span className="text-[#14120e]/30">•</span>
-          <a
-            href={siteData.contact.social.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#c83a1a] transition-colors"
-          >
-            FACEBOOK
-          </a>
-          <span className="text-[#14120e]/30">•</span>
-          <a
-            href={siteData.contact.social.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#c83a1a] transition-colors"
-          >
-            YOUTUBE
-          </a>
+          {Object.entries(siteData.contact.social).map(([platform, url], idx, arr) => (
+            <span key={platform} className="contents">
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#c83a1a] transition-colors uppercase"
+              >
+                {platform}
+              </a>
+              {idx < arr.length - 1 && <span className="text-[#14120e]/30">•</span>}
+            </span>
+          ))}
           <span className="text-[#14120e]/30">•</span>
           <Link
             href="/magazine"
