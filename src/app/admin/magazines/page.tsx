@@ -30,6 +30,7 @@ export default function AdminMagazines() {
   const [magazines, setMagazines] = useState<Magazine[]>([]);
   const [isLoadingMags, setIsLoadingMags] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const fetchMagazines = async () => {
     setIsLoadingMags(true);
@@ -147,6 +148,68 @@ export default function AdminMagazines() {
     }
   };
 
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title || !volume || !year || !editingId) {
+      setMessage({ text: "Please fill all required fields", type: "error" });
+      return;
+    }
+
+    setIsUploading(true);
+    setMessage({ text: "Updating database...", type: "" });
+
+    try {
+      const res = await fetch(`/api/magazines/${editingId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password,
+          title,
+          volume,
+          year,
+          description,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage({ text: "Magazine updated successfully!", type: "success" });
+        cancelEdit();
+        fetchMagazines();
+      } else {
+        setMessage({ text: data.error || "Update failed", type: "error" });
+      }
+    } catch (error) {
+      setMessage({ text: (error as Error).message || "An error occurred during update", type: "error" });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const startEdit = (mag: Magazine) => {
+    setEditingId(mag.id);
+    setTitle(mag.title);
+    setVolume(mag.volume);
+    setYear(mag.year);
+    setDescription(mag.description || "");
+    setMessage({ text: "", type: "" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setTitle("");
+    setVolume("");
+    setYear(new Date().getFullYear().toString());
+    setDescription("");
+    setPdfFile(null);
+    setCoverImage(null);
+    setMessage({ text: "", type: "" });
+  };
+
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this issue? This cannot be undone.")) return;
@@ -212,7 +275,7 @@ export default function AdminMagazines() {
             </span>
             <h1 className="font-display text-5xl sm:text-7xl uppercase tracking-tighter text-[#14120e]">
               <DecryptedText
-                text="UPLOAD ISSUE"
+                text={editingId ? "EDIT ISSUE" : "UPLOAD ISSUE"}
                 animateOn="view"
                 speed={40}
                 maxIterations={8}
@@ -223,7 +286,7 @@ export default function AdminMagazines() {
             </h1>
           </div>
 
-          <form onSubmit={handleUpload} className="space-y-6 bg-[#eae5d9] border border-[#14120e]/30 p-6 sm:p-8 shadow-[8px_8px_0px_#14120e]">
+          <form onSubmit={editingId ? handleUpdate : handleUpload} className="space-y-6 bg-[#eae5d9] border border-[#14120e]/30 p-6 sm:p-8 shadow-[8px_8px_0px_#14120e]">
             {message.text && (
               <div className={`p-4 border ${message.type === "success" ? "border-green-500 bg-green-50 text-green-800" : "border-[#c83a1a] bg-red-50 text-[#c83a1a]"} font-sans text-sm uppercase tracking-wider font-bold`}>
                 {message.text}
@@ -278,51 +341,64 @@ export default function AdminMagazines() {
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-6 pt-4 border-t border-[#14120e]/20">
-              <div className="space-y-2">
-                <div className="flex items-baseline justify-between">
-                  <label className="font-sans text-xs uppercase tracking-widest font-bold text-[#14120e]/70">PDF File *</label>
-                  <span className="text-[10px] font-sans text-[#c83a1a] uppercase font-bold tracking-wider">⚠️ Compress before upload (Max 4.5MB)</span>
+            {!editingId && (
+              <div className="grid grid-cols-1 gap-6 pt-4 border-t border-[#14120e]/20">
+                <div className="space-y-2">
+                  <div className="flex items-baseline justify-between">
+                    <label className="font-sans text-xs uppercase tracking-widest font-bold text-[#14120e]/70">PDF File *</label>
+                    <span className="text-[10px] font-sans text-[#c83a1a] uppercase font-bold tracking-wider">⚠️ Compress before upload (Max 4.5MB)</span>
+                  </div>
+                  <input
+                    id="pdf"
+                    type="file"
+                    accept=".pdf"
+                    required={!editingId}
+                    onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
+                    className="w-full file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-sans file:uppercase file:tracking-widest file:bg-[#14120e] file:text-[#e5e0d3] hover:file:bg-[#c83a1a] file:cursor-pointer file:transition-colors text-sm"
+                  />
+                  <p className="text-[10px] font-serif italic text-[#14120e]/60">
+                    Please use a tool like ILovePDF or Adobe Acrobat to compress your magazine PDF before uploading. Vercel enforces strict size limits on server uploads.
+                  </p>
                 </div>
-                <input
-                  id="pdf"
-                  type="file"
-                  accept=".pdf"
-                  required
-                  onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
-                  className="w-full file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-sans file:uppercase file:tracking-widest file:bg-[#14120e] file:text-[#e5e0d3] hover:file:bg-[#c83a1a] file:cursor-pointer file:transition-colors text-sm"
-                />
-                <p className="text-[10px] font-serif italic text-[#14120e]/60">
-                  Please use a tool like ILovePDF or Adobe Acrobat to compress your magazine PDF before uploading. Vercel enforces strict size limits on server uploads.
-                </p>
-              </div>
 
-              <div className="space-y-2">
-                <label className="font-sans text-xs uppercase tracking-widest font-bold text-[#14120e]/70">Cover Image (Optional)</label>
-                <input
-                  id="cover"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setCoverImage(e.target.files?.[0] || null)}
-                  className="w-full file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-sans file:uppercase file:tracking-widest file:bg-[#14120e]/10 file:text-[#14120e] hover:file:bg-[#14120e]/20 file:cursor-pointer file:transition-colors text-sm"
-                />
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest font-bold text-[#14120e]/70">Cover Image (Optional)</label>
+                  <input
+                    id="cover"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setCoverImage(e.target.files?.[0] || null)}
+                    className="w-full file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-sans file:uppercase file:tracking-widest file:bg-[#14120e]/10 file:text-[#14120e] hover:file:bg-[#14120e]/20 file:cursor-pointer file:transition-colors text-sm"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
-            <button
-              type="submit"
-              disabled={isUploading}
-              className="w-full mt-8 bg-[#14120e] text-[#e5e0d3] font-display text-2xl uppercase tracking-tight py-4 hover:bg-[#c83a1a] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-            >
-              {isUploading ? (
-                <>
-                  <span className="w-4 h-4 border-2 border-[#e5e0d3] border-t-transparent rounded-full animate-spin" />
-                  Uploading...
-                </>
-              ) : (
-                "PUBLISH ISSUE"
+            <div className="flex gap-4">
+              {editingId && (
+                <button
+                  type="button"
+                  onClick={cancelEdit}
+                  className="w-1/3 mt-8 border-2 border-[#14120e] text-[#14120e] font-display text-xl uppercase tracking-tight py-4 hover:bg-[#14120e]/5 transition-colors flex items-center justify-center"
+                >
+                  CANCEL
+                </button>
               )}
-            </button>
+              <button
+                type="submit"
+                disabled={isUploading}
+                className={`${editingId ? 'w-2/3' : 'w-full'} mt-8 bg-[#14120e] text-[#e5e0d3] font-display text-2xl uppercase tracking-tight py-4 hover:bg-[#c83a1a] transition-colors disabled:opacity-50 flex items-center justify-center gap-2`}
+              >
+                {isUploading ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-[#e5e0d3] border-t-transparent rounded-full animate-spin" />
+                    {editingId ? "UPDATING..." : "UPLOADING..."}
+                  </>
+                ) : (
+                  editingId ? "UPDATE ISSUE" : "PUBLISH ISSUE"
+                )}
+              </button>
+            </div>
           </form>
         </div>
 
@@ -360,23 +436,36 @@ export default function AdminMagazines() {
                     </h3>
                   </div>
                   
-                  <button
-                    onClick={() => handleDelete(mag.id)}
-                    disabled={deletingId === mag.id}
-                    className="w-full border border-[#c83a1a]/30 text-[#c83a1a] font-sans text-[10px] font-bold uppercase tracking-widest py-2 hover:bg-[#c83a1a] hover:text-[#e5e0d3] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-                  >
-                    {deletingId === mag.id ? (
-                      "Deleting..."
-                    ) : (
-                      <>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="3 6 5 6 21 6"></polyline>
-                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg>
-                        Delete Issue
-                      </>
-                    )}
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => startEdit(mag)}
+                      disabled={deletingId === mag.id || editingId === mag.id}
+                      className="w-1/2 border border-[#14120e]/30 text-[#14120e] font-sans text-[10px] font-bold uppercase tracking-widest py-2 hover:bg-[#14120e]/10 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(mag.id)}
+                      disabled={deletingId === mag.id}
+                      className="w-1/2 border border-[#c83a1a]/30 text-[#c83a1a] font-sans text-[10px] font-bold uppercase tracking-widest py-2 hover:bg-[#c83a1a] hover:text-[#e5e0d3] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                    >
+                      {deletingId === mag.id ? (
+                        "Deleting..."
+                      ) : (
+                        <>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                          </svg>
+                          Delete
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               ))
             )}

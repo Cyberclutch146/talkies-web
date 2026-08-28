@@ -35,6 +35,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     return NextResponse.json(jsonResponse);
   } catch (error) {
+    console.error('VERCEL BLOB UPLOAD ERROR:', error);
     return NextResponse.json(
       { error: (error as Error).message },
       { status: 400 } // Vercel Blob webhook requires 400 for errors

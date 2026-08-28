@@ -52,3 +52,46 @@ export async function DELETE(
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const body = await request.json();
+    
+    // Check password
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword) {
+      return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 });
+    }
+    if (body.password !== adminPassword) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { id } = await params;
+    const { title, volume, year, description } = body;
+
+    if (!title || !volume || !year) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    const magazine = await prisma.magazine.update({
+      where: { id },
+      data: {
+        title,
+        volume,
+        year,
+        description: description || null,
+      },
+    });
+
+    return NextResponse.json({ success: true, magazine });
+  } catch (error) {
+    console.error('Error updating magazine:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}

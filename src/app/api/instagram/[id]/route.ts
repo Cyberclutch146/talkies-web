@@ -49,3 +49,44 @@ export async function DELETE(
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const body = await request.json();
+    
+    // Check password
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword) {
+      return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 });
+    }
+    if (body.password !== adminPassword) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { id } = await params;
+    const { postUrl, caption } = body;
+
+    if (!postUrl) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    const post = await prisma.instagramPost.update({
+      where: { id },
+      data: {
+        postUrl,
+        caption: caption || null,
+      },
+    });
+
+    return NextResponse.json({ success: true, post });
+  } catch (error) {
+    console.error('Error updating instagram post:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
