@@ -34,9 +34,16 @@ export default function AdminInstagram() {
     setIsLoading(true);
     try {
       const res = await fetch("/api/instagram");
-      if (res.ok) setPosts(await res.json());
+      const data = await res.json();
+      if (res.ok && Array.isArray(data)) {
+        setPosts(data);
+      } else {
+        console.error("API returned error:", data);
+        setPosts([]);
+      }
     } catch (err) {
       console.error("Failed to fetch posts", err);
+      setPosts([]);
     } finally {
       setIsLoading(false);
     }

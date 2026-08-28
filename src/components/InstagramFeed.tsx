@@ -18,10 +18,18 @@ export default function InstagramFeed() {
     fetch("/api/instagram")
       .then((res) => res.json())
       .then((data) => {
-        setPosts(data);
+        if (Array.isArray(data)) {
+          setPosts(data);
+        } else {
+          console.error("Expected array from API, got:", data);
+          setPosts([]);
+        }
         setIsLoading(false);
       })
-      .catch(() => setIsLoading(false));
+      .catch((err) => {
+        console.error("Failed to fetch instagram feed:", err);
+        setIsLoading(false);
+      });
   }, []);
 
   // Don't render the section if there are no posts and we're done loading
@@ -71,7 +79,7 @@ export default function InstagramFeed() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {posts.map((post, idx) => (
               <a
                 key={post.id}
