@@ -10,6 +10,7 @@ interface Magazine {
   title: string;
   volume: string;
   year: string;
+  description?: string;
   createdAt: string;
 }
 
