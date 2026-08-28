@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { upload } from "@vercel/blob/client";
 import DecryptedText from "@/components/DecryptedText";
 import { verifyPassword } from "../actions";
 
@@ -77,23 +78,45 @@ export default function AdminMagazines() {
     }
 
     setIsUploading(true);
-    setMessage({ text: "", type: "" });
-
-    const formData = new FormData();
-    formData.append("password", password);
-    formData.append("title", title);
-    formData.append("volume", volume);
-    formData.append("year", year);
-    formData.append("description", description);
-    formData.append("pdf", pdfFile);
-    if (coverImage) {
-      formData.append("coverImage", coverImage);
-    }
+    setMessage({ text: "Uploading PDF directly to storage...", type: "" });
 
     try {
+      // 1. Upload PDF directly from browser
+      const pdfBlob = await upload(pdfFile.name, pdfFile, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+        clientPayload: JSON.stringify({ password }),
+      });
+
+      let coverImageUrl = null;
+      // 2. Upload Cover Image directly (if exists)
+      if (coverImage) {
+        setMessage({ text: "Uploading cover image...", type: "" });
+        const coverBlob = await upload(coverImage.name, coverImage, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+          clientPayload: JSON.stringify({ password }),
+        });
+        coverImageUrl = coverBlob.url;
+      }
+
+      setMessage({ text: "Saving to database...", type: "" });
+
+      // 3. Save database record
       const res = await fetch("/api/magazines", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password,
+          title,
+          volume,
+          year,
+          description,
+          pdfUrl: pdfBlob.url,
+          coverImageUrl,
+        }),
       });
 
       const data = await res.json();
@@ -118,11 +141,12 @@ export default function AdminMagazines() {
         setMessage({ text: data.error || "Upload failed", type: "error" });
       }
     } catch (error) {
-      setMessage({ text: "An error occurred during upload", type: "error" });
+      setMessage({ text: (error as Error).message || "An error occurred during upload", type: "error" });
     } finally {
       setIsUploading(false);
     }
   };
+
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this issue? This cannot be undone.")) return;
