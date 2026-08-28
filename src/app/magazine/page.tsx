@@ -2,6 +2,8 @@ import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = 'force-dynamic';
+
 export default async function MagazinePage() {
   const magazines = await prisma.magazine.findMany({
     orderBy: { createdAt: "desc" },
