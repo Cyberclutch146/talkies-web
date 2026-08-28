@@ -13,17 +13,17 @@
             {
               "title": "Football Finals",
               "blurb": "CSE department wins in a thrilling final that went to penalties.",
-              "image": "/events/footballl.JPG"
+              "image": "/events/footballl.webp"
             },
             {
               "title": "Cricket Trophy",
               "blurb": "An epic showdown decided in the last over — edge-of-seat cricket.",
-              "image": "/events/cricket.JPG"
+              "image": "/events/cricket.webp"
             },
             {
               "title": "Tug of War Competition",
               "blurb": "RCCIIT wins silver in an all out battle of the strength",
-              "image": "/events/tugofwar (2).JPG"
+              "image": "/events/tugofwar (2).webp"
             }
           ]
         }
@@ -42,17 +42,17 @@
             {
               "title": "Gaming Tournament",
               "blurb": "180 participants, 30 teams, 1 winner — the ultimate virtual war.",
-              "image": "/events/valorant.JPG"
+              "image": "/events/valorant.webp"
             },
             {
               "title": "Robo-Wars",
               "blurb": "Battle-bot robotics competition with custom-built machines.",
-              "image": "/events/robowar.JPG"
+              "image": "/events/robowar.webp"
             },
             {
               "title": "Project Expo",
               "blurb": "Final-year projects showcased to industry judges and recruiters.",
-              "image": "/events/projectexpo.JPG"
+              "image": "/events/projectexpo.webp"
             }
           ]
         }
@@ -71,17 +71,17 @@
             {
               "title": "Dance Battle",
               "blurb": "High-energy performances from all departments — crowd goes wild.",
-              "image": "/events/regaliadance.jpeg"
+              "image": "/events/regaliadance.webp"
             },
             {
               "title": "Band Bash",
               "blurb": "Live band performances and singing contests under the stars.",
-              "image": "/events/regaliaband.JPG"
+              "image": "/events/regaliaband.webp"
             },
             {
               "title": "Drama & Skit",
               "blurb": "Award-winning dramatic performances that left the audience speechless.",
-              "image": "/events/regaliadrama.JPG"
+              "image": "/events/regaliadrama.webp"
             }
           ]
         }
@@ -100,17 +100,17 @@
             {
               "title": "Freshers' Night",
               "blurb": "A spectacular evening of performances, introductions, and campus traditions for the incoming batch.",
-              "image": "/events/freshersnight.JPG"
+              "image": "/events/freshersnight.webp"
             },
             {
               "title": "Talent Showcase",
               "blurb": "First-year students take the stage — singing, dancing, and stand-up that reveal hidden gems.",
-              "image": "/events/talentshowcase.JPG"
+              "image": "/events/talentshowcase.webp"
             },
             {
               "title": "Welcome Ceremony",
               "blurb": "Faculty addresses, lamp lighting, and the official induction of the new RCCIIT cohort.",
-              "image": "/events/fresherwelcome.JPG"
+              "image": "/events/fresherwelcome.webp"
             }
           ]
         }

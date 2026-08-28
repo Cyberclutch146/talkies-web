@@ -10,9 +10,9 @@ import AboutCollege from "@/components/AboutCollege";
 import CircularText from "@/components/CircularText";
 
 const facultyMembers = [
-  { name: "Anwesha Basu", role: "Faculty Advisor", photo: "/faculty/anwesha.jpg", dept: "CSE Department" },
-  { name: "Sohini Sen", role: "Faculty Coordinator", photo: "/faculty/sohini.jpeg", dept: "CSE Department" },
-  { name: "Tasmina Yasmin", role: "Faculty Coordinator", photo: "/faculty/tasnima.jpeg", dept: "CSE Department" },
+  { name: "Anwesha Basu", role: "Faculty Advisor", photo: "/faculty/anwesha.webp", dept: "CSE Department" },
+  { name: "Sohini Sen", role: "Faculty Coordinator", photo: "/faculty/sohini.webp", dept: "CSE Department" },
+  { name: "Tasmina Yasmin", role: "Faculty Coordinator", photo: "/faculty/tasnima.webp", dept: "CSE Department" },
 ];
 
 const missionPillars = [
@@ -51,7 +51,7 @@ export default function HomePage() {
       title: "Game Of Thrones 2025",
       headline: "CSE clinches football final in thrilling penalty shootout",
       blurb: "CSE department wins in a thrilling final that went to penalties. Annual sports festival records broken at track & field.",
-      image: "/events/footballl.JPG",
+      image: "/events/footballl.webp",
       alt: "Sports and football fest at RCCIIT",
     },
     {
@@ -61,7 +61,7 @@ export default function HomePage() {
       title: "TechTrix Hackathon",
       headline: "180 coders, 30 teams, 1 champion in 24-hour sprint",
       blurb: "The ultimate gaming tournament and robotics championship showcased to industry judges and recruiters.",
-      image: "/events/valorant.JPG",
+      image: "/events/valorant.webp",
       alt: "Gaming tournament at RCCIIT",
     },
     {
@@ -71,7 +71,7 @@ export default function HomePage() {
       title: "Regalia 3-Day Fest",
       headline: "High-octane dance battles and live musical night",
       blurb: "Performances from all departments, award-winning dramatic skits, and live music under the stars.",
-      image: "/events/regaliaband.JPG",
+      image: "/events/regaliaband.webp",
       alt: "Cultural fest music and dance stage",
     },
   ];
@@ -134,25 +134,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Bottom bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 px-4 sm:px-8 py-4 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#14120e]/70 backdrop-blur-sm text-[9px] sm:text-xs font-sans uppercase tracking-widest text-[#e5e0d3]/90">
-          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-center sm:text-left">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#c83a1a] animate-pulse flex-shrink-0" />
-              <span className="font-bold">LATEST //</span>
-            </div>
-            <span className="text-[#e5e0d3]/70">GOT 2025 & TechTrix registrations live</span>
-          </div>
-          <div className="flex items-center gap-3 sm:gap-4 font-bold pointer-events-auto">
-            <Link href="/events" className="hover:text-[#c83a1a] transition-colors">
-              EVENTS ↓
-            </Link>
-            <span className="text-[#e5e0d3]/30">•</span>
-            <Link href="/contact" className="hover:text-[#c83a1a] transition-colors">
-              JOIN US ↗
-            </Link>
-          </div>
-        </div>
+
 
         {/* Scroll indicator */}
         <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none animate-bounce">
