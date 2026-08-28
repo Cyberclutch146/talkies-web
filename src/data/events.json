@@ -2,59 +2,28 @@
   "flagship": [
     {
       "slug": "got",
-      "name": "Game Of Trophies",
+      "name": "Game Of Thrones",
       "shortName": "GOT",
       "tagline": "Annual Sports Festival",
-      "description": "The biggest inter-departmental sports showdown at RCCIIT, featuring football, cricket, athletics, and more.",
+      "description": "The biggest state level sports showdown at RCCIIT, featuring football, cricket, tug of war, and more.",
       "years": [
         {
           "year": 2025,
           "highlights": [
             {
               "title": "Football Finals",
-              "blurb": "CSE department wins in a thrilling final that went to penalties."
+              "blurb": "CSE department wins in a thrilling final that went to penalties.",
+              "image": "/events/footballl.JPG"
             },
             {
               "title": "Cricket Trophy",
-              "blurb": "An epic showdown decided in the last over — edge-of-seat cricket."
+              "blurb": "An epic showdown decided in the last over — edge-of-seat cricket.",
+              "image": "/events/cricket.JPG"
             },
             {
-              "title": "Athletics Meet",
-              "blurb": "Records broken at the annual track & field championship."
-            }
-          ]
-        },
-        {
-          "year": 2024,
-          "highlights": [
-            {
-              "title": "Football Finals",
-              "blurb": "IT department clinches the title with a last-minute goal."
-            },
-            {
-              "title": "Cricket Trophy",
-              "blurb": "A rain-interrupted match ends with a dramatic DLS victory."
-            },
-            {
-              "title": "Athletics Meet",
-              "blurb": "New college records set in 100m sprint and long jump."
-            }
-          ]
-        },
-        {
-          "year": 2023,
-          "highlights": [
-            {
-              "title": "Football Finals",
-              "blurb": "ECE vs CSE — an unforgettable rivalry match under floodlights."
-            },
-            {
-              "title": "Cricket Trophy",
-              "blurb": "The inaugural GOT cricket season draws 16 teams from all departments."
-            },
-            {
-              "title": "Athletics Meet",
-              "blurb": "Over 200 students participate in the first-ever GOT track events."
+              "title": "Tug of War Competition",
+              "blurb": "RCCIIT wins silver in an all out battle of the strength",
+              "image": "/events/tugofwar (2).JPG"
             }
           ]
         }
@@ -71,50 +40,19 @@
           "year": 2025,
           "highlights": [
             {
-              "title": "24-Hour Hackathon",
-              "blurb": "180 participants, 30 teams, 1 winner — the ultimate coding marathon."
+              "title": "Gaming Tournament",
+              "blurb": "180 participants, 30 teams, 1 winner — the ultimate virtual war.",
+              "image": "/events/valorant.JPG"
             },
             {
               "title": "Robo-Wars",
-              "blurb": "Battle-bot robotics competition with custom-built machines."
+              "blurb": "Battle-bot robotics competition with custom-built machines.",
+              "image": "/events/robowar.JPG"
             },
             {
               "title": "Project Expo",
-              "blurb": "Final-year projects showcased to industry judges and recruiters."
-            }
-          ]
-        },
-        {
-          "year": 2024,
-          "highlights": [
-            {
-              "title": "24-Hour Hackathon",
-              "blurb": "AI/ML-themed hackathon with mentors from top Kolkata startups."
-            },
-            {
-              "title": "Robo-Wars",
-              "blurb": "New weight-class divisions introduced; record spectator turnout."
-            },
-            {
-              "title": "Project Expo",
-              "blurb": "Two projects selected for incubation at MAKAUT innovation hub."
-            }
-          ]
-        },
-        {
-          "year": 2023,
-          "highlights": [
-            {
-              "title": "24-Hour Hackathon",
-              "blurb": "The first TechTrix hackathon — 100 participants, big ambitions."
-            },
-            {
-              "title": "Robo-Wars",
-              "blurb": "Inaugural robo-wars draws engineering teams from 5 colleges."
-            },
-            {
-              "title": "Project Expo",
-              "blurb": "30 final-year projects exhibited across IoT, ML, and web dev."
+              "blurb": "Final-year projects showcased to industry judges and recruiters.",
+              "image": "/events/projectexpo.JPG"
             }
           ]
         }
@@ -132,49 +70,47 @@
           "highlights": [
             {
               "title": "Dance Battle",
-              "blurb": "High-energy performances from all departments — crowd goes wild."
+              "blurb": "High-energy performances from all departments — crowd goes wild.",
+              "image": "/events/regaliadance.jpeg"
             },
             {
-              "title": "Music Night",
-              "blurb": "Live band performances and singing contests under the stars."
+              "title": "Band Bash",
+              "blurb": "Live band performances and singing contests under the stars.",
+              "image": "/events/regaliaband.JPG"
             },
             {
               "title": "Drama & Skit",
-              "blurb": "Award-winning dramatic performances that left the audience speechless."
+              "blurb": "Award-winning dramatic performances that left the audience speechless.",
+              "image": "/events/regaliadrama.JPG"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "slug": "bihaan",
+      "name": "Bihaan",
+      "shortName": "Bihaan",
+      "tagline": "Freshers' Welcome Celebration",
+      "description": "RCCIIT's grand freshers' welcome — an annual celebration to inaugurate the new batch with performances, games, and memories.",
+      "years": [
         {
-          "year": 2024,
+          "year": 2025,
           "highlights": [
             {
-              "title": "Dance Battle",
-              "blurb": "Contemporary and classical fusion takes center stage."
+              "title": "Freshers' Night",
+              "blurb": "A spectacular evening of performances, introductions, and campus traditions for the incoming batch.",
+              "image": "/events/freshersnight.JPG"
             },
             {
-              "title": "Music Night",
-              "blurb": "Guest artist performance draws a 2000-strong audience."
+              "title": "Talent Showcase",
+              "blurb": "First-year students take the stage — singing, dancing, and stand-up that reveal hidden gems.",
+              "image": "/events/talentshowcase.JPG"
             },
             {
-              "title": "Drama & Skit",
-              "blurb": "Social-issue themed skits win accolades from the jury."
-            }
-          ]
-        },
-        {
-          "year": 2023,
-          "highlights": [
-            {
-              "title": "Dance Battle",
-              "blurb": "Inaugural Regalia dance-off — 12 teams compete for glory."
-            },
-            {
-              "title": "Music Night",
-              "blurb": "Open-mic format lets undiscovered campus talent shine."
-            },
-            {
-              "title": "Drama & Skit",
-              "blurb": "Street-play competition raises awareness on campus safety."
+              "title": "Welcome Ceremony",
+              "blurb": "Faculty addresses, lamp lighting, and the official induction of the new RCCIIT cohort.",
+              "image": "/events/fresherwelcome.JPG"
             }
           ]
         }
