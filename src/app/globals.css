@@ -48,6 +48,7 @@ body {
   font-family: var(--font-serif);
   position: relative;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Subtle newspaper grain overlay */
@@ -56,7 +57,7 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 999;
+  z-index: 50;
   opacity: 0.035;
   background-image: radial-gradient(#14120e 0.75px, transparent 0.75px), radial-gradient(#14120e 0.75px, #e5e0d3 0.75px);
   background-size: 4px 4px;

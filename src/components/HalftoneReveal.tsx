@@ -295,12 +295,15 @@ export default function HalftoneReveal({
     ro.observe(container);
 
     const onMove = (e: PointerEvent) => {
+      // Don't track touch events — let them scroll naturally
+      if (e.pointerType === 'touch') return;
       const rect = container.getBoundingClientRect();
       mouseRef.current.x = (e.clientX - rect.left) / rect.width;
       mouseRef.current.y = 1 - (e.clientY - rect.top) / rect.height;
       mouseRef.current.target = reduced ? 0 : 1;
     };
-    const onLeave = () => {
+    const onLeave = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') return;
       mouseRef.current.target = 0;
     };
     container.addEventListener('pointermove', onMove, { passive: true });

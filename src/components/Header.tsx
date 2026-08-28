@@ -28,6 +28,18 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 bg-[#e5e0d3]/95 backdrop-blur-md border-b border-[#14120e]/15 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -106,7 +118,7 @@ export function Header() {
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "100vh" }}
+            animate={{ opacity: 1, height: "100dvh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="absolute top-full inset-x-0 z-40 bg-[#e5e0d3] border-b border-[#14120e] overflow-y-auto"

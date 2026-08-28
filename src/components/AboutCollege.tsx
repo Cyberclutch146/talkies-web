@@ -36,7 +36,7 @@ export default function AboutCollege() {
             RCCIIT CAMPUS
           </div>
           <div className="absolute bottom-3 right-3 bg-[#c83a1a] text-[#e5e0d3] px-2.5 py-1 text-[10px] sm:text-xs font-sans uppercase tracking-widest font-bold">
-            EST. 1999
+            EST. 2022
           </div>
         </div>
 
