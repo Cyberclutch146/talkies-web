@@ -140,10 +140,25 @@ export default function RecruitmentDashboard() {
       `Hello,\n\nCongratulations! You have been shortlisted for the ${role} position at RCC Talkies.\n\nWe will be reaching out shortly with details for your interview.\n\nBest,\nThe RCC Talkies Team`
     );
 
-    // Create a temporary anchor element to reliably trigger mailto
-    const a = document.createElement("a");
-    a.href = `mailto:?bcc=${bcc}&subject=${subject}&body=${body}`;
-    a.click();
+    // Open Gmail compose in a new tab — works reliably in any browser
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&bcc=${bcc}&su=${subject}&body=${body}`;
+    window.open(gmailUrl, "_blank");
+  };
+
+  const handleCopyEmails = (role: string) => {
+    const shortlistedEmails = applications
+      .filter(app => app.positionAppliedFor === role && app.status === "SHORTLISTED")
+      .map(app => app.collegeEmail);
+
+    if (shortlistedEmails.length === 0) {
+      setEmailAlert({ role, message: "No shortlisted candidates to copy." });
+      setTimeout(() => setEmailAlert(null), 4000);
+      return;
+    }
+
+    navigator.clipboard.writeText(shortlistedEmails.join(", "));
+    setEmailAlert({ role, message: `✓ ${shortlistedEmails.length} email(s) copied to clipboard!` });
+    setTimeout(() => setEmailAlert(null), 3000);
   };
 
   // Grouping logic
@@ -350,16 +365,28 @@ export default function RecruitmentDashboard() {
                                   <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#14120e]/40 font-bold">
                                     {group.applicants.length} {group.applicants.length === 1 ? "CANDIDATE" : "CANDIDATES"}
                                   </span>
-                                  <button
-                                    onClick={() => handleSendEmail(group.role)}
-                                    className="bg-[#c83a1a] text-[#e5e0d3] px-4 py-2 text-[10px] font-sans uppercase font-bold tracking-widest hover:bg-[#a62b10] transition-colors flex items-center gap-2"
-                                  >
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                      <rect width="20" height="16" x="2" y="4" rx="2" />
-                                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                    </svg>
-                                    Email Shortlisted
-                                  </button>
+                                  <div className="flex gap-2">
+                                    <button
+                                      onClick={() => handleCopyEmails(group.role)}
+                                      className="border border-[#14120e]/30 text-[#14120e] px-3 py-2 text-[10px] font-sans uppercase font-bold tracking-widest hover:bg-[#14120e]/5 transition-colors flex items-center gap-1.5"
+                                    >
+                                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                                        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                                      </svg>
+                                      Copy Emails
+                                    </button>
+                                    <button
+                                      onClick={() => handleSendEmail(group.role)}
+                                      className="bg-[#c83a1a] text-[#e5e0d3] px-4 py-2 text-[10px] font-sans uppercase font-bold tracking-widest hover:bg-[#a62b10] transition-colors flex items-center gap-2"
+                                    >
+                                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                      </svg>
+                                      Gmail Compose
+                                    </button>
+                                  </div>
                                 </div>
                                 {emailAlert && emailAlert.role === group.role && (
                                   <div className="p-3 border border-[#c83a1a]/30 bg-[#c83a1a]/5 text-[#c83a1a] font-sans text-[10px] uppercase tracking-widest font-bold">
