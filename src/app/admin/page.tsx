@@ -40,6 +40,33 @@ export default function AdminDashboard() {
   const [shakeKey, setShakeKey] = useState(0);
   const [isVerifying, setIsVerifying] = useState(false);
 
+  const [storageStats, setStorageStats] = useState<{
+    totalMB: string;
+    limitMB: number;
+    percentage: string;
+    fileCount: number;
+  } | null>(null);
+  const [isLoadingStorage, setIsLoadingStorage] = useState(false);
+
+  const fetchStorageStats = async (authPassword: string) => {
+    setIsLoadingStorage(true);
+    try {
+      const res = await fetch("/api/storage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: authPassword })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setStorageStats(data);
+      }
+    } catch (e) {
+      console.error("Failed to fetch storage stats", e);
+    } finally {
+      setIsLoadingStorage(false);
+    }
+  };
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsVerifying(true);
@@ -49,6 +76,7 @@ export default function AdminDashboard() {
     if (result.success) {
       setIsAuthenticated(true);
       setError("");
+      fetchStorageStats(password);
     } else {
       setError(result.error || "Invalid credentials");
       setShakeKey((k) => k + 1);
@@ -201,6 +229,69 @@ export default function AdminDashboard() {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Storage Usage Widget */}
+        <div className="mt-12 border border-[#14120e]/20 bg-[#eae5d9] p-6 sm:p-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="font-display text-2xl uppercase tracking-tight text-[#14120e]">
+                Cloud Storage
+              </h2>
+              <p className="font-serif text-sm text-[#14120e]/60 mt-1">
+                Vercel Blob capacity (Hobby Tier limit: 250MB)
+              </p>
+            </div>
+            <div className="w-10 h-10 border border-[#14120e]/20 flex items-center justify-center text-[#14120e]/50">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+              </svg>
+            </div>
+          </div>
+          
+          {isLoadingStorage ? (
+            <div className="flex items-center gap-3 text-xs font-sans uppercase tracking-widest text-[#14120e]/50 py-4">
+              <span className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
+              Calculating usage...
+            </div>
+          ) : storageStats ? (
+            <div>
+              <div className="flex items-baseline justify-between mb-2">
+                <span className="font-display text-3xl text-[#14120e]">
+                  {storageStats.percentage}% <span className="text-lg text-[#14120e]/50">Used</span>
+                </span>
+                <span className="font-mono text-sm text-[#14120e]/70">
+                  {storageStats.totalMB}MB / {storageStats.limitMB}MB
+                </span>
+              </div>
+              
+              {/* Progress bar background */}
+              <div className="w-full h-4 bg-[#14120e]/10 overflow-hidden relative">
+                {/* Progress bar fill */}
+                <div 
+                  className={`h-full transition-all duration-1000 ease-out ${Number(storageStats.percentage) > 90 ? 'bg-[#c83a1a]' : 'bg-[#14120e]'}`}
+                  style={{ width: `${storageStats.percentage}%` }}
+                />
+              </div>
+              
+              <div className="mt-4 flex items-center gap-6">
+                <div className="text-xs font-sans uppercase tracking-widest text-[#14120e]/60">
+                  <span className="font-bold text-[#14120e]">{storageStats.fileCount}</span> total files stored
+                </div>
+                {Number(storageStats.percentage) > 90 && (
+                  <div className="text-xs font-sans uppercase tracking-widest text-[#c83a1a] font-bold flex items-center gap-1">
+                    ⚠️ Approaching Limit
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="text-xs font-sans uppercase tracking-widest text-[#c83a1a] py-4">
+              Failed to load storage statistics.
+            </div>
+          )}
         </div>
 
         {/* Quick Info Bar */}
