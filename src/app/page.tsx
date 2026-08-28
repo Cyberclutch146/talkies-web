@@ -1,10 +1,46 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import siteData from "@/data/site.json";
 import HalftoneReveal from "@/components/HalftoneReveal";
 import DecryptedText from "@/components/DecryptedText";
 import AboutCollege from "@/components/AboutCollege";
+import CircularText from "@/components/CircularText";
+
+const facultyMembers = [
+  { name: "Anwesha Basu", role: "Faculty Advisor", photo: "/faculty/anwesha.jpg", dept: "CSE Department" },
+  { name: "Sohini Sen", role: "Faculty Coordinator", photo: "/faculty/sohini.jpeg", dept: "CSE Department" },
+  { name: "Tasmina Yasmin", role: "Faculty Coordinator", photo: "/faculty/tasnima.jpeg", dept: "CSE Department" },
+];
+
+const missionPillars = [
+  {
+    tag: "01",
+    title: "Document & Report",
+    description: "Cover and document key campus events, fests, academic activities, and student achievements accurately and dynamically.",
+  },
+  {
+    tag: "02",
+    title: "Creative Expression",
+    description: "Provide a collaborative platform for students to explore their talents in content creation, photography, videography, anchoring, writing, and editing.",
+  },
+  {
+    tag: "03",
+    title: "Community Engagement",
+    description: "Connect the student body, faculty, and alumni through engaging digital media, creative showcases, and insightful campus journalism.",
+  },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  }),
+};
 
 export default function HomePage() {
   const featuredStories = [
@@ -12,10 +48,10 @@ export default function HomePage() {
       id: "got",
       tag: "GOT | SPORTS",
       isNew: true,
-      title: "Game Of Trophies 2025",
+      title: "Game Of Thrones 2025",
       headline: "CSE clinches football final in thrilling penalty shootout",
       blurb: "CSE department wins in a thrilling final that went to penalties. Annual sports festival records broken at track & field.",
-      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=80",
+      image: "/events/footballl.JPG",
       alt: "Sports and football fest at RCCIIT",
     },
     {
@@ -24,9 +60,9 @@ export default function HomePage() {
       isNew: true,
       title: "TechTrix Hackathon",
       headline: "180 coders, 30 teams, 1 champion in 24-hour sprint",
-      blurb: "The ultimate 24-hour coding marathon and robotics championship showcased to industry judges and recruiters.",
-      image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1000&q=80",
-      alt: "Hackathon coding competition",
+      blurb: "The ultimate gaming tournament and robotics championship showcased to industry judges and recruiters.",
+      image: "/events/valorant.JPG",
+      alt: "Gaming tournament at RCCIIT",
     },
     {
       id: "regalia",
@@ -35,7 +71,7 @@ export default function HomePage() {
       title: "Regalia 3-Day Fest",
       headline: "High-octane dance battles and live musical night",
       blurb: "Performances from all departments, award-winning dramatic skits, and live music under the stars.",
-      image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80",
+      image: "/events/regaliaband.JPG",
       alt: "Cultural fest music and dance stage",
     },
   ];
@@ -71,7 +107,7 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 right-0 z-10 px-4 sm:px-8 py-4 flex flex-col sm:flex-row flex-wrap items-center justify-between gap-2 text-[9px] sm:text-xs font-sans uppercase tracking-[0.18em] text-[#e5e0d3]/80">
           <div className="flex items-center gap-2">
             <span className="text-[#c83a1a]">✦</span>
-            <span className="font-bold">EST. 1999</span>
+            <span className="font-bold">EST. 2023</span>
             <span className="text-[#e5e0d3]/40">·</span>
             <span>RCCIIT, KOLKATA</span>
           </div>
@@ -272,82 +308,193 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          PUBLICATIONS: 3 cards
+          VISION & MISSION — Paper theme, proper spacing
       ═══════════════════════════════════════════════════════════════ */}
       <section className="w-full border-b border-[#14120e]/20">
+        {/* Section header bar */}
         <div className="px-4 sm:px-10 py-6 sm:py-8 border-b border-[#14120e]/20 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
           <div>
             <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-1">
-              ARCHIVES & EDITIONS
+              WHAT WE STAND FOR
             </span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-[#14120e]">
-              FEATURED PUBLICATIONS
+              <DecryptedText
+                text="VISION & MISSION"
+                animateOn="view"
+                speed={30}
+                maxIterations={6}
+                sequential={true}
+                revealDirection="start"
+                className="text-[#14120e]"
+                encryptedClassName="text-[#c83a1a]"
+              />
             </h2>
           </div>
-          <p className="font-serif text-sm text-[#14120e]/60 max-w-sm">
-            Handpicked issues & official event reports from the last few sessions.
+          <p className="font-serif text-sm text-[#14120e]/60 max-w-sm italic">
+            The principles that guide RCC Talkies as the creative voice of RCCIIT.
           </p>
         </div>
 
+        {/* Content: Logo + Vision left, Mission pillars right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20">
+
+          {/* Left: Vision + CircularText Logo */}
+          <div className="lg:col-span-5 p-8 sm:p-12 flex flex-col items-center justify-center gap-10">
+            {/* CircularText with logo */}
+            <motion.div
+              className="relative w-[220px] h-[220px] sm:w-[260px] sm:h-[260px]"
+              initial={{ opacity: 0, rotate: -20 }}
+              whileInView={{ opacity: 1, rotate: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <CircularText
+                  text="RCC TALKIES • THE VOICE OF RCCIIT • EST. 2023 • "
+                  spinDuration={25}
+                  onHover="speedUp"
+                  className="!w-[220px] !h-[220px] sm:!w-[260px] sm:!h-[260px] !text-[#14120e]/60 !font-sans !text-[10px] sm:!text-[12px] !tracking-[0.15em] !uppercase"
+                />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <Image
+                  src="/logo.png"
+                  alt="RCC Talkies Logo"
+                  width={80}
+                  height={80}
+                  className="w-16 h-16 sm:w-20 sm:h-20 object-contain opacity-80"
+                />
+              </div>
+            </motion.div>
+
+            {/* Vision statement */}
+            <motion.div
+              className="text-center max-w-sm"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeUp}
+              custom={0}
+            >
+              <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-3">
+                ✦ OUR VISION
+              </span>
+              <p className="font-serif text-base sm:text-lg text-[#14120e]/80 leading-relaxed">
+                To serve as the creative voice and official media pulse of the college community, fostering a vibrant culture of digital storytelling, journalistic integrity, filmmaking, and visual communication.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Right: Mission Pillars */}
+          <div className="lg:col-span-7 p-8 sm:p-12 bg-[#eae5d9]/40 space-y-6">
+            <div className="border-b border-[#14120e]/20 pb-4">
+              <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-1">
+                OUR MISSION
+              </span>
+              <p className="font-serif text-sm text-[#14120e]/60">
+                Three pillars that drive everything we create, document, and share.
+              </p>
+            </div>
+
+            {missionPillars.map((pillar, idx) => (
+              <motion.div
+                key={pillar.tag}
+                className="group p-6 sm:p-8 border border-[#14120e]/15 bg-[#e5e0d3] hover:border-[#14120e] hover:shadow-[4px_4px_0px_#14120e] hover:-translate-y-0.5 transition-all duration-300"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={fadeUp}
+                custom={idx + 1}
+              >
+                <div className="flex items-start gap-4 sm:gap-5">
+                  <span className="font-display text-3xl sm:text-4xl text-[#c83a1a] flex-shrink-0 leading-none">
+                    {pillar.tag}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-xl sm:text-2xl uppercase tracking-tight text-[#14120e] mb-2">
+                      {pillar.title}
+                    </h3>
+                    <p className="font-serif text-sm sm:text-base text-[#14120e]/70 leading-relaxed">
+                      {pillar.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          FACULTY MENTORS — Full-width cards, paper theme
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="w-full border-b border-[#14120e]/20 bg-[#eae5d9]/50">
+        {/* Section header bar */}
+        <div className="px-4 sm:px-10 py-6 sm:py-8 border-b border-[#14120e]/20 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+          <div>
+            <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-1">
+              ADVISORY BOARD
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-[#14120e]">
+              <DecryptedText
+                text="OUR MENTORS"
+                animateOn="view"
+                speed={35}
+                maxIterations={7}
+                sequential={true}
+                revealDirection="center"
+                className="text-[#14120e]"
+                encryptedClassName="text-[#c83a1a]"
+              />
+            </h2>
+          </div>
+          <p className="font-serif text-sm text-[#14120e]/60 max-w-sm italic">
+            The guiding force behind RCC Talkies — our faculty advisors from RCCIIT&apos;s CSE department.
+          </p>
+        </div>
+
+        {/* Faculty cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#14120e]/20">
-          {[
-            {
-              badge: "VOL. II",
-              badgeColor: "bg-[#c83a1a]",
-              title: "MAGAZINE VOL. II",
-              subtitle: "Tech & Culture — student startups, artistic expression, and innovation.",
-              img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80",
-              link: "/magazine",
-              cta: "Read Issue",
-            },
-            {
-              badge: "2024",
-              badgeColor: "bg-[#14120e]",
-              title: "MAGAZINE VOL. I",
-              subtitle: "The Beginning — inaugural edition documenting student journalism and campus voices.",
-              img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80",
-              link: "/magazine",
-              cta: "Read Issue",
-            },
-            {
-              badge: "PDF",
-              badgeColor: "bg-[#c83a1a]",
-              title: "EVENT REPORTS",
-              subtitle: "GOT, TechTrix, and Regalia 2024 comprehensive reports by the research wing.",
-              img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
-              link: "/reports",
-              cta: "View Reports",
-            },
-          ].map((pub) => (
-            <div key={pub.title} className="p-5 sm:p-8 flex flex-col justify-between group hover:bg-[#e0dbcd]/50 transition-colors">
-              <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden border border-[#14120e]/30 bg-[#2b3a4a] mb-4">
-                  <img
-                    src={pub.img}
-                    alt={pub.title}
-                    className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
-                  />
+          {facultyMembers.map((faculty, idx) => (
+            <motion.div
+              key={faculty.name}
+              className="group p-5 sm:p-8 flex flex-col hover:bg-[#e0dbcd]/50 transition-colors"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeUp}
+              custom={idx}
+            >
+              {/* Large portrait */}
+              <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#14120e]/30 bg-[#dad4c3] mb-5">
+                <Image
+                  src={faculty.photo}
+                  alt={faculty.name}
+                  fill
+                  className="object-cover md:grayscale md:contrast-110 md:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                {/* Hover gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#14120e]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Number badge */}
+                <div className="absolute top-3 left-3 bg-[#c83a1a] text-[#e5e0d3] text-[9px] font-sans font-bold uppercase tracking-widest px-2 py-0.5">
+                  0{idx + 1} // FACULTY
                 </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-sans font-bold text-[11px] sm:text-xs tracking-wider uppercase text-[#14120e]">
-                    {pub.title}
-                  </span>
-                  <span className={`${pub.badgeColor} text-[#e5e0d3] text-[9px] font-sans font-bold uppercase tracking-widest px-1.5 py-0.5`}>
-                    {pub.badge}
-                  </span>
-                </div>
-                <p className="text-sm font-serif text-[#14120e]/75 leading-relaxed">
-                  {pub.subtitle}
+              </div>
+
+              {/* Info */}
+              <div className="space-y-1">
+                <h3 className="font-display text-xl sm:text-2xl uppercase tracking-tight text-[#14120e] leading-tight">
+                  {faculty.name}
+                </h3>
+                <p className="text-[11px] font-sans uppercase tracking-[0.15em] text-[#c83a1a] font-bold">
+                  {faculty.role}
+                </p>
+                <p className="text-[11px] font-sans uppercase tracking-[0.15em] text-[#14120e]/50 font-semibold">
+                  {faculty.dept}
                 </p>
               </div>
-              <Link
-                href={pub.link}
-                className="mt-5 inline-flex items-center gap-2 text-[11px] font-sans uppercase tracking-widest font-bold text-[#14120e] group-hover:text-[#c83a1a]"
-              >
-                <span>{pub.cta}</span>
-                <span>↗</span>
-              </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -358,25 +505,25 @@ export default function HomePage() {
       <section className="w-full border-b border-[#14120e]/20 py-6 sm:py-10 overflow-hidden bg-[#ded8c7]/50 select-none">
         <div className="animate-marquee flex items-center gap-6 sm:gap-8 whitespace-nowrap">
           {[0, 1].map((seg) => (
-            <div key={seg} className="flex items-center gap-6 sm:gap-8 text-3xl sm:text-5xl lg:text-6xl font-serif text-[#14120e]">
+            <div key={seg} className="flex items-center gap-6 sm:gap-8 text-xl sm:text-5xl lg:text-6xl font-serif text-[#14120e]">
               <span>Let&apos;s document campus history together</span>
               <Link
                 href="/contact"
-                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-2xl sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
+                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
               >
                 EMAIL US
               </Link>
               <span>The Voice of RCCIIT</span>
               <Link
                 href="/contact"
-                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-2xl sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
+                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
               >
                 JOIN DESK
               </Link>
               <span>Let&apos;s create something together</span>
               <Link
                 href="/magazine"
-                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-2xl sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
+                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
               >
                 READ ISSUE
               </Link>

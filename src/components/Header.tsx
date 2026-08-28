@@ -85,7 +85,7 @@ export function Header() {
           {/* Minimalist 2-line Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex flex-col justify-center items-center w-8 h-8 gap-1.5 cursor-pointer group"
+            className="flex flex-col justify-center items-center w-11 h-11 gap-1.5 cursor-pointer group"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >

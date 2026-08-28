@@ -59,7 +59,7 @@ export default function JoinPage() {
               <p className="font-serif text-base text-[#14120e]/75 leading-relaxed mb-6">
                 Step up and take charge of a desk. We&apos;re looking for dedicated individuals to lead our editorial, tech, social media, and creative wings.
               </p>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 mb-6">
                 {LEAD_POSITIONS.map((pos, idx) => (
                   <div key={pos} className="flex items-center gap-2 py-1.5 border-b border-[#14120e]/10">
                     <span className="font-sans text-[10px] text-[#c83a1a] font-bold w-4 flex-shrink-0">
