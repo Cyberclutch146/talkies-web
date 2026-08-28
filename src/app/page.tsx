@@ -1,17 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import siteData from "@/data/site.json";
 import HalftoneReveal from "@/components/HalftoneReveal";
 import DecryptedText from "@/components/DecryptedText";
-import IntroOverlay from "@/components/IntroOverlay";
 import AboutCollege from "@/components/AboutCollege";
 
 export default function HomePage() {
-  const [introKey, setIntroKey] = useState(0);
-  const [showIntro, setShowIntro] = useState(true);
-
   const featuredStories = [
     {
       id: "got",
@@ -47,15 +42,6 @@ export default function HomePage() {
 
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
-      {/* ═══════════════════════════════════════════════════════════════
-          INTRO: Masked Heading Cinematic Overlay
-      ═══════════════════════════════════════════════════════════════ */}
-      {showIntro && (
-        <IntroOverlay
-          key={introKey}
-          onComplete={() => setShowIntro(false)}
-        />
-      )}
 
       {/* ═══════════════════════════════════════════════════════════════
           HERO: Full-bleed Halftone + Overlaid Giant Title
@@ -93,16 +79,6 @@ export default function HomePage() {
             &ldquo;The Voice of RCCIIT&rdquo;
           </span>
           <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={() => {
-                setIntroKey((k) => k + 1);
-                setShowIntro(true);
-              }}
-              className="hover:text-[#c83a1a] transition-colors border border-[#e5e0d3]/25 px-2 py-0.5 text-[9px] uppercase tracking-widest hidden sm:inline-block"
-              title="Replay front-page intro"
-            >
-              ✦ REPLAY
-            </button>
             <span className="bg-[#c83a1a] text-[#e5e0d3] text-[9px] px-2 py-0.5 font-bold">
               LIVE
             </span>
@@ -265,7 +241,7 @@ export default function HomePage() {
             <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold text-[#c83a1a] mb-6 block">
               OFFICIAL PUBLICATIONS
             </span>
-            <h2 className="font-display text-5xl sm:text-7xl lg:text-[110px] leading-[0.85] uppercase tracking-tighter mb-8 text-[#e5e0d3]">
+            <h2 className="font-display text-5xl sm:text-7xl lg:text-[110px] leading-none uppercase tracking-tighter mb-8 text-[#e5e0d3]">
               THE<br/>MAGAZINE
             </h2>
             <p className="font-serif text-lg sm:text-xl text-[#e5e0d3]/80 leading-relaxed max-w-2xl mb-10">

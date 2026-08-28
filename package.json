@@ -17,6 +17,8 @@
     "ogl": "^1.0.11",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-pageflip": "^2.0.3",
+    "react-pdf": "^10.5.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

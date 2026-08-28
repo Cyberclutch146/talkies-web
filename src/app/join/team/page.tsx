@@ -3,20 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
-
-const DESKS = [
-  { name: "Editorial Member", desc: "Writing, editing, and proofreading for the quarterly magazine and campus reports." },
-  { name: "Tech Member", desc: "Development, website maintenance, and digital innovation." },
-  { name: "Graphics & Editorial Member", desc: "Visual storytelling — photography, poster design, and creative artwork." },
-  { name: "Social Media Member", desc: "Social media management, outreach, and community engagement." },
-  { name: "Content Member", desc: "Crafting engaging content, scripts, and promotional copy." },
-  { name: "Artwork Member", desc: "Creating illustrations, digital art, and visual assets." },
-  { name: "Journalist", desc: "On-ground fest coverage, interviews, and breaking campus stories." },
-  { name: "Media Journalist", desc: "Multimedia reporting, video coverage, and broadcasting." },
-  { name: "Research Wing Member", desc: "Data-driven event reports, surveys, and in-depth investigative features." },
-  { name: "Alumni Team Member", desc: "Building and maintaining connections with the RCCIIT alumni network." },
-  { name: "Event Management Member", desc: "Organizing, coordinating, and managing club events and logistics." },
-];
+import { TEAM_DESKS as DESKS } from "@/data/positions";
 
 export default function TeamJoinPage() {
   const [loading, setLoading] = useState(false);
@@ -54,8 +41,8 @@ export default function TeamJoinPage() {
       }
 
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -262,7 +249,7 @@ export default function TeamJoinPage() {
                     WHY DO YOU WANT TO JOIN? *
                   </label>
                   <textarea
-                    required id="team-why" name="whyJoin" rows={4}
+                    id="team-why" name="whyJoin" rows={4}
                     className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none resize-none transition-colors"
                     placeholder="Tell us what excites you about journalism, media, or campus storytelling..."
                   />

@@ -63,7 +63,7 @@ export default function EventsPage() {
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
       {/* Inverted Black Header Banner */}
-      <section className="w-full bg-[#14120e] text-[#e5e0d3] py-6 sm:py-10 px-4 sm:px-8 border-b border-[#14120e]">
+      <section className="w-full bg-[#14120e] text-[#e5e0d3] pt-32 sm:pt-40 pb-8 sm:pb-12 px-4 sm:px-8 border-b border-[#14120e]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#c83a1a] font-bold block mb-1">
@@ -213,7 +213,7 @@ export default function EventsPage() {
                   {activeEvent.shortName} // {activeYear} HIGHLIGHTS
                 </h3>
                 <span className="text-xs font-sans uppercase tracking-widest text-[#c83a1a] font-bold">
-                  ✦ 3 STORIES
+                  ✦ {activeYearData?.highlights.length || 0} STORIES
                 </span>
               </div>
 
@@ -225,7 +225,7 @@ export default function EventsPage() {
                   >
                     <div className="flex items-center gap-3">
                       <span className="font-display text-2xl text-[#c83a1a]">
-                        0{i + 1}
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                       <h4 className="font-display text-xl sm:text-2xl uppercase tracking-tight text-[#14120e]">
                         {h.title}

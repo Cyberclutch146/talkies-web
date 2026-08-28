@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { LEAD_POSITIONS, TEAM_DESK_NAMES } from "@/data/positions";
 
 const baseApplicationSchema = z.object({
   name: z
@@ -33,24 +34,12 @@ const baseApplicationSchema = z.object({
 export const leadApplicationSchema = baseApplicationSchema.extend({
   type: z.literal("LEAD"),
   yearOfStudy: z.literal("3", {
-    errorMap: () => ({ message: "Leads must be in their 3rd year of study." }),
+    error: "Leads must be in their 3rd year of study.",
   }),
   positionAppliedFor: z.enum(
-    [
-      "Editor-in-Chief",
-      "Tech Lead",
-      "Graphics Lead cum Editorial Associate",
-      "Social Media Lead",
-      "Content Lead",
-      "Artwork Lead",
-      "Lead Journalist",
-      "Media Journalist Lead",
-      "Research Wing Lead",
-      "Alumni POC",
-      "Event Management Lead",
-    ],
+    LEAD_POSITIONS,
     {
-      errorMap: () => ({ message: "Please select a valid lead position." }),
+      error: "Please select a valid lead position.",
     }
   ),
 });
@@ -58,24 +47,12 @@ export const leadApplicationSchema = baseApplicationSchema.extend({
 export const teamApplicationSchema = baseApplicationSchema.extend({
   type: z.literal("TEAM"),
   yearOfStudy: z.enum(["1", "2", "3"], {
-    errorMap: () => ({ message: "Team members must be in 1st, 2nd, or 3rd year." }),
+    error: "Team members must be in 1st, 2nd, or 3rd year.",
   }),
   positionAppliedFor: z.enum(
-    [
-      "Editorial Member",
-      "Tech Member",
-      "Graphics & Editorial Member",
-      "Social Media Member",
-      "Content Member",
-      "Artwork Member",
-      "Journalist",
-      "Media Journalist",
-      "Research Wing Member",
-      "Alumni Team Member",
-      "Event Management Member",
-    ],
+    TEAM_DESK_NAMES as unknown as [string, ...string[]],
     {
-      errorMap: () => ({ message: "Please select a valid team desk." }),
+      error: "Please select a valid team desk.",
     }
   ),
 });

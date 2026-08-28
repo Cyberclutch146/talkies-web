@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${unifraktur.variable} ${pirata.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-serif bg-[#e7e3d8] text-[#14120e] selection:bg-[#14120e] selection:text-[#e7e3d8]">
+      <body className="min-h-full flex flex-col font-serif bg-[#e5e0d3] text-[#14120e] selection:bg-[#14120e] selection:text-[#e5e0d3]">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>

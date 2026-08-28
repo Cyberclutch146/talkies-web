@@ -23,4 +23,19 @@ model Application {
   whyJoin            String?
   status             String   @default("PENDING") // PENDING, REVIEWED, ACCEPTED, REJECTED
   createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([collegeEmail, positionAppliedFor, type])
+  @@index([status])
+}
+
+model Magazine {
+  id          String   @id @default(cuid())
+  title       String
+  volume      String
+  year        String
+  description String?
+  pdfUrl      String
+  coverImage  String?
+  createdAt   DateTime @default(now())
 }

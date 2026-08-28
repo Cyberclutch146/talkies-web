@@ -2,40 +2,15 @@
 
 import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
+import { LEAD_POSITIONS, TEAM_DESKS } from "@/data/positions";
 
-const LEAD_POSITIONS = [
-  "Editor-in-Chief",
-  "Tech Lead",
-  "Graphics Lead cum Editorial Associate",
-  "Social Media Lead",
-  "Content Lead",
-  "Artwork Lead",
-  "Lead Journalist",
-  "Media Journalist Lead",
-  "Research Wing Lead",
-  "Alumni POC",
-  "Event Management Lead",
-];
-
-const TEAM_DESKS = [
-  { name: "Editorial", desc: "Member of the Editorial wing" },
-  { name: "Tech", desc: "Member of the Tech wing" },
-  { name: "Graphics & Editorial", desc: "Member of the Graphics wing" },
-  { name: "Social Media", desc: "Member of the Social Media wing" },
-  { name: "Content", desc: "Member of the Content wing" },
-  { name: "Artwork", desc: "Member of the Artwork wing" },
-  { name: "Journalism", desc: "Member of the Journalism wing" },
-  { name: "Media Journalism", desc: "Member of the Media Journalism wing" },
-  { name: "Research Wing", desc: "Member of the Research Wing" },
-  { name: "Alumni Team", desc: "Member of the Alumni Team" },
-  { name: "Event Management", desc: "Member of the Event Management wing" },
-];
+const TEAM_DESKS_DISPLAY = TEAM_DESKS.map((d) => ({ name: d.name.replace(/ Member$/, '').replace(/ist$/, 'ism'), desc: `Member of the ${d.name.replace(/ Member$/, '')} wing` }));
 
 export default function JoinPage() {
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
       {/* ── Inverted Black Header Banner ── */}
-      <section className="w-full bg-[#14120e] text-[#e5e0d3] py-6 sm:py-10 px-4 sm:px-8 border-b border-[#14120e]">
+      <section className="w-full bg-[#14120e] text-[#e5e0d3] pt-32 sm:pt-40 pb-8 sm:pb-12 px-4 sm:px-8 border-b border-[#14120e]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#c83a1a] font-bold block mb-1">
@@ -124,7 +99,7 @@ export default function JoinPage() {
                 {TEAM_DESKS.map((desk, idx) => (
                   <div key={desk.name} className="border-l-2 border-[#14120e] pl-3">
                     <span className="font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-[#c83a1a] block">
-                      0{idx + 1}
+                      {String(idx + 1).padStart(2, "0")}
                     </span>
                     <span className="font-sans text-xs uppercase tracking-wider font-bold text-[#14120e]">
                       {desk.name}
@@ -155,7 +130,7 @@ export default function JoinPage() {
             <p className="text-xs font-sans uppercase tracking-widest text-[#14120e]/60 mt-1">Years of Legacy</p>
           </div>
           <div>
-            <span className="font-display text-3xl text-[#14120e]">5</span>
+            <span className="font-display text-3xl text-[#14120e]">{TEAM_DESKS.length}</span>
             <p className="text-xs font-sans uppercase tracking-widest text-[#14120e]/60 mt-1">Editorial Desks</p>
           </div>
           <div>

@@ -3,20 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
-
-const POSITIONS = [
-  "Editor-in-Chief",
-  "Tech Lead",
-  "Graphics Lead cum Editorial Associate",
-  "Social Media Lead",
-  "Content Lead",
-  "Artwork Lead",
-  "Lead Journalist",
-  "Media Journalist Lead",
-  "Research Wing Lead",
-  "Alumni POC",
-  "Event Management Lead",
-];
+import { LEAD_POSITIONS as POSITIONS } from "@/data/positions";
 
 export default function LeadsJoinPage() {
   const [loading, setLoading] = useState(false);
@@ -54,8 +41,8 @@ export default function LeadsJoinPage() {
       }
 
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -64,7 +51,7 @@ export default function LeadsJoinPage() {
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
       {/* ── Inverted Banner ── */}
-      <section className="w-full bg-[#14120e] text-[#e5e0d3] py-6 sm:py-10 px-4 sm:px-8 border-b border-[#14120e]">
+      <section className="w-full bg-[#14120e] text-[#e5e0d3] pt-32 sm:pt-40 pb-8 sm:pb-12 px-4 sm:px-8 border-b border-[#14120e]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#c83a1a] font-bold block mb-1">
@@ -146,7 +133,7 @@ export default function LeadsJoinPage() {
                   REQUIREMENTS
                 </span>
                 <ul className="space-y-1.5 text-sm font-serif text-[#14120e]/75 leading-relaxed">
-                  <li>• Active RCCIIT student (any year)</li>
+                  <li>• Active RCCIIT student (3rd year only)</li>
                   <li>• Commitment to weekly editorial meetings</li>
                   <li>• Prior experience preferred but not required</li>
                   <li>• Portfolio or past work samples encouraged</li>
