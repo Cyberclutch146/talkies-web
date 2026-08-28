@@ -68,7 +68,6 @@
     { "label": "Home", "href": "/" },
     { "label": "Events", "href": "/events" },
     { "label": "Magazine", "href": "/magazine" },
-    { "label": "Reports", "href": "/reports" },
     { "label": "Members", "href": "/members" },
     { "label": "Join", "href": "/join" },
     { "label": "Contact", "href": "/contact" }
