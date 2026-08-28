@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import DecryptedText from "@/components/DecryptedText";
+import { verifyPassword } from "../actions";
 
 interface InstaPost {
   id: string;
@@ -64,12 +65,21 @@ export default function AdminInstagram() {
     return () => URL.revokeObjectURL(url);
   }, [imageFile]);
 
-  const handleAuth = (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.trim().length > 0) {
-      setIsAuthenticated(true);
-    } else {
+    
+    if (password.trim().length === 0) {
       setMessage({ text: "Please enter the admin password", type: "error" });
+      return;
+    }
+    
+    const result = await verifyPassword(password);
+    
+    if (result.success) {
+      setIsAuthenticated(true);
+      setMessage({ text: "", type: "" });
+    } else {
+      setMessage({ text: result.error || "Invalid password", type: "error" });
     }
   };
 

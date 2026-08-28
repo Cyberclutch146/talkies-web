@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
 
-const ADMIN_PASSWORD = "trex@zeno123";
+import { verifyPassword } from "./actions";
 
 const adminModules = [
   {
@@ -38,16 +38,23 @@ export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState("");
   const [shakeKey, setShakeKey] = useState(0);
+  const [isVerifying, setIsVerifying] = useState(false);
 
-  const handleAuth = (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
+    setIsVerifying(true);
+    
+    const result = await verifyPassword(password);
+    
+    if (result.success) {
       setIsAuthenticated(true);
       setError("");
     } else {
-      setError("Invalid credentials");
+      setError(result.error || "Invalid credentials");
       setShakeKey((k) => k + 1);
     }
+    
+    setIsVerifying(false);
   };
 
   /* ─── Login Gate ─── */

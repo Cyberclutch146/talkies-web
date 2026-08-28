@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import DecryptedText from "@/components/DecryptedText";
+import { verifyPassword } from "../actions";
 
 interface Magazine {
   id: string;
@@ -52,21 +53,19 @@ export default function AdminMagazines() {
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Validate by attempting an authenticated API call.
-    // The real security is on the API layer; this is just UX gating.
-    try {
-      const res = await fetch("/api/magazines");
-      if (res.ok) {
-        // Password will be validated on actual uploads/deletes.
-        // For the gate, we just check it's non-empty.
-        if (password.trim().length > 0) {
-          setIsAuthenticated(true);
-        } else {
-          setMessage({ text: "Please enter the admin password", type: "error" });
-        }
-      }
-    } catch {
-      setMessage({ text: "Could not connect to server", type: "error" });
+    
+    if (password.trim().length === 0) {
+      setMessage({ text: "Please enter the admin password", type: "error" });
+      return;
+    }
+    
+    const result = await verifyPassword(password);
+    
+    if (result.success) {
+      setIsAuthenticated(true);
+      setMessage({ text: "", type: "" });
+    } else {
+      setMessage({ text: result.error || "Invalid password", type: "error" });
     }
   };
 
