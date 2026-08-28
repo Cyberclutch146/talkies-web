@@ -71,31 +71,34 @@ function FacultyCard({ member }: { member: TeamMember }) {
 
   return (
     <SpotlightCard
-      className="group p-0 flex flex-row items-center gap-0 transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
+      className="group p-0 flex flex-col h-full transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
       spotlightColor="rgba(200, 58, 26, 0.1)"
     >
-      {/* Photo */}
-      <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 bg-[#dad4c3] overflow-hidden border-r border-[#14120e]/15">
+      {/* Photo Area */}
+      <div className="relative w-full aspect-[4/5] bg-[#dad4c3] overflow-hidden border-b border-[#14120e]/15">
         <Image
           src={photoSrc}
           alt={member.name}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          sizes="96px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
+        {/* Advisory badge */}
+        <div className="absolute top-2 left-2 bg-[#14120e] text-[#c83a1a] text-[9px] font-sans font-bold px-1.5 py-0.5 tracking-widest uppercase">
+          Advisory
+        </div>
       </div>
 
       {/* Info */}
-      <div className="p-4 flex-1">
-        <span className="text-[10px] font-sans uppercase tracking-[0.2em] font-bold text-[#c83a1a] block mb-1">
-          ADVISORY BOARD
-        </span>
-        <h3 className="font-display text-lg sm:text-xl uppercase tracking-tight text-[#14120e] leading-tight mb-0.5">
-          {member.name}
-        </h3>
-        <p className="text-[11px] font-sans uppercase tracking-widest text-[#14120e]/60 font-semibold">
-          {member.role}
-        </p>
+      <div className="p-4 flex-1 flex flex-col justify-between">
+        <div>
+          <h3 className="font-display text-base sm:text-lg uppercase tracking-tight text-[#14120e] leading-tight mb-1">
+            {member.name}
+          </h3>
+          <p className="text-[11px] font-sans uppercase tracking-[0.15em] text-[#14120e]/60 font-semibold">
+            {member.role}
+          </p>
+        </div>
       </div>
     </SpotlightCard>
   );
@@ -133,16 +136,16 @@ export default function MembersPage() {
       </section>
 
       {/* Academic Year Tabs */}
-      <div className="w-full border-b border-[#14120e]/20 bg-[#eae5d9]/50 sticky top-[53px] z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center gap-0">
+      <div className="w-full border-b border-[#14120e]/20 bg-[#eae5d9]/50 py-3 sm:py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-wrap items-center gap-3 sm:gap-4">
           {years.map((yr, idx) => (
             <button
               key={yr.year}
               onClick={() => setActiveYearIdx(idx)}
-              className={`py-4 px-5 sm:px-8 font-sans text-xs sm:text-sm uppercase tracking-[0.15em] font-bold border-b-2 transition-colors ${
+              className={`py-2.5 sm:py-3 px-5 sm:px-8 font-gothic text-xl sm:text-2xl tracking-wide transition-all border ${
                 activeYearIdx === idx
-                  ? "border-[#c83a1a] text-[#14120e]"
-                  : "border-transparent text-[#14120e]/50 hover:text-[#14120e]/80"
+                  ? "border-[#14120e] bg-[#14120e] text-[#e5e0d3] font-bold shadow-[4px_4px_0px_#c83a1a] -translate-y-1"
+                  : "border-[#14120e]/20 bg-transparent text-[#14120e]/50 hover:text-[#14120e] hover:border-[#14120e]/50 font-medium"
               }`}
             >
               {yr.label}
@@ -199,7 +202,7 @@ export default function MembersPage() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
             {activeYear.faculty.map((fac) => (
               <FacultyCard key={`${activeYear.year}-fac-${fac.name}`} member={fac} />
             ))}
