@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { put } from '@vercel/blob';
 
 export async function GET() {
   try {
@@ -45,20 +44,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Only image files are accepted.' }, { status: 400 });
     }
 
-    // Save image to public/uploads/instagram/
-    const bytes = await imageFile.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    const uploadDir = path.join(process.cwd(), 'public/uploads/instagram');
-    await mkdir(uploadDir, { recursive: true });
-
+    // Upload image to Vercel Blob
     const ext = imageFile.name.split('.').pop() || 'jpg';
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const filename = `insta_${uniqueSuffix}.${ext}`;
-    const filepath = path.join(uploadDir, filename);
+    const filename = `instagram/insta_${uniqueSuffix}.${ext}`;
 
-    await writeFile(filepath, buffer);
-    const imageUrl = `/uploads/instagram/${filename}`;
+    const blob = await put(filename, imageFile, {
+      access: 'public',
+      addRandomSuffix: false,
+    });
+    const imageUrl = blob.url;
 
     // Get the next order number
     const maxOrder = await prisma.instagramPost.aggregate({

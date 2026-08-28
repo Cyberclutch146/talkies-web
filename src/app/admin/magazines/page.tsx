@@ -257,7 +257,10 @@ export default function AdminMagazines() {
 
             <div className="grid grid-cols-1 gap-6 pt-4 border-t border-[#14120e]/20">
               <div className="space-y-2">
-                <label className="font-sans text-xs uppercase tracking-widest font-bold text-[#14120e]/70">PDF File *</label>
+                <div className="flex items-baseline justify-between">
+                  <label className="font-sans text-xs uppercase tracking-widest font-bold text-[#14120e]/70">PDF File *</label>
+                  <span className="text-[10px] font-sans text-[#c83a1a] uppercase font-bold tracking-wider">⚠️ Compress before upload (Max 4.5MB)</span>
+                </div>
                 <input
                   id="pdf"
                   type="file"
@@ -266,6 +269,9 @@ export default function AdminMagazines() {
                   onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
                   className="w-full file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-sans file:uppercase file:tracking-widest file:bg-[#14120e] file:text-[#e5e0d3] hover:file:bg-[#c83a1a] file:cursor-pointer file:transition-colors text-sm"
                 />
+                <p className="text-[10px] font-serif italic text-[#14120e]/60">
+                  Please use a tool like ILovePDF or Adobe Acrobat to compress your magazine PDF before uploading. Vercel enforces strict size limits on server uploads.
+                </p>
               </div>
 
               <div className="space-y-2">

@@ -1,28 +1,26 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { unlink } from 'fs/promises';
-import path from 'path';
+import { del } from '@vercel/blob';
 
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
-    
-    // Check password from header or body
-    // We'll read it from the JSON body
     const body = await request.json();
-    const { password } = body;
     
+    // Check password
     const adminPassword = process.env.ADMIN_PASSWORD;
     if (!adminPassword) {
-      return NextResponse.json({ error: 'Server misconfigured.' }, { status: 500 });
+      return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 });
     }
-    if (password !== adminPassword) {
+    if (body.password !== adminPassword) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
+
+    // Get the magazine first to find its file URLs
     const magazine = await prisma.magazine.findUnique({
       where: { id },
     });
@@ -31,26 +29,16 @@ export async function DELETE(
       return NextResponse.json({ error: 'Magazine not found' }, { status: 404 });
     }
 
-    // Try to delete the physical files
+    // Delete files from Vercel Blob
     try {
-      if (magazine.pdfUrl) {
-        // e.g. /uploads/magazines/mag_123.pdf
-        const pdfFilename = magazine.pdfUrl.split('/').pop();
-        if (pdfFilename) {
-          const pdfPath = path.join(process.cwd(), 'public/uploads/magazines', pdfFilename);
-          await unlink(pdfPath).catch((e) => console.error("Error deleting PDF file:", e));
-        }
+      if (magazine.pdfUrl && magazine.pdfUrl.includes('public.blob.vercel-storage.com')) {
+        await del(magazine.pdfUrl);
       }
-      
-      if (magazine.coverImage) {
-        const coverFilename = magazine.coverImage.split('/').pop();
-        if (coverFilename) {
-          const coverPath = path.join(process.cwd(), 'public/uploads/magazines', coverFilename);
-          await unlink(coverPath).catch((e) => console.error("Error deleting cover file:", e));
-        }
+      if (magazine.coverImage && magazine.coverImage.includes('public.blob.vercel-storage.com')) {
+        await del(magazine.coverImage);
       }
     } catch (e) {
-      console.error("File deletion error (non-fatal):", e);
+      console.error('Error deleting file from Blob, proceeding with db deletion anyway:', e);
     }
 
     // Delete from database
@@ -58,7 +46,7 @@ export async function DELETE(
       where: { id },
     });
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting magazine:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { put } from '@vercel/blob';
 
 export async function GET() {
   try {
@@ -52,33 +51,27 @@ export async function POST(request: Request) {
       );
     }
 
-    // Process PDF file
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    // Create uploads directory
-    const uploadDir = path.join(process.cwd(), 'public/uploads/magazines');
-    await mkdir(uploadDir, { recursive: true });
-
-    // Generate unique filename
+    // Upload PDF to Vercel Blob
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const filename = `mag_${uniqueSuffix}.pdf`;
-    const filepath = path.join(uploadDir, filename);
-
-    // Save PDF
-    await writeFile(filepath, buffer);
-    const pdfUrl = `/uploads/magazines/${filename}`;
+    const pdfFilename = `magazines/mag_${uniqueSuffix}.pdf`;
+    
+    const pdfBlob = await put(pdfFilename, file, {
+      access: 'public',
+      addRandomSuffix: false,
+    });
+    const pdfUrl = pdfBlob.url;
 
     // Process Cover Image (optional)
     let coverImageUrl = null;
     if (coverImage && coverImage.size > 0) {
-      const coverBytes = await coverImage.arrayBuffer();
-      const coverBuffer = Buffer.from(coverBytes);
       const coverExt = coverImage.name.split('.').pop() || 'jpg';
-      const coverFilename = `cover_${uniqueSuffix}.${coverExt}`;
-      const coverFilepath = path.join(uploadDir, coverFilename);
-      await writeFile(coverFilepath, coverBuffer);
-      coverImageUrl = `/uploads/magazines/${coverFilename}`;
+      const coverFilename = `magazines/cover_${uniqueSuffix}.${coverExt}`;
+      
+      const coverBlob = await put(coverFilename, coverImage, {
+        access: 'public',
+        addRandomSuffix: false,
+      });
+      coverImageUrl = coverBlob.url;
     }
 
     // Save to database
