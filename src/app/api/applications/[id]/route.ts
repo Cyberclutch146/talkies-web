@@ -29,3 +29,28 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const password = searchParams.get('password');
+    const { id } = await params;
+    
+    // 1. Verify Admin Password
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword || password !== adminPassword) {
+      return NextResponse.json({ error: 'Unauthorized: Invalid Admin Password' }, { status: 401 });
+    }
+
+    // 2. Delete application
+    await prisma.application.delete({
+      where: { id }
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting application:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+

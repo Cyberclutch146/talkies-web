@@ -121,6 +121,29 @@ export default function RecruitmentDashboard() {
     }
   };
 
+  const handleDeleteApplication = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this application? This action cannot be undone.")) {
+      return;
+    }
+    setUpdateError("");
+    setUpdateSuccess("");
+    try {
+      const res = await fetch(`/api/applications/${id}?password=${encodeURIComponent(password)}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setApplications(apps => apps.filter(app => app.id !== id));
+        setUpdateSuccess("Application deleted successfully");
+        setTimeout(() => setUpdateSuccess(""), 2000);
+      } else {
+        const data = await res.json();
+        setUpdateError(data.error || "Failed to delete application");
+      }
+    } catch {
+      setUpdateError("Failed to delete application");
+    }
+  };
+
   const [emailAlert, setEmailAlert] = useState<{ role: string; message: string } | null>(null);
 
   const handleSendEmail = (role: string) => {
@@ -423,21 +446,29 @@ export default function RecruitmentDashboard() {
                                           Applied {new Date(app.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                                         </span>
                                       </div>
-                                      <select
-                                        value={app.status}
-                                        onChange={(e) => handleStatusUpdate(app.id, e.target.value)}
-                                        className={`text-[10px] font-sans font-bold uppercase tracking-widest px-3 py-1.5 border cursor-pointer outline-none ${
-                                          app.status === "SHORTLISTED"
-                                            ? "bg-[#14120e] text-[#e5e0d3] border-[#14120e]"
-                                            : app.status === "REJECTED"
-                                            ? "bg-[#c83a1a] text-[#e5e0d3] border-[#c83a1a]"
-                                            : "bg-[#e5e0d3] text-[#14120e] border-[#14120e]/30"
-                                        }`}
-                                      >
-                                        <option value="PENDING">Pending</option>
-                                        <option value="SHORTLISTED">Shortlisted</option>
-                                        <option value="REJECTED">Rejected</option>
-                                      </select>
+                                      <div className="flex flex-col items-end gap-2 shrink-0">
+                                        <select
+                                          value={app.status}
+                                          onChange={(e) => handleStatusUpdate(app.id, e.target.value)}
+                                          className={`text-[10px] font-sans font-bold uppercase tracking-widest px-3 py-1.5 border cursor-pointer outline-none ${
+                                            app.status === "SHORTLISTED"
+                                              ? "bg-[#14120e] text-[#e5e0d3] border-[#14120e]"
+                                              : app.status === "REJECTED"
+                                              ? "bg-[#c83a1a] text-[#e5e0d3] border-[#c83a1a]"
+                                              : "bg-[#e5e0d3] text-[#14120e] border-[#14120e]/30"
+                                          }`}
+                                        >
+                                          <option value="PENDING">Pending</option>
+                                          <option value="SHORTLISTED">Shortlisted</option>
+                                          <option value="REJECTED">Rejected</option>
+                                        </select>
+                                        <button
+                                          onClick={() => handleDeleteApplication(app.id)}
+                                          className="text-[9px] text-[#c83a1a] font-sans uppercase tracking-widest font-bold hover:underline"
+                                        >
+                                          Delete
+                                        </button>
+                                      </div>
                                     </div>
 
                                     {app.portfolioLink && (

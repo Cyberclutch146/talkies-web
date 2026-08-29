@@ -10,8 +10,6 @@ import AboutCollege from "@/components/AboutCollege";
 import CircularText from "@/components/CircularText";
 import InstagramFeed from "@/components/InstagramFeed";
 
-
-
 const missionPillars = [
   {
     tag: "01",
@@ -46,8 +44,8 @@ export default function HomePage() {
       tag: "GOT | SPORTS",
       isNew: true,
       title: "Game Of Thrones 2025",
-      headline: "CSE clinches football final in thrilling penalty shootout",
-      blurb: "CSE department wins in a thrilling final that went to penalties. Annual sports festival records broken at track & field.",
+      headline: "RCC clinches silver in thrilling penalty shootout",
+      blurb: "RCCIIT settles for second place in the highly competitive 11 A SIDE Football tournament.",
       image: "/events/footballl.webp",
       alt: "Sports and football fest at RCCIIT",
     },
@@ -329,7 +327,7 @@ export default function HomePage() {
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <CircularText
-                  text="RCC TALKIES • THE VOICE OF RCCIIT • EST. 2023 • "
+                  text="RCC TALKIES • THE VOICE OF RCCIIT • EST. 2022 • "
                   spinDuration={25}
                   onHover="speedUp"
                   className="!w-[220px] !h-[220px] sm:!w-[260px] sm:!h-[260px] !text-[#14120e]/60 !font-sans !text-[10px] sm:!text-[12px] !tracking-[0.15em] !uppercase"
@@ -339,9 +337,9 @@ export default function HomePage() {
                 <Image
                   src="/logo.png"
                   alt="RCC Talkies Logo"
-                  width={80}
-                  height={80}
-                  className="w-16 h-16 sm:w-20 sm:h-20 object-contain opacity-80"
+                  width={200}
+                  height={200}
+                  className="w-24 h-24 sm:w-32 sm:h-32 object-contain opacity-80"
                 />
               </div>
             </motion.div>

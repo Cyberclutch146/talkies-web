@@ -76,7 +76,7 @@ export default function AboutCollege() {
             {[
               { value: "25+", label: "YEARS" },
               { value: "5000+", label: "ALUMNI" },
-              { value: "10+", label: "DEPARTMENTS" },
+              { value: "7", label: "DEPARTMENTS" },
               { value: "MAKAUT", label: "AFFILIATED" },
             ].map((stat) => (
               <div key={stat.label} className="border-l-2 border-[#14120e] pl-3 sm:pl-4">
