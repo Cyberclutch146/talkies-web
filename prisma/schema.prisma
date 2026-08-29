@@ -49,3 +49,14 @@ model InstagramPost {
   order     Int      @default(0)
   createdAt DateTime @default(now())
 }
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  desk      String
+  message   String
+  status    String   @default("UNREAD") // UNREAD, READ, ARCHIVED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

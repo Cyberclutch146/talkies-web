@@ -51,7 +51,7 @@ export function Footer() {
               <span className="w-8 h-px bg-[#c83a1a]/40"></span>
             </div>
             <p className="font-serif italic text-sm sm:text-base text-[#14120e]/50 text-center max-w-[280px] leading-relaxed">
-              "Documenting the untold stories of campus life, one issue at a time."
+              &quot;Documenting the untold stories of campus life, one issue at a time.&quot;
             </p>
           </div>
 

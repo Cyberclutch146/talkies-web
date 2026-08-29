@@ -228,7 +228,7 @@ export default function HomePage() {
             {siteData.focusAreas.map((area, idx) => (
               <div key={area.title} className="border-l-2 border-[#14120e] pl-4 sm:pl-5 space-y-2">
                 <span className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block">
-                  0{idx + 1} // DESK
+                  0{idx + 1} {"//"} DESK
                 </span>
                 <h3 className="font-display text-lg sm:text-xl text-[#14120e] uppercase">
                   {area.title}

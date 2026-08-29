@@ -45,6 +45,18 @@ const adminModules = [
     ),
     tag: "03 // RECRUITMENT",
   },
+  {
+    title: "Inbox",
+    description: "Read and manage incoming messages from the contact page.",
+    href: "/admin/inbox",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" />
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+      </svg>
+    ),
+    tag: "04 // DISPATCHES",
+  },
 ];
 
 export default function AdminDashboard() {

@@ -175,7 +175,7 @@ export default function LeadsJoinPage() {
                     <input
                       required id="lead-email" name="collegeEmail" type="email"
                       className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors"
-                      placeholder="your@rcciit.org"
+                      placeholder="ece2024xxx@rcciit.org.in"
                     />
                   </div>
                   <div>
@@ -185,7 +185,7 @@ export default function LeadsJoinPage() {
                     <input
                       required id="lead-roll" name="rollNumber" type="text"
                       className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors"
-                      placeholder="e.g. 30001223051"
+                      placeholder="ECE2024XXX"
                     />
                   </div>
                   <div>

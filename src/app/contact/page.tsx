@@ -6,11 +6,42 @@ import DecryptedText from "@/components/DecryptedText";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setIsSubmitting(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      desk: formData.get("desk"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 5000);
+        e.currentTarget.reset();
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error || "Failed to submit message");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -131,6 +162,7 @@ export default function ContactPage() {
                   </label>
                   <input
                     id="contact-name"
+                    name="name"
                     type="text"
                     required
                     className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors"
@@ -147,6 +179,7 @@ export default function ContactPage() {
                   </label>
                   <input
                     id="contact-email"
+                    name="email"
                     type="email"
                     required
                     className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors"
@@ -164,13 +197,14 @@ export default function ContactPage() {
                 </label>
                 <select
                   id="contact-desk"
+                  name="desk"
                   className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-sans uppercase tracking-wider text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors cursor-pointer"
                 >
-                  <option>General Inquiry</option>
-                  <option>Campus News & Tipline</option>
-                  <option>Fest Coverage Request</option>
-                  <option>Magazine Submission (Poetry / Article)</option>
-                  <option>Join The Newsroom</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Campus News & Tipline">Campus News & Tipline</option>
+                  <option value="Fest Coverage Request">Fest Coverage Request</option>
+                  <option value="Magazine Submission">Magazine Submission (Poetry / Article)</option>
+                  <option value="Join The Newsroom">Join The Newsroom</option>
                 </select>
               </div>
 
@@ -183,6 +217,7 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   id="contact-message"
+                  name="message"
                   rows={5}
                   required
                   className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none resize-none transition-colors"
@@ -192,10 +227,17 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full bg-[#14120e] text-[#e5e0d3] font-display text-xl sm:text-2xl uppercase tracking-tight py-4 hover:bg-[#c83a1a] transition-colors"
+                disabled={isSubmitting}
+                className="w-full bg-[#14120e] text-[#e5e0d3] font-display text-xl sm:text-2xl uppercase tracking-tight py-4 hover:bg-[#c83a1a] disabled:opacity-50 transition-colors"
               >
-                {submitted ? "MESSAGE DISPATCHED ✓" : "SUBMIT TO EDITORIAL DESK →"}
+                {isSubmitting ? "DISPATCHING..." : submitted ? "MESSAGE DISPATCHED ✓" : "SUBMIT TO EDITORIAL DESK →"}
               </button>
+
+              {error && (
+                <p className="text-sm font-sans uppercase text-[#c83a1a] text-center font-bold">
+                  {error}
+                </p>
+              )}
 
               {submitted && (
                 <p className="text-sm font-serif text-[#c83a1a] text-center font-bold">
