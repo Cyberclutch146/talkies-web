@@ -500,6 +500,28 @@ export default function RecruitmentDashboard() {
             );
           })}
         </div>
+
+        {/* Quick Info Bar */}
+        <div className="mt-10 border-t border-[#14120e]/20 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-sans uppercase tracking-widest text-[#14120e]/40">
+          <div className="flex items-center gap-2">
+            <span className="text-[#c83a1a]">✦</span>
+            <span>Authenticated as Admin</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <Link
+              href="/admin"
+              className="hover:text-[#c83a1a] transition-colors font-bold"
+            >
+              ← Admin Dashboard
+            </Link>
+            <Link
+              href="/"
+              className="hover:text-[#c83a1a] transition-colors font-bold"
+            >
+              Back to Home
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

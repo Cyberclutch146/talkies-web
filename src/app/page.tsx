@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -38,6 +39,7 @@ const fadeUp = {
 };
 
 export default function HomePage() {
+  const [emailCopied, setEmailCopied] = useState(false);
   const featuredStories = [
     {
       id: "got",
@@ -403,6 +405,44 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
+          INSTAGRAM FEED
+      ═══════════════════════════════════════════════════════════════ */}
+      <InstagramFeed />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          MARQUEE
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="w-full border-b border-[#14120e]/20 py-6 sm:py-10 overflow-hidden bg-[#ded8c7]/50 select-none">
+        <div className="animate-marquee flex items-center gap-6 sm:gap-8 whitespace-nowrap">
+          {[0, 1].map((seg) => (
+            <div key={seg} className="flex items-center gap-6 sm:gap-8 text-xl sm:text-5xl lg:text-6xl font-serif text-[#14120e]">
+              <span>Let&apos;s document campus history together</span>
+              <Link
+                href="/contact"
+                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
+              >
+                EMAIL US
+              </Link>
+              <span>The Voice of RCCIIT</span>
+              <Link
+                href="/contact"
+                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
+              >
+                JOIN DESK
+              </Link>
+              <span>Let&apos;s create something together</span>
+              <Link
+                href="/magazine"
+                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
+              >
+                READ ISSUE
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
           CTA — Get In Touch
       ═══════════════════════════════════════════════════════════════ */}
       <section className="w-full border-b border-[#14120e]/20">
@@ -432,28 +472,38 @@ export default function HomePage() {
             {/* Contact Links */}
             <div className="space-y-4">
               {/* Email */}
-              <a
-                href="mailto:rcctalkies@gmail.com"
-                className="group flex items-center gap-4 p-5 border border-[#14120e]/20 hover:border-[#14120e] hover:shadow-[4px_4px_0px_#14120e] hover:-translate-y-0.5 transition-all duration-300 bg-[#e5e0d3]"
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText("rcctalkies@gmail.com");
+                  setEmailCopied(true);
+                  setTimeout(() => setEmailCopied(false), 2000);
+                }}
+                className="w-full text-left group flex items-center gap-4 p-5 border border-[#14120e]/20 hover:border-[#14120e] hover:shadow-[4px_4px_0px_#14120e] hover:-translate-y-0.5 transition-all duration-300 bg-[#e5e0d3]"
               >
                 <div className="w-12 h-12 bg-[#14120e] text-[#e5e0d3] flex items-center justify-center flex-shrink-0 group-hover:bg-[#c83a1a] transition-colors">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect width="20" height="16" x="2" y="4" rx="2" />
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                  </svg>
+                  {emailCopied ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#14120e]/50 font-bold block mb-0.5">
-                    EMAIL US
+                    {emailCopied ? "COPIED TO CLIPBOARD" : "EMAIL US"}
                   </span>
                   <span className="font-display text-lg sm:text-xl uppercase tracking-tight text-[#14120e] group-hover:text-[#c83a1a] transition-colors">
                     rcctalkies@gmail.com
                   </span>
                 </div>
                 <span className="text-[#14120e]/30 group-hover:text-[#c83a1a] group-hover:translate-x-1 transition-all text-xl">
-                  →
+                  {emailCopied ? "✓" : "→"}
                 </span>
-              </a>
+              </button>
 
               {/* Instagram */}
               <a
@@ -505,45 +555,6 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-        </div>
-      </section>
-
-
-      {/* ═══════════════════════════════════════════════════════════════
-          INSTAGRAM FEED
-      ═══════════════════════════════════════════════════════════════ */}
-      <InstagramFeed />
-
-      {/* ═══════════════════════════════════════════════════════════════
-          MARQUEE
-      ═══════════════════════════════════════════════════════════════ */}
-      <section className="w-full border-b border-[#14120e]/20 py-6 sm:py-10 overflow-hidden bg-[#ded8c7]/50 select-none">
-        <div className="animate-marquee flex items-center gap-6 sm:gap-8 whitespace-nowrap">
-          {[0, 1].map((seg) => (
-            <div key={seg} className="flex items-center gap-6 sm:gap-8 text-xl sm:text-5xl lg:text-6xl font-serif text-[#14120e]">
-              <span>Let&apos;s document campus history together</span>
-              <Link
-                href="/contact"
-                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
-              >
-                EMAIL US
-              </Link>
-              <span>The Voice of RCCIIT</span>
-              <Link
-                href="/contact"
-                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
-              >
-                JOIN DESK
-              </Link>
-              <span>Let&apos;s create something together</span>
-              <Link
-                href="/magazine"
-                className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-lg sm:text-3xl lg:text-4xl px-4 sm:px-6 py-1.5 sm:py-2 uppercase tracking-tight hover:bg-[#c83a1a] transition-colors"
-              >
-                READ ISSUE
-              </Link>
-            </div>
-          ))}
         </div>
       </section>
     </div>
