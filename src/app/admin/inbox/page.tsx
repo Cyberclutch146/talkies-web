@@ -90,6 +90,8 @@ export default function InboxDashboard() {
           prev.map((m) => (m.id === id ? { ...m, status: newStatus } : m))
         );
       }
+    } catch (e) {
+      console.error(e);
     }
   };
 
