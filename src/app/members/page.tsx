@@ -67,7 +67,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
 }
 
 function FacultyCard({ member }: { member: TeamMember }) {
-  const photoSrc = member.photo || "/team/placeholder.jpg";
+  const photoSrc = member.photo || "/team/  .jpg";
 
   return (
     <SpotlightCard

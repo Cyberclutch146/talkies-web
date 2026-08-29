@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,12 +10,12 @@ import siteData from "@/data/site.json";
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(pathname !== "/");
 
   useEffect(() => {
     // Only apply hide-on-hero behavior on the homepage
     if (pathname !== "/") {
-      setVisible(true);
+      // visible is already true from useState, just return
       return;
     }
 
@@ -60,9 +61,11 @@ export function Header() {
             href="/"
             className="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 group"
           >
-            <img
+            <Image
               src="/logo.png"
               alt="RCC Talkies Emblem"
+              width={28}
+              height={28}
               className="h-5 sm:h-7 w-auto object-contain transition-transform group-hover:scale-105 hidden sm:block"
             />
             <span className="font-gothic text-xl sm:text-3xl lg:text-[32px] tracking-wide text-[#14120e] group-hover:opacity-75 transition-opacity whitespace-nowrap">
@@ -127,7 +130,7 @@ export function Header() {
               {/* Top Banner inside Menu */}
               <div className="border-b border-[#14120e]/20 pb-4 mb-8 flex justify-between items-center text-xs font-sans uppercase tracking-[0.2em] text-[#14120e]/60">
                 <div className="flex items-center gap-2">
-                  <img src="/logo.png" alt="RCC Talkies" className="h-5 w-auto" />
+                  <Image src="/logo.png" alt="RCC Talkies" width={20} height={20} className="h-5 w-auto" />
                   <span>The Voice of RCCIIT</span>
                 </div>
                 <span className="hidden sm:inline">Select Section</span>

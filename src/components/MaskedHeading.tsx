@@ -9,6 +9,7 @@ import {
   type CSSProperties,
 } from "react";
 import { gsap } from "gsap";
+import Image from "next/image";
 import "./MaskedHeading.css";
 
 /* ── Helpers ── */
@@ -97,15 +98,17 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     grayscale,
     textScale,
   });
-  settingsRef.current = {
-    fillScale,
-    parallax,
-    drift,
-    brightness,
-    saturation,
-    grayscale,
-    textScale,
-  };
+  useEffect(() => {
+    settingsRef.current = {
+      fillScale,
+      parallax,
+      drift,
+      brightness,
+      saturation,
+      grayscale,
+      textScale,
+    };
+  }, [fillScale, parallax, drift, brightness, saturation, grayscale, textScale]);
 
   /* ── Place the media layer ── */
 
@@ -418,11 +421,14 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
                 playsInline
               />
             ) : (
-              <img
+              <Image
                 className="masked-heading__source"
                 src={src}
                 alt=""
                 draggable={false}
+                fill
+                sizes="100vw"
+                style={{ objectFit: "cover" }}
               />
             )}
           </span>

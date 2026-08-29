@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import siteData from "@/data/site.json";
 
 export function Footer() {
@@ -10,7 +11,7 @@ export function Footer() {
           {/* Col 1: About */}
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-3">
-              <img src="/logo.png" alt="RCC Talkies" className="h-8 w-auto" />
+              <Image src="/logo.png" alt="RCC Talkies" width={32} height={32} className="h-8 w-auto" />
               <h3 className="font-gothic text-2xl sm:text-3xl text-[#14120e]">
                 The RCC Talkies
               </h3>

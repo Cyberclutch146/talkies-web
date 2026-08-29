@@ -14,8 +14,15 @@ export async function GET() {
   }
 }
 
+const MAX_BODY_SIZE = 4.4 * 1024 * 1024; // 4.4MB
+
 export async function POST(request: Request) {
   try {
+    const contentLength = request.headers.get("content-length");
+    if (contentLength && parseInt(contentLength, 10) > MAX_BODY_SIZE) {
+      return NextResponse.json({ error: "Image file is too large. Maximum size is 4.4MB." }, { status: 413 });
+    }
+
     const formData = await request.formData();
 
     // Check password

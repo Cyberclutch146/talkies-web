@@ -9,7 +9,7 @@
     "stats": [
       { "label": "Years", "value": "25+" },
       { "label": "Alumni", "value": "5000+" },
-      { "label": "Departments", "value": "10+" }
+      { "label": "Departments", "value": "7" }
     ]
   },
   "contact": {
@@ -37,7 +37,7 @@
     },
     {
       "title": "Magazine & Posters",
-      "description": "Quarterly magazine editions and event posters that define the visual identity of RCCIIT.",
+      "description": "Bi-Annual magazine editions and posters that define the visual identity of RCCIIT.",
       "icon": "book"
     },
     {

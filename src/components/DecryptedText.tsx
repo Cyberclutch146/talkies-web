@@ -53,11 +53,21 @@ export default function DecryptedText({
   clickMode = 'once',
   ...props
 }: DecryptedTextProps) {
-  const [displayText, setDisplayText] = useState<string>(text);
+  const initialDecrypted = animateOn !== 'click';
+  
+  // We can't use shuffleText here because it relies on useMemo hooks that haven't fired,
+  // but we can do a simple random string for initial state if animateOn === 'click'
+  const getInitialEncrypted = () => {
+    if (animateOn !== 'click') return text;
+    const chars = characters.split('');
+    return text.split('').map(c => c === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)]).join('');
+  };
+
+  const [displayText, setDisplayText] = useState<string>(getInitialEncrypted);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
-  const [isDecrypted, setIsDecrypted] = useState<boolean>(animateOn !== 'click');
+  const [isDecrypted, setIsDecrypted] = useState<boolean>(initialDecrypted);
   const [direction, setDirection] = useState<Direction>('forward');
 
   const containerRef = useRef<HTMLSpanElement>(null);
@@ -340,15 +350,17 @@ export default function DecryptedText({
   }, [animateOn, hasAnimated, triggerDecrypt]);
 
   useEffect(() => {
-    if (animateOn === 'click') {
-      encryptInstantly();
-    } else {
+    // Only re-run text assignment if text prop changes after mount
+    if (animateOn !== 'click') {
       setDisplayText(text);
       setIsDecrypted(true);
+    } else {
+      // If text changes and we are in click mode, we want to reset it
+      // The initial mount is handled by the state initialization
     }
     setRevealedIndices(new Set());
     setDirection('forward');
-  }, [animateOn, text, encryptInstantly]);
+  }, [animateOn, text]);
 
   const animateProps =
     animateOn === 'hover' || animateOn === 'inViewHover'

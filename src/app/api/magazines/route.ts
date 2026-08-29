@@ -14,8 +14,15 @@ export async function GET() {
   }
 }
 
+const MAX_BODY_SIZE = 10 * 1024; // 10KB
+
 export async function POST(request: Request) {
   try {
+    const contentLength = request.headers.get("content-length");
+    if (contentLength && parseInt(contentLength, 10) > MAX_BODY_SIZE) {
+      return NextResponse.json({ error: "Request body too large." }, { status: 413 });
+    }
+
     const data = await request.json();
 
     // Check password

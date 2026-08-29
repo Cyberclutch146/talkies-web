@@ -238,7 +238,7 @@ export default function FlipbookReader({ pdfUrl }: FlipbookReaderProps) {
           }
         >
           {numPages > 0 && (
-            // @ts-ignore
+            /* @ts-expect-error - React HTMLFlipBook typings mismatch with React 18 children */
             <HTMLFlipBook
               key={`fb-${sizeKey}`}
               ref={flipBookRef}

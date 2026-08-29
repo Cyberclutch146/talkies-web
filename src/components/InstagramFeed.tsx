@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import DecryptedText from "@/components/DecryptedText";
 
 interface InstaPost {
@@ -89,11 +90,12 @@ export default function InstagramFeed() {
                 className="group relative aspect-square overflow-hidden bg-[#dad4c3] border-r border-b border-[#14120e]/10"
                 title={post.caption || `Instagram post ${idx + 1}`}
               >
-                <img
+                <Image
                   src={post.imageUrl}
                   alt={post.caption || `Instagram post ${idx + 1}`}
-                  className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 ease-out"
-                  loading="lazy"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                  className="object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 ease-out"
                 />
 
                 {/* Hover overlay */}

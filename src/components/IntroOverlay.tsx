@@ -18,7 +18,10 @@ const IntroOverlay: React.FC<IntroOverlayProps> = ({
   const [isRendered, setIsRendered] = useState(true);
   const dismissedRef = useRef(false);
   const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   const handleDismiss = useCallback(() => {
     if (dismissedRef.current) return;

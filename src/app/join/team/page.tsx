@@ -109,7 +109,7 @@ export default function TeamJoinPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20 border border-[#14120e]/30 bg-[#eae5d9]">
 
             {/* LEFT: Desk Info */}
-            <div className="lg:col-span-4 p-6 sm:p-10 space-y-6">
+            <div className="order-2 lg:order-1 lg:col-span-4 p-6 sm:p-10 space-y-6">
               <div>
                 <span className="text-[10px] font-sans uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-3">
                   EDITORIAL DESKS
@@ -147,7 +147,7 @@ export default function TeamJoinPage() {
             </div>
 
             {/* RIGHT: The Form */}
-            <div className="lg:col-span-8 p-6 sm:p-10 bg-[#e5e0d3]">
+            <div className="order-1 lg:order-2 lg:col-span-8 p-6 sm:p-10 bg-[#e5e0d3]">
               <span className="text-[10px] font-sans uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-2">
                 APPLICATION FORM // TEAM
               </span>
