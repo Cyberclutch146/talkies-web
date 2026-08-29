@@ -271,8 +271,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="lg:col-span-4 p-8 sm:p-12 bg-[#c83a1a] flex items-center justify-center relative overflow-hidden">
-             <div className="absolute inset-0 opacity-10 flex flex-wrap content-start overflow-hidden pointer-events-none select-none">
-                {Array.from({ length: 40 }).map((_, i) => (
+             <div className="absolute top-0 left-0 w-[120%] h-full opacity-10 flex flex-wrap content-start overflow-hidden pointer-events-none select-none">
+                {Array.from({ length: 150 }).map((_, i) => (
                   <span key={i} className="font-display text-6xl leading-[0.8] text-[#14120e] mix-blend-multiply">READ </span>
                 ))}
              </div>
@@ -487,8 +487,8 @@ export default function HomePage() {
           {/* Right: Bold Accent Block */}
           <div className="lg:col-span-5 bg-[#c83a1a] p-8 sm:p-12 flex flex-col items-center justify-center relative overflow-hidden min-h-[300px]">
             {/* Repeating background text */}
-            <div className="absolute inset-0 opacity-10 flex flex-wrap content-start overflow-hidden pointer-events-none select-none">
-              {Array.from({ length: 30 }).map((_, i) => (
+            <div className="absolute top-0 left-0 w-[120%] h-full opacity-10 flex flex-wrap content-start overflow-hidden pointer-events-none select-none">
+              {Array.from({ length: 150 }).map((_, i) => (
                 <span key={i} className="font-display text-5xl sm:text-6xl leading-[0.85] text-[#14120e] mix-blend-multiply">WRITE </span>
               ))}
             </div>
@@ -499,8 +499,8 @@ export default function HomePage() {
               <span className="font-serif italic text-3xl sm:text-4xl lg:text-5xl block text-[#e5e0d3]">
                 the desk
               </span>
-              <div className="w-16 h-[2px] bg-[#e5e0d3]/40 mx-auto" />
-              <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#e5e0d3]/60 max-w-xs mx-auto">
+              <div className="w-16 h-[2px] bg-[#e5e0d3]/80 mx-auto" />
+              <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#e5e0d3] max-w-xs mx-auto font-bold">
                 Writers · Photographers · Designers · Video Editors · Anchors
               </p>
             </div>

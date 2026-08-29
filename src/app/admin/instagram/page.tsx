@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
 import { verifyPassword } from "../actions";
 
@@ -15,6 +16,9 @@ interface InstaPost {
 export default function AdminInstagram() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [shakeKey, setShakeKey] = useState(0);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -70,17 +74,20 @@ export default function AdminInstagram() {
     e.preventDefault();
     
     if (password.trim().length === 0) {
-      setMessage({ text: "Please enter the admin password", type: "error" });
+      setAuthError("Please enter the admin password");
       return;
     }
     
+    setIsVerifying(true);
     const result = await verifyPassword(password);
     
     if (result.success) {
       setIsAuthenticated(true);
-      setMessage({ text: "", type: "" });
+      setAuthError("");
     } else {
-      setMessage({ text: result.error || "Invalid password", type: "error" });
+      setAuthError(result.error || "Invalid password");
+      setShakeKey(k => k + 1);
+      setIsVerifying(false);
     }
   };
 
@@ -232,23 +239,89 @@ export default function AdminInstagram() {
   /* ─── Login Gate ─── */
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#e5e0d3] flex items-center justify-center p-4">
-        <form onSubmit={handleAuth} className="max-w-sm w-full bg-[#14120e] p-8 border border-[#14120e]/20 shadow-[8px_8px_0px_#c83a1a]">
-          <h1 className="font-display text-4xl text-[#e5e0d3] uppercase mb-6 tracking-tight">Admin Access</h1>
-          <input
-            type="password"
-            placeholder="Enter Admin Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full bg-[#e5e0d3] text-[#14120e] p-3 font-sans outline-none mb-4"
-          />
-          {message.text && message.type === "error" && (
-            <p className="text-[#c83a1a] text-xs font-sans uppercase mb-4">{message.text}</p>
-          )}
-          <button type="submit" className="w-full bg-[#c83a1a] text-[#e5e0d3] font-display text-xl uppercase py-2 hover:bg-[#a62b10] transition-colors">
-            Login
-          </button>
+      <div className="min-h-screen bg-[#14120e] flex items-center justify-center p-4 relative overflow-hidden">
+        {/* Grain */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "radial-gradient(#e5e0d3 0.6px, transparent 0.6px), radial-gradient(#e5e0d3 0.6px, transparent 0.6px)",
+            backgroundSize: "4px 4px",
+            backgroundPosition: "0 0, 2px 2px",
+          }}
+        />
+
+        <form
+          key={shakeKey}
+          onSubmit={handleAuth}
+          className="relative max-w-sm w-full space-y-6"
+          style={authError ? { animation: "shake 0.4s ease-in-out" } : undefined}
+        >
+          <div className="flex items-center gap-3 text-[9px] font-sans uppercase tracking-[0.3em] text-[#e5e0d3]/30">
+            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
+            <span>RESTRICTED</span>
+            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
+          </div>
+
+          <div className="text-center space-y-2">
+            <h1 className="font-display text-5xl sm:text-6xl uppercase tracking-tighter text-[#e5e0d3]">
+              INSTAGRAM
+            </h1>
+            <p className="font-serif text-sm italic text-[#e5e0d3]/30">
+              Feed management access
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setAuthError("");
+              }}
+              autoFocus
+              className="w-full bg-[#e5e0d3]/5 border border-[#e5e0d3]/15 text-[#e5e0d3] p-4 font-sans text-sm tracking-wider outline-none focus:border-[#c83a1a]/50 transition-colors placeholder:text-[#e5e0d3]/20"
+            />
+            {authError && (
+              <p className="text-[#c83a1a] text-[10px] font-sans uppercase tracking-widest text-center font-bold">
+                {authError}
+              </p>
+            )}
+            <button
+              type="submit"
+              disabled={isVerifying}
+              className="w-full bg-[#e5e0d3] text-[#14120e] p-4 font-sans text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#c83a1a] hover:text-[#e5e0d3] transition-colors disabled:opacity-50 flex items-center justify-center gap-3"
+            >
+              {isVerifying ? (
+                <>
+                  <span className="w-3 h-3 border-2 border-[#14120e] border-t-transparent rounded-full animate-spin" />
+                  Verifying
+                </>
+              ) : (
+                "Access Dashboard"
+              )}
+            </button>
+          </div>
+          <Link
+            href="/"
+            className="block text-center mt-6 text-[10px] font-sans uppercase tracking-widest text-[#e5e0d3]/20 hover:text-[#e5e0d3]/60 transition-colors"
+          >
+            ← Back to Home
+          </Link>
         </form>
+
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-4px); }
+            40% { transform: translateX(4px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+          }
+        `}} />
       </div>
     );
   }
