@@ -81,7 +81,7 @@ export async function POST(req: Request) {
         yearOfStudy: validatedData.yearOfStudy,
         phoneNumber: validatedData.phoneNumber.trim(),
         positionAppliedFor: validatedData.positionAppliedFor,
-        portfolioLink: validatedData.portfolioLink?.trim() || null,
+        whyRCCTalkies: validatedData.whyRCCTalkies?.trim() || null,
         whyJoin: validatedData.whyJoin?.trim() || null,
       },
     });

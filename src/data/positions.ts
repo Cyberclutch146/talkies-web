@@ -7,65 +7,65 @@
  */
 
 export const LEAD_POSITIONS = [
-  "Editor-in-Chief",
-  "Tech Lead",
-  "Graphics Lead cum Editorial Associate",
-  "Social Media Lead",
-  "Content Lead",
-  "Artwork Lead",
-  "Lead Journalist",
-  "Media Journalist Lead",
-  "Research Wing Lead",
+  "Reporting Lead",
+  "PR & Social Media Lead",
   "Alumni POC",
+  "Content Lead",
+  "Research Wing Lead",
+  "Videography Lead",
+  "Artwork Lead",
+  "Graphics Lead",
   "Event Management Lead",
+  "Tech Lead",
+  "Production Lead",
 ] as const;
 
 export type LeadPosition = (typeof LEAD_POSITIONS)[number];
 
 export const TEAM_DESKS = [
   {
-    name: "Editorial Member" as const,
-    desc: "Writing, editing, and proofreading for the quarterly magazine and campus reports.",
+    name: "Reporting Associate" as const,
+    desc: "On-ground fest coverage, interviews, breaking campus stories, and multimedia reporting.",
   },
   {
-    name: "Tech Member" as const,
-    desc: "Development, website maintenance, and digital innovation.",
-  },
-  {
-    name: "Graphics & Editorial Member" as const,
-    desc: "Visual storytelling — photography, poster design, and creative artwork.",
-  },
-  {
-    name: "Social Media Member" as const,
+    name: "PR & Social Media Associate" as const,
     desc: "Social media management, outreach, and community engagement.",
   },
   {
-    name: "Content Member" as const,
-    desc: "Crafting engaging content, scripts, and promotional copy.",
-  },
-  {
-    name: "Artwork Member" as const,
-    desc: "Creating illustrations, digital art, and visual assets.",
-  },
-  {
-    name: "Journalist" as const,
-    desc: "On-ground fest coverage, interviews, and breaking campus stories.",
-  },
-  {
-    name: "Media Journalist" as const,
-    desc: "Multimedia reporting, video coverage, and broadcasting.",
-  },
-  {
-    name: "Research Wing Member" as const,
-    desc: "Data-driven event reports, surveys, and in-depth investigative features.",
-  },
-  {
-    name: "Alumni Team Member" as const,
+    name: "Alumni Associate" as const,
     desc: "Building and maintaining connections with the RCCIIT alumni network.",
   },
   {
-    name: "Event Management Member" as const,
+    name: "Content Associate" as const,
+    desc: "Crafting engaging content, scripts, and promotional copy.",
+  },
+  {
+    name: "Research Wing Associate" as const,
+    desc: "Data-driven event reports, surveys, and in-depth investigative features.",
+  },
+  {
+    name: "Videography Associate" as const,
+    desc: "Video production, shooting, and cinematic storytelling.",
+  },
+  {
+    name: "Video Editing Associate" as const,
+    desc: "Video editing, color grading, and post-production.",
+  },
+  {
+    name: "Artwork Associate" as const,
+    desc: "Creating illustrations, digital art, and visual assets.",
+  },
+  {
+    name: "Graphics Associate" as const,
+    desc: "Visual storytelling — photography, poster design, and visual branding.",
+  },
+  {
+    name: "Event Management Associate" as const,
     desc: "Organizing, coordinating, and managing club events and logistics.",
+  },
+  {
+    name: "Tech Associate" as const,
+    desc: "Development, website maintenance, and digital innovation.",
   },
 ] as const;
 

@@ -14,7 +14,7 @@ interface Application {
   yearOfStudy: string;
   phoneNumber: string;
   positionAppliedFor: string;
-  portfolioLink?: string;
+  whyRCCTalkies?: string;
   whyJoin?: string;
   status: string;
   createdAt: string;
@@ -471,15 +471,10 @@ export default function RecruitmentDashboard() {
                                       </div>
                                     </div>
 
-                                    {app.portfolioLink && (
-                                      <a
-                                        href={app.portfolioLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1 text-xs text-[#c83a1a] font-sans uppercase tracking-widest font-bold mt-3 hover:underline underline-offset-2"
-                                      >
-                                        Portfolio / CV ↗
-                                      </a>
+                                    {app.whyRCCTalkies && (
+                                      <div className="mt-3 bg-[#e5e0d3] p-3 text-sm font-serif italic text-[#14120e]/80 border-l-2 border-[#c83a1a]">
+                                        &ldquo;{app.whyRCCTalkies}&rdquo;
+                                      </div>
                                     )}
                                     {app.whyJoin && (
                                       <div className="mt-3 bg-[#e5e0d3] p-3 text-sm font-serif italic text-[#14120e]/80 border-l-2 border-[#c83a1a]">

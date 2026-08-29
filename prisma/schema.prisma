@@ -20,7 +20,7 @@ model Application {
   yearOfStudy        String
   phoneNumber        String
   positionAppliedFor String
-  portfolioLink      String?
+  whyRCCTalkies      String?
   whyJoin            String?
   status             String   @default("PENDING") // PENDING, REVIEWED, ACCEPTED, REJECTED
   createdAt          DateTime @default(now())

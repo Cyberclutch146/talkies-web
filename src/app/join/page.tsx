@@ -95,13 +95,13 @@ export default function JoinPage() {
               <p className="font-serif text-base text-[#14120e]/75 leading-relaxed mb-6">
                 Join one of our five editorial desks. Contribute to campus journalism through writing, reporting, photography, research, or social media.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 mb-6">
                 {TEAM_DESKS.map((desk, idx) => (
-                  <div key={desk.name} className="border-l-2 border-[#14120e] pl-3">
-                    <span className="font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-[#c83a1a] block">
+                  <div key={desk.name} className="flex items-center gap-2 py-1.5 border-b border-[#14120e]/10">
+                    <span className="font-sans text-[10px] text-[#c83a1a] font-bold w-4 flex-shrink-0">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
-                    <span className="font-sans text-xs uppercase tracking-wider font-bold text-[#14120e]">
+                    <span className="text-[11px] font-sans uppercase tracking-wider font-bold text-[#14120e]/80 truncate">
                       {desk.name}
                     </span>
                   </div>

@@ -19,9 +19,9 @@ const baseApplicationSchema = z.object({
     .min(10, "Phone number must be at least 10 digits")
     .max(15, "Phone number must be under 15 characters")
     .regex(/^[\d\s+\-()]+$/, "Phone number can only contain digits, spaces, +, -, (, )"),
-  portfolioLink: z
+  whyRCCTalkies: z
     .string()
-    .url("Must be a valid URL")
+    .max(2000, "Response must be under 2000 characters")
     .optional()
     .or(z.literal("")),
   whyJoin: z

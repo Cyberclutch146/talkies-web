@@ -24,7 +24,7 @@ export default function LeadsJoinPage() {
       yearOfStudy: formData.get("yearOfStudy"),
       phoneNumber: formData.get("phoneNumber"),
       positionAppliedFor: formData.get("positionAppliedFor"),
-      portfolioLink: formData.get("portfolioLink"),
+      whyRCCTalkies: formData.get("whyRCCTalkies"),
       whyJoin: formData.get("whyJoin"),
     };
 
@@ -227,13 +227,13 @@ export default function LeadsJoinPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="lead-portfolio" className="block text-[11px] font-sans uppercase tracking-widest font-bold text-[#14120e]/70 mb-2">
-                    PORTFOLIO / RESUME LINK
+                  <label htmlFor="lead-why-rcc" className="block text-[11px] font-sans uppercase tracking-widest font-bold text-[#14120e]/70 mb-2">
+                    WHY DO YOU WANT TO JOIN RCC TALKIES?
                   </label>
-                  <input
-                    id="lead-portfolio" name="portfolioLink" type="url"
-                    className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors"
-                    placeholder="https://your-portfolio.com"
+                  <textarea
+                    id="lead-why-rcc" name="whyRCCTalkies" rows={3}
+                    className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none resize-none transition-colors"
+                    placeholder="Tell us what draws you to this club..."
                   />
                 </div>
 
