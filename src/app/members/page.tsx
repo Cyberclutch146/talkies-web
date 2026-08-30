@@ -45,10 +45,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
-        {/* Number badge */}
-        <div className="absolute top-2 right-2 bg-[#14120e] text-[#e5e0d3] text-[10px] font-sans font-bold px-1.5 py-0.5 tracking-wider">
-          #{String(index + 1).padStart(2, "0")}
-        </div>
+        {/* Number badge removed */}
       </div>
 
       {/* Info */}
