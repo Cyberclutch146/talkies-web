@@ -24,47 +24,47 @@ export type LeadPosition = (typeof LEAD_POSITIONS)[number];
 
 export const TEAM_DESKS = [
   {
-    name: "Reporting Associate" as const,
+    name: "Reporting Team" as const,
     desc: "On-ground fest coverage, interviews, breaking campus stories, and multimedia reporting.",
   },
   {
-    name: "PR & Social Media Associate" as const,
+    name: "PR & Social Media Team" as const,
     desc: "Social media management, outreach, and community engagement.",
   },
   {
-    name: "Alumni Associate" as const,
+    name: "Alumni Team" as const,
     desc: "Building and maintaining connections with the RCCIIT alumni network.",
   },
   {
-    name: "Content Associate" as const,
+    name: "Content Team" as const,
     desc: "Crafting engaging content, scripts, and promotional copy.",
   },
   {
-    name: "Research Wing Associate" as const,
+    name: "Research Wing Team" as const,
     desc: "Data-driven event reports, surveys, and in-depth investigative features.",
   },
   {
-    name: "Videography Associate" as const,
+    name: "Videography Team" as const,
     desc: "Video production, shooting, and cinematic storytelling.",
   },
   {
-    name: "Video Editing Associate" as const,
+    name: "Video Editing Team" as const,
     desc: "Video editing, color grading, and post-production.",
   },
   {
-    name: "Artwork Associate" as const,
+    name: "Artwork Team" as const,
     desc: "Creating illustrations, digital art, and visual assets.",
   },
   {
-    name: "Graphics Associate" as const,
+    name: "Graphics Team" as const,
     desc: "Visual storytelling — photography, poster design, and visual branding.",
   },
   {
-    name: "Event Management Associate" as const,
+    name: "Event Management Team" as const,
     desc: "Organizing, coordinating, and managing club events and logistics.",
   },
   {
-    name: "Tech Associate" as const,
+    name: "Tech Team" as const,
     desc: "Development, website maintenance, and digital innovation.",
   },
 ] as const;
