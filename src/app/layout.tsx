@@ -10,6 +10,7 @@ import {
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SocialWidget } from "@/components/SocialWidget";
 
 const unifraktur = UnifrakturMaguntia({
   weight: "400",
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <SocialWidget />
       </body>
     </html>
   );
