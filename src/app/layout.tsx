@@ -54,7 +54,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "The RCC Talkies — The Paper Portfolio & Journalism Society",
+    default: "The RCC Talkies ",
     template: "%s | The RCC Talkies",
   },
   description:
