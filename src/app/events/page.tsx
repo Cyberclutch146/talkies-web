@@ -84,8 +84,7 @@ export default function EventsPage() {
 
       {/* 4-Tab Bar */}
       <div className="w-full border-b border-[#14120e]/20 bg-[#eae5d9]/80 overflow-x-auto relative scrollbar-none">
-        {/* Scroll fade indicators */}
-        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#eae5d9] to-transparent pointer-events-none z-10 sm:hidden" />
+        {/* Scroll fade indicators removed to prevent UI glitch over active tabs */}
         <div className="max-w-7xl mx-auto flex divide-x divide-[#14120e]/20">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.key;

@@ -66,7 +66,7 @@ export default function AboutCollege() {
               </p>
 
               <p>
-                In <strong className="text-[#c83a1a]">2023</strong>, continuing the institute&apos;s legacy of encouraging extracurricular growth, <em className="italic">RCC Talkies</em> was founded as the official journalism and media club — quickly evolving into the central voice of the student body, covering campus events, producing the annual magazine, and preparing members for careers in media and storytelling.
+                In <strong className="text-[#c83a1a]">2022</strong>, continuing the institute&apos;s legacy of encouraging extracurricular growth, <em className="italic">RCC Talkies</em> was founded as the official journalism and media club — quickly evolving into the central voice of the student body, covering campus events, producing the annual magazine, and preparing members for careers in media and storytelling.
               </p>
             </div>
           </div>

@@ -45,7 +45,7 @@ export default function HomePage() {
       id: "got",
       tag: "GOT | SPORTS",
       isNew: true,
-      title: "Game Of Thrones 2025",
+      title: "Game Of Thrones 2026",
       headline: "RCC clinches silver in thrilling penalty shootout",
       blurb: "RCCIIT settles for second place in the highly competitive 11 A SIDE Football tournament.",
       image: "/events/footballl.webp",

@@ -12,10 +12,13 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(pathname !== "/");
 
+  const isHome = pathname === "/";
+  const showFullHeader = isHome;
+
   useEffect(() => {
     // Only apply hide-on-hero behavior on the homepage
     if (pathname !== "/") {
-      // visible is already true from useState, just return
+      setVisible(true);
       return;
     }
 
@@ -43,41 +46,48 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-[#e5e0d3]/95 backdrop-blur-md border-b border-[#14120e]/15 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        showFullHeader ? "bg-[#e5e0d3]/95 backdrop-blur-md border-b border-[#14120e]/15" : "pointer-events-none"
+      } ${
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="w-full px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <div className={`w-full px-4 sm:px-8 py-3.5 flex items-center ${showFullHeader ? "justify-between" : "justify-end"} pointer-events-none`}>
         {/* Left: Location / Dateline */}
-        <div className="w-[30%] sm:w-1/4 flex items-center gap-2 text-[10px] sm:text-xs font-serif tracking-wider text-[#14120e]/80">
-          <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#c83a1a] animate-pulse" />
-          <span className="whitespace-nowrap">Kolkata, WB</span>
-          <span className="hidden md:inline text-[#14120e]/40">· Est. 2022</span>
-        </div>
+        {showFullHeader && (
+          <div className="w-[30%] sm:w-1/4 flex items-center gap-2 text-[10px] sm:text-xs font-serif tracking-wider text-[#14120e]/80 pointer-events-auto">
+            <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#c83a1a] animate-pulse" />
+            <span className="whitespace-nowrap">Kolkata, WB</span>
+            <span className="hidden md:inline text-[#14120e]/40">· Est. 2022</span>
+          </div>
+        )}
 
         {/* Center: Gothic Masthead Brand Logo with Official Insignia */}
-        <div className="flex-1 text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 group"
-          >
-            <Image
-              src="/logo.png"
-              alt="RCC Talkies Emblem"
-              width={28}
-              height={28}
-              className="h-5 sm:h-7 w-auto object-contain transition-transform group-hover:scale-105 hidden sm:block"
-            />
-            <span className="font-gothic text-xl sm:text-3xl lg:text-[32px] tracking-wide text-[#14120e] group-hover:opacity-75 transition-opacity whitespace-nowrap">
-              The RCC Talkies
-            </span>
-          </Link>
-        </div>
+        {showFullHeader && (
+          <div className="flex-1 text-center pointer-events-auto">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 group"
+            >
+              <Image
+                src="/logo.png"
+                alt="RCC Talkies Emblem"
+                width={28}
+                height={28}
+                className="h-5 sm:h-7 w-auto object-contain transition-transform group-hover:scale-105 hidden sm:block"
+              />
+              <span className="font-gothic text-xl sm:text-3xl lg:text-[32px] tracking-wide text-[#14120e] group-hover:opacity-75 transition-opacity whitespace-nowrap">
+                The RCC Talkies
+              </span>
+            </Link>
+          </div>
+        )}
 
         {/* Right: Minimalist Hamburger Menu Trigger */}
-        <div className="w-[30%] sm:w-1/4 flex justify-end items-center gap-6">
+        <div className={`${showFullHeader ? "w-[30%] sm:w-1/4" : ""} flex justify-end items-center gap-6 pointer-events-auto`}>
           {/* Desktop Quick Nav Links */}
-          <nav className="hidden lg:flex items-center gap-5 text-xs font-sans uppercase tracking-[0.18em] font-medium" aria-label="Quick navigation">
+          {showFullHeader && (
+            <nav className="hidden lg:flex items-center gap-5 text-xs font-sans uppercase tracking-[0.18em] font-medium" aria-label="Quick navigation">
             {siteData.navLinks.slice(1, 6).map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -95,22 +105,27 @@ export function Header() {
                 </Link>
               );
             })}
-          </nav>
+            </nav>
+          )}
 
           {/* Minimalist 2-line Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex flex-col justify-center items-center w-11 h-11 gap-1.5 cursor-pointer group"
+            className={`flex flex-col justify-center items-center w-11 h-11 gap-1 cursor-pointer group pointer-events-auto transition-all relative z-50 ${!showFullHeader ? "bg-[#e5e0d3]/80 backdrop-blur-md rounded-full shadow-sm border border-[#14120e]/15" : ""}`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
             <motion.span
-              animate={menuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-              className="block w-6 h-[1.5px] bg-[#14120e] transition-transform origin-center"
+              animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              className="block w-6 h-[2px] bg-[#14120e] transition-transform origin-center"
             />
             <motion.span
-              animate={menuOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
-              className="block w-6 h-[1.5px] bg-[#14120e] transition-transform origin-center"
+              animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="block w-6 h-[2px] bg-[#14120e] transition-opacity"
+            />
+            <motion.span
+              animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              className="block w-6 h-[2px] bg-[#14120e] transition-transform origin-center"
             />
           </button>
         </div>
@@ -120,13 +135,17 @@ export function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "100dvh" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-full inset-x-0 z-40 bg-[#e5e0d3] border-b border-[#14120e] overflow-y-auto"
+            initial={{ clipPath: "inset(0% 0% 100% 0%)", opacity: 0 }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
+            exit={{ clipPath: "inset(0% 0% 100% 0%)", opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 pt-[72px] sm:pt-[84px] z-40 bg-[#e5e0d3] overflow-y-auto h-[100dvh] pointer-events-auto"
+            onClick={() => setMenuOpen(false)}
           >
-            <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col justify-between min-h-[calc(100vh-80px)]">
+            <div 
+              className="max-w-6xl mx-auto px-6 py-12 flex flex-col justify-between min-h-[calc(100vh-80px)]"
+              onClick={(e) => e.stopPropagation()}
+            >
               {/* Top Banner inside Menu */}
               <div className="border-b border-[#14120e]/20 pb-4 mb-8 flex justify-between items-center text-xs font-sans uppercase tracking-[0.2em] text-[#14120e]/60">
                 <div className="flex items-center gap-2">

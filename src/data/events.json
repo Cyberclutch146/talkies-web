@@ -5,14 +5,14 @@
       "name": "Game Of Thrones",
       "shortName": "GOT",
       "tagline": "Annual Sports Festival",
-      "description": "The biggest state level sports showdown at RCCIIT, featuring football, cricket, tug of war, and more.",
+      "description": "The biggest state level sports showdown at RCCIIT, featuring football, cricket, kabaddi, and more.",
       "years": [
         {
-          "year": 2025,
+          "year": 2026,
           "highlights": [
             {
               "title": "Football Finals",
-              "blurb": "RCCIIT wins in a thrilling final that went to penalties.",
+              "blurb": "RCCIIT acheives silver in a thrilling final that went to penalties.",
               "image": "/events/footballl.webp"
             },
             {
@@ -21,9 +21,9 @@
               "image": "/events/cricket.webp"
             },
             {
-              "title": "Tug of War Competition",
-              "blurb": "RCCIIT wins silver in an all out battle of the strength",
-              "image": "/events/tugofwar (2).webp"
+              "title": "Kabaddi Queens Reign",
+              "blurb": "Bagging the gold with grit, glory, and unstoppable spirit!",
+              "image": "/events/kabaddi.webp"
             }
           ]
         }
@@ -37,7 +37,7 @@
       "description": "RCCIIT's premier technology festival — hackathons, robotics, project expos, and competitive coding.",
       "years": [
         {
-          "year": 2025,
+          "year": 2026,
           "highlights": [
             {
               "title": "Gaming Tournament",
