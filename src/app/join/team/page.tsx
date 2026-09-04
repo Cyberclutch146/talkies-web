@@ -9,11 +9,76 @@ export default function TeamJoinPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [selectedDesk, setSelectedDesk] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("The application window has closed for this year. Please try again next time!");
+    setLoading(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      type: "TEAM",
+      name: formData.get("name"),
+      collegeEmail: formData.get("collegeEmail"),
+      rollNumber: formData.get("rollNumber"),
+      yearOfStudy: formData.get("yearOfStudy"),
+      phoneNumber: formData.get("phoneNumber"),
+      positionAppliedFor: formData.get("positionAppliedFor"),
+      whyRCCTalkies: formData.get("whyRCCTalkies"),
+      whyJoin: formData.get("whyJoin"),
+    };
+
+    try {
+      const res = await fetch("/api/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || "Something went wrong.");
+      }
+
+      setSuccess(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const getPersonalisedQuestion = (desk: string) => {
+    switch (desk) {
+      case "Reporting Team":
+        return { label: "WHY DO YOU WANT TO JOIN THE REPORTING TEAM? *", placeholder: "Tell us about a campus story you'd like to cover or your experience with interviewing..." };
+      case "PR & Social Media Team":
+        return { label: "WHY DO YOU WANT TO JOIN PR & SOCIAL MEDIA? *", placeholder: "What ideas do you have for engaging our audience on social media?" };
+      case "Alumni Team":
+        return { label: "WHY DO YOU WANT TO JOIN THE ALUMNI TEAM? *", placeholder: "How would you foster connections with our alumni network?" };
+      case "Content Team":
+        return { label: "WHY DO YOU WANT TO JOIN THE CONTENT TEAM? *", placeholder: "Share a writing sample link or tell us what topics you love writing about..." };
+      case "Research Wing Team":
+        return { label: "WHY DO YOU WANT TO JOIN THE RESEARCH WING? *", placeholder: "Tell us about your analytical skills, surveying, or research experience..." };
+      case "Videography Team":
+        return { label: "WHY DO YOU WANT TO JOIN VIDEOGRAPHY? *", placeholder: "Share a link to your previous video work or tell us what you'd like to shoot..." };
+      case "Video Editing Team":
+        return { label: "WHY DO YOU WANT TO JOIN VIDEO EDITING? *", placeholder: "Tell us about the software you use or share a link to some of your edits..." };
+      case "Artwork Team":
+        return { label: "WHY DO YOU WANT TO JOIN THE ARTWORK TEAM? *", placeholder: "Share your portfolio link or tell us about your artistic style and tools..." };
+      case "Graphics Team":
+        return { label: "WHY DO YOU WANT TO JOIN THE GRAPHICS TEAM? *", placeholder: "Share a link to your designs or tell us what visual aesthetics inspire you..." };
+      case "Event Management Team":
+        return { label: "WHY DO YOU WANT TO JOIN EVENT MANAGEMENT? *", placeholder: "Tell us about an event you helped organize or how you handle logistical pressure..." };
+      case "Tech Team":
+        return { label: "WHY DO YOU WANT TO JOIN THE TECH TEAM? *", placeholder: "Share your GitHub/portfolio link or tell us what tech stacks you're familiar with..." };
+      default:
+        return { label: "WHY DO YOU WANT TO JOIN? *", placeholder: "Tell us what excites you about this role..." };
+    }
+  };
+
+  const { label: whyJoinLabel, placeholder: whyJoinPlaceholder } = getPersonalisedQuestion(selectedDesk);
 
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
@@ -190,6 +255,8 @@ export default function TeamJoinPage() {
                     </label>
                     <select
                       required id="team-desk" name="positionAppliedFor"
+                      value={selectedDesk}
+                      onChange={(e) => setSelectedDesk(e.target.value)}
                       className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-sans uppercase tracking-wider text-[#14120e] focus:border-[#c83a1a] focus:outline-none transition-colors cursor-pointer"
                     >
                       <option value="">Select Desk</option>
@@ -213,12 +280,12 @@ export default function TeamJoinPage() {
 
                 <div>
                   <label htmlFor="team-why" className="block text-[11px] font-sans uppercase tracking-widest font-bold text-[#14120e]/70 mb-2">
-                    WHY DO YOU WANT TO JOIN? *
+                    {whyJoinLabel}
                   </label>
                   <textarea
                     id="team-why" name="whyJoin" rows={4}
                     className="w-full bg-[#eae5d9] border-2 border-[#14120e]/20 p-3 text-sm font-serif text-[#14120e] focus:border-[#c83a1a] focus:outline-none resize-none transition-colors"
-                    placeholder="Tell us what excites you about journalism, media, or campus storytelling..."
+                    placeholder={whyJoinPlaceholder}
                   />
                 </div>
 
