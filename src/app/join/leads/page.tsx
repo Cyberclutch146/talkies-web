@@ -12,40 +12,7 @@ export default function LeadsJoinPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      type: "LEAD",
-      name: formData.get("name"),
-      collegeEmail: formData.get("collegeEmail"),
-      rollNumber: formData.get("rollNumber"),
-      yearOfStudy: formData.get("yearOfStudy"),
-      phoneNumber: formData.get("phoneNumber"),
-      positionAppliedFor: formData.get("positionAppliedFor"),
-      whyRCCTalkies: formData.get("whyRCCTalkies"),
-      whyJoin: formData.get("whyJoin"),
-    };
-
-    try {
-      const res = await fetch("/api/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Something went wrong.");
-      }
-
-      setSuccess(true);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
+    setError("The application window has closed for this year. Please try again next time!");
   };
 
   return (
