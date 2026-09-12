@@ -53,6 +53,16 @@ export default function AdminMagazines() {
   };
 
   useEffect(() => {
+    const savedPassword = sessionStorage.getItem("adminPassword");
+    if (savedPassword) {
+      setPassword(savedPassword);
+      setIsAuthenticated(true);
+    } else {
+      window.location.href = "/admin";
+    }
+  }, []);
+
+  useEffect(() => {
     if (isAuthenticated) {
       fetchMagazines();
     }
@@ -251,89 +261,10 @@ export default function AdminMagazines() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#14120e] flex items-center justify-center p-4 relative overflow-hidden">
-        {/* Grain */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(#e5e0d3 0.6px, transparent 0.6px), radial-gradient(#e5e0d3 0.6px, transparent 0.6px)",
-            backgroundSize: "4px 4px",
-            backgroundPosition: "0 0, 2px 2px",
-          }}
-        />
-
-        <form
-          key={shakeKey}
-          onSubmit={handleAuth}
-          className="relative max-w-sm w-full space-y-6"
-          style={authError ? { animation: "shake 0.4s ease-in-out" } : undefined}
-        >
-          <div className="flex items-center gap-3 text-[9px] font-sans uppercase tracking-[0.3em] text-[#e5e0d3]/30">
-            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
-            <span>RESTRICTED</span>
-            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
-          </div>
-
-          <div className="text-center space-y-2">
-            <h1 className="font-display text-5xl sm:text-6xl uppercase tracking-tighter text-[#e5e0d3]">
-              MAGAZINES
-            </h1>
-            <p className="font-serif text-sm italic text-[#e5e0d3]/30">
-              Archive management access
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setAuthError("");
-              }}
-              autoFocus
-              className="w-full bg-[#e5e0d3]/5 border border-[#e5e0d3]/15 text-[#e5e0d3] p-4 font-sans text-sm tracking-wider outline-none focus:border-[#c83a1a]/50 transition-colors placeholder:text-[#e5e0d3]/20"
-            />
-            {authError && (
-              <p className="text-[#c83a1a] text-[10px] font-sans uppercase tracking-widest text-center font-bold">
-                {authError}
-              </p>
-            )}
-            <button
-              type="submit"
-              disabled={isVerifying}
-              className="w-full bg-[#e5e0d3] text-[#14120e] p-4 font-sans text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#c83a1a] hover:text-[#e5e0d3] transition-colors disabled:opacity-50 flex items-center justify-center gap-3"
-            >
-              {isVerifying ? (
-                <>
-                  <span className="w-3 h-3 border-2 border-[#14120e] border-t-transparent rounded-full animate-spin" />
-                  Verifying
-                </>
-              ) : (
-                "Access Dashboard"
-              )}
-            </button>
-          </div>
-          <Link
-            href="/"
-            className="block text-center mt-6 text-[10px] font-sans uppercase tracking-widest text-[#e5e0d3]/20 hover:text-[#e5e0d3]/60 transition-colors"
-          >
-            ← Back to Home
-          </Link>
-        </form>
-
-        <style dangerouslySetInnerHTML={{
-          __html: `
-          @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-4px); }
-            40% { transform: translateX(4px); }
-            60% { transform: translateX(-4px); }
-            80% { transform: translateX(4px); }
-          }
-        `}} />
+      <div className="min-h-screen bg-[#14120e] flex items-center justify-center p-4">
+        <div className="text-[#e5e0d3] font-sans text-sm uppercase tracking-widest animate-pulse">
+          Authenticating...
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
 
@@ -74,6 +74,15 @@ export default function AdminDashboard() {
   } | null>(null);
   const [isLoadingStorage, setIsLoadingStorage] = useState(false);
 
+  useEffect(() => {
+    const savedPassword = sessionStorage.getItem("adminPassword");
+    if (savedPassword) {
+      setPassword(savedPassword);
+      setIsAuthenticated(true);
+      fetchStorageStats(savedPassword);
+    }
+  }, []);
+
   const fetchStorageStats = async (authPassword: string) => {
     setIsLoadingStorage(true);
     try {
@@ -102,6 +111,7 @@ export default function AdminDashboard() {
     if (result.success) {
       setIsAuthenticated(true);
       setError("");
+      sessionStorage.setItem("adminPassword", password);
       fetchStorageStats(password);
     } else {
       setError(result.error || "Invalid credentials");

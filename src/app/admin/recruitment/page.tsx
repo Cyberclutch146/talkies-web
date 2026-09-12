@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import DecryptedText from "@/components/DecryptedText";
 import { verifyPassword } from "../actions";
@@ -35,6 +35,16 @@ export default function RecruitmentDashboard() {
   // Allow multiple types and roles to be expanded independently
   const [expandedTypes, setExpandedTypes] = useState<Set<string>>(new Set());
   const [expandedRoles, setExpandedRoles] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const savedPassword = sessionStorage.getItem("adminPassword");
+    if (savedPassword) {
+      setPassword(savedPassword);
+      fetchApplications(savedPassword);
+    } else {
+      window.location.href = "/admin";
+    }
+  }, []);
 
   const toggleType = (type: string) => {
     setExpandedTypes(prev => {
@@ -200,82 +210,10 @@ export default function RecruitmentDashboard() {
   /* ─── Login Gate ─── */
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#14120e] flex items-center justify-center p-4 relative overflow-hidden">
-        {/* Grain */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(#e5e0d3 0.6px, transparent 0.6px), radial-gradient(#e5e0d3 0.6px, transparent 0.6px)",
-            backgroundSize: "4px 4px",
-            backgroundPosition: "0 0, 2px 2px",
-          }}
-        />
-
-        <form
-          key={shakeKey}
-          onSubmit={handleAuth}
-          className="relative max-w-sm w-full space-y-6"
-          style={authError ? { animation: "shake 0.4s ease-in-out" } : undefined}
-        >
-          <div className="flex items-center gap-3 text-[9px] font-sans uppercase tracking-[0.3em] text-[#e5e0d3]/30">
-            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
-            <span>RESTRICTED</span>
-            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
-          </div>
-
-          <div className="text-center space-y-2">
-            <h1 className="font-display text-5xl sm:text-6xl uppercase tracking-tighter text-[#e5e0d3]">
-              RECRUITMENT
-            </h1>
-            <p className="font-serif text-sm italic text-[#e5e0d3]/30">
-              Applicant data access
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setAuthError("");
-              }}
-              autoFocus
-              className="w-full bg-[#e5e0d3]/5 border border-[#e5e0d3]/15 text-[#e5e0d3] p-4 font-sans text-sm tracking-wider outline-none focus:border-[#c83a1a]/50 transition-colors placeholder:text-[#e5e0d3]/20"
-            />
-            {authError && (
-              <p className="text-[#c83a1a] text-[10px] font-sans uppercase tracking-widest text-center font-bold">
-                {authError}
-              </p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            disabled={isVerifying}
-            className="w-full bg-[#c83a1a] text-[#e5e0d3] font-display text-lg uppercase tracking-wide py-3.5 hover:bg-[#a62b10] transition-colors disabled:opacity-50"
-          >
-            {isVerifying ? "VERIFYING..." : "ACCESS DATA"}
-          </button>
-
-          <div className="flex items-center gap-3 text-[9px] font-sans uppercase tracking-[0.3em] text-[#e5e0d3]/20">
-            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
-            <Link href="/admin" className="hover:text-[#c83a1a] transition-colors">← DASHBOARD</Link>
-            <span className="flex-1 h-px bg-[#e5e0d3]/10" />
-          </div>
-        </form>
-
-        <style jsx>{`
-          @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-8px); }
-            40% { transform: translateX(8px); }
-            60% { transform: translateX(-4px); }
-            80% { transform: translateX(4px); }
-          }
-        `}</style>
+      <div className="min-h-screen bg-[#14120e] flex items-center justify-center p-4">
+        <div className="text-[#e5e0d3] font-sans text-sm uppercase tracking-widest animate-pulse">
+          Authenticating...
+        </div>
       </div>
     );
   }
