@@ -139,12 +139,7 @@ export default function DecryptedText({
     return new Set(arr);
   }, []);
 
-  const encryptInstantly = useCallback(() => {
-    const emptySet = new Set<number>();
-    setRevealedIndices(emptySet);
-    setDisplayText(shuffleText(text, emptySet));
-    setIsDecrypted(false);
-  }, [text, shuffleText]);
+
 
   const triggerDecrypt = useCallback(() => {
     if (sequential) {
@@ -352,14 +347,18 @@ export default function DecryptedText({
   useEffect(() => {
     // Only re-run text assignment if text prop changes after mount
     if (animateOn !== 'click') {
-      setDisplayText(text);
-      setIsDecrypted(true);
+      setTimeout(() => {
+        setDisplayText(text);
+        setIsDecrypted(true);
+      }, 0);
     } else {
       // If text changes and we are in click mode, we want to reset it
       // The initial mount is handled by the state initialization
     }
-    setRevealedIndices(new Set());
-    setDirection('forward');
+    setTimeout(() => {
+      setRevealedIndices(new Set());
+      setDirection('forward');
+    }, 0);
   }, [animateOn, text]);
 
   const animateProps =

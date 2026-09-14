@@ -23,9 +23,6 @@ interface Application {
 export default function RecruitmentDashboard() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authError, setAuthError] = useState("");
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [shakeKey, setShakeKey] = useState(0);
 
   const [applications, setApplications] = useState<Application[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,15 +33,6 @@ export default function RecruitmentDashboard() {
   const [expandedTypes, setExpandedTypes] = useState<Set<string>>(new Set());
   const [expandedRoles, setExpandedRoles] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    const savedPassword = sessionStorage.getItem("adminPassword");
-    if (savedPassword) {
-      setPassword(savedPassword);
-      fetchApplications(savedPassword);
-    } else {
-      window.location.href = "/admin";
-    }
-  }, []);
 
   const toggleType = (type: string) => {
     setExpandedTypes(prev => {
@@ -62,7 +50,7 @@ export default function RecruitmentDashboard() {
     });
   };
 
-  const fetchApplications = async (pwd: string) => {
+  async function fetchApplications(pwd: string) {
     setIsLoading(true);
     setUpdateError("");
     try {
@@ -75,37 +63,13 @@ export default function RecruitmentDashboard() {
       if (res.ok) {
         setApplications(data.applications);
         setIsAuthenticated(true);
-        setAuthError("");
       } else {
-        setAuthError(data.error || "Authentication failed");
-        setShakeKey(k => k + 1);
+        window.location.href = "/admin";
       }
     } catch {
-      setAuthError("Failed to connect to server");
-      setShakeKey(k => k + 1);
+      window.location.href = "/admin";
     } finally {
       setIsLoading(false);
-      setIsVerifying(false);
-    }
-  };
-
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (password.trim().length === 0) {
-      setAuthError("Please enter the admin password");
-      return;
-    }
-
-    setIsVerifying(true);
-
-    const result = await verifyPassword(password);
-    if (result.success) {
-      fetchApplications(password);
-    } else {
-      setAuthError(result.error || "Invalid credentials");
-      setShakeKey(k => k + 1);
-      setIsVerifying(false);
     }
   };
 

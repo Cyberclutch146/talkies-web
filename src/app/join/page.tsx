@@ -1,10 +1,26 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import DecryptedText from "@/components/DecryptedText";
-import { LEAD_POSITIONS, TEAM_DESKS } from "@/data/positions";
 
-const TEAM_DESKS_DISPLAY = TEAM_DESKS.map((d) => ({ name: d.name.replace(/ Member$/, '').replace(/ist$/, 'ism'), desc: `Member of the ${d.name.replace(/ Member$/, '')} wing` }));
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  }),
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  },
+};
 
 export default function JoinPage() {
   return (
@@ -14,11 +30,11 @@ export default function JoinPage() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#c83a1a] font-bold block mb-1">
-              RECRUITMENT // 2025
+              RECRUITMENT // STATUS
             </span>
             <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tighter text-[#e5e0d3]">
               <DecryptedText
-                text="JOIN THE TEAM"
+                text="RECRUITMENT"
                 animateOn="view"
                 speed={40}
                 maxIterations={8}
@@ -29,114 +45,183 @@ export default function JoinPage() {
               />
             </h1>
           </div>
-          <p className="font-serif text-sm sm:text-base text-[#e5e0d3]/70 max-w-sm">
-            Whether you want to lead a desk or contribute your skills, there&apos;s a byline waiting for you at RCC Talkies.
+          <p className="font-serif text-sm sm:text-base text-[#e5e0d3]/70 max-w-sm italic">
+            The editorial board thanks all applicants for their interest in RCC Talkies.
           </p>
         </div>
       </section>
 
-      {/* ── Editorial Statement ── */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 border-b border-[#14120e]/20">
-        <div className="flex items-baseline gap-3 text-sm font-sans uppercase tracking-[0.2em] text-[#14120e]/70">
-          <span className="text-[#c83a1a]">✦</span>
-          <span>Applications are reviewed by the editorial board on a rolling basis</span>
-        </div>
-      </div>
+      {/* ── Central "Closed" Notice ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 lg:py-32">
+        <motion.div
+          className="relative border-2 border-[#14120e] bg-[#eae5d9] overflow-hidden"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={scaleIn}
+        >
+          {/* Decorative repeating background */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none overflow-hidden flex flex-wrap content-start">
+            {Array.from({ length: 200 }).map((_, i) => (
+              <span key={i} className="font-gothic text-5xl leading-[0.85] text-[#14120e]">CLOSED </span>
+            ))}
+          </div>
 
-      {/* ── Two-Column Cards ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-[#14120e]/30 bg-[#eae5d9] divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20">
+          {/* Top decorative border bar */}
+          <div className="w-full h-2 bg-[#c83a1a]" />
 
-          {/* LEFT: Lead Applications */}
-          <Link href="/join/leads" className="group p-6 sm:p-10 flex flex-col justify-between hover:bg-[#e0dbcd]/50 transition-colors">
-            <div>
-              <span className="text-[10px] font-sans uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-3">
-                01 // LEADERSHIP POSITIONS
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-[#14120e] mb-4">
-                APPLY FOR LEADS
-              </h2>
-              <p className="font-serif text-base text-[#14120e]/75 leading-relaxed mb-6">
-                Step up and take charge of a desk. We&apos;re looking for dedicated individuals to lead our editorial, tech, social media, and creative wings.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 mb-6">
-                {LEAD_POSITIONS.map((pos, idx) => (
-                  <div key={pos} className="flex items-center gap-2 py-1.5 border-b border-[#14120e]/10">
-                    <span className="font-sans text-[10px] text-[#c83a1a] font-bold w-4 flex-shrink-0">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[11px] font-sans uppercase tracking-wider font-bold text-[#14120e]/80 truncate">
-                      {pos}
-                    </span>
-                  </div>
-                ))}
+          <div className="relative z-10 px-6 sm:px-12 lg:px-20 py-12 sm:py-16 lg:py-24 text-center">
+            {/* Seal / Emblem */}
+            <motion.div
+              className="mx-auto mb-8 w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-[#14120e] flex items-center justify-center relative"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={0}
+            >
+              <div className="absolute inset-2 rounded-full border-2 border-[#14120e]/30" />
+              <div className="text-center">
+                <span className="font-gothic text-3xl sm:text-4xl text-[#c83a1a] block leading-none">✦</span>
+                <span className="font-sans text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#14120e]/70 font-bold mt-1 block">
+                  SEALED
+                </span>
               </div>
-            </div>
-            <div className="flex items-center justify-between pt-5 border-t border-[#14120e]/20">
-              <span className="inline-flex items-center gap-2 text-[11px] font-sans uppercase tracking-widest font-bold text-[#14120e] group-hover:text-[#c83a1a] transition-colors">
-                <span>APPLY NOW</span>
-                <span>→</span>
-              </span>
-              <span className="text-[10px] font-sans uppercase tracking-widest text-[#14120e]/50">
-                {LEAD_POSITIONS.length} POSITIONS
-              </span>
-            </div>
-          </Link>
+            </motion.div>
 
-          {/* RIGHT: Team Applications */}
-          <Link href="/join/team" className="group p-6 sm:p-10 flex flex-col justify-between hover:bg-[#e0dbcd]/50 transition-colors">
-            <div>
-              <span className="text-[10px] font-sans uppercase tracking-[0.25em] font-bold text-[#c83a1a] block mb-3">
-                02 // TEAM MEMBER RECRUITMENT
+            {/* Main Gothic Title */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={1}
+            >
+              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[#c83a1a] font-bold block mb-4">
+                OFFICIAL NOTICE FROM THE EDITORIAL BOARD
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-[#14120e] mb-4">
-                APPLY FOR TEAM
+              <h2 className="font-gothic text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-[#14120e] leading-[0.9] mb-6">
+                Applications are Closed
               </h2>
-              <p className="font-serif text-base text-[#14120e]/75 leading-relaxed mb-6">
-                Join one of our five editorial desks. Contribute to campus journalism through writing, reporting, photography, research, or social media.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 mb-6">
-                {TEAM_DESKS.map((desk, idx) => (
-                  <div key={desk.name} className="flex items-center gap-2 py-1.5 border-b border-[#14120e]/10">
-                    <span className="font-sans text-[10px] text-[#c83a1a] font-bold w-4 flex-shrink-0">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[11px] font-sans uppercase tracking-wider font-bold text-[#14120e]/80 truncate">
-                      {desk.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex items-center justify-between pt-5 border-t border-[#14120e]/20">
-              <span className="inline-flex items-center gap-2 text-[11px] font-sans uppercase tracking-widest font-bold text-[#14120e] group-hover:text-[#c83a1a] transition-colors">
-                <span>APPLY NOW</span>
-                <span>→</span>
-              </span>
-              <span className="text-[10px] font-sans uppercase tracking-widest text-[#14120e]/50">
-                {TEAM_DESKS.length} DESKS
-              </span>
-            </div>
-          </Link>
+            </motion.div>
 
-        </div>
+            {/* Decorative divider */}
+            <motion.div
+              className="flex items-center justify-center gap-4 my-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={2}
+            >
+              <div className="w-16 sm:w-24 h-[1px] bg-[#14120e]/30" />
+              <span className="font-serif italic text-sm sm:text-base text-[#14120e]/50">Anno Domini 2025</span>
+              <div className="w-16 sm:w-24 h-[1px] bg-[#14120e]/30" />
+            </motion.div>
+
+            {/* Message */}
+            <motion.div
+              className="max-w-2xl mx-auto space-y-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={3}
+            >
+              <p className="font-serif text-lg sm:text-xl lg:text-2xl text-[#14120e]/80 leading-relaxed">
+                The recruitment window for the current academic session hath concluded. 
+                All positions — both leadership and team member roles — are no longer accepting applications.
+              </p>
+              <p className="font-serif text-base sm:text-lg text-[#14120e]/65 leading-relaxed">
+                We extend our sincerest gratitude to all who expressed interest in joining our editorial fellowship. 
+                Pray return when the next recruitment cycle commences.
+              </p>
+            </motion.div>
+
+            {/* "Apply Next Year" highlight */}
+            <motion.div
+              className="mt-12 inline-block"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={4}
+            >
+              <div className="bg-[#14120e] px-8 sm:px-12 py-6 sm:py-8 border-2 border-[#14120e]">
+                <span className="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-[#c83a1a] font-bold block mb-2">
+                  MARK YOUR CALENDARS
+                </span>
+                <span className="font-gothic text-3xl sm:text-4xl lg:text-5xl text-[#e5e0d3] block leading-tight">
+                  Please Apply Next Year
+                </span>
+                <span className="font-serif italic text-sm text-[#e5e0d3]/60 block mt-2">
+                  Recruitment reopens with the new academic session
+                </span>
+              </div>
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div
+              className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={5}
+            >
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 bg-[#14120e] text-[#e5e0d3] font-display text-base sm:text-lg uppercase tracking-tight px-8 py-3 hover:bg-[#c83a1a] transition-colors"
+              >
+                ← RETURN HOME
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border-2 border-[#14120e] text-[#14120e] font-display text-base sm:text-lg uppercase tracking-tight px-8 py-3 hover:bg-[#14120e] hover:text-[#e5e0d3] transition-colors"
+              >
+                CONTACT US →
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Bottom decorative border bar */}
+          <div className="w-full h-2 bg-[#c83a1a]" />
+        </motion.div>
       </div>
 
       {/* ── Bottom Info Strip ── */}
       <section className="w-full border-t border-[#14120e]/20 bg-[#ded8c7]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+          >
             <span className="font-display text-3xl text-[#14120e]">25+</span>
             <p className="text-xs font-sans uppercase tracking-widest text-[#14120e]/60 mt-1">Years of Legacy</p>
-          </div>
-          <div>
-            <span className="font-display text-3xl text-[#14120e]">{TEAM_DESKS.length}</span>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={1}
+          >
+            <span className="font-display text-3xl text-[#14120e]">11</span>
             <p className="text-xs font-sans uppercase tracking-widest text-[#14120e]/60 mt-1">Editorial Desks</p>
-          </div>
-          <div>
-            <span className="font-display text-3xl text-[#c83a1a]">OPEN</span>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={2}
+          >
+            <span className="font-display text-3xl text-[#c83a1a]">CLOSED</span>
             <p className="text-xs font-sans uppercase tracking-widest text-[#14120e]/60 mt-1">Recruitment Status</p>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

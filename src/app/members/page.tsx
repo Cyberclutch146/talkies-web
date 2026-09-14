@@ -19,16 +19,9 @@ interface TeamYear {
   faculty: TeamMember[];
 }
 
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-}
 
-function MemberCard({ member, index }: { member: TeamMember; index: number }) {
+
+function MemberCard({ member }: { member: TeamMember }) {
   const photoSrc = member.photo || "/team/placeholder.jpg";
 
   return (
@@ -176,7 +169,7 @@ export default function MembersPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
             {activeYear.core.map((member, i) => (
-              <MemberCard key={`${activeYear.year}-${member.name}`} member={member} index={i} />
+              <MemberCard key={`${activeYear.year}-${member.name}`} member={member} />
             ))}
           </div>
         </section>

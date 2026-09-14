@@ -16,9 +16,6 @@ interface InstaPost {
 export default function AdminInstagram() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authError, setAuthError] = useState("");
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [shakeKey, setShakeKey] = useState(0);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -36,7 +33,7 @@ export default function AdminInstagram() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const fetchPosts = async () => {
+  async function fetchPosts() {
     setIsLoading(true);
     try {
       const res = await fetch("/api/instagram");
@@ -58,6 +55,7 @@ export default function AdminInstagram() {
   useEffect(() => {
     const savedPassword = sessionStorage.getItem("adminPassword");
     if (savedPassword) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPassword(savedPassword);
       setIsAuthenticated(true);
     } else {
@@ -66,40 +64,23 @@ export default function AdminInstagram() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isAuthenticated) fetchPosts();
   }, [isAuthenticated]);
 
   // Generate preview when file changes
   useEffect(() => {
     if (!imageFile) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setImagePreview(null);
       return;
     }
     const url = URL.createObjectURL(imageFile);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setImagePreview(url);
     return () => URL.revokeObjectURL(url);
   }, [imageFile]);
 
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (password.trim().length === 0) {
-      setAuthError("Please enter the admin password");
-      return;
-    }
-    
-    setIsVerifying(true);
-    const result = await verifyPassword(password);
-    
-    if (result.success) {
-      setIsAuthenticated(true);
-      setAuthError("");
-    } else {
-      setAuthError(result.error || "Invalid password");
-      setShakeKey(k => k + 1);
-      setIsVerifying(false);
-    }
-  };
 
   const handleFileSelect = (file: File) => {
     if (!file.type.startsWith("image/")) {

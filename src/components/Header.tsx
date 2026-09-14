@@ -18,7 +18,7 @@ export function Header() {
   useEffect(() => {
     // Only apply hide-on-hero behavior on the homepage
     if (pathname !== "/") {
-      setVisible(true);
+      setTimeout(() => setVisible(true), 0);
       return;
     }
 

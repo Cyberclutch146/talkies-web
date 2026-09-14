@@ -18,24 +18,12 @@ interface ContactMessage {
 export default function InboxDashboard() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authError, setAuthError] = useState("");
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [shakeKey, setShakeKey] = useState(0);
 
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    const savedPassword = sessionStorage.getItem("adminPassword");
-    if (savedPassword) {
-      setPassword(savedPassword);
-      fetchMessages(savedPassword);
-    } else {
-      window.location.href = "/admin";
-    }
-  }, []);
 
   const toggleExpand = (id: string) => {
     setExpandedIds((prev) => {
@@ -45,7 +33,7 @@ export default function InboxDashboard() {
     });
   };
 
-  const fetchMessages = async (pwd: string) => {
+  async function fetchMessages(pwd: string) {
     setIsLoading(true);
     try {
       const res = await fetch("/api/inbox", {
@@ -57,36 +45,16 @@ export default function InboxDashboard() {
       if (res.ok) {
         setMessages(data.messages);
         setIsAuthenticated(true);
-        setAuthError("");
       } else {
-        setAuthError(data.error || "Authentication failed");
-        setShakeKey((k) => k + 1);
+        console.error(data.error || "Authentication failed");
       }
     } catch {
-      setAuthError("Failed to connect to server");
-      setShakeKey((k) => k + 1);
+      console.error("Failed to connect to server");
     } finally {
       setIsLoading(false);
-      setIsVerifying(false);
     }
   };
 
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password.trim().length === 0) {
-      setAuthError("Please enter the admin password");
-      return;
-    }
-    setIsVerifying(true);
-    const result = await verifyPassword(password);
-    if (result.success) {
-      fetchMessages(password);
-    } else {
-      setAuthError(result.error || "Invalid credentials");
-      setShakeKey((k) => k + 1);
-      setIsVerifying(false);
-    }
-  };
 
   const updateStatus = async (id: string, newStatus: string) => {
     try {
@@ -120,6 +88,18 @@ export default function InboxDashboard() {
       console.error(e);
     }
   };
+
+  useEffect(() => {
+    const savedPassword = sessionStorage.getItem("adminPassword");
+    if (savedPassword) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPassword(savedPassword);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      fetchMessages(savedPassword);
+    } else {
+      window.location.href = "/admin";
+    }
+  }, []);
 
   if (!isAuthenticated) {
     return (

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Join",
+  title: "Recruitment Closed",
   description:
-    "Apply to join RCC Talkies — leadership positions and team member recruitment for RCCIIT's journalism and media society.",
+    "Applications for RCC Talkies are currently closed. Please apply next year when recruitment reopens for RCCIIT's journalism and media society.",
 };
 
 export default function JoinLayout({

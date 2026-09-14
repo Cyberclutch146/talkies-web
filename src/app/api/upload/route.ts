@@ -13,7 +13,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         let payloadObj: { password?: string } = {};
         try {
           if (clientPayload) payloadObj = JSON.parse(clientPayload);
-        } catch (e) {
+        } catch {
           throw new Error('Invalid client payload');
         }
 
@@ -28,7 +28,7 @@ export async function POST(request: Request): Promise<NextResponse> {
           maximumSizeInBytes: 100 * 1024 * 1024, // 100MB max limit
         };
       },
-      onUploadCompleted: async ({ blob, tokenPayload }) => {
+      onUploadCompleted: async ({ blob }) => {
         console.log('Upload completed', blob.url);
       },
     });

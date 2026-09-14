@@ -47,7 +47,7 @@ export default async function MagazineViewer({ params }: MagazineViewerProps) {
           </Link>
           <div className="flex flex-col">
             <span className="font-sans text-[9px] uppercase tracking-widest text-[#c83a1a] font-bold leading-none">
-              {magazine.volume} // {magazine.year}
+              {magazine.volume} {"//"} {magazine.year}
             </span>
             <h1 className="font-display text-base sm:text-xl uppercase tracking-tight text-[#e5e0d3] leading-none mt-1">
               {magazine.title}

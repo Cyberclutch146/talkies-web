@@ -8,9 +8,9 @@ export async function GET() {
       orderBy: { order: 'asc' },
     });
     return NextResponse.json(posts);
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching instagram posts:', error);
-    return NextResponse.json({ error: error?.message || 'Internal server error', stack: error?.stack }, { status: 500 });
+    return NextResponse.json({ error: (error as Error)?.message || 'Internal server error', stack: (error as Error)?.stack }, { status: 500 });
   }
 }
 

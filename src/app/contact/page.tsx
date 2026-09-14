@@ -37,7 +37,7 @@ export default function ContactPage() {
         const errorData = await res.json();
         setError(errorData.error || "Failed to submit message");
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);

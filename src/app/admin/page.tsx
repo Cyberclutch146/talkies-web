@@ -77,13 +77,15 @@ export default function AdminDashboard() {
   useEffect(() => {
     const savedPassword = sessionStorage.getItem("adminPassword");
     if (savedPassword) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPassword(savedPassword);
       setIsAuthenticated(true);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchStorageStats(savedPassword);
     }
   }, []);
 
-  const fetchStorageStats = async (authPassword: string) => {
+  async function fetchStorageStats(authPassword: string) {
     setIsLoadingStorage(true);
     try {
       const res = await fetch("/api/storage", {

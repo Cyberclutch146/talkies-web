@@ -179,7 +179,7 @@ export default function EventsPage() {
             <div className="lg:col-span-7 p-6 sm:p-10 space-y-8 bg-[#eae5d9]/40">
               <div className="border-b border-[#14120e]/20 pb-4 flex justify-between items-end">
                 <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-tight text-[#14120e]">
-                  {activeEvent.shortName} // {activeYearData?.year} HIGHLIGHTS
+                  {activeEvent.shortName} {"//"} {activeYearData?.year} HIGHLIGHTS
                 </h3>
                 <span className="text-xs font-sans uppercase tracking-widest text-[#c83a1a] font-bold">
                   ✦ {highlights.length} STORIES

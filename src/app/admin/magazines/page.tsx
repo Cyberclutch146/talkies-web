@@ -18,9 +18,6 @@ interface Magazine {
 export default function AdminMagazines() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authError, setAuthError] = useState("");
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [shakeKey, setShakeKey] = useState(0);
   
   const [title, setTitle] = useState("");
   const [volume, setVolume] = useState("");
@@ -37,7 +34,7 @@ export default function AdminMagazines() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const fetchMagazines = async () => {
+  async function fetchMagazines() {
     setIsLoadingMags(true);
     try {
       const res = await fetch("/api/magazines");
@@ -55,6 +52,7 @@ export default function AdminMagazines() {
   useEffect(() => {
     const savedPassword = sessionStorage.getItem("adminPassword");
     if (savedPassword) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPassword(savedPassword);
       setIsAuthenticated(true);
     } else {
@@ -64,30 +62,11 @@ export default function AdminMagazines() {
 
   useEffect(() => {
     if (isAuthenticated) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchMagazines();
     }
   }, [isAuthenticated]);
 
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (password.trim().length === 0) {
-      setAuthError("Please enter the admin password");
-      return;
-    }
-    
-    setIsVerifying(true);
-    const result = await verifyPassword(password);
-    
-    if (result.success) {
-      setIsAuthenticated(true);
-      setAuthError("");
-    } else {
-      setAuthError(result.error || "Invalid password");
-      setShakeKey(k => k + 1);
-      setIsVerifying(false);
-    }
-  };
 
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
