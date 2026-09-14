@@ -32,6 +32,16 @@ export default function RecruitmentDashboard() {
   // Allow multiple types and roles to be expanded independently
   const [expandedTypes, setExpandedTypes] = useState<Set<string>>(new Set());
   const [expandedRoles, setExpandedRoles] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    const savedPassword = sessionStorage.getItem("adminPassword");
+    if (savedPassword) {
+      setPassword(savedPassword);
+      fetchApplications(savedPassword);
+    } else {
+      window.location.href = "/admin";
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   const toggleType = (type: string) => {
