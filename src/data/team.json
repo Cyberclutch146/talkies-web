@@ -3,11 +3,25 @@
     {
       "year": "2026-27",
       "label": "Academic Year 2026–27",
-      "core": [
-        { "name": "Soumyajit Samanta", "role": "President", "photo": "/team/soumyajit.jpeg" },
-        { "name": "Swagata Ganguly", "role": "Secretary", "photo": "/team/swagata.jpeg" },
-        { "name": "Tiasha Sarkar", "role": "Editor-in-Chief", "photo": "/team/tiasha.jpeg" },
-        { "name": "Raushan Pandey", "role": "Student Advisor", "photo": "/team/raushan.jpeg" }
+      "leads": [
+        { "name": "Soumyajit Samanta", "role": "President", "photo": "/team/soumyajit.webp" },
+        { "name": "Swagata Ganguly", "role": "Secretary", "photo": "/team/swagata.webp" },
+        { "name": "Tiasha Sarkar", "role": "Editor-in-Chief", "photo": "/team/tiasha.webp" },
+        { "name": "Raushan Pandey", "role": "Student Advisor", "photo": "/team/raushan.webp" }
+      ],
+      "coreTeam": [
+        { "name": "Adrika Mukherjee", "role": "Lead Journalist", "photo": "/team/placeholder.webp" },
+        { "name": "Sneha Chaterjee", "role": "Graphics Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Prithwish Mondal", "role": "Graphics Co-Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Bedatroyee Bhattacharya", "role": "Alumni POC", "photo": "/team/placeholder.webp" },
+        { "name": "Oeshik Mazumdar", "role": "Research Wing Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Mousumi Tripathy", "role": "Content Lead", "photo": "/team/placeholder.webp" },
+        { "name": "SK Armaan", "role": "Tech Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Rajdeep Shome", "role": "Videography Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Suchana Barua", "role": "PR & Social Media Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Ayanika Chaterjee", "role": "Artwork Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Debabrata Barman", "role": "Production Lead", "photo": "/team/placeholder.webp" },
+        { "name": "Saranya Mondal", "role": "Event Management Lead", "photo": "/team/placeholder.webp" }
       ],
 
       "faculty": [
@@ -19,21 +33,23 @@
     {
       "year": "2025-26",
       "label": "Academic Year 2025–26",
-      "core": [
-        { "name": "Raunshan Pandey", "role": "Secretary", "photo": "/team/raushan2025.jpeg" },
-        { "name": "Sutanuka Chakraborty", "role": "Editor-in-Chief", "photo": "/team/sutanuka.jpeg" },
-        { "name": "Shreya Dutta", "role": "Student Advisor", "photo": "/team/shreya.jpeg" },
-        { "name": "Kankona Chakraborty", "role": "PR Head", "photo": "/team/kankona.jpeg" },
-        { "name": "Soumyadeep Sardar", "role": "Alumni POC", "photo": "/team/soumyadeep2024.jpeg" },
-        { "name": "Meghna Santra", "role": "Media Journalist Lead", "photo": "/team/meghna.jpeg" },
-        { "name": "Soham Dey", "role": "Art Work Lead", "photo": "/team/sohamdeyartwork.jpeg" },
-        { "name": "Aritree Saha", "role": "Content Lead", "photo": "/team/aritree.jpeg" },
-        { "name": "Antara Malik", "role": "PR & Social Media Lead", "photo": "/team/antara.jpeg" },
-        { "name": "Sohom Sarkar", "role": "Graphics Lead", "photo": "/team/sohomgraphics.jpeg" },
-        { "name": "Kaushiki Baidya", "role": "Lead Journalist", "photo": "/team/kaushiki.jpeg" },
-        { "name": "Aditya Chakraborty", "role": "Event Management Lead", "photo": "/team/aditya.jpeg" },
-        { "name": "Debarghya Aich", "role": "Research Wing Lead", "photo": "/team/debarghya.jpeg" },
-        { "name": "Pritam Mondal", "role": "Tech Lead", "photo": "/team/pritam.jpeg" }
+      "leads": [
+        { "name": "Raunshan Pandey", "role": "Secretary", "photo": "/team/raushan2025.webp" },
+        { "name": "Sutanuka Chakraborty", "role": "Editor-in-Chief", "photo": "/team/sutanuka.webp" },
+        { "name": "Shreya Dutta", "role": "Student Advisor", "photo": "/team/shreya.webp" }
+      ],
+      "coreTeam": [
+        { "name": "Kankona Chakraborty", "role": "PR Head", "photo": "/team/kankona.webp" },
+        { "name": "Soumyadeep Sardar", "role": "Alumni POC", "photo": "/team/soumyadeep2024.webp" },
+        { "name": "Meghna Santra", "role": "Media Journalist Lead", "photo": "/team/meghna.webp" },
+        { "name": "Soham Dey", "role": "Art Work Lead", "photo": "/team/sohamdeyartwork.webp" },
+        { "name": "Aritree Saha", "role": "Content Lead", "photo": "/team/aritree.webp" },
+        { "name": "Antara Malik", "role": "PR & Social Media Lead", "photo": "/team/antara.webp" },
+        { "name": "Sohom Sarkar", "role": "Graphics Lead", "photo": "/team/sohomgraphics.webp" },
+        { "name": "Kaushiki Baidya", "role": "Lead Journalist", "photo": "/team/kaushiki.webp" },
+        { "name": "Aditya Chakraborty", "role": "Event Management Lead", "photo": "/team/aditya.webp" },
+        { "name": "Debarghya Aich", "role": "Research Wing Lead", "photo": "/team/debarghya.webp" },
+        { "name": "Pritam Mondal", "role": "Tech Lead", "photo": "/team/pritam.webp" }
       ],
 
       "faculty": [

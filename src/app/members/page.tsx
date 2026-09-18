@@ -15,14 +15,15 @@ interface TeamMember {
 interface TeamYear {
   year: string;
   label: string;
-  core: TeamMember[];
+  leads: TeamMember[];
+  coreTeam: TeamMember[];
   faculty: TeamMember[];
 }
 
 
 
 function MemberCard({ member }: { member: TeamMember }) {
-  const photoSrc = member.photo || "/team/placeholder.jpg";
+  const photoSrc = member.photo || "/team/placeholder.webp";
 
   return (
     <SpotlightCard
@@ -57,7 +58,7 @@ function MemberCard({ member }: { member: TeamMember }) {
 }
 
 function FacultyCard({ member }: { member: TeamMember }) {
-  const photoSrc = member.photo || "/team/  .jpg";
+  const photoSrc = member.photo || "/team/placeholder.webp";
 
   return (
     <SpotlightCard
@@ -99,13 +100,15 @@ export default function MembersPage() {
   const [activeYearIdx, setActiveYearIdx] = useState(0);
   const activeYear = years[activeYearIdx];
 
+  const totalMembers = activeYear.leads.length + activeYear.coreTeam.length + activeYear.faculty.length;
+
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
       {/* Inverted Black Header Banner */}
       <section className="w-full bg-[#14120e] text-[#e5e0d3] pt-32 sm:pt-40 pb-8 sm:pb-12 px-4 sm:px-8 border-b border-[#14120e]">
         <div className="max-w-7xl mx-auto">
           <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#c83a1a] font-bold block mb-2">
-            THE NEWSROOM & EDITORIAL BOARD
+            THE NEWSROOM &amp; EDITORIAL BOARD
           </span>
           <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tighter text-[#e5e0d3] mb-4">
             <DecryptedText
@@ -143,18 +146,18 @@ export default function MembersPage() {
           ))}
           <div className="ml-auto hidden sm:flex items-center gap-2 text-[11px] font-sans uppercase tracking-widest text-[#14120e]/50">
             <span className="w-2 h-2 bg-[#c83a1a] rounded-full" />
-            {activeYear.core.length + activeYear.faculty.length} MEMBERS
+            {totalMembers} MEMBERS
           </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14 space-y-14 sm:space-y-20">
-        {/* 1. Core Members */}
+        {/* 1. Leads */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
             <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
               <DecryptedText
-                text="01 // Core Members"
+                text="01 // Leads"
                 animateOn="view"
                 speed={30}
                 maxIterations={6}
@@ -163,23 +166,48 @@ export default function MembersPage() {
               />
             </h2>
             <span className="font-sans text-xs uppercase tracking-widest text-[#c83a1a] font-bold whitespace-nowrap">
-              {activeYear.core.length} MEMBERS
+              {activeYear.leads.length} MEMBERS
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
-            {activeYear.core.map((member, i) => (
-              <MemberCard key={`${activeYear.year}-${member.name}`} member={member} />
+            {activeYear.leads.map((member) => (
+              <MemberCard key={`${activeYear.year}-lead-${member.name}`} member={member} />
             ))}
           </div>
         </section>
 
-        {/* 2. Faculty Advisors */}
+        {/* 2. Core Team */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
             <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
               <DecryptedText
-                text="02 // Faculty Advisors"
+                text="02 // Core Team"
+                animateOn="view"
+                speed={30}
+                maxIterations={6}
+                className="text-[#14120e]"
+                encryptedClassName="text-[#c83a1a]/60 font-sans uppercase text-2xl"
+              />
+            </h2>
+            <span className="font-sans text-xs uppercase tracking-widest text-[#c83a1a] font-bold whitespace-nowrap">
+              {activeYear.coreTeam.length} MEMBERS
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+            {activeYear.coreTeam.map((member) => (
+              <MemberCard key={`${activeYear.year}-core-${member.name}`} member={member} />
+            ))}
+          </div>
+        </section>
+
+        {/* 3. Faculty Advisors */}
+        <section className="space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
+            <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
+              <DecryptedText
+                text="03 // Faculty Advisors"
                 animateOn="view"
                 speed={30}
                 maxIterations={6}
