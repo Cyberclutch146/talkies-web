@@ -10,18 +10,18 @@
         { "name": "Raushan Pandey", "role": "Student Advisor", "photo": "/team/raushan.webp" }
       ],
       "coreTeam": [
-        { "name": "Adrika Mukherjee", "role": "Lead Journalist", "photo": "/team/placeholder.webp" },
-        { "name": "Sneha Chaterjee", "role": "Graphics Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Prithwish Mondal", "role": "Graphics Co-Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Bedatroyee Bhattacharya", "role": "Alumni POC", "photo": "/team/placeholder.webp" },
-        { "name": "Oeshik Mazumdar", "role": "Research Wing Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Mousumi Tripathy", "role": "Content Lead", "photo": "/team/placeholder.webp" },
-        { "name": "SK Armaan", "role": "Tech Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Rajdeep Shome", "role": "Videography Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Suchana Barua", "role": "PR & Social Media Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Ayanika Chaterjee", "role": "Artwork Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Debabrata Barman", "role": "Production Lead", "photo": "/team/placeholder.webp" },
-        { "name": "Saranya Mondal", "role": "Event Management Lead", "photo": "/team/placeholder.webp" }
+        { "name": "Adrika Mukherjee", "role": "Lead Journalist", "photo": "/team/adrika.jpeg" },
+        { "name": "Sneha Chaterjee", "role": "Graphics Lead", "photo": "/team/sneha.jpeg" },
+        { "name": "Prithwish Mondal", "role": "Graphics Co-Lead", "photo": "/team/prithwish.jpeg" },
+        { "name": "Bedatroyee Bhattacharya", "role": "Alumni POC", "photo": "/team/BEDATROYEEBHATTACHARYA.jpg" },
+        { "name": "Oeshik Mazumdar", "role": "Research Wing Lead", "photo": "/team/OeshikMazumder .jpeg" },
+        { "name": "Mousumi Tripathy", "role": "Content Lead", "photo": "/team/ MOUSUMITRIPATHY.jpg" },
+        { "name": "SK Armaan", "role": "Tech Lead", "photo": "/team/Arman.jpg" },
+        { "name": "Rajdeep Shome", "role": "Videography Lead", "photo": "/team/Rajdeepshome.jpeg" },
+        { "name": "Suchana Barua", "role": "PR & Social Media Lead", "photo": "/team/SuchanaBarua.jpg" },
+        { "name": "Ayanika Chaterjee", "role": "Artwork Lead", "photo": "/team/ayanika.jpeg" },
+        { "name": "Debabrata Barman", "role": "Production Lead", "photo": "/team/ DEBABRATABARMAN.jpg" },
+        { "name": "Saranya Mondal", "role": "Event Management Lead", "photo": "/team/Saranya.jpeg" }
       ],
 
       "faculty": [
