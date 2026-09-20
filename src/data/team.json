@@ -16,14 +16,13 @@
         { "name": "Bedatroyee Bhattacharya", "role": "Alumni POC", "photo": "/team/BEDATROYEEBHATTACHARYA.webp" },
         { "name": "Oeshik Mazumdar", "role": "Research Wing Lead", "photo": "/team/OeshikMazumder.webp" },
         { "name": "Mousumi Tripathy", "role": "Content Lead", "photo": "/team/MOUSUMITRIPATHY.webp" },
-        { "name": "SK Armaan", "role": "Tech Lead", "photo": "/team/Arman.webp" },
+        { "name": "SK Arman", "role": "Tech Lead", "photo": "/team/Arman.webp" },
         { "name": "Rajdeep Shome", "role": "Videography Lead", "photo": "/team/Rajdeepshome.webp" },
         { "name": "Suchana Barua", "role": "PR & Social Media Lead", "photo": "/team/SuchanaBarua.webp" },
-        { "name": "Ayanika Chatterjee", "role": "Artwork Lead", "photo": "/team/ayanika.webp" },
+        { "name": "Ayanika Chatterjee", "role": "Artwork Lead", "photo": "/team/Ayanika.webp" },
         { "name": "Debabrata Barman", "role": "Production Lead", "photo": "/team/DEBABRATABARMAN.webp" },
         { "name": "Saranya Mondal", "role": "Event Management Lead", "photo": "/team/Saranya.webp" }
       ],
-
       "faculty": [
         { "name": "Anwesha Basu", "role": "Faculty Advisor", "photo": "/faculty/anwesha.webp" },
         { "name": "Sohini Sen", "role": "Faculty Coordinator", "photo": "/faculty/sohini.webp" },
