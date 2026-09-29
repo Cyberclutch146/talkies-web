@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ShiuliFall } from "./ShiuliFall";
 import { DhakPulse } from "./DhakPulse";
+import { TornEdge } from "./TornEdge";
 
 /* ─── Agomoni Hero ─────────────────────────────────────────────── */
 
@@ -55,6 +56,16 @@ export function AgomoniHero() {
         </svg>
       </div>
 
+      {/* Torn edge at bottom — flows into Chapter I */}
+      <TornEdge
+        side="bottom"
+        seed={99}
+        paperColor="#e5e0d3"
+        fibreColor="#ece7da"
+        amplitude={14}
+        className="z-30"
+      />
+
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-8 py-20 max-w-4xl mx-auto">
         {/* Top tag */}
@@ -67,31 +78,89 @@ export function AgomoniHero() {
         >
           <span className="w-8 h-px bg-[#d4a24e]/40" />
           <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
-            RCC Talkies × Art &amp; Cultural Club, RCCIIT
+            RCC Talkies &times; Art &amp; Cultural Club, RCCIIT
           </span>
           <span className="w-8 h-px bg-[#d4a24e]/40" />
         </motion.div>
 
-        {/* Main title — Agomoni in display serif */}
-        <motion.h1
-          className="font-display-serif text-6xl sm:text-8xl lg:text-[140px] leading-[0.85] tracking-tight text-[#faf6ee] mb-4"
+        {/* Main title — আগমনী in Bengali display font (Galada) */}
+        <motion.div
           variants={fadeUp}
           initial={prefersReduced ? "visible" : "hidden"}
           animate="visible"
           custom={1}
+          className="relative mb-4"
         >
-          Agomoni
-        </motion.h1>
+          {/* Accessible name for screen readers */}
+          <span className="sr-only">Agomoni 2026</span>
 
-        {/* Year */}
+          {/* Bengali display title */}
+          <motion.h1
+            className="font-bengali-display text-7xl sm:text-9xl lg:text-[160px] leading-[1.1] tracking-normal pb-2"
+            lang="bn"
+            aria-hidden="true"
+            style={{
+              letterSpacing: 0,
+              lineHeight: 1.2,
+              background: "linear-gradient(90deg, #d4a24e 0%, #faf6ee 40%, #d4a24e 80%, #faf6ee 100%)",
+              backgroundSize: "200% 100%",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              filter: "drop-shadow(0 0 30px rgba(212,162,78,0.2))",
+              paddingBottom: "0.15em",
+            }}
+            animate={
+              prefersReduced
+                ? {}
+                : {
+                    backgroundPosition: ["200% 0%", "0% 0%"],
+                  }
+            }
+            transition={{
+              duration: 3,
+              ease: "easeOut",
+            }}
+          >
+            আগমনী
+          </motion.h1>
+
+          {/* Brush-stroke underline */}
+          <motion.div
+            className="mx-auto h-[3px] rounded-full"
+            style={{
+              background: "linear-gradient(90deg, transparent, #d4a24e, #c83a1a, #d4a24e, transparent)",
+              maxWidth: "60%",
+            }}
+            initial={prefersReduced ? { scaleX: 1 } : { scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.8, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          />
+        </motion.div>
+
+        {/* Latin transliteration + year */}
         <motion.p
-          className="font-display text-3xl sm:text-5xl lg:text-6xl tracking-tighter text-[#d4a24e] mb-6"
+          className="font-display text-xl sm:text-3xl lg:text-4xl tracking-tighter text-[#d4a24e]/70 mb-3"
           variants={fadeUp}
           initial={prefersReduced ? "visible" : "hidden"}
           animate="visible"
           custom={2}
         >
-          2026
+          Agomoni 2026
+        </motion.p>
+
+        {/* Bengali tagline — মা আসছেন */}
+        <motion.p
+          className="font-bengali-serif italic text-xl sm:text-2xl text-[#faf6ee]/50 mb-2"
+          lang="bn"
+          style={{ letterSpacing: 0, lineHeight: 1.5 }}
+          variants={fadeUp}
+          initial={prefersReduced ? "visible" : "hidden"}
+          animate="visible"
+          custom={2.5}
+          aria-hidden="true"
+        >
+          মা আসছেন
         </motion.p>
 
         {/* Subtitle */}
@@ -132,7 +201,7 @@ export function AgomoniHero() {
             href="#participate"
             className="inline-block bg-[#d4a24e] text-[#14120e] font-display text-sm sm:text-base uppercase tracking-tight px-8 py-3.5 hover:bg-[#c83a1a] hover:text-[#faf6ee] transition-colors duration-300"
           >
-            Participate →
+            Participate
           </a>
           <a
             href="#the-event"
@@ -144,7 +213,7 @@ export function AgomoniHero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none">
+      <div className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none">
         <motion.span
           className="text-[9px] sm:text-[10px] font-sans uppercase tracking-[0.25em] text-[#faf6ee]/50 font-bold"
           animate={prefersReduced ? {} : { opacity: [0.3, 0.7, 0.3] }}

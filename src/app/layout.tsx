@@ -6,6 +6,9 @@ import {
   Playfair_Display,
   Anton,
   Space_Grotesk,
+  Galada,
+  Tiro_Bangla,
+  Atma,
 } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
@@ -52,6 +55,28 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const galada = Galada({
+  weight: "400",
+  subsets: ["bengali", "latin"],
+  variable: "--font-bengali-display",
+  display: "swap",
+});
+
+const tiroBangla = Tiro_Bangla({
+  weight: "400",
+  subsets: ["bengali", "latin"],
+  style: ["normal", "italic"],
+  variable: "--font-bengali-serif",
+  display: "swap",
+});
+
+const atma = Atma({
+  weight: ["500", "700"],
+  subsets: ["bengali", "latin"],
+  variable: "--font-bengali-accent",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "The RCC Talkies ",
@@ -74,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
       <html
       lang="en"
-      className={`${unifraktur.variable} ${pirata.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${unifraktur.variable} ${pirata.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} ${galada.variable} ${tiroBangla.variable} ${atma.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-serif bg-[#e5e0d3] text-[#14120e] selection:bg-[#14120e] selection:text-[#e5e0d3]">
         <a href="#main-content" className="skip-link">

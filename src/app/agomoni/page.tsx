@@ -9,7 +9,7 @@ import { PujaDriftWall } from "@/components/agomoni/PujaDriftWall";
 /* ─── SEO & Open Graph ────────────────────────────────────────── */
 
 export const metadata: Metadata = {
-  title: "Agomoni 2026 — Pre-Durga Puja Celebration",
+  title: "Agomoni 2026 | আগমনী — Pre-Durga Puja Celebration",
   description:
     "Agomoni 2026: A pre-Durga Puja celebration of art, music, dance & culture, hosted by RCC Talkies and the Art & Cultural Club of RCCIIT on 9 October 2026.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "pre-puja celebration",
   ],
   openGraph: {
-    title: "Agomoni 2026 — আগমনী",
+    title: "Agomoni 2026 | আগমনী",
     description:
       "A pre-Durga Puja cultural celebration at RCCIIT. Music, dance, art & the spirit of Pujo. 9 Oct 2026.",
     type: "website",

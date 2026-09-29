@@ -2,15 +2,58 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ChapterSection } from "./ChapterSection";
+import { ArticleSplit } from "./ArticleSplit";
+import { TornEdge } from "./TornEdge";
+import {
+  BengaliWatermark,
+  BengaliStamp,
+  BengaliMarginNote,
+  BengaliPullQuote,
+} from "./BengaliAccents";
+
+/* ─── Image Sources (Unsplash — royalty-free) ─────────────────
+   Assigned to chapters by subject relevance. All from
+   images.unsplash.com (already in next.config remotePatterns).  */
+
+const CHAPTER_IMAGES = {
+  arrival: {
+    url: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
+    alt: "A dhak player in traditional white dhuti and red-bordered gamcha beats the dhak drum during Durga Puja festivities",
+    credit: "Photo: Unsplash",
+  },
+  making: {
+    url: "https://images.unsplash.com/photo-1584553421349-3557471bed79?auto=format&fit=crop&w=1200&q=80",
+    alt: "An artisan in Kumartuli sculpts a clay Durga idol, hands covered in wet grey clay under workshop light",
+    credit: "Photo: Unsplash",
+  },
+  homecoming: {
+    url: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=1200&q=80",
+    alt: "Families walking through pandal-lit streets during Durga Puja evening, warm golden lights overhead",
+    credit: "Photo: Unsplash",
+  },
+  celebration: {
+    url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80",
+    alt: "Dancers performing on a brightly lit cultural stage during a festival celebration",
+    credit: "Photo: Unsplash",
+  },
+  farewell: {
+    url: "https://images.unsplash.com/photo-1604423860892-ce4e8a0a8e66?auto=format&fit=crop&w=1200&q=80",
+    alt: "Women playing sindoor khela, smearing vermillion on each other during Bijoya Dashami",
+    credit: "Photo: Unsplash",
+  },
+  event: {
+    url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
+    alt: "Night festival celebrations with vibrant stage lights and crowd",
+    credit: "Photo: Unsplash",
+  },
+};
 
 /* ─── Diya SVG Motif ─────────────────────────────────────────── */
 function DiyaMotif({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 40" width="40" height="40" className={className} aria-hidden="true">
-      {/* Flame */}
       <ellipse cx="20" cy="10" rx="4" ry="7" fill="#d4a24e" opacity="0.8" />
       <ellipse cx="20" cy="11" rx="2" ry="4" fill="#faf6ee" opacity="0.6" />
-      {/* Lamp body */}
       <path d="M12 22 Q14 18, 20 18 Q26 18, 28 22 L30 30 Q20 34, 10 30 Z" fill="#c83a1a" opacity="0.7" />
       <ellipse cx="20" cy="22" rx="8" ry="2" fill="#d4a24e" opacity="0.3" />
     </svg>
@@ -32,244 +75,304 @@ export function AgomoniChapters() {
 
   return (
     <>
-      {/* ── Chapter 1: The Arrival (Agomoni) ─────────────────────── */}
-      <ChapterSection
-        chapterNumber="Chapter I"
-        title="The Arrival"
-        bengaliTitle="আগমনী — Agomoni"
-        emotion="Anticipation"
-        accentColor="#d4a24e"
-      >
-        <motion.p
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          There&apos;s a shift in the air sometime in late September — subtle, almost imperceptible. 
-          The monsoon loosens its grip, the sky turns a pale, luminous blue, and the afternoons grow 
-          gentle with a coolness that wasn&apos;t there before. On the banks of the Ganga, kaash-phool 
-          begins to sway in soft white waves, and in every lane, the first whispers begin: 
-          <em className="text-[#d4a24e]"> &ldquo;Pujo asche.&rdquo;</em>
-        </motion.p>
-        <motion.p
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          This is Agomoni — the arrival, the anticipation, the promise that something magnificent 
-          is approaching. Somewhere in the distance, a lone dhak begins its rhythm, tentative at 
-          first, then steady and insistent. It&apos;s the heartbeat of Bengal waking up, calling the 
-          Goddess home. Shiuli flowers carpet the morning earth in white and orange, and the whole 
-          city seems to hold its breath.
-        </motion.p>
-        <motion.p
-          className="text-[#14120e]/60 italic"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Every generation feels it — that tingle of something sacred and joyful about to unfold. 
-          And so we wait, with hearts wide open, for the drums to grow louder.
-        </motion.p>
-      </ChapterSection>
+      {/* ── Chapter 1: The Arrival ─── Text LEFT, Image RIGHT ──── */}
+      <section className="relative w-full bg-[#e5e0d3] border-b border-[#14120e]/15 overflow-hidden">
+        <BengaliWatermark text="ঢাকের তালে" position="right" />
 
-      {/* ── Chapter 2: The Making ────────────────────────────────── */}
-      <ChapterSection
-        chapterNumber="Chapter II"
-        title="The Making"
-        bengaliTitle="কুমারটুলি — Kumartuli"
-        emotion="Craft & Patience"
-        accentColor="#c83a1a"
-        invertedBg
-      >
-        <motion.p
-          className="text-[#e5e0d3]/85"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
+        <ArticleSplit
+          imageUrl={CHAPTER_IMAGES.arrival.url}
+          imageAlt={CHAPTER_IMAGES.arrival.alt}
+          imageCredit={CHAPTER_IMAGES.arrival.credit}
+          imagePosition="right"
+          tornSeed={101}
         >
-          Months before the first dhak beat, in the narrow lanes of Kumartuli, hands caked in 
-          Ganga clay begin to sculpt divinity. Straw frames sprout ribs and limbs; clay becomes 
-          flesh; hollow eye sockets are painted open with a single brushstroke that feels like 
-          an act of invocation. These artisans — some carrying the craft through five, six 
-          generations — breathe life into Ma Durga, Lakshmi, Saraswati, Kartik, Ganesh.
-        </motion.p>
-        <motion.p
-          className="text-[#e5e0d3]/85"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Across the city, pandal committees race against time. Bamboo skeletons rise on street 
-          corners, draped in fabric and ambition. Theme pandals push boundaries year after year — 
-          an Egyptian temple one block, a spaceship the next, all held together by wires, devotion, 
-          and last-minute miracles. The sawing, hammering, and painting go on through sleepless 
-          nights, fuelled by cups of cha and the collective pride of a neighbourhood.
-        </motion.p>
-        <motion.p
-          className="text-[#e5e0d3]/55 italic"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Every pandal is a love letter written in bamboo and light. Every idol, a prayer 
-          in clay. The making is as sacred as the worship — perhaps more.
-        </motion.p>
-      </ChapterSection>
+          <div className="relative">
+            <BengaliMarginNote text="শিউলি-ঝরা ভোর" side="right" />
 
-      {/* ── Chapter 3: The Homecoming ────────────────────────────── */}
-      <ChapterSection
-        chapterNumber="Chapter III"
-        title="The Homecoming"
-        bengaliTitle="ঘরে ফেরা — Ghore Phera"
-        emotion="Nostalgia & Belonging"
-        accentColor="#d4a24e"
-      >
-        <motion.p
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Trains fill up. Flights get booked out months in advance. The highways leading to 
-          Kolkata swell with a tide of people coming home — not just to a city, but to a feeling. 
-          <em> Pujo</em> is the great gravitational force of Bengal: it pulls you back no matter 
-          where you&apos;ve gone, no matter how far life has taken you.
-        </motion.p>
-        <motion.p
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Homes buzz with preparation. Wardrobes are flung open, new saris pressed and hung, 
-          kurtas laid out with quiet pride. Children try on new shoes and practise their best 
-          poses for the family photograph. Mothers stock up on sweets; grandmothers supervise the 
-          kitchen with an authority that admits no argument. There&apos;s luchi and aloor dom for 
-          breakfast, and the whole house smells of dhoop and Chanel No. 5 in equal measure.
-        </motion.p>
-        <motion.p
-          className="text-[#14120e]/60 italic"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          The neighbourhood uncle starts testing his sound system at 6 AM. The colony kids 
-          form gangs that will roam the pandals till midnight. In every doorway, someone is 
-          waiting for someone to arrive. Pujo doesn&apos;t just bring a goddess home — it 
-          brings all of us home to each other.
-        </motion.p>
-      </ChapterSection>
+            {/* Dateline + Chapter header */}
+            <div className="text-[#14120e]/50 mb-4">
+              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
+                KOLKATA &middot; AGOMONI DESK
+              </span>
+            </div>
+            <div className="flex items-center gap-3 mb-4 text-[#14120e]/50">
+              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
+                Chapter I
+              </span>
+              <span className="w-8 h-px bg-[#d4a24e]/40" />
+              <span className="font-serif italic text-xs">Anticipation</span>
+            </div>
 
-      {/* ── Chapter 4: The Celebration ───────────────────────────── */}
-      <ChapterSection
-        chapterNumber="Chapter IV"
-        title="The Celebration"
-        bengaliTitle="উৎসব — Utsav"
-        emotion="Joy"
-        accentColor="#c83a1a"
-      >
-        <motion.p
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          And then it begins. The five days that Bengalis live the other three hundred and sixty 
-          for. Shashti, Saptami, Ashtami, Navami, Dashami — each with its own rhythm, its own 
-          flavour, its own pitch of joy. The dhak is relentless now, filling the streets with a 
-          primal thunder that makes your ribs vibrate.
-        </motion.p>
-        <motion.p
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Dhunuchi naach at sandhya aarti — smoke swirling around dancers who move as if possessed, 
-          coconut-husk incense burners held aloft, sparks rising into the evening sky. The priest&apos;s 
-          chant mingles with the clash of <em>kaansar ghanta</em> and the collective 
-          ululation of a hundred voices. The bhog is served — khichuri, labra, begun bhaja, payesh — 
-          every spoonful a communion.
-        </motion.p>
-        <motion.p
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Between pandal-hops you eat jhalmuri from paper cones, get your face painted, 
-          and bump into old schoolmates you haven&apos;t seen in years. The adda at the 
-          pandal corner stretches past midnight — politics, poetry, football, the new 
-          Satyajit Ray restoration, that incredible lighting installation three blocks away. 
-          Pujo dissolves every boundary: age, class, routine. For five days, Kolkata becomes 
-          the most democratic party on Earth.
-        </motion.p>
-      </ChapterSection>
+            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
+              The Arrival
+            </h2>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+              আগমনী — Agomoni
+            </p>
 
-      {/* ── Chapter 5: The Farewell (Bijoya) ─────────────────────── */}
-      <ChapterSection
-        chapterNumber="Chapter V"
-        title="The Farewell"
-        bengaliTitle="বিজয়া দশমী — Bijoya Dashami"
-        emotion="Bittersweet Longing"
-        accentColor="#d4a24e"
-        invertedBg
-      >
-        <motion.p
-          className="text-[#e5e0d3]/85"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
+            {/* Prose with drop cap */}
+            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed prose-dropcap" style={{ '--dropcap-color': '#d4a24e' } as React.CSSProperties}>
+              <p>
+                There&apos;s a shift in the air sometime in late September — subtle, almost imperceptible.
+                The monsoon loosens its grip, the sky turns a pale, luminous blue, and the afternoons grow
+                gentle with a coolness that wasn&apos;t there before. On the banks of the Ganga, kaash-phool
+                begins to sway in soft white waves, and in every lane, the first whispers begin:
+                <em className="text-[#d4a24e]"> &ldquo;Pujo asche.&rdquo;</em>
+              </p>
+              <p>
+                This is Agomoni — the arrival, the anticipation, the promise that something magnificent
+                is approaching. Somewhere in the distance, a lone dhak begins its rhythm, tentative at
+                first, then steady and insistent. It&apos;s the heartbeat of Bengal waking up, calling the
+                Goddess home.
+              </p>
+            </div>
+          </div>
+        </ArticleSplit>
+      </section>
+
+      {/* ── Chapter 2: The Making ─── Image LEFT, Text RIGHT ──── */}
+      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] border-b border-[#e5e0d3]/15 overflow-hidden">
+        <TornEdge side="top" seed={201} paperColor="#e5e0d3" fibreColor="#ece7da" amplitude={10} />
+
+        <ArticleSplit
+          imageUrl={CHAPTER_IMAGES.making.url}
+          imageAlt={CHAPTER_IMAGES.making.alt}
+          imageCredit={CHAPTER_IMAGES.making.credit}
+          imagePosition="left"
+          darkBg
+          tornSeed={202}
         >
-          Dashami arrives too soon. It always does. The morning begins with sindoor khela — 
-          married women smearing each other&apos;s faces and hair with vermillion, their 
-          laughter edged with the sadness of goodbye. Red clouds the air. Red stains white 
-          saris. Red on cheeks, red on foreheads, red on the tips of fingers that reach toward 
-          Ma&apos;s face one last time.
-        </motion.p>
-        <motion.p
-          className="text-[#e5e0d3]/85"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
+          <div className="relative">
+            <div className="text-[#e5e0d3]/50 mb-4">
+              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
+                KOLKATA &middot; AGOMONI DESK
+              </span>
+            </div>
+            <div className="flex items-center gap-3 mb-4 text-[#e5e0d3]/50">
+              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#c83a1a]">
+                Chapter II
+              </span>
+              <span className="w-8 h-px bg-[#c83a1a]/40" />
+              <span className="font-serif italic text-xs">Craft &amp; Patience</span>
+            </div>
+
+            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
+              The Making
+            </h2>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+              কুমারটুলি — Kumartuli
+            </p>
+
+            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed text-[#e5e0d3]/85 prose-dropcap" style={{ '--dropcap-color': '#c83a1a' } as React.CSSProperties}>
+              <p>
+                Months before the first dhak beat, in the narrow lanes of Kumartuli, hands caked in
+                Ganga clay begin to sculpt divinity. Straw frames sprout ribs and limbs; clay becomes
+                flesh; hollow eye sockets are painted open with a single brushstroke that feels like
+                an act of invocation.
+              </p>
+
+              <BengaliPullQuote
+                text="হাতের ছোঁয়ায় প্রাণ"
+                attribution="Life through the touch of hands"
+                className="text-[#d4a24e]"
+              />
+
+              <p>
+                Across the city, pandal committees race against time. Bamboo skeletons rise on street
+                corners, draped in fabric and ambition. The sawing, hammering, and painting go on through sleepless
+                nights, fuelled by cups of cha and the collective pride of a neighbourhood.
+              </p>
+            </div>
+          </div>
+        </ArticleSplit>
+      </section>
+
+      {/* ── Chapter 3: The Homecoming ─── Text LEFT, Image RIGHT ─ */}
+      <section className="relative w-full bg-[#e5e0d3] border-b border-[#14120e]/15 overflow-hidden">
+        <TornEdge side="top" seed={301} paperColor="#14120e" fibreColor="#1e1c18" amplitude={10} />
+        <BengaliWatermark text="ঘরে ফেরা" position="left" />
+
+        <ArticleSplit
+          imageUrl={CHAPTER_IMAGES.homecoming.url}
+          imageAlt={CHAPTER_IMAGES.homecoming.alt}
+          imageCredit={CHAPTER_IMAGES.homecoming.credit}
+          imagePosition="right"
+          tornSeed={302}
         >
-          The immersion procession begins in the afternoon. Idols sway on trucks garlanded 
-          with marigold, trailing drumbeats and dancers who refuse to let go. At the ghat, 
-          Ma is lowered into the river — slowly, tenderly — and for a moment, the whole world 
-          holds still. The water accepts her. The drums stop. A silence heavier than any sound 
-          settles over the crowd.
-        </motion.p>
-        <motion.div
-          className="flex items-center gap-3 pt-4"
-          variants={fadeUp}
-          initial={prefersReduced ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true }}
+          <div className="relative">
+            <BengaliStamp text="ঘরে ফেরা" color="#c83a1a" className="absolute -top-2 right-0 hidden lg:block" />
+
+            <div className="text-[#14120e]/50 mb-4">
+              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
+                KOLKATA &middot; AGOMONI DESK
+              </span>
+            </div>
+            <div className="flex items-center gap-3 mb-4 text-[#14120e]/50">
+              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
+                Chapter III
+              </span>
+              <span className="w-8 h-px bg-[#d4a24e]/40" />
+              <span className="font-serif italic text-xs">Nostalgia &amp; Belonging</span>
+            </div>
+
+            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
+              The Homecoming
+            </h2>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+              ঘরে ফেরা — Ghore Phera
+            </p>
+
+            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed prose-dropcap" style={{ '--dropcap-color': '#d4a24e' } as React.CSSProperties}>
+              <p>
+                Trains fill up. Flights get booked out months in advance. The highways leading to
+                Kolkata swell with a tide of people coming home — not just to a city, but to a feeling.
+                <em> Pujo</em> is the great gravitational force of Bengal: it pulls you back no matter
+                where you&apos;ve gone.
+              </p>
+              <p>
+                Homes buzz with preparation. Wardrobes are flung open, new saris pressed and hung,
+                kurtas laid out with quiet pride. There&apos;s luchi and aloor dom for breakfast,
+                and the whole house smells of dhoop and Chanel No. 5 in equal measure.
+              </p>
+            </div>
+          </div>
+        </ArticleSplit>
+      </section>
+
+      {/* ── Chapter 4: The Celebration ─── Image LEFT, Text RIGHT ─ */}
+      <section className="relative w-full bg-[#e5e0d3] border-b border-[#14120e]/15 overflow-hidden">
+        <BengaliWatermark text="ধুনুচির ধোঁয়ায়" position="right" />
+
+        <ArticleSplit
+          imageUrl={CHAPTER_IMAGES.celebration.url}
+          imageAlt={CHAPTER_IMAGES.celebration.alt}
+          imageCredit={CHAPTER_IMAGES.celebration.credit}
+          imagePosition="left"
+          tornSeed={401}
         >
-          <DiyaMotif className="opacity-60 flex-shrink-0" />
-          <p className="text-[#d4a24e] font-serif italic text-lg sm:text-xl leading-relaxed">
-            &ldquo;Ashche bochor abar hobe&rdquo; — she will return next year. 
-            She always does. And so, we wait again.
-          </p>
-        </motion.div>
-      </ChapterSection>
+          <div className="relative">
+            <BengaliMarginNote text="আড্ডা" side="right" />
+
+            <div className="text-[#14120e]/50 mb-4">
+              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
+                KOLKATA &middot; AGOMONI DESK
+              </span>
+            </div>
+            <div className="flex items-center gap-3 mb-4 text-[#14120e]/50">
+              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#c83a1a]">
+                Chapter IV
+              </span>
+              <span className="w-8 h-px bg-[#c83a1a]/40" />
+              <span className="font-serif italic text-xs">Joy</span>
+            </div>
+
+            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
+              The Celebration
+            </h2>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+              উৎসব — Utsav
+            </p>
+
+            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed prose-dropcap" style={{ '--dropcap-color': '#c83a1a' } as React.CSSProperties}>
+              <p>
+                And then it begins. The five days that Bengalis live the other three hundred and sixty
+                for. Shashti, Saptami, Ashtami, Navami, Dashami — each with its own rhythm, its own
+                flavour, its own pitch of joy. The dhak is relentless now, filling the streets with a
+                primal thunder.
+              </p>
+              <p>
+                Dhunuchi naach at sandhya aarti — smoke swirling around dancers who move as if possessed.
+                The bhog is served: khichuri, labra, begun bhaja, payesh — every spoonful a communion.
+                Between pandal-hops you eat jhalmuri from paper cones and bump into old schoolmates
+                you haven&apos;t seen in years.
+              </p>
+            </div>
+          </div>
+        </ArticleSplit>
+      </section>
+
+      {/* ── Chapter 5: The Farewell ─── Text LEFT, Image RIGHT ─── */}
+      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] border-b border-[#e5e0d3]/15 overflow-hidden">
+        <TornEdge side="top" seed={501} paperColor="#e5e0d3" fibreColor="#ece7da" amplitude={10} />
+
+        <ArticleSplit
+          imageUrl={CHAPTER_IMAGES.farewell.url}
+          imageAlt={CHAPTER_IMAGES.farewell.alt}
+          imageCredit={CHAPTER_IMAGES.farewell.credit}
+          imagePosition="right"
+          darkBg
+          tornSeed={502}
+        >
+          <div className="relative">
+            <BengaliStamp text="শুভ বিজয়া" color="#d4a24e" className="absolute -top-2 right-0 hidden lg:block" />
+
+            <div className="text-[#e5e0d3]/50 mb-4">
+              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
+                KOLKATA &middot; AGOMONI DESK
+              </span>
+            </div>
+            <div className="flex items-center gap-3 mb-4 text-[#e5e0d3]/50">
+              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
+                Chapter V
+              </span>
+              <span className="w-8 h-px bg-[#d4a24e]/40" />
+              <span className="font-serif italic text-xs">Bittersweet Longing</span>
+            </div>
+
+            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
+              The Farewell
+            </h2>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+              বিজয়া দশমী — Bijoya Dashami
+            </p>
+
+            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed text-[#e5e0d3]/85 prose-dropcap" style={{ '--dropcap-color': '#d4a24e' } as React.CSSProperties}>
+              <p>
+                Dashami arrives too soon. It always does. The morning begins with sindoor khela —
+                married women smearing each other&apos;s faces and hair with vermillion, their
+                laughter edged with the sadness of goodbye.
+              </p>
+
+              <BengaliPullQuote
+                text="সিঁদুর খেলা"
+                attribution="Sindoor Khela"
+                className="text-[#d4a24e]"
+              />
+
+              <p>
+                The immersion procession begins in the afternoon. Idols sway on trucks garlanded
+                with marigold, trailing drumbeats and dancers who refuse to let go. At the ghat,
+                Ma is lowered into the river — slowly, tenderly — and for a moment, the whole world
+                holds still.
+              </p>
+
+              <div className="flex items-center gap-3 pt-4">
+                <DiyaMotif className="opacity-60 flex-shrink-0" />
+                <p className="text-[#d4a24e] font-serif italic text-lg sm:text-xl leading-relaxed">
+                  &ldquo;Ashche bochor abar hobe&rdquo; — she will return next year.
+                  She always does.
+                </p>
+              </div>
+            </div>
+          </div>
+        </ArticleSplit>
+      </section>
 
       {/* ── Chapter 6: The Event ─────────────────────────────────── */}
       <section
         id="the-event"
-        className="relative w-full bg-[#e5e0d3] text-[#14120e] border-b border-[#14120e]/15"
+        className="relative w-full bg-[#e5e0d3] text-[#14120e] border-b border-[#14120e]/15 overflow-hidden"
       >
+        <TornEdge side="top" seed={601} paperColor="#14120e" fibreColor="#1e1c18" amplitude={10} />
+
         <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 sm:py-24 lg:py-32">
+          {/* Bengali accent */}
+          <div className="text-center mb-2">
+            <span className="font-bengali-serif text-lg sm:text-xl text-[#a82e13]" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+              মঞ্চ তোমার অপেক্ষায়
+            </span>
+          </div>
+
           {/* Header */}
           <motion.div
             className="text-center mb-12"
@@ -278,15 +381,15 @@ export function AgomoniChapters() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#c83a1a] block mb-3">
+            <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#a82e13] block mb-3">
               The Event
             </span>
             <h2 className="font-display-serif text-4xl sm:text-6xl lg:text-7xl text-[#14120e] tracking-tight mb-4">
               Agomoni 2026
             </h2>
             <p className="font-serif text-base sm:text-lg text-[#14120e]/70 max-w-2xl mx-auto leading-relaxed">
-              A pre-Durga Puja cultural programme celebrating art, music, dance, and the 
-              collective spirit of RCCIIT — organised by <strong>RCC Talkies</strong> and 
+              A pre-Durga Puja cultural programme celebrating art, music, dance, and the
+              collective spirit of RCCIIT — organised by <strong>RCC Talkies</strong> and
               the <strong>Art &amp; Cultural Club of RCCIIT</strong>.
             </p>
           </motion.div>
@@ -308,7 +411,7 @@ export function AgomoniChapters() {
               },
               {
                 label: "Time",
-                value: "1:00 PM — 5:00 PM",
+                value: "1:00 PM \u2014 5:00 PM",
                 iconSvg: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
                     <circle cx="12" cy="12" r="10" />
@@ -318,7 +421,6 @@ export function AgomoniChapters() {
               },
               {
                 label: "Venue",
-                /* TODO: Replace with confirmed venue */
                 value: "RCCIIT Campus",
                 iconSvg: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
@@ -350,10 +452,10 @@ export function AgomoniChapters() {
                 transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
                 <span className="block mb-1">{item.iconSvg}</span>
-                <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block">
+                <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#a82e13] block">
                   {item.label}
                 </span>
-                <span className={`font-display-serif text-lg sm:text-xl text-[#14120e] block ${item.placeholder ? "italic text-[#14120e]/50" : ""}`}>
+                <span className={`font-display-serif text-lg sm:text-xl text-[#14120e] block ${"placeholder" in item && item.placeholder ? "italic text-[#14120e]/50" : ""}`}>
                   {item.value}
                 </span>
               </motion.div>
@@ -369,13 +471,12 @@ export function AgomoniChapters() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-full h-1 bg-[#d4a24e] absolute top-0 left-0 right-0" />
-            
+
             <div className="flex items-center gap-3 mb-6">
               <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#d4a24e]">
                 Cultural Programme
               </span>
               <span className="w-12 h-px bg-[#14120e]/20" />
-              {/* TODO: Replace with final schedule */}
               <span className="font-serif italic text-xs text-[#14120e]/50">
                 Schedule to be announced
               </span>
@@ -419,9 +520,9 @@ export function AgomoniChapters() {
           >
             <a
               href="#participate"
-              className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-base sm:text-lg uppercase tracking-tight px-10 py-4 hover:bg-[#c83a1a] transition-colors duration-300"
+              className="inline-block bg-[#14120e] text-[#e5e0d3] font-display text-base sm:text-lg uppercase tracking-tight px-10 py-4 hover:bg-[#a82e13] transition-colors duration-300"
             >
-              Register to Participate →
+              Register to Participate
             </a>
           </motion.div>
         </div>

@@ -28,6 +28,20 @@ export function AgomoniClosing() {
           <span className="w-12 h-px bg-[#d4a24e]/40" />
         </motion.div>
 
+        {/* Bengali greeting */}
+        <motion.p
+          className="font-bengali-serif text-2xl sm:text-3xl text-[#d4a24e] mb-2"
+          lang="bn"
+          aria-hidden="true"
+          style={{ letterSpacing: 0, lineHeight: 1.5 }}
+          initial={prefersReduced ? {} : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          শুভ শারদীয়া
+        </motion.p>
+
         {/* Title */}
         <motion.h2
           className="font-display-serif text-2xl sm:text-4xl text-[#faf6ee] tracking-tight mb-6"
@@ -48,9 +62,9 @@ export function AgomoniClosing() {
           transition={{ delay: 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="border border-[#e5e0d3]/15 p-6 sm:p-8 space-y-2 hover:border-[#d4a24e]/40 transition-colors">
+            <div className="border border-[#e5e0d3]/15 p-6 sm:p-8 space-y-2 hover:border-[#d4a24e]/40 transition-colors rounded-2xl">
               <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#d4a24e] block">
-                Media & Publicity
+                Media &amp; Publicity
               </span>
               <span className="font-gothic text-xl sm:text-2xl text-[#faf6ee] block">
                 The RCC Talkies
@@ -59,7 +73,7 @@ export function AgomoniClosing() {
                 The official journalism &amp; media society of RCCIIT
               </p>
             </div>
-            <div className="border border-[#e5e0d3]/15 p-6 sm:p-8 space-y-2 hover:border-[#d4a24e]/40 transition-colors">
+            <div className="border border-[#e5e0d3]/15 p-6 sm:p-8 space-y-2 hover:border-[#d4a24e]/40 transition-colors rounded-2xl">
               <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block">
                 Cultural Programming
               </span>
@@ -71,6 +85,24 @@ export function AgomoniClosing() {
               </p>
             </div>
           </div>
+        </motion.div>
+
+        {/* Photo Credits */}
+        <motion.div
+          className="mb-10"
+          initial={prefersReduced ? {} : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#e5e0d3]/30 block mb-3">
+            Photo Credits
+          </span>
+          <p className="font-serif italic text-xs text-[#e5e0d3]/40 max-w-lg mx-auto leading-relaxed">
+            All photographs used on this page are sourced from Unsplash under
+            the Unsplash License (free for commercial and non-commercial use).
+            We thank the photographers for sharing their work.
+          </p>
         </motion.div>
 
         {/* Contact */}
@@ -91,7 +123,7 @@ export function AgomoniClosing() {
             >
               rcctalkies@gmail.com
             </a>
-            <span className="hidden sm:inline text-[#e5e0d3]/30">•</span>
+            <span className="hidden sm:inline text-[#e5e0d3]/30">&bull;</span>
             <a
               href="https://www.instagram.com/rcc_talkies/"
               target="_blank"
@@ -100,23 +132,27 @@ export function AgomoniClosing() {
             >
               @rcc_talkies
             </a>
-            {/* TODO: Add Art & Cultural Club contact if available */}
           </div>
         </motion.div>
 
-        {/* Closing line */}
+        {/* Closing line — Bengali */}
         <motion.div
-          className="flex items-center justify-center gap-3"
+          className="flex flex-col items-center gap-4"
           initial={prefersReduced ? {} : { opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <span className="w-8 h-px bg-[#d4a24e]/30" />
-          <p className="font-serif italic text-sm sm:text-base text-[#e5e0d3]/40">
-            &ldquo;Ashche bochor abar hobe&rdquo;
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-px bg-[#d4a24e]/30" />
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e]/70" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+              আসছে বছর আবার হবে
+            </p>
+            <span className="w-8 h-px bg-[#d4a24e]/30" />
+          </div>
+          <p className="font-serif italic text-sm text-[#e5e0d3]/30">
+            She will return next year. She always does.
           </p>
-          <span className="w-8 h-px bg-[#d4a24e]/30" />
         </motion.div>
       </div>
     </section>
