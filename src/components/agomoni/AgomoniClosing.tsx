@@ -9,8 +9,6 @@ export function AgomoniClosing() {
 
   return (
     <section className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden">
-      {/* Decorative top border */}
-      <div className="w-full h-1 bg-gradient-to-r from-[#d4a24e] via-[#c83a1a] to-[#d4a24e]" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-8 py-16 sm:py-24 text-center">
         {/* Ornamental divider */}

@@ -279,7 +279,7 @@ export function AgomoniChapters() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#c83a1a] block mb-3">
-              ✦ The Event
+              The Event
             </span>
             <h2 className="font-display-serif text-4xl sm:text-6xl lg:text-7xl text-[#14120e] tracking-tight mb-4">
               Agomoni 2026
@@ -297,26 +297,48 @@ export function AgomoniChapters() {
               {
                 label: "Date",
                 value: "9 October 2026",
-                icon: "📅",
+                iconSvg: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <line x1="16" x2="16" y1="2" y2="6" />
+                    <line x1="8" x2="8" y1="2" y2="6" />
+                    <line x1="3" x2="21" y1="10" y2="10" />
+                  </svg>
+                ),
               },
               {
                 label: "Time",
-                /* TODO: Replace with confirmed timing */
-                value: "TBA",
-                icon: "🕐",
-                placeholder: true,
+                value: "1:00 PM — 5:00 PM",
+                iconSvg: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                ),
               },
               {
                 label: "Venue",
                 /* TODO: Replace with confirmed venue */
                 value: "RCCIIT Campus",
-                icon: "📍",
+                iconSvg: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                ),
                 placeholder: true,
               },
               {
                 label: "Hosted By",
-                value: "RCC Talkies × Art & Cultural Club",
-                icon: "🎭",
+                value: "RCC Talkies \u00d7 Art & Cultural Club",
+                iconSvg: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                ),
               },
             ].map((item, i) => (
               <motion.div
@@ -327,7 +349,7 @@ export function AgomoniChapters() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className="text-2xl block">{item.icon}</span>
+                <span className="block mb-1">{item.iconSvg}</span>
                 <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#c83a1a] block">
                   {item.label}
                 </span>

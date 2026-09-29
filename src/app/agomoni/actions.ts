@@ -40,6 +40,6 @@ export async function submitAgomoniForm(
 
   return {
     success: true,
-    message: "You're registered for Agomoni 2026! We'll reach out soon. 🪷",
+    message: "You're registered for Agomoni 2026! We'll reach out soon.",
   };
 }

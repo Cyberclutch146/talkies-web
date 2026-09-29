@@ -4,6 +4,7 @@ import { AgomoniChapters } from "@/components/agomoni/AgomoniChapters";
 import { ParticipationForm } from "@/components/agomoni/ParticipationForm";
 import { AgomoniClosing } from "@/components/agomoni/AgomoniClosing";
 import { ChapterProgress } from "@/components/agomoni/ChapterProgress";
+import { PujaDriftWall } from "@/components/agomoni/PujaDriftWall";
 
 /* ─── SEO & Open Graph ────────────────────────────────────────── */
 
@@ -41,6 +42,7 @@ export default function AgomoniPage() {
       <ChapterProgress />
       <AgomoniHero />
       <AgomoniChapters />
+      <PujaDriftWall />
       <ParticipationForm />
       <AgomoniClosing />
     </div>
