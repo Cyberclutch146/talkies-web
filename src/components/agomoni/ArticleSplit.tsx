@@ -53,12 +53,12 @@ export function ArticleSplit({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full ${bg}`}
+      className={`relative w-full min-h-[100svh] ${bg}`}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full min-h-[100svh]">
         {/* ── Photo column ──────────────────────────────────────── */}
         <motion.div
-          className={`relative overflow-visible min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] ${
+          className={`relative overflow-visible min-h-[40vh] lg:min-h-0 h-full ${
             imagePosition === "right" ? "lg:order-2" : "lg:order-1"
           }`}
           style={prefersReduced ? {} : { y: photoY }}

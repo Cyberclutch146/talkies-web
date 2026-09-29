@@ -357,10 +357,10 @@ export function AgomoniChapters() {
       {/* ── Chapter 6: The Event ─────────────────────────────────── */}
       <section
         id="the-event"
-        className="relative w-full bg-[#e5e0d3] text-[#14120e] overflow-hidden"
+        className="relative w-full min-h-[100svh] bg-[#e5e0d3] text-[#14120e] overflow-hidden flex flex-col justify-center"
       >
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 sm:py-24 lg:py-32">
+        <div className="w-full max-w-5xl mx-auto px-4 sm:px-8 py-16 lg:py-24">
           {/* Bengali accent */}
           <div className="text-center mb-2">
             <span className="font-bengali-serif text-lg sm:text-xl text-[#a82e13]" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>

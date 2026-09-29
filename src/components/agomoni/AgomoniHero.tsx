@@ -7,6 +7,8 @@ import dynamic from "next/dynamic";
 
 const Silk = dynamic(() => import("./Silk"), { ssr: false });
 
+import Image from "next/image";
+
 /* ─── Agomoni Hero ─────────────────────────────────────────────── */
 
 export function AgomoniHero() {
@@ -27,8 +29,9 @@ export function AgomoniHero() {
 
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden bg-[#14120e] flex flex-col items-center justify-center border-b-2 border-[#d4a24e]/30">
-      {/* Silk WebGL background — golden flowing fabric */}
-      <div className="absolute inset-0 z-[1] opacity-60">
+      
+      {/* 1. Silk WebGL background — golden flowing fabric */}
+      <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
         <Silk
           speed={3}
           scale={1.2}
@@ -37,12 +40,26 @@ export function AgomoniHero() {
           rotation={0.15}
         />
       </div>
-      {/* Dark overlay to keep text readable */}
+
+      {/* 2. Maa Durga Background Image overlaid on Silk */}
+      <div className="absolute inset-0 z-[1] opacity-60 mix-blend-overlay pointer-events-none">
+        <Image
+          src="https://images.unsplash.com/photo-1633012764038-f8eab989f2aa?auto=format&fit=crop&w=2000&q=80"
+          alt="Maa Durga"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        {/* Simple gradient fade at the bottom so it merges into the next section */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#14120e] to-transparent" />
+      </div>
+      
+      {/* 3. Dark overlay to keep text readable */}
       <div
-        className="absolute inset-0 z-[2]"
+        className="absolute inset-0 z-[2] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 30%, transparent 0%, rgba(20,18,14,0.5) 50%, rgba(10,9,8,0.85) 100%)",
+            "radial-gradient(ellipse at 50% 50%, rgba(20,18,14,0.1) 0%, rgba(10,9,8,0.9) 100%)",
         }}
       />
 

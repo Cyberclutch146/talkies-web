@@ -28,7 +28,7 @@ const PUJA_IMAGES = [
 
 export function PujaDriftWall() {
   return (
-    <section className="relative w-full bg-[#0a0908] overflow-hidden border-b border-[#d4a24e]/10">
+    <section className="relative w-full bg-[#0a0908] overflow-hidden min-h-[100svh] flex flex-col justify-center">
       {/* Section label */}
       <div className="absolute top-6 left-0 right-0 z-10 text-center pointer-events-none">
         <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]/60">
@@ -36,7 +36,7 @@ export function PujaDriftWall() {
         </span>
       </div>
 
-      <div className="h-[420px] sm:h-[520px] lg:h-[600px]">
+      <div className="w-full h-full flex-grow relative min-h-[600px]">
         <DriftWall
           items={PUJA_IMAGES}
           columns={5}

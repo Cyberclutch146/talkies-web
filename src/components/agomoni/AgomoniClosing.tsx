@@ -8,9 +8,9 @@ export function AgomoniClosing() {
   const prefersReduced = useReducedMotion();
 
   return (
-    <section className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden">
+    <section className="relative w-full min-h-[100svh] bg-[#14120e] text-[#e5e0d3] overflow-hidden flex flex-col justify-center">
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-8 py-16 sm:py-24 text-center">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-8 py-16 lg:py-24 text-center">
         {/* Ornamental divider */}
         <motion.div
           className="flex items-center justify-center gap-4 mb-10"

@@ -34,17 +34,21 @@ export const metadata: Metadata = {
   },
 };
 
+import { SmoothScroll } from "@/components/agomoni/SmoothScroll";
+
 /* ─── Page Component (Server Component) ──────────────────────── */
 
 export default function AgomoniPage() {
   return (
-    <div className="w-full">
-      <ChapterProgress />
-      <AgomoniHero />
-      <AgomoniChapters />
-      <PujaDriftWall />
-      <ParticipationForm />
-      <AgomoniClosing />
-    </div>
+    <SmoothScroll>
+      <div className="w-full">
+        <ChapterProgress />
+        <AgomoniHero />
+        <AgomoniChapters />
+        <PujaDriftWall />
+        <ParticipationForm />
+        <AgomoniClosing />
+      </div>
+    </SmoothScroll>
   );
 }

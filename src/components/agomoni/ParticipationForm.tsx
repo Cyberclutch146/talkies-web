@@ -336,7 +336,7 @@ export function ParticipationForm() {
   return (
     <section
       id="participate"
-      className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden"
+      className="relative w-full min-h-[100svh] bg-[#14120e] text-[#e5e0d3] overflow-hidden flex flex-col justify-center"
       style={{ colorScheme: "dark" }}
     >
       {/* Aria live region for discard announcement */}
