@@ -3,16 +3,43 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ShiuliFall } from "./ShiuliFall";
 import { DhakPulse } from "./DhakPulse";
-import dynamic from "next/dynamic";
-
-const Silk = dynamic(() => import("./Silk"), { ssr: false });
-
+import { FireSparks } from "./FireSparks";
+import { AnimatedText } from "./AnimatedText";
 import Image from "next/image";
+import { useState, MouseEvent } from "react";
 
 /* ─── Agomoni Hero ─────────────────────────────────────────────── */
 
+const FONTS = [
+  // Google Fonts (from layout.tsx variables)
+  { name: "Galada", var: "var(--font-bengali-display)" },
+  { name: "Noto Serif", var: "var(--font-bengali-noto)" },
+  { name: "Tiro Bangla", var: "var(--font-bengali-serif)" },
+  { name: "Mina", var: "var(--font-bengali-mina)" },
+  { name: "Baloo Da 2", var: "var(--font-bengali-baloo)" },
+  { name: "Anek Bangla", var: "var(--font-bengali-anek)" },
+  { name: "Hind Siliguri", var: "var(--font-bengali-hind)" },
+  { name: "Atma", var: "var(--font-bengali-accent)" },
+  
+  // Custom Local Fonts (loaded via @font-face below)
+  { name: "BenSen (Puja Classic)", var: "'BenSen', sans-serif" },
+  { name: "BenSen Handwriting", var: "'BenSenHandwriting', sans-serif" },
+  { name: "Kalpurush (Print)", var: "'Kalpurush', sans-serif" },
+  { name: "Siyam Rupali", var: "'SiyamRupali', sans-serif" },
+  { name: "Bangla", var: "'Bangla', sans-serif" },
+  { name: "Nikosh", var: "'Nikosh', sans-serif" },
+  { name: "Mukti", var: "'Mukti', sans-serif" },
+];
+
 export function AgomoniHero() {
   const prefersReduced = useReducedMotion();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [titleFont, setTitleFont] = useState(FONTS[0].var);
+
+  const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
 
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -28,42 +55,50 @@ export function AgomoniHero() {
   };
 
   return (
-    <section className="relative w-full min-h-[100svh] overflow-hidden bg-[#14120e] flex flex-col items-center justify-center border-b-2 border-[#d4a24e]/30">
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        @font-face { font-family: 'BenSen'; src: url('/fonts/BenSen.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'BenSenHandwriting'; src: url('/fonts/BenSenHandwriting.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'Kalpurush'; src: url('/fonts/kalpurush.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'SiyamRupali'; src: url('/fonts/Siyamrupali.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'Bangla'; src: url('/fonts/Bangla.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'Nikosh'; src: url('/fonts/Nikosh.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'Mukti'; src: url('/fonts/Mukti.ttf') format('truetype'); font-display: swap; }
+      `}} />
+      <section 
+        onMouseMove={handleMouseMove}
+        className="relative w-full min-h-[100svh] overflow-hidden bg-[#14120e] flex flex-col items-center justify-center border-b-2 border-[#d4a24e]/30"
+      >
       
-      {/* 1. Silk WebGL background — golden flowing fabric */}
-      <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
-        <Silk
-          speed={3}
-          scale={1.2}
-          color="#6B4F1D"
-          noiseIntensity={1.2}
-          rotation={0.15}
-        />
+      {/* 1. Maa Durga Background Image (Faded) */}
+      <div 
+        className="absolute inset-0 z-0 opacity-[0.35] pointer-events-none bg-cover bg-center bg-no-repeat grayscale mix-blend-luminosity"
+        style={{ backgroundImage: 'url("/durga-bg.jpg")' }}
+      >
+        {/* Dark gradient to ensure text readability and blend into the next section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#14120e]/40 via-[#14120e]/20 to-[#14120e]" />
       </div>
 
-      {/* 2. Maa Durga Background Image overlaid on Silk */}
-      <div className="absolute inset-0 z-[1] opacity-60 mix-blend-overlay pointer-events-none">
-        <Image
-          src="https://images.unsplash.com/photo-1633012764038-f8eab989f2aa?auto=format&fit=crop&w=2000&q=80"
-          alt="Maa Durga"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        {/* Simple gradient fade at the bottom so it merges into the next section */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#14120e] to-transparent" />
-      </div>
-      
-      {/* 3. Dark overlay to keep text readable */}
+      {/* 2. Dotted Halftone Overlay */}
       <div
-        className="absolute inset-0 z-[2] pointer-events-none"
+        className="absolute inset-0 z-[1] opacity-15 pointer-events-none mix-blend-overlay"
         style={{
-          background:
-            "radial-gradient(ellipse at 50% 50%, rgba(20,18,14,0.1) 0%, rgba(10,9,8,0.9) 100%)",
+          backgroundImage: "radial-gradient(#d4a24e 1px, transparent 1px)",
+          backgroundSize: "4px 4px",
         }}
       />
 
+      {/* Interactive Spotlight Overlay */}
+      <div 
+        className="pointer-events-none absolute inset-0 z-[4] mix-blend-color-dodge transition-opacity duration-500 hidden sm:block opacity-60"
+        style={{
+          background: `radial-gradient(circle 400px at ${mousePos.x}px ${mousePos.y}px, rgba(212,162,78,0.2), transparent 100%)`
+        }}
+        aria-hidden="true"
+      />
+
       {/* Animated motifs */}
+      <FireSparks count={40} />
       <ShiuliFall count={24} />
       <DhakPulse />
 
@@ -86,8 +121,26 @@ export function AgomoniHero() {
       </div>
 
 
+      {/* Font Switcher UI (Dev tool) */}
+      <div className="absolute top-24 right-4 sm:right-8 z-50 flex flex-col gap-2 p-4 rounded-xl bg-[#14120e]/80 border border-[#d4a24e]/20 backdrop-blur-md shadow-2xl">
+        <p className="text-[10px] uppercase tracking-widest text-[#d4a24e] mb-1 font-bold">Try Fonts</p>
+        <div className="flex flex-col gap-1.5">
+          {FONTS.map(f => (
+            <button
+              key={f.name}
+              onClick={() => setTitleFont(f.var)}
+              className={`text-xs text-left px-3 py-1.5 rounded-md transition-colors ${
+                titleFont === f.var ? 'bg-[#d4a24e] text-[#14120e] font-bold' : 'text-[#faf6ee]/70 hover:bg-[#d4a24e]/20'
+              }`}
+            >
+              {f.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-8 py-20 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-4 sm:px-8 py-20 max-w-4xl mx-auto mt-16 sm:mt-0">
         {/* Top tag */}
         <motion.div
           className="flex items-center justify-center gap-3 mb-8"
@@ -103,7 +156,7 @@ export function AgomoniHero() {
           <span className="w-8 h-px bg-[#d4a24e]/40" />
         </motion.div>
 
-        {/* Main title — আগমনী in Bengali display font (Galada) */}
+        {/* Main title — আগমনী in Bengali display font */}
         <motion.div
           variants={fadeUp}
           initial={prefersReduced ? "visible" : "hidden"}
@@ -116,10 +169,11 @@ export function AgomoniHero() {
 
           {/* Bengali display title */}
           <motion.h1
-            className="font-bengali-display text-7xl sm:text-9xl lg:text-[160px] leading-[1.1] tracking-normal pb-2"
+            className="text-7xl sm:text-9xl lg:text-[160px] leading-[1.1] tracking-normal pb-2"
             lang="bn"
             aria-hidden="true"
             style={{
+              fontFamily: titleFont,
               letterSpacing: 0,
               lineHeight: 1.2,
               background: "linear-gradient(90deg, #d4a24e 0%, #faf6ee 40%, #d4a24e 80%, #faf6ee 100%)",
@@ -159,15 +213,15 @@ export function AgomoniHero() {
         </motion.div>
 
         {/* Latin transliteration + year */}
-        <motion.p
+        <motion.div
           className="font-display text-xl sm:text-3xl lg:text-4xl tracking-tighter text-[#d4a24e]/70 mb-3"
           variants={fadeUp}
           initial={prefersReduced ? "visible" : "hidden"}
           animate="visible"
           custom={2}
         >
-          Agomoni 2026
-        </motion.p>
+          <AnimatedText text="Agomoni 2026" delay={0.6} />
+        </motion.div>
 
         {/* Bengali tagline — মা আসছেন */}
         <motion.p
@@ -248,5 +302,6 @@ export function AgomoniHero() {
         />
       </div>
     </section>
+    </>
   );
 }
