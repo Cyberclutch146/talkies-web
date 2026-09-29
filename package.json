@@ -10,7 +10,9 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@prisma/client": "6.19.3",
+    "@react-three/fiber": "^9.8.1",
     "@vercel/blob": "^2.8.0",
     "framer-motion": "^13.1.1",
     "gsap": "^3.15.0",
@@ -22,6 +24,7 @@
     "react-dom": "19.2.8",
     "react-pageflip": "^2.0.3",
     "react-pdf": "^10.5.0",
+    "three": "^0.186.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -29,6 +32,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.186.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
     "prisma": "6.19.3",

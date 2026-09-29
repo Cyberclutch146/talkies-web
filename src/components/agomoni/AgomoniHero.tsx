@@ -3,7 +3,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ShiuliFall } from "./ShiuliFall";
 import { DhakPulse } from "./DhakPulse";
-import { TornEdge } from "./TornEdge";
+import dynamic from "next/dynamic";
+
+const Silk = dynamic(() => import("./Silk"), { ssr: false });
 
 /* ─── Agomoni Hero ─────────────────────────────────────────────── */
 
@@ -25,12 +27,22 @@ export function AgomoniHero() {
 
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden bg-[#14120e] flex flex-col items-center justify-center border-b-2 border-[#d4a24e]/30">
-      {/* Background gradient — deep autumn night sky */}
+      {/* Silk WebGL background — golden flowing fabric */}
+      <div className="absolute inset-0 z-[1] opacity-60">
+        <Silk
+          speed={3}
+          scale={1.2}
+          color="#6B4F1D"
+          noiseIntensity={1.2}
+          rotation={0.15}
+        />
+      </div>
+      {/* Dark overlay to keep text readable */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-[2]"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 30%, #2a1a0e 0%, #14120e 50%, #0a0908 100%)",
+            "radial-gradient(ellipse at 50% 30%, transparent 0%, rgba(20,18,14,0.5) 50%, rgba(10,9,8,0.85) 100%)",
         }}
       />
 
@@ -56,15 +68,6 @@ export function AgomoniHero() {
         </svg>
       </div>
 
-      {/* Torn edge at bottom — flows into Chapter I */}
-      <TornEdge
-        side="bottom"
-        seed={99}
-        paperColor="#e5e0d3"
-        fibreColor="#ece7da"
-        amplitude={14}
-        className="z-30"
-      />
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-8 py-20 max-w-4xl mx-auto">

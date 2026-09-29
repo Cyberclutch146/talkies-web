@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ChapterSection } from "./ChapterSection";
 import { ArticleSplit } from "./ArticleSplit";
-import { TornEdge } from "./TornEdge";
 import {
   BengaliWatermark,
   BengaliStamp,
@@ -76,7 +75,7 @@ export function AgomoniChapters() {
   return (
     <>
       {/* ── Chapter 1: The Arrival ─── Text LEFT, Image RIGHT ──── */}
-      <section className="relative w-full bg-[#e5e0d3] border-b border-[#14120e]/15 overflow-hidden">
+      <section className="relative w-full bg-[#e5e0d3] overflow-hidden">
         <BengaliWatermark text="ঢাকের তালে" position="right" />
 
         <ArticleSplit
@@ -131,8 +130,7 @@ export function AgomoniChapters() {
       </section>
 
       {/* ── Chapter 2: The Making ─── Image LEFT, Text RIGHT ──── */}
-      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] border-b border-[#e5e0d3]/15 overflow-hidden">
-        <TornEdge side="top" seed={201} paperColor="#e5e0d3" fibreColor="#ece7da" amplitude={10} />
+      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden">
 
         <ArticleSplit
           imageUrl={CHAPTER_IMAGES.making.url}
@@ -188,8 +186,7 @@ export function AgomoniChapters() {
       </section>
 
       {/* ── Chapter 3: The Homecoming ─── Text LEFT, Image RIGHT ─ */}
-      <section className="relative w-full bg-[#e5e0d3] border-b border-[#14120e]/15 overflow-hidden">
-        <TornEdge side="top" seed={301} paperColor="#14120e" fibreColor="#1e1c18" amplitude={10} />
+      <section className="relative w-full bg-[#e5e0d3] overflow-hidden">
         <BengaliWatermark text="ঘরে ফেরা" position="left" />
 
         <ArticleSplit
@@ -240,7 +237,7 @@ export function AgomoniChapters() {
       </section>
 
       {/* ── Chapter 4: The Celebration ─── Image LEFT, Text RIGHT ─ */}
-      <section className="relative w-full bg-[#e5e0d3] border-b border-[#14120e]/15 overflow-hidden">
+      <section className="relative w-full bg-[#e5e0d3] overflow-hidden">
         <BengaliWatermark text="ধুনুচির ধোঁয়ায়" position="right" />
 
         <ArticleSplit
@@ -292,8 +289,7 @@ export function AgomoniChapters() {
       </section>
 
       {/* ── Chapter 5: The Farewell ─── Text LEFT, Image RIGHT ─── */}
-      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] border-b border-[#e5e0d3]/15 overflow-hidden">
-        <TornEdge side="top" seed={501} paperColor="#e5e0d3" fibreColor="#ece7da" amplitude={10} />
+      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden">
 
         <ArticleSplit
           imageUrl={CHAPTER_IMAGES.farewell.url}
@@ -361,9 +357,8 @@ export function AgomoniChapters() {
       {/* ── Chapter 6: The Event ─────────────────────────────────── */}
       <section
         id="the-event"
-        className="relative w-full bg-[#e5e0d3] text-[#14120e] border-b border-[#14120e]/15 overflow-hidden"
+        className="relative w-full bg-[#e5e0d3] text-[#14120e] overflow-hidden"
       >
-        <TornEdge side="top" seed={601} paperColor="#14120e" fibreColor="#1e1c18" amplitude={10} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 sm:py-24 lg:py-32">
           {/* Bengali accent */}
