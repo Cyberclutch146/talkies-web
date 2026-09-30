@@ -389,73 +389,111 @@ export function AgomoniChapters() {
             </p>
           </motion.div>
 
-          {/* Event Details Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {[
-              {
-                label: "Date",
-                value: "9 October 2026",
-                iconSvg: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
-                    <rect width="18" height="18" x="3" y="4" rx="2" />
-                    <line x1="16" x2="16" y1="2" y2="6" />
-                    <line x1="8" x2="8" y1="2" y2="6" />
-                    <line x1="3" x2="21" y1="10" y2="10" />
-                  </svg>
-                ),
-              },
-              {
-                label: "Time",
-                value: "1:00 PM \u2014 5:00 PM",
-                iconSvg: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                ),
-              },
-              {
-                label: "Venue",
-                value: "RCCIIT Campus",
-                iconSvg: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
-                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                ),
-                placeholder: true,
-              },
-              {
-                label: "Hosted By",
-                value: "RCC Talkies \u00d7 Art & Cultural Club",
-                iconSvg: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#d4a24e]">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                ),
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                className="border border-[#14120e]/15 p-6 bg-[#eae5d9]/50 text-center space-y-2 hover:border-[#14120e] hover:shadow-[3px_3px_0px_#14120e] hover:-translate-y-0.5 transition-all duration-300"
-                initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <span className="block mb-1">{item.iconSvg}</span>
-                <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#a82e13] block">
-                  {item.label}
-                </span>
-                <span className={`font-display-serif text-lg sm:text-xl text-[#14120e] block ${"placeholder" in item && item.placeholder ? "italic text-[#14120e]/50" : ""}`}>
-                  {item.value}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+          {/* Vintage Ticket Event Details */}
+          <motion.div
+            className="relative mx-auto w-full max-w-4xl mb-16 flex flex-col md:flex-row shadow-[0_15px_40px_-10px_rgba(20,18,14,0.1)] group cursor-default"
+            initial={prefersReduced ? {} : { opacity: 0, y: 30 }}
+            whileInView={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, rotate: [-1, 1.5, -1] }}
+            whileHover={{ rotate: 0, scale: 1.02, y: -5, transition: { duration: 0.3 } }}
+            viewport={{ once: true }}
+            transition={{ 
+              opacity: { duration: 0.8 },
+              y: { duration: 0.8, type: "spring", bounce: 0.3 },
+              rotate: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+            }}
+          >
+            {/* Left/Main Ticket Body */}
+            <div className="flex-1 bg-[#faf6ee] p-8 sm:p-10 relative overflow-hidden border border-b-0 md:border-b md:border-r-0 border-[#14120e]/10 rounded-t-xl md:rounded-l-xl md:rounded-tr-none flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 z-10">
+                
+                {/* Background Texture/Stamp */}
+                <div className="absolute -right-8 -bottom-10 opacity-[0.03] pointer-events-none transform -rotate-12 transition-transform duration-700 group-hover:-rotate-6 group-hover:scale-110">
+                   <svg width="250" height="250" viewBox="0 0 100 100">
+                     <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="2" />
+                     <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="2,2" />
+                     <text x="50" y="55" fontSize="14" textAnchor="middle" fill="currentColor" fontWeight="bold">AGOMONI 2026</text>
+                   </svg>
+                </div>
+
+                <div className="flex-1 relative">
+                   <span className="font-sans text-[10px] uppercase tracking-[0.3em] font-bold text-[#a82e13] block mb-2">
+                     General Admission
+                   </span>
+                   <h3 className="font-display-serif text-3xl sm:text-4xl text-[#14120e] mb-6">Agomoni 2026 </h3>
+                   
+                   <div className="flex flex-wrap gap-x-12 gap-y-6">
+                     <div>
+                       <p className="font-sans text-[9px] uppercase tracking-[0.2em] font-bold text-[#14120e]/40 mb-1 flex items-center gap-1.5">
+                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="4" rx="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg>
+                         Date
+                       </p>
+                       <p className="font-display-serif text-xl text-[#14120e]">9 October 2026</p>
+                     </div>
+                     <div>
+                       <p className="font-sans text-[9px] uppercase tracking-[0.2em] font-bold text-[#14120e]/40 mb-1 flex items-center gap-1.5">
+                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                         Time
+                       </p>
+                       <p className="font-display-serif text-xl text-[#14120e]">1:00 PM &mdash; 5:00 PM</p>
+                     </div>
+                   </div>
+                </div>
+
+                {/* Hosts */}
+                <div className="w-full sm:w-auto text-left sm:text-right border-t sm:border-t-0 sm:border-l border-[#14120e]/10 pt-6 sm:pt-0 sm:pl-8 relative flex flex-col items-start sm:items-end">
+                   <p className="font-sans text-[9px] uppercase tracking-[0.2em] font-bold text-[#14120e]/40 mb-2 flex items-center gap-1.5">
+                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                     Hosted By
+                   </p>
+                   <p className="font-display-serif text-lg text-[#14120e]">
+                     RCC Talkies &times; <br className="hidden sm:block" />
+                     Art &amp; Cultural Club
+                   </p>
+                </div>
+            </div>
+
+            {/* Perforation Line */}
+            <div className="w-full md:w-auto h-auto bg-[#faf6ee] relative flex flex-col items-center justify-center border-l border-r md:border-t md:border-b border-[#14120e]/10 md:border-l-0 md:border-r-0">
+               {/* The dashed line */}
+               <div className="absolute top-0 bottom-0 left-0 right-0 md:w-px h-px md:h-full border-t-2 md:border-t-0 md:border-l-2 border-dashed border-[#14120e]/15 mx-4 md:mx-0 md:my-4" />
+               
+               {/* Circle Cutouts - Desktop (Top/Bottom) */}
+               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#e5e0d3] hidden md:block shadow-[inset_0_-2px_4px_rgba(0,0,0,0.05)] border-b border-[#14120e]/10 z-20" />
+               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#e5e0d3] hidden md:block shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] border-t border-[#14120e]/10 z-20" />
+               
+               {/* Circle Cutouts - Mobile (Left/Right) */}
+               <div className="absolute top-1/2 -left-3 -translate-y-1/2 w-6 h-6 rounded-full bg-[#e5e0d3] block md:hidden shadow-[inset_-2px_0_4px_rgba(0,0,0,0.05)] border-r border-[#14120e]/10 z-20" />
+               <div className="absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-[#e5e0d3] block md:hidden shadow-[inset_2px_0_4px_rgba(0,0,0,0.05)] border-l border-[#14120e]/10 z-20" />
+            </div>
+
+            {/* Right/Bottom Ticket Stub */}
+            <div className="md:w-72 bg-[#f4ece1] p-8 border border-t-0 md:border-t md:border-l-0 border-[#14120e]/10 rounded-b-xl md:rounded-r-xl md:rounded-bl-none flex flex-col justify-center items-center text-center relative z-10 text-[#a82e13]">
+               <p className="font-sans text-[9px] uppercase tracking-[0.2em] font-bold text-[#a82e13]/70 mb-2 flex items-center justify-center gap-1.5">
+                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+                 Venue
+               </p>
+               <h4 className="font-display-serif text-xl sm:text-2xl text-[#a82e13] italic mb-8 leading-snug">
+                 Dr. Jaya Deb Roy Auditorium <br/>
+                 <span className="text-sm sm:text-base font-serif opacity-80 not-italic">in RCCIIT Campus</span>
+               </h4>
+               
+               {/* Fake Barcode */}
+               <div className="flex h-12 w-full max-w-[200px] items-center justify-center opacity-40 group-hover:opacity-60 transition-opacity duration-300">
+                  <div className="h-full w-1 bg-[#a82e13] ml-1" />
+                  <div className="h-full w-2 bg-[#a82e13] ml-1.5" />
+                  <div className="h-full w-1 bg-[#a82e13] ml-1" />
+                  <div className="h-full w-3 bg-[#a82e13] ml-2" />
+                  <div className="h-full w-1 bg-[#a82e13] ml-1" />
+                  <div className="h-full w-2 bg-[#a82e13] ml-1.5" />
+                  <div className="h-full w-1 bg-[#a82e13] ml-1" />
+                  <div className="h-full w-4 bg-[#a82e13] ml-2" />
+                  <div className="h-full w-1 bg-[#a82e13] ml-1" />
+                  <div className="h-full w-2 bg-[#a82e13] ml-1.5" />
+                  <div className="h-full w-1 bg-[#a82e13] ml-1" />
+                  <div className="h-full w-3 bg-[#a82e13] ml-2" />
+               </div>
+               <p className="font-mono text-[9px] tracking-[0.3em] text-[#a82e13]/70 mt-3 uppercase">Admit One</p>
+            </div>
+          </motion.div>
 
           {/* Cultural Programme Schedule */}
           <motion.div

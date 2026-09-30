@@ -1,27 +1,29 @@
 import * as z from "zod";
 
 // ─── Participation Categories ───────────────────────────────────────
-// TODO: Replace with final list once confirmed
 export const PARTICIPATION_CATEGORIES = [
-  "Dance",
   "Music (Vocal)",
   "Music (Instrumental)",
-  "Drama / Skit",
+  "Dance",
   "Recitation",
-  "Art / Painting",
-  "Photography",
-  "Quiz",
-  "Other",
 ] as const;
 
 // ─── Year Options ───────────────────────────────────────────────────
 export const YEAR_OPTIONS = ["1st Year", "2nd Year", "3rd Year", "4th Year"] as const;
 
+// ─── Performance Duration Options ───────────────────────────────────
+export const DURATION_OPTIONS = [
+  "3–5 minutes",
+  "5–8 minutes",
+  "8–10 minutes",
+  "10–15 minutes",
+] as const;
+
 // ─── Field Definitions (single config for dynamic rendering) ────────
 export const AGOMONI_FIELDS = [
   {
-    name: "name" as const,
-    label: "Full Name",
+    name: "teamLeaderName" as const,
+    label: "Team Leader Name",
     type: "text" as const,
     placeholder: "e.g. Arpita Mukherjee",
     required: true,
@@ -57,24 +59,39 @@ export const AGOMONI_FIELDS = [
   },
   {
     name: "category" as const,
-    label: "Participation Category",
+    label: "Performance Category",
     type: "select" as const,
     options: PARTICIPATION_CATEGORIES,
-    placeholder: "What would you like to perform / participate in?",
+    placeholder: "Select your performance type",
+    required: true,
+  },
+  {
+    name: "duration" as const,
+    label: "Required Performance Time",
+    type: "select" as const,
+    options: DURATION_OPTIONS,
+    placeholder: "How long is your performance?",
+    required: true,
+  },
+  {
+    name: "teamMembers" as const,
+    label: "Team Members",
+    type: "textarea" as const,
+    placeholder: "List all team member names, one per line\ne.g.\nRahul Das — 2nd Year CSE\nProva Sen — 3rd Year ECE",
     required: true,
   },
   {
     name: "message" as const,
-    label: "Anything else?",
+    label: "Additional Notes",
     type: "textarea" as const,
-    placeholder: "Team members, song choice, special requirements…",
+    placeholder: "Song / piece name, special requirements, instruments needed…",
     required: false,
   },
 ] as const;
 
 // ─── Zod Schema ─────────────────────────────────────────────────────
 export const agomoniSchema = z.object({
-  name: z
+  teamLeaderName: z
     .string()
     .min(2, "Name must be at least 2 characters")
     .max(100, "Name must be under 100 characters"),
@@ -97,8 +114,15 @@ export const agomoniSchema = z.object({
     .optional()
     .or(z.literal("")),
   category: z.enum(PARTICIPATION_CATEGORIES, {
-    error: "Please select a participation category",
+    error: "Please select a performance category",
   }),
+  duration: z.enum(DURATION_OPTIONS, {
+    error: "Please select the required performance time",
+  }),
+  teamMembers: z
+    .string()
+    .min(2, "Please list your team members")
+    .max(2000, "Team members list must be under 2000 characters"),
   message: z
     .string()
     .max(1000, "Message must be under 1000 characters")

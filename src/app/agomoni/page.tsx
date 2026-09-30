@@ -45,8 +45,8 @@ export default function AgomoniPage() {
         <ChapterProgress />
         <AgomoniHero />
         <AgomoniChapters />
-        <PujaDriftWall />
         <ParticipationForm />
+        <PujaDriftWall />
         <AgomoniClosing />
       </div>
     </SmoothScroll>

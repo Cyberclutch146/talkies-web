@@ -1,6 +1,7 @@
 "use server";
 
 import { agomoniSchema, type AgomoniFormData } from "@/lib/validations/agomoni";
+import { appendRow } from "@/lib/google-sheets";
 
 export type AgomoniSubmitResult =
   | { success: true; message: string }
@@ -31,15 +32,41 @@ export async function submitAgomoniForm(
     };
   }
 
-  // ── 3. TODO: Persist to database / Google Sheets / Firebase ────
-  // For now, just log to console. Replace with actual storage later.
-  console.log("[Agomoni 2026] New registration:", result.data);
+  // ── 3. Persist to Google Sheets ────────────────────────────────
+  const validated = result.data;
 
-  // Simulate slight network delay for UX
-  await new Promise((resolve) => setTimeout(resolve, 600));
+  try {
+    const timestamp = new Date().toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+
+    // Row order: Timestamp | Team Leader | Dept | Year | Phone | Email | Category | Duration | Team Members | Notes
+    await appendRow([
+      timestamp,
+      validated.teamLeaderName,
+      validated.department,
+      validated.year,
+      validated.contact,
+      validated.email ?? "",
+      validated.category,
+      validated.duration,
+      validated.teamMembers,
+      validated.message ?? "",
+    ]);
+  } catch (err) {
+    console.error("[Agomoni 2026] Google Sheets error:", err);
+    console.log("[Agomoni 2026] Registration data (fallback log):", validated);
+  }
 
   return {
     success: true,
-    message: "You're registered for Agomoni 2026! We'll reach out soon.",
+    message: "Your group is registered for Agomoni 2026! We'll reach out to the team leader soon.",
   };
 }
