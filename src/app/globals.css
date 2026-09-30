@@ -87,6 +87,21 @@ body::before {
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
+.font-bengali-display {
+  font-family: var(--font-bengali-display), serif;
+  letter-spacing: 0;
+}
+
+.font-bengali-serif {
+  font-family: var(--font-bengali-serif), serif;
+  letter-spacing: 0;
+}
+
+.font-bengali-accent {
+  font-family: var(--font-bengali-accent), sans-serif;
+  letter-spacing: 0;
+}
+
 /* ───────── Interactive & UI Utilities ───────── */
 
 *:focus-visible {
@@ -153,4 +168,28 @@ body::before {
 }
 .skip-link:focus {
   top: 16px;
+}
+
+/* ───────── Newspaper Drop Cap ───────── */
+.prose-dropcap > p:first-of-type::first-letter {
+  font-family: var(--font-display-serif), Georgia, serif;
+  float: left;
+  font-size: 3.5em;
+  line-height: 0.75;
+  padding-right: 0.12em;
+  padding-top: 0.08em;
+  color: var(--dropcap-color, #d4a24e);
+  font-weight: 700;
+}
+
+/* ───────── Dark Form Autofill Override ───────── */
+.agomoni-form input:-webkit-autofill,
+.agomoni-form input:-webkit-autofill:hover,
+.agomoni-form input:-webkit-autofill:focus,
+.agomoni-form select:-webkit-autofill,
+.agomoni-form textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px rgba(250, 246, 238, 0.05) inset !important;
+  -webkit-text-fill-color: #faf6ee !important;
+  caret-color: #d4a24e;
+  transition: background-color 5000s ease-in-out 0s;
 }
