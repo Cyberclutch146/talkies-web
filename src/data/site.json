@@ -71,7 +71,6 @@
     { "label": "Magazine", "href": "/magazine" },
     { "label": "Members", "href": "/members" },
     { "label": "Join", "href": "/join" },
-    { "label": "Agomoni", "href": "/agomoni" },
     { "label": "Contact", "href": "/contact" }
   ]
 }
