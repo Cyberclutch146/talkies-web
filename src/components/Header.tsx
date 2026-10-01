@@ -23,13 +23,23 @@ export function Header() {
     }
 
     const handleScroll = () => {
-      // Show header after scrolling past ~90vh (the hero section)
-      setVisible(window.scrollY > window.innerHeight * 0.85);
+      const heroContainer = document.getElementById("hero-scroll-container");
+      if (heroContainer) {
+        const rect = heroContainer.getBoundingClientRect();
+        // Show topbar only after the pinned hero section has scrolled out of view
+        setVisible(rect.bottom <= 80);
+      } else {
+        setVisible(window.scrollY > window.innerHeight * 0.85);
+      }
     };
 
     handleScroll(); // Check initial position
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [pathname]);
 
   // Lock body scroll when mobile menu is open
@@ -88,7 +98,7 @@ export function Header() {
           {/* Desktop Quick Nav Links */}
           {showFullHeader && (
             <nav className="hidden lg:flex items-center gap-5 text-xs font-sans uppercase tracking-[0.18em] font-medium" aria-label="Quick navigation">
-            {siteData.navLinks.slice(1, 6).map((link) => {
+            {siteData.navLinks.slice(1).map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link

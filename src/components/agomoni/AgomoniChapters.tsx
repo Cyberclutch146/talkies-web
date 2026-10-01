@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChapterSection } from "./ChapterSection";
 import { ArticleSplit } from "./ArticleSplit";
@@ -9,6 +10,7 @@ import {
   BengaliMarginNote,
   BengaliPullQuote,
 } from "./BengaliAccents";
+import PaperCrumple from "./PaperCrumple";
 
 /* ─── Image Sources (Unsplash — royalty-free) ─────────────────
    Assigned to chapters by subject relevance. All from
@@ -16,29 +18,29 @@ import {
 
 const CHAPTER_IMAGES = {
   arrival: {
-    url: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
-    alt: "A dhak player in traditional white dhuti and red-bordered gamcha beats the dhak drum during Durga Puja festivities",
-    credit: "Photo: Unsplash",
+    url: "/agomoni/howrah-bridge.jpg",
+    alt: "Boat on the river Hooghly at sunset with Howrah Bridge in the background during autumn",
+    credit: "Agomoni Archive",
   },
   making: {
-    url: "https://images.unsplash.com/photo-1584553421349-3557471bed79?auto=format&fit=crop&w=1200&q=80",
-    alt: "An artisan in Kumartuli sculpts a clay Durga idol, hands covered in wet grey clay under workshop light",
-    credit: "Photo: Unsplash",
+    url: "/agomoni/kumartuli-clay-idols.jpg",
+    alt: "Artisan tending to Durga clay idols with smoke in Kumartuli workshop",
+    credit: "Agomoni Archive",
   },
   homecoming: {
-    url: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=1200&q=80",
-    alt: "Families walking through pandal-lit streets during Durga Puja evening, warm golden lights overhead",
-    credit: "Photo: Unsplash",
+    url: "/agomoni/durga-aarti.jpg",
+    alt: "Aarti being performed with dhunuchi before the grand Durga idol",
+    credit: "Agomoni Archive",
   },
   celebration: {
-    url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80",
-    alt: "Dancers performing on a brightly lit cultural stage during a festival celebration",
-    credit: "Photo: Unsplash",
+    url: "/agomoni/dhunuchi-dance.jpg",
+    alt: "Two traditional dancers performing Dhunuchi naach before Goddess Durga",
+    credit: "Agomoni Archive",
   },
   farewell: {
-    url: "https://images.unsplash.com/photo-1604423860892-ce4e8a0a8e66?auto=format&fit=crop&w=1200&q=80",
-    alt: "Women playing sindoor khela, smearing vermillion on each other during Bijoya Dashami",
-    credit: "Photo: Unsplash",
+    url: "/agomoni/sindur khela.png",
+    alt: "Women playing sindur khela, smearing vermillion on each other during Bijoya Dashami",
+    credit: "Agomoni Archive",
   },
   event: {
     url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
@@ -62,6 +64,16 @@ function DiyaMotif({ className = "" }: { className?: string }) {
 /* ─── All Narrative Chapters ─────────────────────────────────── */
 export function AgomoniChapters() {
   const prefersReduced = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -298,6 +310,10 @@ export function AgomoniChapters() {
           imagePosition="right"
           darkBg
           tornSeed={502}
+          objectFit="cover"
+          objectPosition="center 30%"
+          unoptimized
+          disableGrain
         >
           <div className="relative">
             <BengaliStamp text="শুভ বিজয়া" color="#d4a24e" className="absolute -top-2 right-0 hidden lg:block" />
@@ -495,53 +511,36 @@ export function AgomoniChapters() {
             </div>
           </motion.div>
 
-          {/* Cultural Programme Schedule */}
-          <motion.div
-            className="border-2 border-[#14120e] bg-[#eae5d9] p-6 sm:p-10 relative overflow-hidden"
-            initial={prefersReduced ? {} : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="w-full h-1 bg-[#d4a24e] absolute top-0 left-0 right-0" />
-
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#d4a24e]">
-                Cultural Programme
-              </span>
-              <span className="w-12 h-px bg-[#14120e]/20" />
-              <span className="font-serif italic text-xs text-[#14120e]/50">
-                Schedule to be announced
-              </span>
+          {/* Cultural Programme Schedule — Interactive 3D Paper */}
+          <div className="relative mx-auto w-full max-w-4xl flex flex-col items-center justify-center">
+            <div className="w-full flex items-center justify-center">
+              <PaperCrumple
+                key={isMobile ? "mobile-paper" : "desktop-paper"}
+                src={isMobile ? "/agomoni/cultural-programme-poster-vertical.png" : "/agomoni/cultural-programme-poster.png"}
+                alt="Agomoni 2026 Cultural Programme Schedule"
+                width={isMobile ? 350 : 860}
+                height={isMobile ? 495 : 440}
+                sceneHeight={isMobile ? 550 : 520}
+                releaseBehavior="restore"
+                crumpleAmount={0.88}
+                crumpleDuration={0.6}
+                releaseDuration={1.3}
+                foldCount={6}
+                foldSharpness={0.6}
+                wrinkleDepth={0.65}
+                creaseStrength={0.18}
+                paperColor="#eae5d9"
+                paperTexture={0.08}
+                draggable
+                returnToOrigin
+                unfoldOnTouch
+              />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                "Music Performances (Vocal & Instrumental)",
-                "Dance — Classical, Folk & Contemporary",
-                "Drama & Skit Performances",
-                "Recitation & Spoken Word",
-                "Art Exhibition & Live Painting",
-                "Photography Showcase",
-                "Quiz & Fun Activities",
-                "Special Guest Performances",
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 py-2 border-b border-[#14120e]/10 last:border-0"
-                >
-                  <span className="w-2 h-2 bg-[#d4a24e] flex-shrink-0" />
-                  <span className="font-serif text-sm sm:text-base text-[#14120e]/80">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <p className="font-serif italic text-xs text-[#14120e]/40 mt-6 text-center">
-              Detailed schedule with timings will be published closer to the event.
+            <p className="font-serif italic text-xs text-[#14120e]/50 mt-3 text-center select-none pointer-events-none">
+              Touch or click the crumpled paper to open the schedule &middot; Drag to crumple
             </p>
-          </motion.div>
+          </div>
 
           {/* CTA to form */}
           <motion.div
