@@ -21,6 +21,11 @@ interface ArticleSplitProps {
   children: React.ReactNode;
   darkBg?: boolean;
   tornSeed?: number;
+  objectFit?: "cover" | "contain";
+  objectPosition?: string;
+  unoptimized?: boolean;
+  priority?: boolean;
+  disableGrain?: boolean;
 }
 
 export function ArticleSplit({
@@ -31,6 +36,11 @@ export function ArticleSplit({
   children,
   darkBg = false,
   tornSeed = 42,
+  objectFit = "cover",
+  objectPosition = "center",
+  unoptimized = false,
+  priority = false,
+  disableGrain = false,
 }: ArticleSplitProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
@@ -58,43 +68,50 @@ export function ArticleSplit({
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full min-h-[100svh]">
         {/* ── Photo column ──────────────────────────────────────── */}
         <motion.div
-          className={`relative overflow-visible min-h-[40vh] lg:min-h-0 h-full ${
-            imagePosition === "right" ? "lg:order-2" : "lg:order-1"
-          }`}
+          className={`relative overflow-visible min-h-[40vh] lg:min-h-0 h-full ${imagePosition === "right" ? "lg:order-2" : "lg:order-1"
+            }`}
           style={prefersReduced ? {} : { y: photoY }}
         >
-          {/* Image wrapper — extends slightly beyond its column to create overlap */}
+          {/* Image wrapper — extends slightly beyond its column to create overlap if cover */}
           <div
-            className="absolute inset-0 lg:-inset-y-4"
+            className={`absolute inset-0 ${objectFit === "contain" ? "flex items-center justify-center p-4 sm:p-8 lg:p-12" : "lg:-inset-y-4"}`}
             style={{
-              // On desktop, let the photo bleed slightly into the text column
-              ...(imagePosition === "right"
-                ? { left: 0, right: "-3%" }
-                : { right: 0, left: "-3%" }),
+              // On desktop, let the photo bleed slightly into the text column if cover
+              ...(objectFit !== "contain"
+                ? (imagePosition === "right"
+                  ? { left: 0, right: "-3%" }
+                  : { right: 0, left: "-3%" })
+                : {}),
             }}
           >
             <Image
               src={imageUrl}
               alt={imageAlt}
               fill
+              quality={100}
+              unoptimized={unoptimized}
+              priority={priority}
               sizes="(max-width: 1024px) 100vw, 55vw"
-              className="object-cover"
+              className={objectFit === "contain" ? "object-contain drop-shadow-2xl" : "object-cover"}
               style={{
-                filter: "sepia(0.12) saturate(0.75) contrast(1.08)",
+                objectPosition,
+                filter: "contrast(1.02)",
               }}
             />
           </div>
 
-          {/* Halftone grain overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, #14120e 0.5px, transparent 0.5px)",
-              backgroundSize: "3px 3px",
-            }}
-            aria-hidden="true"
-          />
+          {/* Halftone grain overlay (only for cover images, keeping contained photos or disabled grain 100% pristine) */}
+          {objectFit !== "contain" && !disableGrain && (
+            <div
+              className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle, #14120e 0.5px, transparent 0.5px)",
+                backgroundSize: "3px 3px",
+              }}
+              aria-hidden="true"
+            />
+          )}
 
           {/* ── Vertical torn edge — the centerpiece effect ───── */}
           <TornEdge
@@ -118,9 +135,8 @@ export function ArticleSplit({
 
         {/* ── Text column ───────────────────────────────────────── */}
         <div
-          className={`relative z-10 ${textColor} ${
-            imagePosition === "right" ? "lg:order-1" : "lg:order-2"
-          } px-6 sm:px-10 lg:px-14 py-12 sm:py-20 lg:py-24 flex flex-col justify-center`}
+          className={`relative z-10 ${textColor} ${imagePosition === "right" ? "lg:order-1" : "lg:order-2"
+            } px-6 sm:px-10 lg:px-14 py-12 sm:py-20 lg:py-24 flex flex-col justify-center`}
         >
           {children}
         </div>
