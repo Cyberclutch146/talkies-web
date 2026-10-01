@@ -102,6 +102,23 @@ body::before {
   letter-spacing: 0;
 }
 
+@font-face {
+  font-family: 'BenSen';
+  src: url('/fonts/BenSen.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BenSenHandwriting';
+  src: url('/fonts/BenSenHandwriting.ttf') format('truetype');
+  font-display: swap;
+}
+
+.font-bensen-handwriting {
+  font-family: 'BenSenHandwriting', cursive, sans-serif;
+  letter-spacing: 0;
+}
+
 /* ───────── Interactive & UI Utilities ───────── */
 
 *:focus-visible {
