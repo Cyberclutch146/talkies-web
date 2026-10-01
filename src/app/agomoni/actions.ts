@@ -2,6 +2,8 @@
 
 import { agomoniSchema, type AgomoniFormData } from "@/lib/validations/agomoni";
 import { appendRow } from "@/lib/google-sheets";
+import { db } from "@/lib/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export type AgomoniSubmitResult =
   | { success: true; message: string }
@@ -34,19 +36,19 @@ export async function submitAgomoniForm(
 
   // ── 3. Persist to Google Sheets ────────────────────────────────
   const validated = result.data;
+  
+  const timestamp = new Date().toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
 
   try {
-    const timestamp = new Date().toLocaleString("en-IN", {
-      timeZone: "Asia/Kolkata",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    });
-
     // Row order: Timestamp | Team Leader | Dept | Year | Phone | Email | Category | Duration | Team Members | Notes
     await appendRow([
       timestamp,
@@ -63,6 +65,17 @@ export async function submitAgomoniForm(
   } catch (err) {
     console.error("[Agomoni 2026] Google Sheets error:", err);
     console.log("[Agomoni 2026] Registration data (fallback log):", validated);
+  }
+
+  // ── 4. Persist to Firebase ─────────────────────────────────────
+  try {
+    await addDoc(collection(db, "agomoniRegistrations"), {
+      ...validated,
+      timestamp: new Date().toISOString(),
+      displayTimestamp: timestamp,
+    });
+  } catch (err) {
+    console.error("[Agomoni 2026] Firebase error:", err);
   }
 
   return {
