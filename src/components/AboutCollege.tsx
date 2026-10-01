@@ -1,6 +1,5 @@
-"use client";
-
 import React from "react";
+import Image from "next/image";
 import DecryptedText from "@/components/DecryptedText";
 
 export default function AboutCollege() {
@@ -25,17 +24,19 @@ export default function AboutCollege() {
       {/* Content Grid: Image Left + Text Right */}
       <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20">
         {/* LEFT — Campus Photo */}
-        <div className="lg:col-span-5 relative overflow-hidden bg-[#14120e] flex items-center justify-center">
-          <img
+        <div className="lg:col-span-5 relative overflow-hidden bg-[#14120e] flex items-center justify-center min-h-[250px] lg:min-h-[400px]">
+          <Image
             src="/rcc.jpg"
             alt="RCCIIT Campus — Kolkata"
-            className="w-full h-auto max-h-[350px] lg:max-h-none lg:h-full object-cover object-center"
+            fill
+            sizes="(max-width: 1024px) 100vw, 42vw"
+            className="object-cover object-center"
           />
           {/* Floating badges */}
-          <div className="absolute top-3 left-3 bg-[#14120e] text-[#e5e0d3] px-2.5 py-1 text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] font-bold">
+          <div className="absolute top-3 left-3 bg-[#14120e] text-[#e5e0d3] px-2.5 py-1 text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] font-bold z-10">
             RCCIIT CAMPUS
           </div>
-          <div className="absolute bottom-3 right-3 bg-[#c83a1a] text-[#e5e0d3] px-2.5 py-1 text-[10px] sm:text-xs font-sans uppercase tracking-widest font-bold">
+          <div className="absolute bottom-3 right-3 bg-[#c83a1a] text-[#e5e0d3] px-2.5 py-1 text-[10px] sm:text-xs font-sans uppercase tracking-widest font-bold z-10">
             EST. 2022
           </div>
         </div>

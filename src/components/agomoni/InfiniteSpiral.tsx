@@ -296,8 +296,8 @@ const InfiniteSpiral: React.FC<InfiniteSpiralProps> = ({
                 loading={index < 8 ? "eager" : "lazy"}
                 draggable={false}
                 style={{
-                  width: cardWidth,
-                  height: cardHeight,
+                  width: "100%",
+                  height: "100%",
                   maxWidth: "none",
                   maxHeight: "none",
                   objectFit: imageFit,

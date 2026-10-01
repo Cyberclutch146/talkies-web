@@ -154,10 +154,12 @@ export default function HomePage() {
             <div key={story.id} className="p-5 sm:p-8 flex flex-col justify-between group hover:bg-[#e0dbcd]/50 transition-colors">
               <div>
                 <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#14120e]/30 bg-[#dad4c3] mb-4">
-                  <img
+                  <Image
                     src={story.image}
                     alt={story.alt}
-                    className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                   />
                 </div>
                 <div className="flex items-center gap-2 mb-2">

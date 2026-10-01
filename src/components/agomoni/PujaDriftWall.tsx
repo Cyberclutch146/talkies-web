@@ -197,10 +197,10 @@ export function PujaDriftWall() {
               items={GALLERY_IMAGES}
               animationMode="all"
               speed={0.35}
-              radius={170}
-              cardWidth={120}
-              cardHeight={96}
-              verticalSpacing={60}
+              radius={210}
+              cardWidth={200}
+              cardHeight={160}
+              verticalSpacing={72}
               perspective={675}
               cardRadius={10}
               centerScale={1.2}
