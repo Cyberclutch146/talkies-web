@@ -2,16 +2,42 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { put } from '@vercel/blob';
 
+const ORIGINAL_POSTS = [
+  {
+    id: "cmto1mbwe0000jr04lri3nhlk",
+    imageUrl: "https://8brkwckz0zwemks0.public.blob.vercel-storage.com/instagram/insta_1788592205716-540699324.jpg",
+    postUrl: "https://www.instagram.com/p/Dc5Yy-kpvCm/?igsi=NWwzbHExZDl3YTl1",
+    caption: null,
+    order: 5,
+  },
+  {
+    id: "cmu0qxytn0000k004jhyagoqc",
+    imageUrl: "https://8brkwckz0zwemks0.public.blob.vercel-storage.com/instagram/insta_1789360334094-307662712.jpg",
+    postUrl: "https://www.instagram.com/p/DdQRi2fJo2V/?stkn=MW9hM2dvZ3Jzc2hrcw==",
+    caption: null,
+    order: 6,
+  },
+  {
+    id: "cmua6sqzz0000kw04x31nk119",
+    imageUrl: "https://8brkwckz0zwemks0.public.blob.vercel-storage.com/instagram/insta_1789931160472-996510633.jpeg",
+    postUrl: "https://www.instagram.com/p/DdayN0dJxE4/?stkn=OTlpZzE1OXBia3Vy",
+    caption: null,
+    order: 7,
+  }
+];
+
 export async function GET() {
   try {
     const posts = await prisma.instagramPost.findMany({
       orderBy: { order: 'asc' },
     });
-    return NextResponse.json(posts);
+    if (posts && posts.length > 0) {
+      return NextResponse.json(posts);
+    }
   } catch (error) {
     console.error('Error fetching instagram posts:', error);
-    return NextResponse.json({ error: (error as Error)?.message || 'Internal server error', stack: (error as Error)?.stack }, { status: 500 });
   }
+  return NextResponse.json(ORIGINAL_POSTS);
 }
 
 const MAX_BODY_SIZE = 4.4 * 1024 * 1024; // 4.4MB

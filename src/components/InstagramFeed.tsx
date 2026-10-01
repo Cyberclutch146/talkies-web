@@ -11,30 +11,46 @@ interface InstaPost {
   caption: string | null;
 }
 
+const ORIGINAL_POSTS: InstaPost[] = [
+  {
+    id: "cmto1mbwe0000jr04lri3nhlk",
+    imageUrl: "https://8brkwckz0zwemks0.public.blob.vercel-storage.com/instagram/insta_1788592205716-540699324.jpg",
+    postUrl: "https://www.instagram.com/p/Dc5Yy-kpvCm/?igsi=NWwzbHExZDl3YTl1",
+    caption: null,
+  },
+  {
+    id: "cmu0qxytn0000k004jhyagoqc",
+    imageUrl: "https://8brkwckz0zwemks0.public.blob.vercel-storage.com/instagram/insta_1789360334094-307662712.jpg",
+    postUrl: "https://www.instagram.com/p/DdQRi2fJo2V/?stkn=MW9hM2dvZ3Jzc2hrcw==",
+    caption: null,
+  },
+  {
+    id: "cmua6sqzz0000kw04x31nk119",
+    imageUrl: "https://8brkwckz0zwemks0.public.blob.vercel-storage.com/instagram/insta_1789931160472-996510633.jpeg",
+    postUrl: "https://www.instagram.com/p/DdayN0dJxE4/?stkn=OTlpZzE1OXBia3Vy",
+    caption: null,
+  },
+];
+
 export default function InstagramFeed() {
-  const [posts, setPosts] = useState<InstaPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [posts, setPosts] = useState<InstaPost[]>(ORIGINAL_POSTS);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetch("/api/instagram")
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && data.length > 0) {
           setPosts(data);
         } else {
-          console.error("Expected array from API, got:", data);
-          setPosts([]);
+          setPosts(ORIGINAL_POSTS);
         }
-        setIsLoading(false);
       })
       .catch((err) => {
         console.error("Failed to fetch instagram feed:", err);
-        setIsLoading(false);
+        setPosts(ORIGINAL_POSTS);
       });
   }, []);
-
-  // Don't render the section if there are no posts and we're done loading
-  if (!isLoading && posts.length === 0) return null;
 
   return (
     <section className="w-full border-b border-[#14120e]/20">
@@ -70,7 +86,7 @@ export default function InstagramFeed() {
 
       {/* Photo Grid */}
       <div className="w-full">
-        {isLoading ? (
+        {isLoading && posts.length === 0 ? (
           <div className="flex items-center justify-center py-20">
             <div className="flex flex-col items-center gap-3">
               <div className="w-5 h-5 border-2 border-[#c83a1a] border-t-transparent rounded-full animate-spin" />
