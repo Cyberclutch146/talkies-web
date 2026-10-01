@@ -116,27 +116,5 @@
         }
       ]
     }
-  ],
-  "external": [
-    {
-      "name": "GNIT Hackathon",
-      "description": "50+ colleges across West Bengal compete in a 36-hour coding marathon."
-    },
-    {
-      "name": "Smart India Hackathon (SIH)",
-      "description": "National-level open innovation challenge organized by the Government of India."
-    },
-    {
-      "name": "JDEX Tech Expo",
-      "description": "Jadavpur District Student Tech Expo — interdisciplinary project showcase."
-    },
-    {
-      "name": "Inter-College Debate",
-      "description": "West Bengal Inter-College Debate Championship at Presidency University."
-    },
-    {
-      "name": "MAKAUT Fest",
-      "description": "University-wide cultural and technical festival for all affiliated colleges."
-    }
   ]
 }
