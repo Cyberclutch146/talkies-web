@@ -1,362 +1,284 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { ChapterSection } from "./ChapterSection";
-import { ArticleSplit } from "./ArticleSplit";
-import {
-  BengaliWatermark,
-  BengaliStamp,
-  BengaliMarginNote,
-  BengaliPullQuote,
-} from "./BengaliAccents";
+import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import PaperCrumple from "./PaperCrumple";
 
-/* ─── Image Sources (Local Agomoni Archive) ───────────────────
-   Assigned to chapters by subject relevance.                    */
+/* ─── Alpona Motif ───────────────────────────────────────────── */
+function BengaliAlpona({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <circle cx="100" cy="100" r="8" />
+      <circle cx="100" cy="100" r="16" strokeDasharray="3 4" />
+      <circle cx="100" cy="100" r="28" />
+      {/* 8 inner petals */}
+      <path d="M100 72 C 110 50, 120 50, 100 30 C 80 50, 90 50, 100 72" />
+      <path d="M100 128 C 110 150, 120 150, 100 170 C 80 150, 90 150, 100 128" />
+      <path d="M72 100 C 50 110, 50 120, 30 100 C 50 80, 50 90, 72 100" />
+      <path d="M128 100 C 150 110, 150 120, 170 100 C 150 80, 150 90, 128 100" />
+      
+      {/* diagonal petals */}
+      <path d="M80 80 C 65 60, 70 50, 50 50 C 50 70, 60 65, 80 80" />
+      <path d="M120 120 C 135 140, 130 150, 150 150 C 150 130, 140 135, 120 120" />
+      <path d="M120 80 C 135 60, 130 50, 150 50 C 150 70, 140 65, 120 80" />
+      <path d="M80 120 C 65 140, 70 150, 50 150 C 50 130, 60 135, 80 120" />
+      
+      {/* Outer border/scallops */}
+      <circle cx="100" cy="100" r="80" strokeDasharray="5 5" opacity="0.5" />
+      
+      {/* Outer dots */}
+      <circle cx="100" cy="10" r="2" fill="currentColor" />
+      <circle cx="100" cy="190" r="2" fill="currentColor" />
+      <circle cx="10" cy="100" r="2" fill="currentColor" />
+      <circle cx="190" cy="100" r="2" fill="currentColor" />
+    </svg>
+  );
+}
 
-const CHAPTER_IMAGES = {
-  arrival: {
-    url: "/agomoni/arrival.jpg",
-    alt: "Boat on the river Hooghly at sunset with Howrah Bridge in the background during autumn",
-    credit: "Agomoni Archive",
+/* ─── Chapter Data ───────────────────────────────────────────── */
+const CHAPTERS = [
+  {
+    id: "I",
+    title: "The Arrival",
+    bengali: "আগমনী — Agomoni",
+    text: "There's a shift in the air sometime in late September — subtle, almost imperceptible. The monsoon loosens its grip, the sky turns a pale, luminous blue, and the afternoons grow gentle with a coolness that wasn't there before. On the banks of the Ganga, kaash-phool begins to sway in soft white waves, and in every lane, the first whispers begin: \"Pujo asche.\"",
+    image: "/agomoni/arrival.jpg",
+    alt: "Boat on the river Hooghly at sunset",
+    theme: "Anticipation",
+    frame: "01A",
   },
-  making: {
-    url: "/agomoni/making.jpeg",
-    alt: "Artisan tending to Durga clay idols with smoke in Kumartuli workshop",
-    credit: "Agomoni Archive",
+  {
+    id: "II",
+    title: "The Making",
+    bengali: "কুমারটুলি — Kumartuli",
+    text: "Months before the first dhak beat, in the narrow lanes of Kumartuli, hands caked in Ganga clay begin to sculpt divinity. Straw frames sprout ribs and limbs; clay becomes flesh; hollow eye sockets are painted open with a single brushstroke that feels like an act of invocation.",
+    image: "/agomoni/makingnew.jpeg",
+    alt: "Artisan tending to Durga clay idols",
+    theme: "Craft & Patience",
+    frame: "02A",
   },
-  homecoming: {
-    url: "/agomoni/durga-aarti.jpg",
-    alt: "Aarti being performed with dhunuchi before the grand Durga idol",
-    credit: "Agomoni Archive",
+  {
+    id: "III",
+    title: "The Homecoming",
+    bengali: "ঘরে ফেরা — Ghore Phera",
+    text: "Trains fill up. Flights get booked out months in advance. The highways leading to Kolkata swell with a tide of people coming home — not just to a city, but to a feeling. Pujo is the great gravitational force of Bengal: it pulls you back no matter where you've gone.",
+    image: "/agomoni/durga-aarti.jpg",
+    alt: "Aarti being performed with dhunuchi",
+    theme: "Nostalgia & Belonging",
+    frame: "03A",
   },
-  celebration: {
-    url: "/agomoni/dhunuchi-dance.jpg",
-    alt: "Two traditional dancers performing Dhunuchi naach before Goddess Durga",
-    credit: "Agomoni Archive",
+  {
+    id: "IV",
+    title: "The Celebration",
+    bengali: "উৎসব — Utsav",
+    text: "And then it begins. The five days that Bengalis live the other three hundred and sixty for. Shashti, Saptami, Ashtami, Navami, Dashami — each with its own rhythm, its own flavour, its own pitch of joy. The dhak is relentless now, filling the streets with a primal thunder.",
+    image: "/agomoni/homecoming.jpeg",
+    alt: "Vibrant pandal celebrations",
+    theme: "Joy",
+    frame: "04A",
   },
-  farewell: {
-    url: "/agomoni/sindur khela.png",
-    alt: "Women playing sindur khela, smearing vermillion on each other during Bijoya Dashami",
-    credit: "Agomoni Archive",
+  {
+    id: "V",
+    title: "The Farewell",
+    bengali: "বিজয়া দশমী — Bijoya Dashami",
+    text: "Dashami arrives too soon. It always does. The morning begins with sindoor khela — married women smearing each other's faces and hair with vermillion, their laughter edged with the sadness of goodbye.",
+    image: "/agomoni/sindur khela.png",
+    alt: "Women playing sindur khela",
+    theme: "Bittersweet Longing",
+    frame: "05A",
   },
-  event: {
-    url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
-    alt: "Night festival celebrations with vibrant stage lights and crowd",
-    credit: "Photo: Unsplash",
-  },
-};
+];
 
-
-
-/* ─── All Narrative Chapters ─────────────────────────────────── */
 export function AgomoniChapters() {
   const prefersReduced = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
-    },
+  /* Film Strip Scroll Logic */
+  const targetRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [scrollRange, setScrollRange] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"]
+  });
+  
+  // Measure the track width so we can translate exactly to the end
+  useEffect(() => {
+    const measure = () => {
+      if (trackRef.current) {
+        const trackWidth = trackRef.current.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        setScrollRange(trackWidth - viewportWidth);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollRange]);
+
+  // CSS for authentic 35mm film perforations with SVG
+  // The hole fill matches the page background (#14120e) to look like a physical cutout
+  const perforationStyle = {
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='40'%3E%3Crect x='8' y='9' width='16' height='22' rx='2' fill='%2314120e' stroke='rgba(255,255,255,0.05)' stroke-width='1' /%3E%3C/svg%3E")`,
+    backgroundRepeat: "repeat-x",
+    backgroundPosition: "center",
   };
 
   return (
     <>
-      {/* ── Chapter 1: The Arrival ─── Text LEFT, Image RIGHT ──── */}
-      <section className="relative w-full bg-[#e5e0d3] overflow-hidden">
-        <BengaliWatermark text="ঢাকের তালে" position="right" />
-
-        <ArticleSplit
-          imageUrl={CHAPTER_IMAGES.arrival.url}
-          imageAlt={CHAPTER_IMAGES.arrival.alt}
-          imageCredit={CHAPTER_IMAGES.arrival.credit}
-          imagePosition="right"
-          tornSeed={101}
-        >
-          <div className="relative">
-            <BengaliMarginNote text="শিউলি-ঝরা ভোর" side="right" />
-
-            {/* Dateline + Chapter header */}
-            <div className="text-[#14120e]/50 mb-4">
-              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
-                KOLKATA &middot; AGOMONI DESK
-              </span>
-            </div>
-            <div className="flex items-center gap-3 mb-4 text-[#14120e]/50">
-              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
-                Chapter I
-              </span>
-              <span className="w-8 h-px bg-[#d4a24e]/40" />
-              <span className="font-serif italic text-xs">Anticipation</span>
+      {/* ── Cinematic Film Strip Timeline ─────────────────────────────────── */}
+      <section ref={targetRef} className="relative h-[400vh] bg-[#14120e] text-[#e5e0d3]">
+        <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
+          
+          {/* Moving Film Strip Track */}
+          <motion.div 
+            ref={trackRef}
+            style={{ x }} 
+            className="w-max h-[75vh] sm:h-[65vh] bg-black relative shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)] flex items-center px-[7.5vw] md:px-[25vw] gap-1 md:gap-2"
+          >
+            {/* Top Perforations & Edge Markings */}
+            <div className="absolute top-0 left-0 w-full h-[40px] z-20" style={perforationStyle}>
+              {/* Fake film edge markings */}
+              <div className="absolute bottom-[-16px] w-full flex items-center justify-around gap-[15vw] px-[10vw] font-mono text-[8px] sm:text-[9px] text-[#d4a24e]/50 uppercase tracking-[0.4em] whitespace-nowrap pointer-events-none select-none">
+                <span>KODAK SAFETY FILM</span>
+                <span>▶ 5222</span>
+                <span>EASTMAN</span>
+                <span>▶ 5222</span>
+                <span>KODAK SAFETY FILM</span>
+                <span>▶ 5222</span>
+              </div>
             </div>
 
-            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
-              The Arrival
-            </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
-              আগমনী — Agomoni
-            </p>
+            {/* The Frames */}
+            {CHAPTERS.map((chapter) => (
+              <div 
+                key={chapter.id} 
+                className="relative w-[85vw] md:w-[50vw] aspect-[4/3] md:aspect-[3/2] shrink-0 bg-black overflow-hidden group"
+              >
+                <Image 
+                  src={chapter.image} 
+                  alt={chapter.alt} 
+                  fill 
+                  className="object-cover opacity-70 group-hover:opacity-90 transition-all duration-700 ease-in-out scale-[1.02] group-hover:scale-105" 
+                  sizes="(max-width: 768px) 85vw, 50vw"
+                  priority={chapter.id === "I"}
+                />
+                
+                {/* Subtle film grain on the image */}
+                <div className="absolute inset-0 opacity-[0.3] mix-blend-overlay pointer-events-none" style={{ backgroundImage: "url('/noise.png')", backgroundSize: "100px" }} />
+                
+                {/* Cinematic Vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/10 pointer-events-none" />
+                
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-10 md:p-12">
+                  <div className="flex items-center gap-3 mb-3 md:mb-4">
+                    <span className="font-sans text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
+                      Chapter {chapter.id}
+                    </span>
+                    <span className="w-8 md:w-16 h-px bg-[#d4a24e]/50" />
+                    <span className="font-serif italic text-xs md:text-sm text-[#e5e0d3]/80">
+                      {chapter.theme}
+                    </span>
+                  </div>
+                  
+                  <h2 className="font-display-serif text-3xl sm:text-5xl md:text-6xl text-[#faf6ee] mb-2 md:mb-3 leading-tight tracking-tight drop-shadow-lg">
+                    {chapter.title}
+                  </h2>
+                  <p className="font-bengali-serif italic text-xl sm:text-2xl md:text-3xl text-[#d4a24e] mb-4 md:mb-6 drop-shadow-md" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+                    {chapter.bengali}
+                  </p>
+                  
+                  <div className="max-w-2xl">
+                    <p className="font-serif text-xs sm:text-sm md:text-lg text-[#e5e0d3]/90 leading-relaxed drop-shadow-md">
+                      {chapter.text}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
 
-            {/* Prose with drop cap */}
-            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed prose-dropcap" style={{ '--dropcap-color': '#d4a24e' } as React.CSSProperties}>
-              <p>
-                There&apos;s a shift in the air sometime in late September — subtle, almost imperceptible.
-                The monsoon loosens its grip, the sky turns a pale, luminous blue, and the afternoons grow
-                gentle with a coolness that wasn&apos;t there before. On the banks of the Ganga, kaash-phool
-                begins to sway in soft white waves, and in every lane, the first whispers begin:
-                <em className="text-[#d4a24e]"> &ldquo;Pujo asche.&rdquo;</em>
-              </p>
+            {/* Bottom Perforations & Edge Markings */}
+            <div className="absolute bottom-0 left-0 w-full h-[40px] z-20" style={perforationStyle}>
+              <div className="absolute top-[-16px] w-full flex items-center justify-around gap-[15vw] px-[10vw] font-mono text-[8px] sm:text-[9px] text-[#d4a24e]/50 uppercase tracking-[0.4em] whitespace-nowrap pointer-events-none select-none">
+                <span>▶ {CHAPTERS[0].frame}</span>
+                <span>▶ {CHAPTERS[1].frame}</span>
+                <span>▶ {CHAPTERS[2].frame}</span>
+                <span>▶ {CHAPTERS[3].frame}</span>
+                <span>▶ {CHAPTERS[4].frame}</span>
+              </div>
             </div>
-          </div>
-        </ArticleSplit>
-      </section>
-
-      {/* ── Chapter 2: The Making ─── Image LEFT, Text RIGHT ──── */}
-      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden">
-
-        <ArticleSplit
-          imageUrl={CHAPTER_IMAGES.making.url}
-          imageAlt={CHAPTER_IMAGES.making.alt}
-          imageCredit={CHAPTER_IMAGES.making.credit}
-          imagePosition="left"
-          darkBg
-          tornSeed={202}
-        >
-          <div className="relative">
-            <div className="text-[#e5e0d3]/50 mb-4">
-              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
-                KOLKATA &middot; AGOMONI DESK
-              </span>
-            </div>
-            <div className="flex items-center gap-3 mb-4 text-[#e5e0d3]/50">
-              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#c83a1a]">
-                Chapter II
-              </span>
-              <span className="w-8 h-px bg-[#c83a1a]/40" />
-              <span className="font-serif italic text-xs">Craft &amp; Patience</span>
-            </div>
-
-            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
-              The Making
-            </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
-              কুমারটুলি — Kumartuli
-            </p>
-
-            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed text-[#e5e0d3]/85 prose-dropcap" style={{ '--dropcap-color': '#c83a1a' } as React.CSSProperties}>
-              <p>
-                Months before the first dhak beat, in the narrow lanes of Kumartuli, hands caked in
-                Ganga clay begin to sculpt divinity. Straw frames sprout ribs and limbs; clay becomes
-                flesh; hollow eye sockets are painted open with a single brushstroke that feels like
-                an act of invocation.
-              </p>
-
-              <BengaliPullQuote
-                text="হাতের ছোঁয়ায় প্রাণ"
-                attribution="Life through the touch of hands"
-                className="text-[#d4a24e]"
-              />
-            </div>
-          </div>
-        </ArticleSplit>
-      </section>
-
-      {/* ── Chapter 3: The Homecoming ─── Text LEFT, Image RIGHT ─ */}
-      <section className="relative w-full bg-[#e5e0d3] overflow-hidden">
-        <BengaliWatermark text="ঘরে ফেরা" position="left" />
-
-        <ArticleSplit
-          imageUrl={CHAPTER_IMAGES.homecoming.url}
-          imageAlt={CHAPTER_IMAGES.homecoming.alt}
-          imageCredit={CHAPTER_IMAGES.homecoming.credit}
-          imagePosition="right"
-          tornSeed={302}
-        >
-          <div className="relative">
-            <BengaliStamp text="ঘরে ফেরা" color="#c83a1a" className="absolute -top-2 right-0 hidden lg:block" />
-
-            <div className="text-[#14120e]/50 mb-4">
-              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
-                KOLKATA &middot; AGOMONI DESK
-              </span>
-            </div>
-            <div className="flex items-center gap-3 mb-4 text-[#14120e]/50">
-              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
-                Chapter III
-              </span>
-              <span className="w-8 h-px bg-[#d4a24e]/40" />
-              <span className="font-serif italic text-xs">Nostalgia &amp; Belonging</span>
-            </div>
-
-            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
-              The Homecoming
-            </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
-              ঘরে ফেরা — Ghore Phera
-            </p>
-
-            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed prose-dropcap" style={{ '--dropcap-color': '#d4a24e' } as React.CSSProperties}>
-              <p>
-                Trains fill up. Flights get booked out months in advance. The highways leading to
-                Kolkata swell with a tide of people coming home — not just to a city, but to a feeling.
-                <em> Pujo</em> is the great gravitational force of Bengal: it pulls you back no matter
-                where you&apos;ve gone.
-              </p>
-            </div>
-          </div>
-        </ArticleSplit>
-      </section>
-
-      {/* ── Chapter 4: The Celebration ─── Image LEFT, Text RIGHT ─ */}
-      <section className="relative w-full bg-[#e5e0d3] overflow-hidden">
-        <BengaliWatermark text="ধুনুচির ধোঁয়ায়" position="right" />
-
-        <ArticleSplit
-          imageUrl={CHAPTER_IMAGES.celebration.url}
-          imageAlt={CHAPTER_IMAGES.celebration.alt}
-          imageCredit={CHAPTER_IMAGES.celebration.credit}
-          imagePosition="left"
-          tornSeed={401}
-        >
-          <div className="relative">
-            <BengaliMarginNote text="আড্ডা" side="right" />
-
-            <div className="text-[#14120e]/50 mb-4">
-              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
-                KOLKATA &middot; AGOMONI DESK
-              </span>
-            </div>
-            <div className="flex items-center gap-3 mb-4 text-[#14120e]/50">
-              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#c83a1a]">
-                Chapter IV
-              </span>
-              <span className="w-8 h-px bg-[#c83a1a]/40" />
-              <span className="font-serif italic text-xs">Joy</span>
-            </div>
-
-            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
-              The Celebration
-            </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
-              উৎসব — Utsav
-            </p>
-
-            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed prose-dropcap" style={{ '--dropcap-color': '#c83a1a' } as React.CSSProperties}>
-              <p>
-                And then it begins. The five days that Bengalis live the other three hundred and sixty
-                for. Shashti, Saptami, Ashtami, Navami, Dashami — each with its own rhythm, its own
-                flavour, its own pitch of joy. The dhak is relentless now, filling the streets with a
-                primal thunder.
-              </p>
-            </div>
-          </div>
-        </ArticleSplit>
-      </section>
-
-      {/* ── Chapter 5: The Farewell ─── Text LEFT, Image RIGHT ─── */}
-      <section className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden">
-
-        <ArticleSplit
-          imageUrl={CHAPTER_IMAGES.farewell.url}
-          imageAlt={CHAPTER_IMAGES.farewell.alt}
-          imageCredit={CHAPTER_IMAGES.farewell.credit}
-          imagePosition="right"
-          darkBg
-          tornSeed={502}
-          objectFit="cover"
-          objectPosition="center 30%"
-          unoptimized
-          disableGrain
-        >
-          <div className="relative">
-            <BengaliStamp text="শুভ বিজয়া" color="#d4a24e" className="absolute -top-2 right-0 hidden lg:block" />
-
-            <div className="text-[#e5e0d3]/50 mb-4">
-              <span className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold">
-                KOLKATA &middot; AGOMONI DESK
-              </span>
-            </div>
-            <div className="flex items-center gap-3 mb-4 text-[#e5e0d3]/50">
-              <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
-                Chapter V
-              </span>
-              <span className="w-8 h-px bg-[#d4a24e]/40" />
-              <span className="font-serif italic text-xs">Bittersweet Longing</span>
-            </div>
-
-            <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
-              The Farewell
-            </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
-              বিজয়া দশমী — Bijoya Dashami
-            </p>
-
-            <div className="space-y-5 font-serif text-base sm:text-lg leading-relaxed text-[#e5e0d3]/85 prose-dropcap" style={{ '--dropcap-color': '#d4a24e' } as React.CSSProperties}>
-              <p>
-                Dashami arrives too soon. It always does. The morning begins with sindoor khela —
-                married women smearing each other&apos;s faces and hair with vermillion, their
-                laughter edged with the sadness of goodbye.
-              </p>
-
-              <BengaliPullQuote
-                text="সিঁদুর খেলা"
-                attribution="Sindoor Khela"
-                className="text-[#d4a24e]"
-              />
-            </div>
-          </div>
-        </ArticleSplit>
+          </motion.div>
+          
+        </div>
       </section>
 
       {/* ── Chapter 6: The Event ─────────────────────────────────── */}
       <section
         id="the-event"
-        className="relative w-full min-h-[100svh] bg-[#e5e0d3] text-[#14120e] overflow-hidden flex flex-col justify-center"
+        className="relative w-full min-h-[100svh] bg-[#d5cbb8] text-[#14120e] overflow-hidden flex flex-col justify-center"
       >
+        {/* ── Background Depth Layers ── */}
+        {/* 1. Vintage Paper Noise */}
+        <div className="absolute inset-0 opacity-[0.45] mix-blend-color-burn pointer-events-none z-0" style={{ backgroundImage: "url('/noise.png')", backgroundSize: "120px" }} />
+        
+        {/* 2. Dotted Grid Pattern - Much more visible now */}
+        <div className="absolute inset-0 opacity-[0.15] pointer-events-none z-0" style={{ backgroundImage: "radial-gradient(#14120e 2px, transparent 2px)", backgroundSize: "32px 32px" }} />
+        
+        {/* 3. Radial Spotlight (draws eye to center) */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(250,246,238,0.95)_0%,transparent_80%)] pointer-events-none z-0" />
+        
+        {/* 4. Massive Bengali Typography Watermarks - Boosted opacity */}
+        <div className="absolute top-[5%] -left-[5%] text-[15vw] font-bengali-serif text-[#14120e]/[0.08] -rotate-12 pointer-events-none select-none whitespace-nowrap z-0" lang="bn">
+          আগমনী
+        </div>
+        <div className="absolute bottom-[10%] -right-[5%] text-[12vw] font-bengali-serif text-[#14120e]/[0.08] rotate-6 pointer-events-none select-none whitespace-nowrap z-0" lang="bn">
+          উৎসব
+        </div>
+        
+        {/* 5. Alpona / Floral Patterns */}
+        <div className="absolute top-[15%] -right-[15%] w-[50vw] sm:w-[40vw] max-w-[600px] text-[#a82e13] opacity-[0.18] pointer-events-none z-0">
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 80, repeat: Infinity, ease: "linear" }}>
+            <BengaliAlpona className="w-full h-full drop-shadow-sm" />
+          </motion.div>
+        </div>
+        
+        <div className="absolute bottom-[5%] -left-[10%] w-[55vw] sm:w-[45vw] max-w-[700px] text-[#a82e13] opacity-[0.15] pointer-events-none z-0">
+          <motion.div animate={{ rotate: -360 }} transition={{ duration: 100, repeat: Infinity, ease: "linear" }}>
+            <BengaliAlpona className="w-full h-full drop-shadow-sm" />
+          </motion.div>
+        </div>
 
-        <div className="w-full max-w-5xl mx-auto px-4 sm:px-8 py-16 lg:py-24">
+        <div className="w-full max-w-5xl mx-auto px-4 sm:px-8 py-16 lg:py-24 relative z-10">
           {/* Bengali accent */}
           <div className="text-center mb-2">
             <span className="font-bengali-serif text-lg sm:text-xl text-[#a82e13]" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
-              মঞ্চ তোমার অপেক্ষায়
+              অনুষ্ঠান
             </span>
           </div>
 
-          {/* Header */}
-          <motion.div
-            className="text-center mb-12"
-            initial={prefersReduced ? {} : { opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#a82e13] block mb-3">
-              The Event
-            </span>
-            <h2 className="font-display-serif text-4xl sm:text-6xl lg:text-7xl text-[#14120e] tracking-tight mb-4">
-              Agomoni 2026
+          <div className="text-center mb-12 sm:mb-20">
+            <h2 className="font-display-serif text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#14120e] mb-6">
+              The Grand Event
             </h2>
             <p className="font-serif text-base sm:text-lg text-[#14120e]/70 max-w-2xl mx-auto leading-relaxed">
-              A pre-Durga Puja cultural programme celebrating art, music, dance, and the
-              collective spirit of RCCIIT — organised by <strong>RCC Talkies</strong> and
-              the <strong>Art &amp; Cultural Club of RCCIIT</strong>.
+              Join us for an evening of cultural brilliance as we celebrate the spirit of Agomoni. 
+              Music, dance, and storytelling come together in a tribute to our heritage.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Vintage Ticket Event Details */}
+          {/* Ticket/Pass UI */}
           <motion.div
             className="relative mx-auto w-full max-w-4xl mb-16 flex flex-col md:flex-row shadow-[0_15px_40px_-10px_rgba(20,18,14,0.1)] group cursor-default"
             initial={prefersReduced ? {} : { opacity: 0, y: 30 }}
