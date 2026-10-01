@@ -322,15 +322,27 @@ export default function EventsPage() {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#c83a1a]/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             </div>
 
-            <div className="relative p-8 sm:p-12 lg:p-16">
+            {/* Right: Side image bleeding to top & bottom, faded into backdrop */}
+            <div className="absolute inset-y-0 right-0 w-1/2 sm:w-2/5 lg:w-1/3">
+              <img
+                src="/side.1.jpg"
+                alt="Agomoni — Durga idol"
+                className="w-full h-full object-cover"
+              />
+              {/* Fade into backdrop color — no visible edges */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#14120e] via-[#14120e]/70 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-l from-[#14120e]/50 via-transparent to-transparent" />
+            </div>
+
+            <div className="relative z-10 p-8 sm:p-12 lg:p-16">
               <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
                 {/* Left: Text content */}
                 <div className="flex-1 space-y-4">
                   <span className="inline-block text-[10px] font-sans font-bold uppercase tracking-[0.25em] text-[#c83a1a]">
                     02 // FEATURED EVENT
                   </span>
-                  <h3 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-[#e5e0d3]">
-                    Agomoni
+                  <h3 className="font-bengali-display text-4xl sm:text-5xl lg:text-6xl tracking-tight text-[#e5e0d3]">
+                    আগমনী
                   </h3>
                   <p className="font-serif text-base sm:text-lg text-[#e5e0d3]/70 max-w-lg leading-relaxed">
                     A pre-Durga Puja celebration of art, music, dance & culture — hosted by RCC Talkies and the Art & Cultural Club of RCCIIT.
@@ -344,31 +356,6 @@ export default function EventsPage() {
                       RCCIIT Campus
                     </span>
                   </div>
-                </div>
-
-                {/* Right: Animated visual element */}
-                <div className="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 flex-shrink-0">
-                  {/* Pulsing rings */}
-                  <div className="absolute inset-0 rounded-full border border-[#c83a1a]/30 animate-ping" />
-                  <div className="absolute inset-2 rounded-full border border-[#c83a1a]/20 animate-pulse" />
-                  <div className="absolute inset-4 rounded-full border border-[#c83a1a]/10" />
-
-                  {/* Center icon */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-4xl sm:text-5xl lg:text-6xl">🪔</span>
-                  </div>
-
-                  {/* Rotating text ring */}
-                  <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
-                    <defs>
-                      <path id="circlePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-                    </defs>
-                    <text className="fill-[#c83a1a] text-[8px] font-sans font-bold uppercase tracking-widest">
-                      <textPath href="#circlePath">
-                        Agomoni 2026 • Agomoni 2026 •
-                      </textPath>
-                    </text>
-                  </svg>
                 </div>
               </div>
 
