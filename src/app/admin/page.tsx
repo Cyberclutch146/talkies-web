@@ -57,6 +57,22 @@ const adminModules = [
     ),
     tag: "04 // DISPATCHES",
   },
+  {
+    title: "AGOMONI",
+    description: "Application tracking system",
+    href: "/admin/agomoni",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+        <polyline points="10 9 9 9 8 9" />
+      </svg>
+    ),
+    tag: "05 // AGOMONI",
+    fullWidth: true,
+  },
 ];
 
 export default function AdminDashboard() {
@@ -243,7 +259,7 @@ export default function AdminDashboard() {
             <Link
               key={mod.href}
               href={mod.href}
-              className="group border border-[#14120e]/20 bg-[#eae5d9] p-6 sm:p-8 flex flex-col justify-between hover:border-[#14120e] hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 transition-all duration-300"
+              className={`group border border-[#14120e]/20 bg-[#eae5d9] p-6 sm:p-8 flex flex-col justify-between hover:border-[#14120e] hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 transition-all duration-300 ${mod.fullWidth ? 'sm:col-span-2' : ''}`}
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
