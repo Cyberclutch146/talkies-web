@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import InfiniteSpiral, { type InfiniteSpiralItem } from "./InfiniteSpiral";
 import "./InfiniteSpiral.css";
@@ -147,8 +147,24 @@ const GALLERY_IMAGES: InfiniteSpiralItem[] = [
 export function PujaDriftWall() {
   const [selectedPhoto, setSelectedPhoto] = useState<InfiniteSpiralItem | null>(null);
 
+  // Close lightbox on Escape key
+  const closeModal = useCallback(() => setSelectedPhoto(null), []);
+  useEffect(() => {
+    if (!selectedPhoto) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeModal();
+    };
+    document.addEventListener("keydown", onKey);
+    // Prevent body scroll while lightbox is open (important on mobile)
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [selectedPhoto, closeModal]);
+
   return (
-    <section className="relative w-full bg-[#0d0b08] text-[#e5e0d3] py-16 sm:py-20 lg:py-24 overflow-hidden border-t border-[#d4a24e]/15">
+    <section className="relative w-full min-h-[100svh] bg-[#0d0b08] text-[#e5e0d3] overflow-hidden border-t border-[#d4a24e]/15 flex flex-col">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
@@ -163,8 +179,8 @@ export function PujaDriftWall() {
         <div className="absolute inset-0 bg-black/45 md:bg-black/55" />
       </div>
 
-      {/* Main Section Heading: Centered at Top of entire section */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 text-center mb-6 sm:mb-8 lg:mb-12 z-10 relative">
+      {/* Main Section Heading */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 text-center pt-10 sm:pt-14 lg:pt-16 mb-3 sm:mb-6 lg:mb-10 z-10 relative flex-shrink-0">
         <div className="inline-flex items-center justify-center gap-3">
           <span className="w-8 h-px bg-[#d4a24e]/40" />
           <h3 className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-[#d4a24e]">
@@ -174,25 +190,26 @@ export function PujaDriftWall() {
         </div>
       </div>
 
-      {/* Responsive Two-Column Layout (Stacked on Mobile, 40/60 on Tablet & Desktop) */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* Full-screen content area */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 flex-1 flex flex-col pb-8 sm:pb-12 lg:pb-16">
+        {/* Mobile: stacked (text on top, spiral fills below) | Desktop: side-by-side */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 lg:gap-12 items-center flex-1">
           {/* LEFT COLUMN: Bengali Heading & Description */}
-          <div className="md:col-span-5 flex flex-col justify-center text-center md:text-left translate-x-3 sm:translate-x-5 md:translate-x-8 lg:translate-x-12 pr-0 md:pr-4">
+          <div className="md:col-span-4 flex flex-col justify-center text-center md:text-left md:translate-x-4 lg:translate-x-8 pr-0 md:pr-4">
             <h2
-              className="font-bensen-handwriting text-4xl sm:text-5xl lg:text-6xl text-[#f3eedf] leading-[1.25]"
+              className="font-bensen-handwriting text-3xl sm:text-4xl lg:text-6xl text-[#f3eedf] leading-[1.25]"
               lang="bn"
               style={{ fontFamily: "'BenSenHandwriting', cursive, sans-serif", letterSpacing: 0 }}
             >
               উৎসবের স্মৃতি
             </h2>
-            <p className="font-serif italic text-sm sm:text-base lg:text-lg text-[#e5e0d3]/70 mt-3 sm:mt-4 leading-relaxed max-w-lg mx-auto md:mx-0">
-              Through the lenses of RCCIITians. Click any photo to see the photographer’s name.
+            <p className="font-serif italic text-xs sm:text-sm lg:text-lg text-[#e5e0d3]/70 mt-2 sm:mt-3 leading-relaxed max-w-lg mx-auto md:mx-0">
+              Through the lenses of RCCIITians. Click any photo to see the photographer&apos;s name.
             </p>
           </div>
 
-          {/* RIGHT COLUMN: Infinite Spiral Gallery */}
-          <div className="md:col-span-7 w-full h-[520px] sm:h-[580px] lg:h-[620px] relative overflow-hidden flex items-center justify-center">
+          {/* RIGHT COLUMN: Infinite Spiral Gallery — fills remaining height */}
+          <div className="md:col-span-8 w-full min-h-[400px] h-[55svh] sm:h-[60svh] md:h-full relative overflow-hidden flex items-center justify-center">
             <InfiniteSpiral
               items={GALLERY_IMAGES}
               animationMode="all"
@@ -216,17 +233,25 @@ export function PujaDriftWall() {
       {/* Lightbox Modal on Card Click */}
       {selectedPhoto && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in duration-200"
-          onClick={() => setSelectedPhoto(null)}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in duration-200"
+          onClick={closeModal}
+          onTouchEnd={(e) => {
+            // On mobile, if the touch target is the backdrop itself (not the card), close
+            if (e.target === e.currentTarget) closeModal();
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Photo by ${selectedPhoto.photographer}`}
         >
           <div
             className="relative max-w-2xl w-full bg-[#181511] border border-[#d4a24e]/30 rounded-xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Close Button — larger tap target on mobile (44×44 min) */}
             <button
-              onClick={() => setSelectedPhoto(null)}
-              className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/70 hover:bg-[#c83a1a] text-white flex items-center justify-center text-sm transition-colors border border-white/20"
+              onClick={closeModal}
+              className="absolute top-2 right-2 z-20 w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-[#c83a1a] active:bg-[#c83a1a] text-white flex items-center justify-center text-base sm:text-sm transition-colors border border-white/20"
               aria-label="Close modal"
             >
               ✕

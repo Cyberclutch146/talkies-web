@@ -63,12 +63,12 @@ export function ArticleSplit({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full min-h-[100svh] ${bg}`}
+      className={`relative w-full min-h-[auto] lg:min-h-[100svh] ${bg}`}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full min-h-[100svh]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full lg:min-h-[100svh]">
         {/* ── Photo column ──────────────────────────────────────── */}
         <motion.div
-          className={`relative overflow-visible min-h-[40vh] lg:min-h-0 h-full ${imagePosition === "right" ? "lg:order-2" : "lg:order-1"
+          className={`relative overflow-visible min-h-[50vh] lg:min-h-0 h-full order-1 ${imagePosition === "right" ? "lg:order-2" : "lg:order-1"
             }`}
           style={prefersReduced ? {} : { y: photoY }}
         >
@@ -135,8 +135,8 @@ export function ArticleSplit({
 
         {/* ── Text column ───────────────────────────────────────── */}
         <div
-          className={`relative z-10 ${textColor} ${imagePosition === "right" ? "lg:order-1" : "lg:order-2"
-            } px-6 sm:px-10 lg:px-14 py-12 sm:py-20 lg:py-24 flex flex-col justify-center`}
+          className={`relative z-10 ${textColor} order-2 ${imagePosition === "right" ? "lg:order-1" : "lg:order-2"
+            } px-5 sm:px-10 lg:px-14 py-8 sm:py-16 lg:py-24 flex flex-col justify-center`}
         >
           {children}
         </div>

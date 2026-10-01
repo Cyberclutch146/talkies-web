@@ -72,17 +72,7 @@ export default function DurgaScrollReveal() {
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @font-face {
-              font-family: 'BenSenHandwriting';
-              src: url('/fonts/BenSenHandwriting.ttf') format('truetype');
-              font-display: swap;
-            }
-          `,
-        }}
-      />
+
 
       <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-auto select-none overflow-hidden h-20 sm:h-24 md:h-28 bg-gradient-to-t from-[#0e0c0a] via-[#0e0c0a]/85 to-transparent">
         {/* Center Revealed Agomoni Link — Vertically Centered */}

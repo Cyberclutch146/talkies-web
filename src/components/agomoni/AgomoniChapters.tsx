@@ -12,18 +12,17 @@ import {
 } from "./BengaliAccents";
 import PaperCrumple from "./PaperCrumple";
 
-/* ─── Image Sources (Unsplash — royalty-free) ─────────────────
-   Assigned to chapters by subject relevance. All from
-   images.unsplash.com (already in next.config remotePatterns).  */
+/* ─── Image Sources (Local Agomoni Archive) ───────────────────
+   Assigned to chapters by subject relevance.                    */
 
 const CHAPTER_IMAGES = {
   arrival: {
-    url: "/agomoni/howrah-bridge.jpg",
+    url: "/agomoni/arrival.jpg",
     alt: "Boat on the river Hooghly at sunset with Howrah Bridge in the background during autumn",
     credit: "Agomoni Archive",
   },
   making: {
-    url: "/agomoni/kumartuli-clay-idols.jpg",
+    url: "/agomoni/making.jpeg",
     alt: "Artisan tending to Durga clay idols with smoke in Kumartuli workshop",
     credit: "Agomoni Archive",
   },
@@ -49,17 +48,7 @@ const CHAPTER_IMAGES = {
   },
 };
 
-/* ─── Diya SVG Motif ─────────────────────────────────────────── */
-function DiyaMotif({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 40" width="40" height="40" className={className} aria-hidden="true">
-      <ellipse cx="20" cy="10" rx="4" ry="7" fill="#d4a24e" opacity="0.8" />
-      <ellipse cx="20" cy="11" rx="2" ry="4" fill="#faf6ee" opacity="0.6" />
-      <path d="M12 22 Q14 18, 20 18 Q26 18, 28 22 L30 30 Q20 34, 10 30 Z" fill="#c83a1a" opacity="0.7" />
-      <ellipse cx="20" cy="22" rx="8" ry="2" fill="#d4a24e" opacity="0.3" />
-    </svg>
-  );
-}
+
 
 /* ─── All Narrative Chapters ─────────────────────────────────── */
 export function AgomoniChapters() {
@@ -117,7 +106,7 @@ export function AgomoniChapters() {
             <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
               The Arrival
             </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
               আগমনী — Agomoni
             </p>
 
@@ -129,12 +118,6 @@ export function AgomoniChapters() {
                 gentle with a coolness that wasn&apos;t there before. On the banks of the Ganga, kaash-phool
                 begins to sway in soft white waves, and in every lane, the first whispers begin:
                 <em className="text-[#d4a24e]"> &ldquo;Pujo asche.&rdquo;</em>
-              </p>
-              <p>
-                This is Agomoni — the arrival, the anticipation, the promise that something magnificent
-                is approaching. Somewhere in the distance, a lone dhak begins its rhythm, tentative at
-                first, then steady and insistent. It&apos;s the heartbeat of Bengal waking up, calling the
-                Goddess home.
               </p>
             </div>
           </div>
@@ -169,7 +152,7 @@ export function AgomoniChapters() {
             <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
               The Making
             </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
               কুমারটুলি — Kumartuli
             </p>
 
@@ -186,12 +169,6 @@ export function AgomoniChapters() {
                 attribution="Life through the touch of hands"
                 className="text-[#d4a24e]"
               />
-
-              <p>
-                Across the city, pandal committees race against time. Bamboo skeletons rise on street
-                corners, draped in fabric and ambition. The sawing, hammering, and painting go on through sleepless
-                nights, fuelled by cups of cha and the collective pride of a neighbourhood.
-              </p>
             </div>
           </div>
         </ArticleSplit>
@@ -227,7 +204,7 @@ export function AgomoniChapters() {
             <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
               The Homecoming
             </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
               ঘরে ফেরা — Ghore Phera
             </p>
 
@@ -237,11 +214,6 @@ export function AgomoniChapters() {
                 Kolkata swell with a tide of people coming home — not just to a city, but to a feeling.
                 <em> Pujo</em> is the great gravitational force of Bengal: it pulls you back no matter
                 where you&apos;ve gone.
-              </p>
-              <p>
-                Homes buzz with preparation. Wardrobes are flung open, new saris pressed and hung,
-                kurtas laid out with quiet pride. There&apos;s luchi and aloor dom for breakfast,
-                and the whole house smells of dhoop and Chanel No. 5 in equal measure.
               </p>
             </div>
           </div>
@@ -278,7 +250,7 @@ export function AgomoniChapters() {
             <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
               The Celebration
             </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#c83a1a] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
               উৎসব — Utsav
             </p>
 
@@ -288,12 +260,6 @@ export function AgomoniChapters() {
                 for. Shashti, Saptami, Ashtami, Navami, Dashami — each with its own rhythm, its own
                 flavour, its own pitch of joy. The dhak is relentless now, filling the streets with a
                 primal thunder.
-              </p>
-              <p>
-                Dhunuchi naach at sandhya aarti — smoke swirling around dancers who move as if possessed.
-                The bhog is served: khichuri, labra, begun bhaja, payesh — every spoonful a communion.
-                Between pandal-hops you eat jhalmuri from paper cones and bump into old schoolmates
-                you haven&apos;t seen in years.
               </p>
             </div>
           </div>
@@ -334,7 +300,7 @@ export function AgomoniChapters() {
             <h2 className="font-display-serif text-3xl sm:text-5xl tracking-tight leading-[1.05] mb-2">
               The Farewell
             </h2>
-            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
+            <p className="font-bengali-serif italic text-lg sm:text-xl text-[#d4a24e] mb-5 sm:mb-8" lang="bn" style={{ letterSpacing: 0, lineHeight: 1.5 }}>
               বিজয়া দশমী — Bijoya Dashami
             </p>
 
@@ -350,21 +316,6 @@ export function AgomoniChapters() {
                 attribution="Sindoor Khela"
                 className="text-[#d4a24e]"
               />
-
-              <p>
-                The immersion procession begins in the afternoon. Idols sway on trucks garlanded
-                with marigold, trailing drumbeats and dancers who refuse to let go. At the ghat,
-                Ma is lowered into the river — slowly, tenderly — and for a moment, the whole world
-                holds still.
-              </p>
-
-              <div className="flex items-center gap-3 pt-4">
-                <DiyaMotif className="opacity-60 flex-shrink-0" />
-                <p className="text-[#d4a24e] font-serif italic text-lg sm:text-xl leading-relaxed">
-                  &ldquo;Ashche bochor abar hobe&rdquo; — she will return next year.
-                  She always does.
-                </p>
-              </div>
             </div>
           </div>
         </ArticleSplit>

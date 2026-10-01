@@ -146,9 +146,9 @@ const STEPS: { id: string; title: string; subtitle: string; fields: string[] }[]
 
 /* ─── Organiser Contacts ─────────────────────────────────────── */
 const CONTACTS = [
+  { name: "Meghna Santra", role: "President, Art & Cultural Club", phone: "+91 93307 34507" },
   { name: "Soumyajit Samanta", role: "President, RCC Talkies", phone: "+91 70031 40676" },
   { name: "Swagata Ganguly", role: "Secretary, RCC Talkies", phone: "+91 96744 15363" },
-  { name: "Meghna Santra", role: "President, Art & Cultural Club", phone: "+91 93307 34507" },
   { name: "Kasturi Bhattacharya", role: "Secretary, Art & Cultural Club", phone: "+91 91431 91144" },
 ];
 
@@ -437,18 +437,18 @@ export function ParticipationForm() {
         </motion.div>
 
         {/* ── Two-column layout: Guidelines + Form ───────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16">
 
           {/* LEFT COLUMN: Guidelines & Contacts */}
           <motion.div
-            className="lg:col-span-2 space-y-10"
+            className="lg:col-span-2 space-y-10 order-2 lg:order-1"
             initial={prefersReduced ? {} : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* Guidelines */}
-            <div>
+            {/* Guidelines — shows above on mobile via separate render, hidden here on mobile */}
+            <div className="hidden lg:block">
               <h3 className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#d4a24e] mb-6">
                 Guidelines
               </h3>
@@ -477,8 +477,8 @@ export function ParticipationForm() {
               </ol>
             </div>
 
-            {/* Divider */}
-            <div className="w-full h-px bg-gradient-to-r from-[#d4a24e]/30 via-[#d4a24e]/10 to-transparent" />
+            {/* Divider — only on desktop */}
+            <div className="hidden lg:block w-full h-px bg-gradient-to-r from-[#d4a24e]/30 via-[#d4a24e]/10 to-transparent" />
 
             {/* Contact Numbers */}
             <div>
@@ -514,7 +514,30 @@ export function ParticipationForm() {
           </motion.div>
 
           {/* RIGHT COLUMN: The Form */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 order-1 lg:order-2">
+            {/* Guidelines — mobile only, shown above the form */}
+            <div className="block lg:hidden mb-8">
+              <h3 className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-[#d4a24e] mb-5">
+                Guidelines
+              </h3>
+              <ol className="space-y-3 list-none counter-reset-none">
+                {[
+                  "Only group performances are allowed. Solo acts will not be entertained.",
+                  "Performances must be traditional or classical. Bollywood numbers and film music are not permitted.",
+                  "Obscene or inappropriate content is strictly prohibited and will lead to disqualification.",
+                  "Acts rooted in Durga Puja, Agomoni, or Bengali cultural heritage will receive priority.",
+                  "Each group must declare their required stage time.",
+                ].map((text, i) => (
+                  <li key={i} className="flex items-baseline gap-3">
+                    <span className="font-display-serif text-lg text-[#d4a24e]/30 flex-shrink-0 leading-none" style={{ fontFeatureSettings: '"lnum"' }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-serif text-[12px] text-[#e5e0d3]/60 leading-[1.6]">{text}</span>
+                  </li>
+                ))}
+              </ol>
+              <div className="w-full h-px bg-gradient-to-r from-[#d4a24e]/30 via-[#d4a24e]/10 to-transparent mt-6" />
+            </div>
             {/* Honeypot */}
             <div className="absolute -left-[9999px]" aria-hidden="true">
               <label htmlFor="agomoni-honey">Do not fill this</label>
@@ -560,6 +583,24 @@ export function ParticipationForm() {
                     <span className="font-serif italic text-sm">Ashche bochor abar hobe</span>
                     <span className="w-8 h-px bg-[#d4a24e]/40" />
                   </div>
+
+                  {/* Submit another application */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData({});
+                      setFieldErrors({});
+                      setCurrentStep(0);
+                      setDirection(1);
+                      setFormState("idle");
+                      setResultMessage("");
+                      clearDraft();
+                    }}
+                    className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-[0.15em] font-bold text-[#14120e] bg-[#d4a24e] hover:bg-[#c83a1a] hover:text-[#faf6ee] transition-all duration-300 px-8 py-3 rounded-full cursor-pointer mx-auto"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+                    Register Another Group
+                  </button>
                 </motion.div>
               ) : (
                 <motion.div

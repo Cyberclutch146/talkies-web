@@ -99,9 +99,9 @@ export function AgomoniClosing() {
             Photo Credits
           </span>
           <p className="font-serif italic text-xs text-[#e5e0d3]/40 max-w-lg mx-auto leading-relaxed">
-            All photographs used on this page are sourced from Unsplash under
-            the Unsplash License (free for commercial and non-commercial use).
-            We thank the photographers for sharing their work.
+            Chapter photographs are from the Agomoni Archive. Gallery images
+            are captured and submitted by RCCIIT students during Durga Puja.
+            We thank every photographer for sharing their work.
           </p>
         </motion.div>
 

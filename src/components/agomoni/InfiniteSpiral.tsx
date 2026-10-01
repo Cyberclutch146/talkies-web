@@ -100,7 +100,6 @@ const InfiniteSpiral: React.FC<InfiniteSpiralProps> = ({
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const scrollEnabled = animationMode === "scroll" || animationMode === "all";
     const scrollSpeedMultiplier = Math.max(speed, 0) / 0.55;
-    let lastScrollY = window.scrollY;
 
     const resizeObserver = new ResizeObserver(() => {
       bounds = root.getBoundingClientRect();
@@ -115,18 +114,34 @@ const InfiniteSpiral: React.FC<InfiniteSpiralProps> = ({
     );
     intersectionObserver.observe(root);
 
-    const handleScroll = () => {
-      const nextScrollY = window.scrollY;
-      const scrollDelta = nextScrollY - lastScrollY;
-      lastScrollY = nextScrollY;
-      if (!scrollEnabled || !visibleRef.current || scrollDelta === 0) return;
+    // Capture wheel events on the gallery itself to prevent page scroll
+    // and drive the spiral rotation instead
+    const handleWheel = (e: WheelEvent) => {
+      if (!scrollEnabled || !visibleRef.current) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const delta = e.deltaY || e.deltaX;
       targetProgressRef.current += clamp(
-        (scrollDelta * scrollSpeedMultiplier) / Math.max(verticalSpacing * 2, 1),
-        -1.5,
-        1.5
+        (delta * scrollSpeedMultiplier * 0.5) / Math.max(verticalSpacing * 2, 1),
+        -2.5,
+        2.5
       );
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Must be non-passive to allow preventDefault
+    root.addEventListener("wheel", handleWheel, { passive: false });
+
+    // Stop Lenis smooth scroll when hovering over the spiral
+    const stopLenisScroll = () => {
+      const lenisEl = document.querySelector("[data-lenis-prevent]");
+      if (!lenisEl) {
+        root.setAttribute("data-lenis-prevent", "");
+      }
+    };
+    const restoreLenisScroll = () => {
+      root.removeAttribute("data-lenis-prevent");
+    };
+    root.addEventListener("mouseenter", stopLenisScroll);
+    root.addEventListener("mouseleave", restoreLenisScroll);
 
     const render = (time: number) => {
       const delta = Math.min((time - previousTime) / 1000, 0.05);
@@ -189,7 +204,10 @@ const InfiniteSpiral: React.FC<InfiniteSpiralProps> = ({
       cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
-      window.removeEventListener("scroll", handleScroll);
+      root.removeEventListener("wheel", handleWheel);
+      root.removeEventListener("mouseenter", stopLenisScroll);
+      root.removeEventListener("mouseleave", restoreLenisScroll);
+      restoreLenisScroll();
     };
   }, [
     normalizedItems,
@@ -251,14 +269,24 @@ const InfiniteSpiral: React.FC<InfiniteSpiralProps> = ({
         dragMovedRef.current = false;
         lastPointerYRef.current = event.clientY;
         targetProgressRef.current = progressRef.current;
-        event.currentTarget.setPointerCapture(event.pointerId);
+        // Don't setPointerCapture here — it redirects all events to the
+        // root div, which prevents the card's onClick from ever firing.
+        // Capture is deferred to onPointerMove once real drag is detected.
         event.currentTarget.style.cursor = "grabbing";
       }}
       onPointerMove={(event) => {
         if (!draggingRef.current) return;
         const pointerDelta = event.clientY - lastPointerYRef.current;
         lastPointerYRef.current = event.clientY;
-        if (Math.abs(pointerDelta) > 0.5) dragMovedRef.current = true;
+        if (Math.abs(pointerDelta) > 0.5) {
+          dragMovedRef.current = true;
+          // Set pointer capture on first real movement so we can track
+          // the drag even if the pointer leaves the container bounds
+          const el = event.currentTarget;
+          if (!el.hasPointerCapture(event.pointerId)) {
+            try { el.setPointerCapture(event.pointerId); } catch { /* ignore */ }
+          }
+        }
         targetProgressRef.current -= pointerDelta / Math.max(verticalSpacing, 1);
       }}
       onPointerUp={stopDragging}

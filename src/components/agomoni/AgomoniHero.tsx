@@ -34,8 +34,6 @@ export function AgomoniHero() {
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `
-        @font-face { font-family: 'BenSen'; src: url('/fonts/BenSen.ttf') format('truetype'); font-display: swap; }
-        @font-face { font-family: 'BenSenHandwriting'; src: url('/fonts/BenSenHandwriting.ttf') format('truetype'); font-display: swap; }
         @font-face { font-family: 'Kalpurush'; src: url('/fonts/kalpurush.ttf') format('truetype'); font-display: swap; }
         @font-face { font-family: 'SiyamRupali'; src: url('/fonts/Siyamrupali.ttf') format('truetype'); font-display: swap; }
         @font-face { font-family: 'Bangla'; src: url('/fonts/Bangla.ttf') format('truetype'); font-display: swap; }
