@@ -74,7 +74,7 @@ export default function DurgaScrollReveal() {
     <>
 
 
-      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-auto select-none overflow-hidden h-20 sm:h-24 md:h-28 bg-gradient-to-t from-[#0e0c0a] via-[#0e0c0a]/85 to-transparent">
+      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-auto select-none h-20 sm:h-24 md:h-28 bg-gradient-to-t from-[#0e0c0a] via-[#0e0c0a]/85 to-transparent">
         {/* Center Revealed Agomoni Link — Vertically Centered */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-4">
           <Link
@@ -124,11 +124,11 @@ export default function DurgaScrollReveal() {
           </Link>
         </div>
         <div
-          className="absolute top-1/2 z-30 pointer-events-auto transition-transform duration-75 ease-out cursor-pointer"
+          className="absolute top-1/2 z-30 pointer-events-auto cursor-pointer"
           style={{
-            left: `calc(${leftPercent}% + ${leftOffsetPx}px)`,
-            transform: `translate(-${durgaTranslateX}%, -50%)`,
-            willChange: "left, transform",
+            left: '16px',
+            transform: `translate3d(calc(${travelProgress} * (100vw - 32px - 100%)), -50%, 0)`,
+            willChange: "transform",
           }}
         >
           <Link
@@ -136,14 +136,13 @@ export default function DurgaScrollReveal() {
             aria-label="Visit Agomoni 2026"
             className="group relative flex items-center justify-center"
           >
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-2 border-[#d4a24e] shadow-[0_0_20px_rgba(212,162,78,0.7)] overflow-hidden bg-[#14120e] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,162,78,0.95)] flex items-center justify-center">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center overflow-visible">
               <img
-                src="/durga-hero.jpg"
-                alt="Maa Durga"
-                className="w-full h-full object-cover object-[50%_42%] scale-[1.45] transition-transform duration-500 group-hover:scale-[1.6]"
+                src="/agomoni/dhaki-new.png"
+                alt="Dhaki"
+                className="w-full h-full object-contain scale-x-[-1.3] scale-y-[1.3] transition-transform duration-500 group-hover:scale-x-[-1.4] group-hover:scale-y-[1.4]"
                 draggable={false}
               />
-              <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-[#d4a24e]/40 pointer-events-none" />
             </div>
             <span className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none text-[8px] sm:text-[9px] font-sans uppercase font-bold tracking-widest text-[#d4a24e] bg-[#14120e]/90 px-2 py-0.5 rounded border border-[#d4a24e]/50 whitespace-nowrap shadow-lg">
               আগমনী ✦
