@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import teamData from "@/data/team.json";
+import coreData from "@/data/coreteam.json";
+import subcoreData from "@/data/subcore.json";
 import SpotlightCard from "@/components/SpotlightCard";
 import DecryptedText from "@/components/DecryptedText";
 
@@ -20,7 +21,21 @@ interface TeamYear {
   faculty: TeamMember[];
 }
 
+interface SubcoreMember {
+  name: string;
+  photo: string;
+}
 
+interface SubcoreCategory {
+  role: string;
+  members: SubcoreMember[];
+}
+
+interface AcademicYearSubcore {
+  year: string;
+  label: string;
+  subcoreTeam: Record<string, SubcoreCategory>;
+}
 
 function MemberCard({ member }: { member: TeamMember }) {
   const photoSrc = member.photo || "/team/placeholder.webp";
@@ -30,7 +45,6 @@ function MemberCard({ member }: { member: TeamMember }) {
       className="group p-0 flex flex-col h-full transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
       spotlightColor="rgba(200, 58, 26, 0.15)"
     >
-      {/* Photo Area */}
       <div className="relative w-full aspect-[4/5] bg-[#dad4c3] overflow-hidden border-b border-[#14120e]/15">
         <Image
           src={photoSrc}
@@ -39,10 +53,8 @@ function MemberCard({ member }: { member: TeamMember }) {
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
-        {/* Number badge removed */}
       </div>
 
-      {/* Info */}
       <div className="p-4 flex-1 flex flex-col justify-between">
         <div>
           <h3 className="font-display text-base sm:text-lg uppercase tracking-tight text-[#14120e] leading-tight mb-1">
@@ -65,7 +77,6 @@ function FacultyCard({ member }: { member: TeamMember }) {
       className="group p-0 flex flex-col h-full transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
       spotlightColor="rgba(200, 58, 26, 0.1)"
     >
-      {/* Photo Area */}
       <div className="relative w-full aspect-[4/5] bg-[#dad4c3] overflow-hidden border-b border-[#14120e]/15">
         <Image
           src={photoSrc}
@@ -74,13 +85,11 @@ function FacultyCard({ member }: { member: TeamMember }) {
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        {/* Advisory badge */}
         <div className="absolute top-2 left-2 bg-[#14120e] text-[#c83a1a] text-[9px] font-sans font-bold px-1.5 py-0.5 tracking-widest uppercase">
           Advisory
         </div>
       </div>
 
-      {/* Info */}
       <div className="p-4 flex-1 flex flex-col justify-between">
         <div>
           <h3 className="font-display text-base sm:text-lg uppercase tracking-tight text-[#14120e] leading-tight mb-1">
@@ -96,15 +105,20 @@ function FacultyCard({ member }: { member: TeamMember }) {
 }
 
 export default function MembersPage() {
-  const years = teamData.years as TeamYear[];
+  const years = coreData.years as TeamYear[];
+  const subcoreYears = subcoreData as AcademicYearSubcore[];
+
   const [activeYearIdx, setActiveYearIdx] = useState(0);
+  const [showSubcore, setShowSubcore] = useState(false);
+
   const activeYear = years[activeYearIdx];
+  const activeSubcore = subcoreYears.find((s) => s.year === activeYear.year);
 
   const totalMembers = activeYear.leads.length + activeYear.coreTeam.length + activeYear.faculty.length;
 
   return (
     <div className="w-full bg-[#e5e0d3] text-[#14120e]">
-      {/* Inverted Black Header Banner */}
+      {/* Header Banner */}
       <section className="w-full bg-[#14120e] text-[#e5e0d3] pt-32 sm:pt-40 pb-8 sm:pb-12 px-4 sm:px-8 border-b border-[#14120e]">
         <div className="max-w-7xl mx-auto">
           <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#c83a1a] font-bold block mb-2">
@@ -134,7 +148,10 @@ export default function MembersPage() {
           {years.map((yr, idx) => (
             <button
               key={yr.year}
-              onClick={() => setActiveYearIdx(idx)}
+              onClick={() => {
+                setActiveYearIdx(idx);
+                setShowSubcore(false);
+              }}
               className={`py-2.5 sm:py-3 px-5 sm:px-8 font-gothic text-xl sm:text-2xl tracking-wide transition-all border ${
                 activeYearIdx === idx
                   ? "border-[#14120e] bg-[#14120e] text-[#e5e0d3] font-bold shadow-[4px_4px_0px_#c83a1a] -translate-y-1"
@@ -226,6 +243,55 @@ export default function MembersPage() {
             ))}
           </div>
         </section>
+
+        {/* View / Hide Subcore Button */}
+        {activeSubcore && (
+          <div className="flex justify-center pt-6">
+            <button
+              onClick={() => setShowSubcore(!showSubcore)}
+              className="py-3 px-8 border-2 border-[#14120e] bg-[#14120e] text-[#e5e0d3] font-gothic text-2xl tracking-wide uppercase transition-all shadow-[4px_4px_0px_#c83a1a] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#c83a1a]"
+            >
+              {showSubcore ? "Hide Subcore Team ↑" : "View Subcore Team →"}
+            </button>
+          </div>
+        )}
+
+        {/* 4. Subcore Team (Revealed on Click) */}
+        {showSubcore && activeSubcore && (
+          <section className="space-y-12 border-t-2 border-[#14120e]/20 pt-10">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 border-b border-[#14120e]/20 pb-3">
+              <h2 className="font-pirata text-4xl sm:text-5xl lg:text-6xl text-[#14120e]">
+                <DecryptedText
+                  text="04 // Subcore Team"
+                  animateOn="view"
+                  speed={30}
+                  maxIterations={6}
+                  className="text-[#14120e]"
+                  encryptedClassName="text-[#c83a1a]/60 font-sans uppercase text-2xl"
+                />
+              </h2>
+              <span className="font-sans text-xs uppercase tracking-widest text-[#c83a1a] font-bold whitespace-nowrap">
+                DEPARTMENTS
+              </span>
+            </div>
+
+            {Object.entries(activeSubcore.subcoreTeam).map(([deptKey, category]) => (
+              <div key={deptKey} className="space-y-4">
+                <h3 className="font-sans text-lg uppercase tracking-widest text-[#c83a1a] font-bold border-b border-[#14120e]/10 pb-1">
+                  // {deptKey}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+                  {category.members.map((member) => (
+                    <MemberCard
+                      key={`${activeYear.year}-${deptKey}-${member.name}`}
+                      member={{ name: member.name, role: category.role, photo: member.photo }}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </section>
+        )}
       </div>
     </div>
   );

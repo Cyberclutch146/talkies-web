@@ -1,0 +1,109 @@
+[
+  {
+    "year": "2026-27",
+    "label": "Academic Year 2026–27",
+    "subcoreTeam": {
+      "alumni": {
+        "role": "Alumni Member",
+        "members": [
+          { "name": "Adrija Mitra", "photo": "/subcore/alumni/Adrija Mitra.jpg" },
+          { "name": "Arshdeep Singh", "photo": "/subcore/alumni/Arshdeep Singh.jpg" },
+          { "name": "Samadrita Saha", "photo": "/subcore/alumni/Samadrita Saha.jpg" },
+          { "name": "Sambhashan Dhara", "photo": "/subcore/alumni/Sambhashan Dhara.jpg" },
+          { "name": "Swapnendu Srimani", "photo": "/subcore/alumni/Swapnendu Srimani.jpg" }
+        ]
+      },
+      "artwork": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Asmita Mitra", "photo": "/subcore/artwork/Asmita Mitra.jpeg" },
+          { "name": "Enakshi Dalui", "photo": "/subcore/artwork/Enakshi Dalui.jpeg" },
+          { "name": "Krite Saha", "photo": "/subcore/artwork/Krite Saha.jpeg" },
+          { "name": "Mouparna Gupta", "photo": "/subcore/artwork/Mouparna Gupta.jpeg" },
+          { "name": "Rajarashi Ghosh", "photo": "/subcore/artwork/Rajarshi Ghosh.jpeg" },
+          { "name": "Sambhashan Dhara", "photo": "/subcore/artwork/Sambhashan Dhara.jpeg" }
+        ]
+      },
+      "content": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Deborima Roy", "photo": "/subcore/content/Deborima Roy.jpeg" },
+          { "name": "Piyush Roy Sarkar", "photo": "/subcore/content/Piyush Roy Sarkar.jpeg" },
+          { "name": "Sagnika Sinha", "photo": "/subcore/content/Sagnika Sinha.jpeg" },
+          { "name": "Sahina Parveen", "photo": "/subcore/content/Sahina Parveen.jpeg" },
+          { "name": "Sananda Sarkar", "photo": "/subcore/content/Sananda Sarkar.jpeg" }
+        ]
+      },
+      "event": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Atul Poddar", "photo": "/subcore/event/Atul Poddar.jpeg" },
+          { "name": "Diwakar Kumar", "photo": "/subcore/event/Diwakar Kumar.jpeg" },
+          { "name": "Eshika Saha", "photo": "/subcore/event/Eshika Saha.jpeg" },
+          { "name": "Priyangshu Sen", "photo": "/subcore/event/Priyangshu Sen.jpeg" },
+          { "name": "Sagnik Bose", "photo": "/subcore/event/Sagnik Bose.jpeg" },
+          { "name": "Saniya Ashraf", "photo": "/subcore/event/Saniya Ashraf.jpeg" },
+          { "name": "Sayan Das", "photo": "/subcore/event/Sayan Das.jpeg" },
+          { "name": "Sk Soniya Jabin", "photo": "/subcore/event/Sk Soniya Jabin.jpeg" }
+        ]
+      },
+      "graphics": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Ambalika Karmakar", "photo": "/subcore/graphics/Ambalika Karmakar.jpeg" },
+          { "name": "Ayushi Muhury", "photo": "/subcore/graphics/Ayushi Muhury.jpeg" },
+          { "name": "Sagnika Sinha", "photo": "/subcore/graphics/Sagnika Sinha.jpeg" },
+          { "name": "Srijoyni Mukherjee", "photo": "/subcore/graphics/SRIJOYNI MUKHERJEE.jpeg" },
+          { "name": "Suman Biswas", "photo": "/subcore/graphics/SumanBiswas.jpeg" }
+        ]
+      },
+      "pr": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Ayushi Muhury", "photo": "/subcore/pr/Ayushi Muhury.jpeg" },
+          { "name": "Sourjya Dutta", "photo": "/subcore/pr/Sourjya Dutta.jpeg" }
+        ]
+      },
+      "reporting": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Arshdeep Singh", "photo": "/subcore/reporting/Arshdeep Singh.jpeg" },
+          { "name": "Brishni", "photo": "/subcore/reporting/Brishni.jpeg" },
+          { "name": "Shreya Sarbavidya", "photo": "/subcore/reporting/Shreya Sarbavidya.jpeg" },
+          { "name": "Srirup Karmakar", "photo": "/subcore/reporting/Srirup Karmakar.jpeg" },
+          { "name": "Tiyasa", "photo": "/subcore/reporting/Tiyasa.jpeg" }
+        ]
+      },
+      "research": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Dayita Mondal", "photo": "/subcore/research/Dayita Mondal.jpeg" },
+          { "name": "Samadrita Saha", "photo": "/subcore/research/Samadrita Saha.jpeg" },
+          { "name": "Samriddha Das", "photo": "/subcore/research/Samriddha Das.jpeg" },
+          { "name": "Swapnil Biswas", "photo": "/subcore/research/Swapnil Biswas.jpeg" }
+        ]
+      },
+      "tech": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Ankit Karmakar", "photo": "/subcore/tech/Ankit Karmakar_.jpg" },
+          { "name": "Baidantik Das", "photo": "/subcore/tech/Baidantik Das.jpg" },
+          { "name": "Dayita Das", "photo": "/subcore/tech/Dayita Das.jpg" },
+          { "name": "Deepjyoti Mridha", "photo": "/subcore/tech/Deepjyoti mridha_.jpg" },
+          { "name": "Dhritiman Siva", "photo": "/subcore/tech/Dhritiman siva.jpg" },
+          { "name": "Sushweta Ghosh", "photo": "/subcore/tech/Sushweta Ghosh.jpg" }
+        ]
+      },
+      "videography": {
+        "role": "Subcore Member",
+        "members": [
+          { "name": "Abhijit Mahato", "photo": "/subcore/videography/ABHIJIT MAHATO.png" },
+          { "name": "Arkonil", "photo": "/subcore/videography/Arkonil.jpeg" },
+          { "name": "Sargik Kundu", "photo": "/subcore/videography/Sargik Kundu.PNG" },
+          { "name": "Sohandip Kar", "photo": "/subcore/videography/Sohandip Kar.png" },
+          { "name": "Subhadip Karmakar", "photo": "/subcore/videography/Subhadip Karmakar.webp" }
+        ]
+      }
+    }
+  }
+]
