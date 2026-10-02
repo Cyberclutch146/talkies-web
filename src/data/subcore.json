@@ -53,8 +53,8 @@
           { "name": "Ambalika Karmakar", "photo": "/subcore/graphics/Ambalika Karmakar.jpeg" },
           { "name": "Ayushi Muhury", "photo": "/subcore/graphics/Ayushi Muhury.jpeg" },
           { "name": "Sagnika Sinha", "photo": "/subcore/graphics/Sagnika Sinha.jpeg" },
-          { "name": "Srijoyni Mukherjee", "photo": "/subcore/graphics/SRIJOYNI MUKHERJEE.jpeg" },
-          { "name": "Suman Biswas", "photo": "/subcore/graphics/SumanBiswas.jpeg" }
+          { "name": "Srijoyni Mukherjee", "photo": "/subcore/graphics/SRIJOYNI MUKHERJEE.jpg" },
+          { "name": "Suman Biswas", "photo": "/subcore/graphics/SumanBiswas.png" }
         ]
       },
       "pr": {
@@ -87,7 +87,7 @@
         "role": "Subcore Member",
         "members": [
           { "name": "Ankit Karmakar", "photo": "/subcore/tech/Ankit Karmakar_.jpg" },
-          { "name": "Baidantik Das", "photo": "/subcore/tech/Baidantik Das.jpg" },
+          { "name": "Baidantik Das", "photo": "/subcore/tech/Baidantik Das.jpeg" },
           { "name": "Dayita Das", "photo": "/subcore/tech/Dayita Das.jpg" },
           { "name": "Deepjyoti Mridha", "photo": "/subcore/tech/Deepjyoti mridha_.jpg" },
           { "name": "Dhritiman Siva", "photo": "/subcore/tech/Dhritiman siva.jpg" },

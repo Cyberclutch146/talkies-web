@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import DecryptedText from "@/components/DecryptedText";
 import { prisma } from "@/lib/prisma";
 
@@ -71,10 +72,12 @@ export default async function MagazinePage() {
                   {/* Magazine Cover Frame */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden border border-[#14120e] bg-[#14120e] text-[#e5e0d3] p-6 sm:p-8 flex flex-col justify-between mb-6">
                     {mag.coverImage ? (
-                      <img
+                      <Image
                         src={mag.coverImage}
                         alt={`${mag.title} cover`}
-                        className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover opacity-30 group-hover:opacity-50 transition-opacity"
                       />
                     ) : null}
                     <div className="relative z-10 flex justify-between items-start">
@@ -87,7 +90,7 @@ export default async function MagazinePage() {
                     </div>
 
                     <div className="relative z-10 text-center my-auto">
-                      <span className="font-gothic text-xl text-[#e5e0d3]/50 block mb-1">
+                      <span className="font-sans text-xs uppercase tracking-[0.2em] font-semibold text-[#e5e0d3]/60 block mb-1">
                         The RCC Talkies
                       </span>
                       <h3 className="font-display text-3xl sm:text-5xl uppercase tracking-tight text-[#e5e0d3]">
