@@ -632,7 +632,7 @@ export function ParticipationForm() {
                   </div>
 
                   {/* Step content with slide animation */}
-                  <AnimatePresence mode="wait" custom={direction}>
+                  <AnimatePresence mode="popLayout" custom={direction}>
                     <motion.div
                       key={step.id}
                       custom={direction}
@@ -641,10 +641,10 @@ export function ParticipationForm() {
                       animate="center"
                       exit="exit"
                       transition={{
-                        duration: prefersReduced ? 0 : 0.3,
+                        duration: prefersReduced ? 0 : 0.2,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="min-h-[300px]"
+                      className="min-h-[300px] w-full"
                     >
                       {/* Step header */}
                       <div className="mb-8">
@@ -721,7 +721,7 @@ export function ParticipationForm() {
                         <button
                           type="button"
                           onClick={goBack}
-                          className="font-sans text-xs uppercase tracking-[0.15em] font-bold text-[#e5e0d3]/50 hover:text-[#faf6ee] transition-colors flex items-center gap-2 cursor-pointer"
+                          className="font-sans text-xs uppercase tracking-[0.15em] font-bold text-[#e5e0d3]/50 hover:text-[#faf6ee] transition-colors flex items-center gap-2 cursor-pointer touch-manipulation"
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
                           Back
@@ -734,7 +734,7 @@ export function ParticipationForm() {
                         <button
                           type="button"
                           onClick={goNext}
-                          className="font-sans text-xs uppercase tracking-[0.15em] font-bold text-[#14120e] bg-[#d4a24e] hover:bg-[#c83a1a] hover:text-[#faf6ee] transition-all duration-300 px-8 py-3 rounded-full flex items-center gap-2 cursor-pointer"
+                          className="font-sans text-xs uppercase tracking-[0.15em] font-bold text-[#14120e] bg-[#d4a24e] hover:bg-[#c83a1a] hover:text-[#faf6ee] transition-all duration-300 px-8 py-3 rounded-full flex items-center gap-2 cursor-pointer touch-manipulation"
                         >
                           {currentStep === totalSteps - 2 ? "Review" : "Next"}
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14m0 0l-7-7m7 7l-7 7"/></svg>
