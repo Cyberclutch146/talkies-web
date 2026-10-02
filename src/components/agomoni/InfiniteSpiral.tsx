@@ -232,9 +232,7 @@ const InfiniteSpiral: React.FC<InfiniteSpiralProps> = ({
     perspective: `${perspective}px`,
     // @ts-expect-error CSS variable injection
     "--infinite-spiral-card-width": `${cardWidth}px`,
-    // @ts-expect-error CSS variable injection
     "--infinite-spiral-card-height": `${cardHeight}px`,
-    // @ts-expect-error CSS variable injection
     "--infinite-spiral-card-radius": `${cardRadius}px`,
     cursor: animationMode === "drag" || animationMode === "all" ? "grab" : "default",
     touchAction: animationMode === "drag" || animationMode === "all" ? "pan-x" : "auto",
