@@ -137,11 +137,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-      <html
+    <html
       lang="en"
       className={`${unifraktur.variable} ${pirata.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} ${galada.variable} ${tiroBangla.variable} ${atma.variable} ${notoBengali.variable} ${mina.variable} ${baloo.variable} ${anek.variable} ${hind.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-serif bg-[#e5e0d3] text-[#14120e] selection:bg-[#14120e] selection:text-[#e5e0d3]">
+      <body className="min-h-full flex flex-col font-serif bg-[#e5e0d3] text-[#14120e] selection:bg-[#14120e] selection:text-[#e5e0d3] overflow-x-hidden">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>

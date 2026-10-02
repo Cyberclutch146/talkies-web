@@ -132,17 +132,25 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Center: Giant overlaid title with mix-blend */}
-        <div className="absolute inset-0 z-[5] flex flex-col items-center justify-center pointer-events-none select-none px-4">
-          <h1 className="font-display text-[22vw] sm:text-[16vw] lg:text-[14vw] leading-[0.85] tracking-tighter uppercase text-[#e5e0d3] mix-blend-difference text-center drop-shadow-2xl">
+        {/* Center: Giant overlaid title with mix-blend. Fades in after 2.5s so Maa Durga's face is visible first */}
+        <motion.div 
+          className="absolute inset-0 z-[5] flex flex-col items-center justify-center pointer-events-none select-none px-4"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 2.5, duration: 1.5, ease: "easeOut" }}
+        >
+          <span className="mb-2 sm:mb-4 font-sans text-[10px] sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.5em] text-[#e5e0d3] mix-blend-difference text-center font-bold">
+            PRESENTED BY
+          </span>
+          <h1 className="font-display text-[17vw] sm:text-[14vw] lg:text-[12vw] leading-[0.85] tracking-tighter uppercase text-[#e5e0d3] mix-blend-difference text-center drop-shadow-2xl">
             RCC
             <br />
             TALKIES
           </h1>
-          <p className="mt-4 sm:mt-6 font-sans text-[9px] sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#e5e0d3]/70 mix-blend-difference text-center max-w-[90%] mx-auto leading-relaxed">
+          <p className="mt-4 sm:mt-6 font-sans text-[9px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#e5e0d3]/70 mix-blend-difference text-center max-w-[90%] mx-auto leading-relaxed">
             THE OFFICIAL JOURNALISM CLUB OF RCCIIT
           </p>
-        </div>
+        </motion.div>
 
 
 
