@@ -34,7 +34,7 @@ export function SocialWidget() {
   if (!isVisible) return null;
 
   return (
-    <div ref={widgetRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 font-sans">
+    <div ref={widgetRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 font-sans pointer-events-none">
       
       {/* Dialogue Box */}
       <div 
@@ -128,7 +128,7 @@ export function SocialWidget() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#14120e] text-[#e5e0d3] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#c83a1a] hover:shadow-xl focus:outline-none"
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#14120e] text-[#e5e0d3] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#c83a1a] hover:shadow-xl focus:outline-none pointer-events-auto"
         aria-label="Social Links"
         aria-expanded={isOpen}
       >
