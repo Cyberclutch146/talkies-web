@@ -254,17 +254,28 @@ export function ParticipationForm() {
   }, [currentStep, formData]);
 
   /* ── Navigation ──────────────────────────────────────────────── */
+  const formTopRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = () => {
+    if (formTopRef.current) {
+      const y = formTopRef.current.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   const goNext = useCallback(() => {
     if (currentStep >= totalSteps - 1) return;
     if (!validateCurrentStep()) return;
     setDirection(1);
     setCurrentStep((s) => s + 1);
+    setTimeout(scrollToTop, 100);
   }, [currentStep, totalSteps, validateCurrentStep]);
 
   const goBack = useCallback(() => {
     if (currentStep <= 0) return;
     setDirection(-1);
     setCurrentStep((s) => s - 1);
+    setTimeout(scrollToTop, 100);
   }, [currentStep]);
 
   /* ── Final submit ────────────────────────────────────────────── */
@@ -320,7 +331,8 @@ export function ParticipationForm() {
     return (
       <motion.div
         key={field.name}
-        className="space-y-1"
+        className="space-y-1 relative"
+        style={{ zIndex: 50 - index }}
         initial={prefersReduced ? {} : { opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: index * 0.05 }}
@@ -402,7 +414,7 @@ export function ParticipationForm() {
   return (
     <section
       id="participate"
-      className="relative w-full bg-[#14120e] text-[#e5e0d3] overflow-hidden"
+      className="relative w-full bg-[#14120e] text-[#e5e0d3]"
       style={{ colorScheme: "dark" }}
     >
       {/* Full-section আগমনী watermark */}
@@ -418,6 +430,7 @@ export function ParticipationForm() {
 
         {/* ── Header ─────────────────────────────────────────── */}
         <motion.div
+          ref={formTopRef}
           className="text-center mb-16"
           initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -632,7 +645,7 @@ export function ParticipationForm() {
                   </div>
 
                   {/* Step content with slide animation */}
-                  <AnimatePresence mode="popLayout" custom={direction}>
+                  <AnimatePresence mode="wait" custom={direction}>
                     <motion.div
                       key={step.id}
                       custom={direction}
