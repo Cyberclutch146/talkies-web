@@ -11,6 +11,7 @@ interface TeamMember {
   name: string;
   role: string;
   photo: string | null;
+  position?: string;
 }
 
 interface TeamYear {
@@ -24,6 +25,7 @@ interface TeamYear {
 interface SubcoreMember {
   name: string;
   photo: string;
+  position?: string;
 }
 
 interface SubcoreCategory {
@@ -50,7 +52,7 @@ function MemberCard({ member }: { member: TeamMember }) {
           src={photoSrc}
           alt={member.name}
           fill
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          style={{ objectFit: 'cover', objectPosition: member.position || 'center' }}
           className="transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
@@ -290,7 +292,7 @@ export default function MembersPage() {
                   {category.members?.map((member, idx) => (
                     <MemberCard
                       key={`${activeYear.year}-${deptKey}-${member.name}-${idx}`}
-                      member={{ name: member.name, role: category.role, photo: member.photo }}
+                      member={{ name: member.name, role: category.role, photo: member.photo, position: member.position }}
                     />
                   ))}
                 </div>

@@ -17,10 +17,10 @@
         "role": "Subcore Member",
         "members": [
           { "name": "Asmita Mitra", "photo": "/subcore/artwork/Asmita Mitra.jpeg" },
-          { "name": "Enakshi Dalui", "photo": "/subcore/artwork/Enakshi Dalui.jpeg" },
+          { "name": "Enakshi Dalui", "photo": "/subcore/artwork/Enakshi Dalui.jpeg", "position": "center top" },
           { "name": "Krite Saha", "photo": "/subcore/artwork/Krite Saha.jpeg" },
           { "name": "Mouparna Gupta", "photo": "/subcore/artwork/Mouparna Gupta.jpeg" },
-          { "name": "Rajarashi Ghosh", "photo": "/subcore/artwork/Rajarshi Ghosh.jpeg" },
+          { "name": "Rajarashi Ghosh", "photo": "/subcore/artwork/Rajarshi Ghosh.jpeg", "position": "center top" },
           { "name": "Sambhashan Dhara", "photo": "/subcore/artwork/Sambhashan Dhara.jpeg" }
         ]
       },
@@ -73,7 +73,7 @@
           { "name": "Brishni Das", "photo": "/subcore/reporting/Brishni.jpeg" },
           { "name": "Shreya Sarbavidya", "photo": "/subcore/reporting/Shreya Sarbavidya.jpeg" },
           { "name": "Srirup Karmakar", "photo": "/subcore/reporting/Srirup Karmakar.jpeg" },
-          { "name": "Tiyasa Das", "photo": "/subcore/reporting/Tiyasa.jpeg" }
+          { "name": "Tiyasa Das", "photo": "/subcore/reporting/Tiyasa.jpeg", "position": "center top" }
         ]
       },
       "research": {
