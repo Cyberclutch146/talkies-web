@@ -7,7 +7,7 @@
         "role": "Alumni Member",
         "members": [
           { "name": "Adrija Mitra", "photo": "/subcore/alumni/Adrija Mitra.jpg" },
-          { "name": "Arshdeep Singh", "photo": "/subcore/alumni/Arshdeep Singh.jpg" },
+          { "name": "Arshdeep Singh", "photo": "/subcore/reporting/Arshdeep Singh.jpeg" },
           { "name": "Samadrita Saha", "photo": "/subcore/alumni/Samadrita Saha.jpg" },
           { "name": "Sambhashan Dhara", "photo": "/subcore/alumni/Sambhashan Dhara.jpg" },
           { "name": "Swapnendu Srimani", "photo": "/subcore/alumni/Swapnendu Srimani.jpg" }
@@ -53,6 +53,7 @@
           { "name": "Ambalika Karmakar", "photo": "/subcore/graphics/Ambalika Karmakar.jpeg" },
           { "name": "Ayushi Muhury", "photo": "/subcore/graphics/Ayushi Muhury.jpeg" },
           { "name": "Sagnika Sinha", "photo": "/subcore/graphics/Sagnika Sinha.jpeg" },
+          { "name": "Sagnik Bose", "photo": "/subcore/event/Sagnik Bose.jpeg" },
           { "name": "Srijoyni Mukherjee", "photo": "/subcore/graphics/SRIJOYNI MUKHERJEE.jpg" },
           { "name": "Suman Biswas", "photo": "/subcore/graphics/SumanBiswas.png" }
         ]
@@ -67,11 +68,12 @@
       "reporting": {
         "role": "Subcore Member",
         "members": [
+          { "name": "Arko Chakraborty", "photo": "/subcore/reporting/Arko Chakraborty.jpeg" },
           { "name": "Arshdeep Singh", "photo": "/subcore/reporting/Arshdeep Singh.jpeg" },
-          { "name": "Brishni", "photo": "/subcore/reporting/Brishni.jpeg" },
+          { "name": "Brishni Das", "photo": "/subcore/reporting/Brishni.jpeg" },
           { "name": "Shreya Sarbavidya", "photo": "/subcore/reporting/Shreya Sarbavidya.jpeg" },
           { "name": "Srirup Karmakar", "photo": "/subcore/reporting/Srirup Karmakar.jpeg" },
-          { "name": "Tiyasa", "photo": "/subcore/reporting/Tiyasa.jpeg" }
+          { "name": "Tiyasa Das", "photo": "/subcore/reporting/Tiyasa.jpeg" }
         ]
       },
       "research": {
@@ -98,7 +100,7 @@
         "role": "Subcore Member",
         "members": [
           { "name": "Abhijit Mahato", "photo": "/subcore/videography/ABHIJIT MAHATO.png" },
-          { "name": "Arkonil", "photo": "/subcore/videography/Arkonil.jpeg" },
+          { "name": "Arkonil Sarkar", "photo": "/subcore/videography/Arkonil.jpeg" },
           { "name": "Sargik Kundu", "photo": "/subcore/videography/Sargik Kundu.PNG" },
           { "name": "Sohandip Kar", "photo": "/subcore/videography/Sohandip Kar.png" },
           { "name": "Subhadip Karmakar", "photo": "/subcore/videography/Subhadip Karmakar.webp" }

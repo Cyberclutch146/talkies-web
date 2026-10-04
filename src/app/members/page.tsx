@@ -45,12 +45,13 @@ function MemberCard({ member }: { member: TeamMember }) {
       className="group p-0 flex flex-col h-full transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
       spotlightColor="rgba(200, 58, 26, 0.15)"
     >
-      <div className="relative w-full aspect-[4/5] bg-[#dad4c3] overflow-hidden border-b border-[#14120e]/15">
+      <div className="relative w-full aspect-[4/5] overflow-hidden">
         <Image
           src={photoSrc}
           alt={member.name}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          className="transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
       </div>
@@ -77,12 +78,13 @@ function FacultyCard({ member }: { member: TeamMember }) {
       className="group p-0 flex flex-col h-full transition-all duration-500 hover:shadow-[6px_6px_0px_#14120e] hover:-translate-y-1 hover:border-[#c83a1a]"
       spotlightColor="rgba(200, 58, 26, 0.1)"
     >
-      <div className="relative w-full aspect-[4/5] bg-[#dad4c3] overflow-hidden border-b border-[#14120e]/15">
+      <div className="relative w-full aspect-[4/5] overflow-hidden">
         <Image
           src={photoSrc}
           alt={member.name}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          className="transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute top-2 left-2 bg-[#14120e] text-[#c83a1a] text-[9px] font-sans font-bold px-1.5 py-0.5 tracking-widest uppercase">

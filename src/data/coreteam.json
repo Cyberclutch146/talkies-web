@@ -33,9 +33,9 @@
       "year": "2025-26",
       "label": "Academic Year 2025–26",
       "leads": [
-        { "name": "Raunshan Pandey", "role": "Secretary", "photo": "/team/raushan2025.webp" },
-        { "name": "Sutanuka Chakraborty", "role": "Editor-in-Chief", "photo": "/team/sutanuka.webp" },
-        { "name": "Shreya Dutta", "role": "Student Advisor", "photo": "/team/shreya.webp" }
+        { "name": "Raunshan Pandey", "role": "Secretary", "photo": "/coreteam/raushan2025.webp" },
+        { "name": "Sutanuka Chakraborty", "role": "Editor-in-Chief", "photo": "/coreteam/sutanuka.webp" },
+        { "name": "Shreya Dutta", "role": "Student Advisor", "photo": "/coreteam/shreya.webp" }
       ],
       "coreTeam": [
         { "name": "Kankona Chakraborty", "role": "PR Head", "photo": "/coreteam/kankona.webp" },
