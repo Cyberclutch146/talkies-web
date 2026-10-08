@@ -104,7 +104,7 @@ const baloo = Baloo_Da_2({
 });
 
 const anek = Anek_Bangla({
-  weight: ["400", "700", "800"],
+  weight: "400",
   subsets: ["bengali"],
   variable: "--font-bengali-anek",
   display: "swap",
