@@ -10,7 +10,6 @@ import DecryptedText from "@/components/DecryptedText";
 import AboutCollege from "@/components/AboutCollege";
 import CircularText from "@/components/CircularText";
 import InstagramFeed from "@/components/InstagramFeed";
-import DurgaScrollReveal from "@/components/Scroll";
 
 const missionPillars = [
   {
@@ -79,13 +78,10 @@ export default function HomePage() {
 
       {/* ═══════════════════════════════════════════════════════════════
           HERO: Full-bleed Halftone + Overlaid Giant Title
-          Pinned scroll container: pins hero while Durga logo travels
-          horizontally across the bottom, then releases to scroll down
       ═══════════════════════════════════════════════════════════════ */}
-      <div id="hero-scroll-container" className="relative w-full h-[280vh]">
-        <section className="sticky top-0 w-full h-[100svh] min-h-[500px] overflow-hidden bg-[#14120e] border-b-2 border-[#14120e]">
-        {/* Full-bleed Halftone Canvas (commented out for Durga Puja) */}
-        {/* <div className="absolute inset-0 z-0">
+      <section className="relative w-full h-[100svh] min-h-[500px] overflow-hidden bg-[#14120e] border-b-2 border-[#14120e]">
+        {/* Full-bleed Halftone Canvas */}
+        <div className="absolute inset-0 z-0">
           <HalftoneReveal
             src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80"
             inkColor="#14120e"
@@ -98,15 +94,6 @@ export default function HomePage() {
             follow={0.25}
             trigger="hover"
             borderRadius="0px"
-          />
-        </div> */}
-
-        {/* Durga Puja background — black & white */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/durga-hero.jpg"
-            alt="Durga Puja background"
-            className="w-full h-full object-cover object-center"
           />
         </div>
 
@@ -132,12 +119,12 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Center: Giant overlaid title with mix-blend. Fades in after 2.5s so Maa Durga's face is visible first */}
+        {/* Center: Giant overlaid title with mix-blend */}
         <motion.div 
           className="absolute inset-0 z-[5] flex flex-col items-center justify-center pointer-events-none select-none px-4"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2.5, duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
           <span className="mb-2 sm:mb-4 font-sans text-[10px] sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.5em] text-[#e5e0d3] mix-blend-difference text-center font-bold">
             PRESENTED BY
@@ -152,10 +139,8 @@ export default function HomePage() {
           </p>
         </motion.div>
 
-
-
         {/* Scroll indicator */}
-        <div className="absolute bottom-28 sm:bottom-36 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none animate-bounce">
+        <div className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none animate-bounce">
           <span className="text-[9px] sm:text-[10px] font-sans uppercase tracking-[0.25em] text-[#e5e0d3]/70 font-bold">
             SCROLL DOWN
           </span>
@@ -164,14 +149,7 @@ export default function HomePage() {
             <path d="M1 4L6 9L11 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            AGOMONI SCROLL REVEAL: Maa Durga face glides along bottom to
-            reveal "আগমনী" (GDGC taxi-style)
-        ═══════════════════════════════════════════════════════════════ */}
-        <DurgaScrollReveal />
-        </section>
-      </div>
+      </section>
 
       {/* ═══════════════════════════════════════════════════════════════
           EDITORIAL STORIES: 3-col feature grid
