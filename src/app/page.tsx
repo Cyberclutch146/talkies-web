@@ -294,6 +294,87 @@ export default function HomePage() {
         </div>
       </section>
 
+            {/* ═══════════════════════════════════════════════════════════════
+          STUDENT ACHIEVEMENTS: Hall of Fame & Dispatch Submission
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="w-full border-b border-[#14120e]/20 bg-[#ded8c7]/50 relative overflow-hidden">
+        {/* Ambient subtle mask.png texture background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: "url('/mask.png')" }}
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#14120e]/20 relative z-10">
+          {/* Left: Content & Featured Highlights */}
+          <div className="lg:col-span-8 p-6 sm:p-10 lg:p-16 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-[#c83a1a]">✦</span>
+                <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold text-[#c83a1a]">
+                  RCC TALKIES // OUR DATABASE
+                </span>
+              </div>
+              <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tighter text-[#14120e] leading-[0.95] mb-6">
+                <DecryptedText
+                  text="STUDENT ACHIEVEMENTS"
+                  animateOn="view"
+                  speed={35}
+                  maxIterations={7}
+                  sequential={true}
+                  revealDirection="start"
+                  className="text-[#14120e]"
+                  encryptedClassName="text-[#c83a1a]"
+                />
+              </h2>
+              <p className="font-serif text-base sm:text-lg text-[#14120e]/80 max-w-2xl leading-relaxed">
+                Your hard work deserves to be seen. From national hackathon podiums and international research fellowships to sports championships and placement milestones — share your triumphs with the official RCC Talkies database.
+              </p>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-[#14120e]/20">
+              <Link
+                href="/achievements#submit-section"
+                className="inline-flex items-center gap-2 bg-[#942617] text-[#f4efe4] px-6 py-3.5 font-sans text-xs uppercase tracking-widest font-bold hover:bg-[#7b1e11] transition-all shadow-[3px_3px_0px_#14120e] border border-[#14120e] group"
+              >
+                <span>Submit Your Achievement</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+              <Link
+                href="/achievements"
+                className="inline-flex items-center gap-2 border-2 border-[#14120e] bg-[#f5efe2] px-6 py-3.5 font-sans text-xs uppercase tracking-widest font-bold text-[#14120e] hover:bg-[#14120e] hover:text-[#e5e0d3] transition-all shadow-[3px_3px_0px_#14120e]"
+              >
+                <span>Explore Hall of Fame</span>
+                <span>↗</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: Vintage Poster Card Teaser */}
+          <div className="lg:col-span-4 p-8 sm:p-12 bg-[#171411] text-[#e5e0d3] flex flex-col justify-center relative overflow-hidden">
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay pointer-events-none"
+              style={{ backgroundImage: "url('/mask.png')" }}
+            />
+            
+            <div className="relative z-10 space-y-4">
+              <div className="inline-block transform -rotate-1 bg-[#f4eee2] text-[#14120e] border-2 border-[#14120e] px-2.5 py-0.5 shadow-[2px_2px_0px_#c83a1a]">
+                <span className="font-mono text-[9px] font-black uppercase tracking-[0.2em]">
+                  SUBMIT YOUR DISPATCH
+                </span>
+              </div>
+              <h3 className="font-serif text-3xl sm:text-4xl font-black uppercase text-[#f4efe4] leading-tight drop-shadow-sm">
+                Got a story to tell?
+              </h3>
+              <p className="font-serif italic text-sm text-[#cfc9bd] leading-relaxed">
+                &ldquo;Great achievements aren&apos;t born in comfort zones.&rdquo;
+              </p>
+              <div className="w-12 h-0.5 bg-[#c83a1a]" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════════════════════════════════════════════════════════
           VISION & MISSION — Paper theme, proper spacing
       ═══════════════════════════════════════════════════════════════ */}

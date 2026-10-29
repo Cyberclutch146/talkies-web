@@ -135,6 +135,43 @@ export default async function MagazinePage() {
           )}
         </div>
       </div>
+
+      {/* ── Student Achievements Section Below Magazine Issues ── */}
+      <section className="border-t-2 border-[#14120e]/20 bg-[#ded8c7]/40 py-12 px-4 sm:px-8 relative overflow-hidden">
+        {/* Subtle ambient mask.png texture */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"
+          style={{ backgroundImage: "url('/mask.png')" }}
+        />
+
+        <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 border-2 border-[#14120e] bg-[#f5efe2] p-6 sm:p-10 shadow-[6px_6px_0px_#14120e]">
+          <div className="space-y-2 max-w-xl">
+            <span className="font-mono text-xs uppercase tracking-[0.25em] font-bold text-[#c83a1a] block">
+              ✦ FEATURED IN PRINT & PERMANENT ARCHIVE ✦
+            </span>
+            <h3 className="font-serif text-2xl sm:text-4xl font-bold uppercase tracking-tight text-[#14120e]">
+              Student Achievements Registry
+            </h3>
+            <p className="font-serif text-sm sm:text-base text-[#14120e]/75 leading-relaxed">
+              Outstanding student milestones and competition triumphs are featured directly in our upcoming print magazine editions. Submit your story to the editorial board.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/achievements#submit-section"
+              className="px-5 py-3 bg-[#942617] text-[#f4efe4] font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#7b1e11] transition-colors shadow-[2px_2px_0px_#14120e]"
+            >
+              Submit Achievement →
+            </Link>
+            <Link
+              href="/achievements"
+              className="px-5 py-3 border-2 border-[#14120e] text-[#14120e] font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#14120e] hover:text-[#e5e0d3] transition-colors shadow-[2px_2px_0px_#14120e]"
+            >
+              Explore Hall of Fame ↗
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
