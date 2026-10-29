@@ -1,0 +1,80 @@
+[
+  {
+    "id": "ach-1",
+    "fullName": "Arijit Mukherjee",
+    "department": "CSE",
+    "rollNumber": "CSE2021042",
+    "achievements": "Led Team CircuitBreakers to 1st Place at Smart India Hackathon 2025 (Hardware Edition) with an AIoT-based Smart Grid Fault Detection system. Selected out of 1,200+ teams nationwide.",
+    "picture": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    "dateYear": "2025",
+    "category": "Hackathons & Tech Competitions",
+    "additionalNotes": "Received a cash prize of ₹1,00,000 and incubation support at MeitY startup hub.",
+    "featured": true,
+    "createdAt": "2025-11-15T10:30:00.000Z"
+  },
+  {
+    "id": "ach-2",
+    "fullName": "Sneha Chakraborty",
+    "department": "IT",
+    "rollNumber": "IT2022018",
+    "achievements": "Secured an International Research Internship at Nanyang Technological University (NTU), Singapore for Summer 2025 in Quantum Machine Learning & Cryptography.",
+    "picture": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+    "dateYear": "2025",
+    "category": "Academics & Research",
+    "additionalNotes": "Published 2 IEEE papers under Dr. P. K. Ghosh at RCCIIT prior to this fellowship.",
+    "featured": true,
+    "createdAt": "2025-10-02T14:15:00.000Z"
+  },
+  {
+    "id": "ach-3",
+    "fullName": "Rohit Debnath",
+    "department": "ECE",
+    "rollNumber": "ECE2022055",
+    "achievements": "Captained RCCIIT Football Team to win the MAKAUT Inter-College Football Championship 2026, scoring the decisive goal in the 88th minute of the finals against Heritage.",
+    "picture": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    "dateYear": "2026",
+    "category": "Sports & Athletics",
+    "additionalNotes": "Awarded 'Player of the Tournament' with 7 goals across 5 matches.",
+    "featured": true,
+    "createdAt": "2026-02-18T18:00:00.000Z"
+  },
+  {
+    "id": "ach-4",
+    "fullName": "Ananya Roy",
+    "department": "AIML",
+    "rollNumber": "AIML2023009",
+    "achievements": "Winner of Eastern Classical Solo Vocal at MAKAUT Ananya Cultural Meet 2025 and featured vocal soloist at RCCIIT Regalia Band Night.",
+    "picture": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
+    "dateYear": "2025",
+    "category": "Cultural, Music & Arts",
+    "additionalNotes": "Mentored under the RCCIIT Art & Cultural Club vocal division.",
+    "featured": false,
+    "createdAt": "2025-09-12T09:45:00.000Z"
+  },
+  {
+    "id": "ach-5",
+    "fullName": "Debarghya Sen",
+    "department": "CSE",
+    "rollNumber": "CSE2021088",
+    "achievements": "Cracked Atlassian as Software Development Engineer with a package of 42 LPA, marking one of the highest on-campus placement offers for the 2025 graduating cohort.",
+    "picture": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    "dateYear": "2025",
+    "category": "Internships & Placements",
+    "additionalNotes": "Former lead of RCC Techz competitive programming wing.",
+    "featured": true,
+    "createdAt": "2025-08-20T11:20:00.000Z"
+  },
+  {
+    "id": "ach-6",
+    "fullName": "Koyel Ghosh",
+    "department": "EE",
+    "rollNumber": "EE2023031",
+    "achievements": "Built 'SolarisEye', an open-source autonomous microgrid monitor deployed at 3 village schools in South 24 Parganas, generating 100% renewable telemetry.",
+    "picture": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+    "dateYear": "2024 / 2025",
+    "category": "Open Source & Projects",
+    "additionalNotes": "Project showcased at Kolkata Green Tech Expo 2025.",
+    "featured": false,
+    "createdAt": "2025-05-10T16:00:00.000Z"
+  }
+]
