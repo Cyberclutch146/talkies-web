@@ -1,0 +1,82 @@
+/* ─── Page Transition Overlay ─── */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #14120e;
+  opacity: 1;
+  animation: pt-fade-in 0.12s ease-out both;
+}
+
+.page-transition-overlay.fade-out {
+  animation: pt-fade-out 0.3s ease-in both;
+}
+
+.page-transition-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: radial-gradient(#e5e0d3 0.75px, transparent 0.75px),
+    radial-gradient(#e5e0d3 0.75px, #14120e 0.75px);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+}
+
+.page-transition-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Override Shuffle defaults for the transition text */
+.page-transition-text.shuffle-parent {
+  font-size: clamp(2rem, 6vw, 4rem) !important;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.page-transition-tagline {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(207, 200, 189, 0.5);
+  animation: pt-tagline-in 0.4s ease-out 0.15s both;
+}
+
+/* ─── Keyframes ─── */
+@keyframes pt-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pt-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pt-tagline-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

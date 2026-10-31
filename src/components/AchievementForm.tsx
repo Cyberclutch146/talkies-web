@@ -401,33 +401,103 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
             <div className="bg-[#ded2bc] border-2 border-[#2b2219] p-4 sm:p-6 lg:p-8 shadow-[3px_3px_0px_#2b2219] relative overflow-visible">
 
               {/* ── PAPERCLIP (top-left, desktop) ── */}
-              <div className="hidden md:block absolute -top-4 left-8 z-20 select-none pointer-events-none">
-                <svg width="28" height="48" viewBox="0 0 28 48" fill="none" className="text-[#6b6054] drop-shadow-sm">
-                  <path d="M10 8V34C10 38.5 13.5 42 18 42C22.5 42 26 38.5 26 34V6C26 3 23 0.5 19.5 0.5C16 0.5 13 3 13 6V30C13 32.5 15 34 17 34C19 34 21 32.5 21 30V10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+              <div className="hidden md:block absolute -top-6 left-10 z-20 select-none pointer-events-none">
+                <svg width="32" height="56" viewBox="0 0 28 48" fill="none" className="text-[#8a8070] drop-shadow-md">
+                  <path d="M10 8V34C10 38.5 13.5 42 18 42C22.5 42 26 38.5 26 34V6C26 3 23 0.5 19.5 0.5C16 0.5 13 3 13 6V30C13 32.5 15 34 17 34C19 34 21 32.5 21 30V10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                 </svg>
               </div>
 
-              {/* ── STICKY NOTE (top-right, desktop) ── */}
-              <div className="hidden lg:block absolute -top-5 -right-3 z-20 select-none pointer-events-none">
-                <div className="transform rotate-3 bg-[#fef3c7] border border-[#d4a017]/40 px-3 py-2.5 w-36 shadow-[2px_3px_6px_rgba(0,0,0,0.15)]">
-                  <p className="font-serif italic text-[10px] text-[#5c4a1e] leading-snug">
-                    &ldquo;Great achievements aren&apos;t born in comfort zones.&rdquo;
-                  </p>
-                  <div className="mt-1.5 w-full h-px bg-[#d4a017]/30" />
-                  <p className="font-mono text-[7px] uppercase tracking-widest text-[#8b7530] mt-1 text-right">— RCC Talkies</p>
+              {/* ── RED PUSH PIN (top-left corner, desktop) ── */}
+              <div className="hidden md:block absolute -top-3 left-28 z-20 select-none pointer-events-none">
+                <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
+                  <circle cx="11" cy="8" r="7" fill="#8c2817" stroke="#5a1a0f" strokeWidth="1.5" />
+                  <circle cx="11" cy="8" r="3" fill="#b8432e" opacity="0.7" />
+                  <line x1="11" y1="15" x2="11" y2="27" stroke="#6b6054" strokeWidth="1.8" />
+                </svg>
+              </div>
+
+              {/* ── RED PUSH PIN (top-right, desktop) ── */}
+              <div className="hidden md:block absolute -top-3 right-12 z-20 select-none pointer-events-none">
+                <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
+                  <circle cx="11" cy="8" r="7" fill="#8c2817" stroke="#5a1a0f" strokeWidth="1.5" />
+                  <circle cx="11" cy="8" r="3" fill="#b8432e" opacity="0.7" />
+                  <line x1="11" y1="15" x2="11" y2="27" stroke="#6b6054" strokeWidth="1.8" />
+                </svg>
+              </div>
+
+              {/* ── STICKY NOTE (top-right, desktop) — bigger with fold ── */}
+              <div className="hidden lg:block absolute -top-8 -right-5 z-20 select-none pointer-events-none">
+                <div className="transform rotate-4 w-44 shadow-[3px_4px_8px_rgba(0,0,0,0.2)]" style={{ background: 'linear-gradient(135deg, #fef3c7 85%, #e8d5a0 85%)' }}>
+                  <div className="border border-[#d4a017]/30 px-3.5 py-3">
+                    <p className="font-serif italic text-[11px] text-[#5c4a1e] leading-snug">
+                      &ldquo;Great achievements aren&apos;t born in comfort zones.&rdquo;
+                    </p>
+                    <div className="mt-2 w-full h-px bg-[#d4a017]/25" />
+                    <div className="mt-1.5 flex items-center justify-between">
+                      <span className="text-[#8c2817] text-sm">★</span>
+                      <span className="font-mono text-[7px] uppercase tracking-widest text-[#8b7530]">— RCC Talkies</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* ── RED WASHI TAPE STRIP (top, desktop) ── */}
-              <div className="hidden md:block absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 select-none pointer-events-none">
-                <div className="w-24 h-5 bg-[#8c2817]/70 transform -rotate-1 opacity-80" style={{ clipPath: 'polygon(2% 0%, 98% 3%, 100% 100%, 0% 97%)' }} />
+              {/* ── WIDE WASHI TAPE (top-center, desktop) ── */}
+              <div className="hidden md:block absolute -top-3 left-1/2 -translate-x-1/2 z-20 select-none pointer-events-none">
+                <div className="w-32 h-7 bg-[#8c2817]/65 transform -rotate-1" style={{ clipPath: 'polygon(1% 0%, 99% 2%, 100% 100%, 0% 98%)' }}>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="font-mono text-[7px] text-[#f7f2e7]/60 uppercase tracking-[0.3em]">RCC ✦ TALKIES</span>
+                  </div>
+                </div>
               </div>
-              {/* ── COFFEE RING STAIN (desktop, decorative) ── */}
-              <div className="hidden lg:block absolute top-24 -right-8 z-10 select-none pointer-events-none opacity-[0.07]">
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-                  <circle cx="60" cy="60" r="52" stroke="#3d2b1a" strokeWidth="8" />
-                  <circle cx="60" cy="60" r="44" stroke="#3d2b1a" strokeWidth="2" />
-                  <circle cx="60" cy="60" r="38" stroke="#3d2b1a" strokeWidth="1" opacity="0.5" />
+
+              {/* ── CIRCULAR RUBBER STAMP SEAL (right side, desktop) ── */}
+              <div className="hidden lg:block absolute top-28 -right-10 z-10 select-none pointer-events-none transform rotate-12 opacity-[0.18]">
+                <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
+                  <circle cx="70" cy="70" r="62" stroke="#8c2817" strokeWidth="4" />
+                  <circle cx="70" cy="70" r="55" stroke="#8c2817" strokeWidth="1.5" />
+                  <circle cx="70" cy="70" r="50" stroke="#8c2817" strokeWidth="0.5" strokeDasharray="3 3" />
+                  <text x="70" y="62" textAnchor="middle" fill="#8c2817" fontSize="11" fontFamily="serif" fontWeight="bold" letterSpacing="3">OFFICIAL</text>
+                  <text x="70" y="78" textAnchor="middle" fill="#8c2817" fontSize="7" fontFamily="monospace" letterSpacing="2">RCC TALKIES</text>
+                  <line x1="30" y1="67" x2="55" y2="67" stroke="#8c2817" strokeWidth="0.8" />
+                  <line x1="85" y1="67" x2="110" y2="67" stroke="#8c2817" strokeWidth="0.8" />
+                  <text x="70" y="92" textAnchor="middle" fill="#8c2817" fontSize="18">★</text>
+                </svg>
+              </div>
+
+              {/* ── CINEMA FILM STRIP (left edge, desktop) ── */}
+              <div className="hidden lg:flex absolute left-0 top-0 bottom-0 w-5 z-[2] select-none pointer-events-none flex-col overflow-hidden opacity-20">
+                <div className="w-full h-full bg-[#1c1712]/40 flex flex-col items-center py-2 gap-3">
+                  {Array.from({ length: 25 }).map((_, i) => (
+                    <div key={i} className="w-2.5 h-2 rounded-[1px] bg-[#ded2bc]/80 flex-shrink-0" />
+                  ))}
+                </div>
+              </div>
+
+              {/* ── ADMIT ONE TICKET (floating right, desktop) ── */}
+              <div className="hidden lg:block absolute bottom-32 -right-6 z-20 select-none pointer-events-none">
+                <div className="transform -rotate-6 bg-[#f5efe2] border-2 border-[#2b2219]/60 w-16 shadow-[2px_3px_6px_rgba(0,0,0,0.15)]" style={{ borderLeft: '3px dashed #8c2817' }}>
+                  <div className="px-2 py-3 text-center">
+                    <span className="font-display text-[7px] uppercase tracking-wider text-[#8c2817] block">ADMIT</span>
+                    <span className="font-serif font-bold text-lg text-[#1c1712] block leading-none">ONE</span>
+                    <div className="w-8 h-px bg-[#2b2219]/30 mx-auto my-1" />
+                    <span className="font-mono text-[6px] text-[#1c1712]/50 block">No. 2025</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── INK SPLATTER (bottom-left, desktop) ── */}
+              <div className="hidden lg:block absolute bottom-8 -left-4 z-10 select-none pointer-events-none opacity-[0.06]">
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="#1c1712">
+                  <circle cx="50" cy="50" r="22" />
+                  <circle cx="35" cy="35" r="8" />
+                  <circle cx="68" cy="38" r="6" />
+                  <circle cx="42" cy="70" r="10" />
+                  <circle cx="62" cy="65" r="5" />
+                  <circle cx="28" cy="55" r="4" />
+                  <circle cx="72" cy="55" r="7" />
+                  <circle cx="55" cy="30" r="3" />
+                  <circle cx="38" cy="48" r="12" />
+                  <circle cx="60" cy="50" r="9" />
                 </svg>
               </div>
 
@@ -618,14 +688,26 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                     )}
                   </div>
 
-                  {/* ── TORN TICKET STUB DIVIDER (desktop) ── */}
-                  <div className="hidden md:flex items-center gap-3 my-2 select-none pointer-events-none">
+                  {/* ── TORN TICKET STUB DIVIDER with decorative flourish (desktop) ── */}
+                  <div className="hidden md:flex items-center gap-3 my-3 select-none pointer-events-none">
                     <div className="flex-1 border-t-2 border-dashed border-[#2b2219]/25" />
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-[#d5c7ad] border border-[#2b2219]/30 transform -rotate-1">
-                      <span className="text-[#8c2817] text-[10px]">✂</span>
-                      <span className="font-serif italic text-[9px] text-[#1c1712]/60 tracking-wide">tear here</span>
+                    <div className="flex items-center gap-2 px-4 py-1.5 bg-[#d5c7ad] border border-[#2b2219]/30 transform -rotate-1 shadow-sm">
+                      <span className="text-[#8c2817] text-xs">✂</span>
+                      <span className="font-serif italic text-[10px] text-[#1c1712]/60 tracking-wide">tear here</span>
+                      <span className="text-[#8c2817] text-xs">✂</span>
                     </div>
                     <div className="flex-1 border-t-2 border-dashed border-[#2b2219]/25" />
+                  </div>
+
+                  {/* ── HAND-DRAWN ARROW pointing to upload (desktop) ── */}
+                  <div className="hidden lg:block absolute right-4 select-none pointer-events-none" style={{ marginTop: '-8px' }}>
+                    <div className="transform rotate-12">
+                      <svg width="50" height="35" viewBox="0 0 50 35" fill="none" className="text-[#8c2817]/30">
+                        <path d="M2 28 C10 30, 20 25, 28 18 C32 14, 38 8, 45 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" strokeDasharray="4 3" />
+                        <path d="M40 2 L46 5 L40 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                      </svg>
+                      <span className="font-serif italic text-[8px] text-[#8c2817]/30 block -mt-1 ml-1">upload!</span>
+                    </div>
                   </div>
 
                   {/* 5. Achievement Picture Upload */}
@@ -714,6 +796,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                           ✕ Remove
                         </button>
                       </div>
+
                     )}
 
                     {errors.picture && (
@@ -721,6 +804,17 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         {errors.picture}
                       </p>
                     )}
+                  </div>
+
+                  {/* ── ORNAMENTAL FLOURISH DIVIDER (desktop) ── */}
+                  <div className="hidden md:flex items-center justify-center gap-2 my-1 select-none pointer-events-none">
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none" className="text-[#2b2219]/20">
+                      <path d="M0 6 C5 2, 10 2, 15 6 C20 10, 25 10, 30 6 C35 2, 38 4, 40 6" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                    </svg>
+                    <span className="text-[#8c2817]/30 text-xs">✦</span>
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none" className="text-[#2b2219]/20 scale-x-[-1]">
+                      <path d="M0 6 C5 2, 10 2, 15 6 C20 10, 25 10, 30 6 C35 2, 38 4, 40 6" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                    </svg>
                   </div>
 
                   {/* 6. Date / Year */}
@@ -751,18 +845,6 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         {errors.dateYear}
                       </p>
                     )}
-                  </div>
-
-                  {/* ── VINTAGE POSTAGE STAMP (desktop, between category and notes) ── */}
-                  <div className="hidden md:flex justify-end select-none pointer-events-none -my-1">
-                    <div className="w-20 h-24 bg-[#f5efe2] border-2 border-[#2b2219]/40 p-1.5 transform rotate-6 shadow-[1px_2px_4px_rgba(0,0,0,0.12)]" style={{ backgroundImage: 'radial-gradient(circle at 0% 0%, transparent 3px, #f5efe2 3px), radial-gradient(circle at 100% 0%, transparent 3px, #f5efe2 3px), radial-gradient(circle at 0% 100%, transparent 3px, #f5efe2 3px), radial-gradient(circle at 100% 100%, transparent 3px, #f5efe2 3px)' }}>
-                      <div className="w-full h-full border border-[#8c2817]/30 flex flex-col items-center justify-center gap-0.5">
-                        <span className="text-[#8c2817] text-lg leading-none">★</span>
-                        <span className="font-display text-[7px] uppercase tracking-wider text-[#1c1712]/70">RCC</span>
-                        <span className="font-serif italic text-[8px] text-[#8c2817]/80">Talkies</span>
-                        <span className="font-mono text-[6px] text-[#1c1712]/40 mt-0.5">2025</span>
-                      </div>
-                    </div>
                   </div>
 
                   {/* 7. Category */}
@@ -853,17 +935,29 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
             </div>
 
             {/* ── DREAM·PLAN·ACHIEVE sticker (bottom-right, desktop) ── */}
-            <div className="hidden md:block absolute -bottom-3 right-6 z-20 select-none pointer-events-none">
-              <div className="transform rotate-2 bg-[#8c2817] text-[#f7f2e7] px-3 py-1.5 text-center border border-[#14120e] shadow-[2px_2px_0px_#14120e]">
-                <span className="font-display text-[10px] uppercase tracking-wider">Dream • Plan • Achieve</span>
+            <div className="hidden md:block absolute -bottom-4 right-6 z-20 select-none pointer-events-none">
+              <div className="transform rotate-2 bg-[#8c2817] text-[#f7f2e7] px-4 py-2 text-center border border-[#14120e] shadow-[3px_3px_0px_#14120e]">
+                <span className="font-display text-xs uppercase tracking-wider">Dream • Plan • Achieve</span>
               </div>
             </div>
 
-            {/* ── DIAGONAL VERIFIED WATERMARK (desktop) ── */}
+            {/* ── BOTTOM-LEFT WASHI TAPE (desktop) ── */}
+            <div className="hidden md:block absolute -bottom-2 left-16 z-20 select-none pointer-events-none">
+              <div className="w-20 h-6 bg-[#2b6e4f]/50 transform rotate-3" style={{ clipPath: 'polygon(2% 0%, 98% 3%, 100% 100%, 0% 97%)' }} />
+            </div>
+
+            {/* ── CLASSIFIED DIAGONAL STAMP (desktop) ── */}
             <div className="hidden lg:flex absolute inset-0 items-center justify-center z-[1] select-none pointer-events-none overflow-hidden">
-              <div className="transform -rotate-12 border-4 border-[#8c2817]/[0.06] rounded-sm px-10 py-3">
-                <span className="font-display text-5xl tracking-[0.3em] text-[#8c2817]/[0.05] uppercase">Verified</span>
+              <div className="transform -rotate-[18deg] border-[5px] border-[#8c2817]/[0.08] rounded-sm px-12 py-4">
+                <span className="font-display text-6xl tracking-[0.35em] text-[#8c2817]/[0.06] uppercase">Classified</span>
               </div>
+            </div>
+
+            {/* ── SECOND PAPERCLIP (bottom-left, desktop) ── */}
+            <div className="hidden md:block absolute -bottom-5 left-40 z-20 select-none pointer-events-none transform rotate-180">
+              <svg width="24" height="42" viewBox="0 0 28 48" fill="none" className="text-[#8a8070] drop-shadow-sm">
+                <path d="M10 8V34C10 38.5 13.5 42 18 42C22.5 42 26 38.5 26 34V6C26 3 23 0.5 19.5 0.5C16 0.5 13 3 13 6V30C13 32.5 15 34 17 34C19 34 21 32.5 21 30V10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+              </svg>
             </div>
 
           </div>
