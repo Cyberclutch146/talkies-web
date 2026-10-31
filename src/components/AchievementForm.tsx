@@ -200,9 +200,18 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
     };
 
     try {
+      const storedToken =
+        typeof window !== "undefined"
+          ? localStorage.getItem("talkies_student_token") || ""
+          : "";
+
       const res = await fetch("/api/achievements", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(storedToken ? { "x-student-token": storedToken } : {}),
+          "x-student-roll": rollNumber.trim().toUpperCase(),
+        },
         body: JSON.stringify(payload),
       });
 
@@ -212,7 +221,12 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
         const newItem: AchievementItem = data.achievement;
 
         try {
-          localStorage.removeItem("rcc_user_achievements");
+          if (data.studentToken) {
+            localStorage.setItem("talkies_student_token", data.studentToken);
+          }
+          if (newItem.rollNumber) {
+            localStorage.setItem("talkies_student_roll", newItem.rollNumber);
+          }
         } catch {
           // ignore
         }
@@ -455,7 +469,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                       Achievement Recorded!
                     </h3>
                     <p className="font-serif text-xs sm:text-sm text-[#1c1712]/85 max-w-sm mx-auto">
-                      Thank you, <strong className="text-[#1c1712]">{submittedItem.fullName}</strong>. Your story has been successfully filed in the Talkies archives and is now displayed in the Hall of Fame!
+                      Thank you, <strong className="text-[#1c1712]">{submittedItem.fullName}</strong>. Your story has been successfully filed in the Talkies archives and is recorded in your personal submissions list below.
                     </p>
                   </div>
 
@@ -478,10 +492,10 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                       Submit Another
                     </button>
                     <a
-                      href="#achievement-database"
+                      href="#your-submissions"
                       className="px-5 py-2.5 border-2 border-[#1c1712] bg-[#ded2bc] text-[#1c1712] font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#c9bda5] transition-colors"
                     >
-                      View on Wall ↑
+                      View Your Submissions ↓
                     </a>
                   </div>
                 </motion.div>
