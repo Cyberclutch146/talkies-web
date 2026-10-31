@@ -274,8 +274,9 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
           AUTHENTIC VINTAGE SCRAPBOOK POSTER CONTAINER
       ═══════════════════════════════════════════════════════════════ */}
       <div className="relative w-full max-w-4xl mx-auto bg-[#cbbda3] text-[#1c1712] border-4 border-[#2b2219] shadow-[0_25px_60px_rgba(0,0,0,0.7),10px_10px_0px_#14120e] p-3 sm:p-5 overflow-hidden select-none sm:select-auto">
-        
+
         {/* Vintage Paper Texture & Subtle Grain Overlay */}
+
         <div
           className="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply bg-cover bg-center"
           style={{ backgroundImage: "url('/mask.png')" }}
@@ -283,7 +284,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
         {/* Outer Frame Pinstripe */}
         <div className="relative border-2 border-[#2b2219]/60 p-2 sm:p-3 bg-[#cfc1a7]/90">
-          
+
           {/* ── TOP HEADER BAR: ✦ RCC TALKIES / YOUR JOURNEY / OUR DATABASE ✦ ── */}
           <div className="flex items-center justify-between border-b-2 border-[#2b2219] pb-2 mb-3 text-[10px] sm:text-xs font-serif uppercase tracking-[0.2em] font-bold text-[#1c1712]">
             <div className="flex items-center gap-1.5 sm:gap-2">
@@ -303,7 +304,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
           {/* ── RIPPED BLACK PAPER HERO BANNER ── */}
           <div className="relative bg-[#161310] text-[#f7f2e7] p-4 sm:p-6 mb-5 border-2 border-[#1c1712] shadow-[inset_0_2px_8px_rgba(0,0,0,0.85)] overflow-hidden">
-            
+
             {/* Subtle mask texture inside torn header */}
             <div
               className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay pointer-events-none"
@@ -392,7 +393,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
           {/* ── 3-COLUMN SCRAPBOOK BODY (LEFT MARGIN + CENTER FORM + RIGHT MARGIN) ── */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
-            
+
             {/* ── LEFT MARGIN COLLAGE ── */}
             <div className="hidden md:flex md:col-span-3 flex-col justify-between self-stretch space-y-5 border-r-2 border-[#2b2219]/35 pr-3 select-none">
               {/* Paperclip graphic & Talent Builds Tomorrow card */}
@@ -537,9 +538,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.fullName) setErrors((prev) => ({ ...prev, fullName: "" }));
                       }}
                       placeholder="Enter your full name"
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${
-                        errors.fullName ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                      } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.fullName ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
                     />
                     {errors.fullName && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -569,9 +569,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.rollNumber) setErrors((prev) => ({ ...prev, rollNumber: "" }));
                       }}
                       placeholder="e.g. 23BCS001"
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${
-                        errors.rollNumber ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                      } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.rollNumber ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
                     />
                     {errors.rollNumber && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -598,9 +597,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.department) setErrors((prev) => ({ ...prev, department: "" }));
                       }}
                       placeholder="e.g. CSE, IT, ECE, EE, AIML..."
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${
-                        errors.department ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                      } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.department ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
                     />
                     {errors.department && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -630,9 +628,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.achievements) setErrors((prev) => ({ ...prev, achievements: "" }));
                       }}
                       placeholder="Tell us about your achievement(s)..."
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${
-                        errors.achievements ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                      } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none resize-y`}
+                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.achievements ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none resize-y`}
                     />
                     {errors.achievements && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -667,13 +664,12 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         onDragLeave={onDragLeave}
                         onDrop={onDrop}
                         onClick={() => fileInputRef.current?.click()}
-                        className={`border-2 border-dashed ${
-                          isDragging
+                        className={`border-2 border-dashed ${isDragging
                             ? "border-[#8c2817] bg-[#dfcca9]"
                             : errors.picture
-                            ? "border-[#8c2817] bg-[#d7c9b0]/60"
-                            : "border-[#5c4f40]/80 bg-[#d4c7b0]/60 hover:bg-[#dcd0b9]"
-                        } p-4 sm:p-5 text-center transition-colors cursor-pointer`}
+                              ? "border-[#8c2817] bg-[#d7c9b0]/60"
+                              : "border-[#5c4f40]/80 bg-[#d4c7b0]/60 hover:bg-[#dcd0b9]"
+                          } p-4 sm:p-5 text-center transition-colors cursor-pointer`}
                       >
                         <div className="flex flex-col items-center justify-center gap-1.5">
                           {/* Upload Cloud Icon */}
@@ -751,9 +747,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.dateYear) setErrors((prev) => ({ ...prev, dateYear: "" }));
                       }}
                       placeholder="e.g. 2024 / 2025"
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${
-                        errors.dateYear ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                      } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.dateYear ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
                     />
                     {errors.dateYear && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -779,9 +774,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         setCategory(e.target.value);
                         if (errors.category) setErrors((prev) => ({ ...prev, category: "" }));
                       }}
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${
-                        errors.category ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                      } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.category ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
                     >
                       <option value="">Select category</option>
                       {achievementCategories.map((cat) => (
