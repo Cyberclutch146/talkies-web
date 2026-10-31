@@ -103,3 +103,4 @@ export async function deleteAchievement(password: string, id: string) {
     return { success: false, error: err.message || "Failed to delete document" };
   }
 }
+

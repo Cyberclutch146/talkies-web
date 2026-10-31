@@ -20,10 +20,30 @@ export function Footer() {
             </div>
             
             {/* Moved from bottom strip */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] text-[#14120e]/80 pt-2">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] text-[#14120e]/80 pt-2">
               <span className="font-bold tracking-[0.22em] text-[#14120e]">TALKIES ©</span>
-              <Link href="/admin" className="inline-flex items-center justify-center px-2 py-0.5 border border-[#14120e]/30 bg-[#e0dbcd] text-[10px] font-mono no-underline text-inherit">
+              <span className="inline-flex items-center justify-center px-1.5 py-0.5 border border-[#14120e]/30 bg-[#e0dbcd] text-[10px] font-mono text-[#14120e]/90">
                 EST. 2022
+              </span>
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-1.5 px-2 py-0.5 border border-[#14120e]/50 bg-[#dfd9ca] hover:bg-[#14120e] hover:text-[#e5e0d3] hover:border-[#14120e] text-[10px] font-mono uppercase tracking-wider font-bold transition-all shadow-[1.5px_1.5px_0px_#14120e]"
+                title="Access Editorial Board Admin Portal"
+              >
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                <span>Admin Portal</span>
               </Link>
               <Link href="/contact" className="hover:text-[#c83a1a] transition-colors text-xs">
                 Masthead & Legal
