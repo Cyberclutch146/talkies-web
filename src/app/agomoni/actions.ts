@@ -2,7 +2,7 @@
 
 import { agomoniSchema, type AgomoniFormData } from "@/lib/validations/agomoni";
 import { appendRow } from "@/lib/google-sheets";
-import { db } from "@/lib/firebase";
+import { agomoniDb as db } from "@/lib/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 export type AgomoniSubmitResult =

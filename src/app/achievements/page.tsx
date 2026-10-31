@@ -5,11 +5,12 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import DecryptedText from "@/components/DecryptedText";
 import AchievementForm from "@/components/AchievementForm";
-import initialAchievements from "@/data/achievements.json";
 import { AchievementItem, achievementCategories } from "@/lib/validations/achievement";
+import { db } from "@/lib/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 
 export default function AchievementsPage() {
-  const [achievements, setAchievements] = useState<AchievementItem[]>(initialAchievements as AchievementItem[]);
+  const [achievements, setAchievements] = useState<AchievementItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedItem, setSelectedItem] = useState<AchievementItem | null>(null);
@@ -19,23 +20,61 @@ export default function AchievementsPage() {
   const [activeIdx, setActiveIdx] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  // Load any previously saved user submissions from localStorage on mount
+  // Real-time synchronization directly with Firebase Firestore:
+  // Whenever any document is added OR deleted in Firestore (e.g. from Firebase Console),
+  // this listener automatically updates the website in real time!
   useEffect(() => {
+    // Purge any stale local cache from previous sessions
     try {
-      const stored = localStorage.getItem("rcc_user_achievements");
-      if (stored) {
-        const userItems: AchievementItem[] = JSON.parse(stored);
-        if (Array.isArray(userItems) && userItems.length > 0) {
-          setAchievements((prev) => {
-            const existingIds = new Set(prev.map((i) => i.id));
-            const newToAdd = userItems.filter((i) => !existingIds.has(i.id));
-            return [...newToAdd, ...prev];
-          });
+      localStorage.removeItem("rcc_user_achievements");
+    } catch {
+      // ignore
+    }
+
+    const colRef = collection(db, "achievements");
+    const unsubscribe = onSnapshot(
+      colRef,
+      (snapshot) => {
+        const liveItems: AchievementItem[] = snapshot.docs.map((docSnap) => {
+          const data = docSnap.data();
+          return {
+            id: docSnap.id,
+            fullName: data.fullName || "",
+            department: data.department || "",
+            rollNumber: data.rollNumber || "",
+            achievements: data.achievements || "",
+            picture: data.picture || "",
+            dateYear: data.dateYear || "",
+            category: data.category || "Other",
+            additionalNotes: data.additionalNotes || undefined,
+            featured: !!data.featured,
+            createdAt: data.createdAt || new Date().toISOString(),
+          } as AchievementItem;
+        });
+
+        // Sort newest first
+        liveItems.sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        setAchievements(liveItems);
+      },
+      async (err) => {
+        console.warn("[Firestore] Real-time listener fallback:", err.message);
+        try {
+          const res = await fetch("/api/achievements", { cache: "no-store" });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.achievements) {
+              setAchievements(data.achievements);
+            }
+          }
+        } catch (fetchErr) {
+          console.error("Fetch fallback error:", fetchErr);
         }
       }
-    } catch (e) {
-      console.warn("Error reading stored achievements:", e);
-    }
+    );
+
+    return () => unsubscribe();
   }, []);
 
   // Filtered list based on category & search query
@@ -261,7 +300,25 @@ export default function AchievementsPage() {
           {/* ─────────────────────────────────────────────────────────
               ANIMATED STAGE (ONE BY ONE MOVING LEFT TO RIGHT)
           ───────────────────────────────────────────────────────── */}
-          {filteredAchievements.length === 0 ? (
+          {achievements.length === 0 ? (
+            <div className="py-16 text-center border-3 border-dashed border-[#14120e]/30 bg-[#f5efe2] p-8 sm:p-12 space-y-4 shadow-[6px_6px_0px_#14120e]">
+              <span className="text-3xl text-[#c83a1a]">❦</span>
+              <h3 className="font-display-serif text-2xl sm:text-3xl font-bold uppercase tracking-wide text-[#14120e]">
+                No Dispatches Filed Yet
+              </h3>
+              <p className="font-serif italic text-sm sm:text-base text-[#14120e]/80 max-w-md mx-auto">
+                Be the first student of RCCIIT to inscribe your achievement into the Talkies official archives.
+              </p>
+              <div className="pt-2">
+                <a
+                  href="#submit-achievement"
+                  className="inline-block px-6 py-3 bg-[#c83a1a] text-[#f5efe2] font-mono text-xs uppercase tracking-widest font-bold border-2 border-[#14120e] shadow-[3px_3px_0px_#14120e] hover:shadow-[1px_1px_0px_#14120e] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                >
+                  ✦ Inscribe Your Achievement ↗
+                </a>
+              </div>
+            </div>
+          ) : filteredAchievements.length === 0 ? (
             <div className="py-16 text-center border-2 border-dashed border-[#14120e]/40 bg-[#f5efe2] p-8 space-y-4">
               <p className="font-serif italic text-lg text-[#14120e]/70">
                 No achievements match your query.
@@ -469,47 +526,21 @@ export default function AchievementsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          4. SUBMIT SECTION: VINTAGE POSTER FORM
-          WITH mask.png AS AMBIENT BACKGROUND AROUND OUTSIDE THE FORM
+          4. SUBMIT SECTION: VINTAGE SCRAPBOOK POSTER FORM
       ───────────────────────────────────────────────────────────── */}
       <section
-        id="submit-section"
-        className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b-2 border-[#14120e] overflow-hidden bg-[#1a1714]"
+        id="submit-achievement"
+        className="relative w-full py-16 sm:py-24 px-3 sm:px-6 border-b-2 border-[#14120e] overflow-hidden bg-[#161310]"
       >
-        {/* ── MASK.PNG BACKGROUND AROUND OUTSIDE THE FORM ── */}
+        {/* Ambient Dark Vintage Texture Background */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-luminosity pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity pointer-events-none"
           style={{ backgroundImage: "url('/mask.png')" }}
         />
-        {/* Repeating fine pattern blend */}
-        <div
-          className="absolute inset-0 bg-repeat opacity-20 pointer-events-none"
-          style={{
-            backgroundImage: "url('/mask.png')",
-            backgroundSize: "450px auto",
-            mixBlendMode: "overlay",
-          }}
-        />
-        {/* Deep dark vintage vignette around edges */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_rgba(18,15,12,0.92)_100%)] pointer-events-none" />
-
-        {/* Section Title Header */}
-        <div className="relative z-10 max-w-5xl mx-auto mb-10 text-center space-y-2">
-          <div className="inline-block bg-[#c83a1a] text-[#e5e0d3] px-3 py-0.5 border border-[#e5e0d3]/30 shadow-md">
-            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold block">
-              ✦ DOCUMENT YOUR TRIUMPH ✦
-            </span>
-          </div>
-          <h2 className="font-display text-3xl sm:text-5xl uppercase tracking-tight text-[#f4efe4] drop-shadow-md">
-            Submit To The Official Record
-          </h2>
-          <p className="font-serif text-sm sm:text-base text-[#cfc9bd] max-w-xl mx-auto">
-            Fill out the official vintage dispatch form below to have your achievement published in the Talkies archives and featured on our Hall of Fame.
-          </p>
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_rgba(15,12,10,0.95)_100%)] pointer-events-none" />
 
         {/* The Vintage Newspaper Poster Component */}
-        <div className="relative z-10">
+        <div className="relative z-10 max-w-4xl mx-auto">
           <AchievementForm onSuccess={handleNewAchievement} />
         </div>
       </section>
