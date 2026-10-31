@@ -204,7 +204,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
           ? localStorage.getItem("talkies_student_token") || ""
           : "";
 
-      const res = await fetch("/api/achievements", {
+      const res = await fetch("/api/acheivements", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

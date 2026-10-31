@@ -334,7 +334,7 @@ export default function HomePage() {
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-[#14120e]/20">
               <Link
-                href="/achievements#submit-section"
+                href="/acheivements#submit-section"
                 className="inline-flex items-center gap-2 bg-[#942617] text-[#f4efe4] px-6 py-3.5 font-sans text-xs uppercase tracking-widest font-bold hover:bg-[#7b1e11] transition-all shadow-[3px_3px_0px_#14120e] border border-[#14120e] group"
               >
                 <span>Submit Your Achievement</span>

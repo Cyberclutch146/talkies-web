@@ -30,7 +30,7 @@ export default function AchievementsPage() {
         return;
       }
 
-      const res = await fetch("/api/achievements", {
+      const res = await fetch("/api/acheivements", {
         headers: {
           ...(studentToken ? { "x-student-token": studentToken } : {}),
           ...(studentRoll ? { "x-student-roll": studentRoll } : {}),

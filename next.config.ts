@@ -1,6 +1,32 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/achievements",
+        destination: "/acheivements",
+        permanent: true,
+      },
+      {
+        source: "/achievements/:path*",
+        destination: "/acheivements/:path*",
+        permanent: true,
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/achievements",
+        destination: "/api/acheivements",
+      },
+      {
+        source: "/api/achievements/:path*",
+        destination: "/api/acheivements/:path*",
+      },
+    ];
+  },
   images: {
     qualities: [70, 90, 100],
     remotePatterns: [

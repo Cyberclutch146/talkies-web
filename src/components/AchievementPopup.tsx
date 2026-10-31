@@ -172,7 +172,7 @@ export default function AchievementPopup() {
 
                 {/* CTA — Navigate to Achievements */}
                 <Link
-                  href="/achievements"
+                  href="/acheivements"
                   onClick={handleClose}
                   className="inline-flex items-center gap-2 mt-2 mb-3 px-5 py-2 border border-[#8b2512] text-[#8b2512] font-serif font-semibold text-sm uppercase tracking-[0.12em] hover:bg-[#8b2512] hover:text-[#f8f3ea] transition-all duration-200 cursor-pointer"
                 >

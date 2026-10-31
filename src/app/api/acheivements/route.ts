@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { achievementSchema, AchievementItem } from "@/lib/validations/achievement";
+import { achievementSchema, AchievementItem } from "@/lib/validations/acheivements";
 import { db } from "@/lib/firebase";
 import { collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
 

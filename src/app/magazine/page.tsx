@@ -158,13 +158,13 @@ export default async function MagazinePage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/achievements#submit-section"
+              href="/acheivements#submit-section"
               className="px-5 py-3 bg-[#942617] text-[#f4efe4] font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#7b1e11] transition-colors shadow-[2px_2px_0px_#14120e]"
             >
               Submit Achievement →
             </Link>
             <Link
-              href="/achievements"
+              href="/acheivements"
               className="px-5 py-3 border-2 border-[#14120e] text-[#14120e] font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#14120e] hover:text-[#e5e0d3] transition-colors shadow-[2px_2px_0px_#14120e]"
             >
               Explore Hall of Fame ↗
