@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef, DragEvent, ChangeEvent } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { achievementCategories, AchievementItem } from "@/lib/validations/achievement";
 
@@ -285,6 +284,12 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
         {/* Outer Frame Pinstripe */}
         <div className="relative border-2 border-[#2b2219]/60 p-2 sm:p-3 bg-[#cfc1a7]/90">
 
+          {/* ── SCRAPBOOK CORNER DOODLES (desktop only) ── */}
+          <span className="hidden md:block absolute top-2 left-3 text-[#8c2817]/25 text-lg select-none pointer-events-none">❖</span>
+          <span className="hidden md:block absolute top-2 right-3 text-[#8c2817]/25 text-lg select-none pointer-events-none">❖</span>
+          <span className="hidden md:block absolute bottom-2 left-3 text-[#8c2817]/25 text-lg select-none pointer-events-none">❖</span>
+          <span className="hidden md:block absolute bottom-2 right-3 text-[#8c2817]/25 text-lg select-none pointer-events-none">❖</span>
+
           {/* ── TOP HEADER BAR: ✦ RCC TALKIES / YOUR JOURNEY / OUR DATABASE ✦ ── */}
           <div className="flex items-center justify-between border-b-2 border-[#2b2219] pb-2 mb-3 text-[10px] sm:text-xs font-serif uppercase tracking-[0.2em] font-bold text-[#1c1712]">
             <div className="flex items-center gap-1.5 sm:gap-2">
@@ -391,66 +396,41 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
             </div>
           </div>
 
-          {/* ── 3-COLUMN SCRAPBOOK BODY (LEFT MARGIN + CENTER FORM + RIGHT MARGIN) ── */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
+          {/* ── FORM BODY ── */}
+          <div className="w-full">
+            <div className="bg-[#ded2bc] border-2 border-[#2b2219] p-4 sm:p-6 lg:p-8 shadow-[3px_3px_0px_#2b2219] relative overflow-visible">
 
-            {/* ── LEFT MARGIN COLLAGE ── */}
-            <div className="hidden md:flex md:col-span-3 flex-col justify-between self-stretch space-y-5 border-r-2 border-[#2b2219]/35 pr-3 select-none">
-              {/* Paperclip graphic & Talent Builds Tomorrow card */}
-              <div className="relative pt-3">
-                <svg
-                  width="26"
-                  height="40"
-                  viewBox="0 0 28 44"
-                  fill="none"
-                  className="text-[#4a4035] absolute -top-3 left-3 z-20 drop-shadow"
-                >
-                  <path
-                    d="M10 8V32C10 36 13 39 17 39C21 39 24 36 24 32V6C24 3.5 21.5 1 18.5 1C15.5 1 13 3.5 13 6V29C13 31 14.5 32 16.5 32C18.5 32 20 31 20 29V10"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
+              {/* ── PAPERCLIP (top-left, desktop) ── */}
+              <div className="hidden md:block absolute -top-4 left-8 z-20 select-none pointer-events-none">
+                <svg width="28" height="48" viewBox="0 0 28 48" fill="none" className="text-[#6b6054] drop-shadow-sm">
+                  <path d="M10 8V34C10 38.5 13.5 42 18 42C22.5 42 26 38.5 26 34V6C26 3 23 0.5 19.5 0.5C16 0.5 13 3 13 6V30C13 32.5 15 34 17 34C19 34 21 32.5 21 30V10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
                 </svg>
+              </div>
 
-                <div className="bg-[#ded3bd] border-2 border-[#2b2219] p-2 text-center pt-5 shadow-[2px_2px_0px_#2b2219]">
-                  <h4 className="font-display text-xs sm:text-sm uppercase leading-tight tracking-tight text-[#1c1712]">
-                    Talent<br />Builds<br />Tomorrow
-                  </h4>
+              {/* ── STICKY NOTE (top-right, desktop) ── */}
+              <div className="hidden lg:block absolute -top-5 -right-3 z-20 select-none pointer-events-none">
+                <div className="transform rotate-3 bg-[#fef3c7] border border-[#d4a017]/40 px-3 py-2.5 w-36 shadow-[2px_3px_6px_rgba(0,0,0,0.15)]">
+                  <p className="font-serif italic text-[10px] text-[#5c4a1e] leading-snug">
+                    &ldquo;Great achievements aren&apos;t born in comfort zones.&rdquo;
+                  </p>
+                  <div className="mt-1.5 w-full h-px bg-[#d4a017]/30" />
+                  <p className="font-mono text-[7px] uppercase tracking-widest text-[#8b7530] mt-1 text-right">— RCC Talkies</p>
                 </div>
               </div>
 
-              {/* Quote note */}
-              <div className="border-l-2 border-[#8c2817] pl-2.5 py-1 bg-[#dcd0b9]/60">
-                <p className="font-serif italic text-[11px] text-[#1c1712]/90 leading-snug">
-                  &ldquo;Great achievements aren&apos;t born in comfort zones.&rdquo;
-                </p>
+              {/* ── RED WASHI TAPE STRIP (top, desktop) ── */}
+              <div className="hidden md:block absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 select-none pointer-events-none">
+                <div className="w-24 h-5 bg-[#8c2817]/70 transform -rotate-1 opacity-80" style={{ clipPath: 'polygon(2% 0%, 98% 3%, 100% 100%, 0% 97%)' }} />
+              </div>
+              {/* ── COFFEE RING STAIN (desktop, decorative) ── */}
+              <div className="hidden lg:block absolute top-24 -right-8 z-10 select-none pointer-events-none opacity-[0.07]">
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                  <circle cx="60" cy="60" r="52" stroke="#3d2b1a" strokeWidth="8" />
+                  <circle cx="60" cy="60" r="44" stroke="#3d2b1a" strokeWidth="2" />
+                  <circle cx="60" cy="60" r="38" stroke="#3d2b1a" strokeWidth="1" opacity="0.5" />
+                </svg>
               </div>
 
-              {/* Sepia Victory Crowd Photo */}
-              <div className="relative aspect-[3/4] w-full border-2 border-[#2b2219] bg-[#14120e] overflow-hidden shadow-[2px_2px_0px_#2b2219]">
-                <Image
-                  src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80"
-                  alt="Crowd cheering at fest"
-                  fill
-                  className="object-cover grayscale contrast-125 opacity-85"
-                />
-                <div className="absolute inset-0 bg-[#8c2817]/10 mix-blend-multiply" />
-                <div className="absolute bottom-1 left-1 right-1 bg-[#14120e]/90 text-[#f5efe2] text-[8px] font-mono text-center px-1 py-0.5 uppercase tracking-widest">
-                  CAMPUS MERIT
-                </div>
-              </div>
-
-              {/* Dream Plan Achieve sticker */}
-              <div className="transform -rotate-2 bg-[#8c2817] text-[#f7f2e7] px-2 py-1 text-center border border-[#14120e] shadow-[2px_2px_0px_#14120e]">
-                <span className="font-display text-[10px] sm:text-xs uppercase tracking-wider block">
-                  Dream • Plan • Achieve
-                </span>
-              </div>
-            </div>
-
-            {/* ── CENTER FORM CONTAINER ── */}
-            <div className="md:col-span-6 bg-[#ded2bc] border-2 border-[#2b2219] p-3 sm:p-5 shadow-[3px_3px_0px_#2b2219] relative">
               {submitSuccess && submittedItem ? (
                 /* Success View */
                 <motion.div
@@ -484,17 +464,17 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 w-full">
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="px-5 py-2.5 bg-[#8c2817] text-[#f7f2e7] font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#721f11] transition-colors shadow-[2px_2px_0px_#14120e]"
+                      className="w-full sm:w-auto min-h-[44px] px-6 py-3 bg-[#8c2817] text-[#f7f2e7] font-mono text-xs sm:text-sm uppercase tracking-widest font-bold hover:bg-[#721f11] active:scale-[0.98] transition-all shadow-[2px_2px_0px_#14120e] rounded-sm cursor-pointer touch-manipulation"
                     >
                       Submit Another
                     </button>
                     <a
                       href="#your-submissions"
-                      className="px-5 py-2.5 border-2 border-[#1c1712] bg-[#ded2bc] text-[#1c1712] font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#c9bda5] transition-colors"
+                      className="w-full sm:w-auto min-h-[44px] px-6 py-3 border-2 border-[#1c1712] bg-[#ded2bc] text-[#1c1712] font-mono text-xs sm:text-sm uppercase tracking-widest font-bold hover:bg-[#c9bda5] active:scale-[0.98] transition-all text-center rounded-sm touch-manipulation"
                     >
                       View Your Submissions ↓
                     </a>
@@ -502,7 +482,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                 </motion.div>
               ) : (
                 /* The Retro Form */
-                <form onSubmit={handleSubmit} noValidate className="space-y-3 sm:space-y-4">
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
                   {/* Honeypot field for bot suppression */}
                   <input
                     type="text"
@@ -522,7 +502,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
                   {/* 1. Full Name */}
                   <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                         <circle cx="12" cy="7" r="4" />
@@ -538,8 +518,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.fullName) setErrors((prev) => ({ ...prev, fullName: "" }));
                       }}
                       placeholder="Enter your full name"
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.fullName ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#f5efe2] border ${errors.fullName ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-white focus:border-[#8c2817] focus:ring-2 focus:ring-[#8c2817]/20 text-xs sm:text-sm font-sans placeholder:text-[#1c1712]/45 transition-colors shadow-none outline-none rounded`}
                     />
                     {errors.fullName && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -550,7 +530,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
                   {/* 2. Roll Number */}
                   <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <rect x="2" y="3" width="20" height="18" rx="2" />
                         <line x1="8" y1="21" x2="16" y2="21" />
@@ -569,8 +549,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.rollNumber) setErrors((prev) => ({ ...prev, rollNumber: "" }));
                       }}
                       placeholder="e.g. 23BCS001"
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.rollNumber ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#f5efe2] border ${errors.rollNumber ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-white focus:border-[#8c2817] focus:ring-2 focus:ring-[#8c2817]/20 text-xs sm:text-sm font-sans uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-none outline-none rounded`}
                     />
                     {errors.rollNumber && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -581,7 +561,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
                   {/* 3. Department */}
                   <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
                         <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
@@ -597,8 +577,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.department) setErrors((prev) => ({ ...prev, department: "" }));
                       }}
                       placeholder="e.g. CSE, IT, ECE, EE, AIML..."
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.department ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#f5efe2] border ${errors.department ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-white focus:border-[#8c2817] focus:ring-2 focus:ring-[#8c2817]/20 text-xs sm:text-sm font-sans uppercase text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-none outline-none rounded`}
                     />
                     {errors.department && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -609,7 +589,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
                   {/* 4. Achievements */}
                   <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
                         <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
@@ -628,8 +608,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.achievements) setErrors((prev) => ({ ...prev, achievements: "" }));
                       }}
                       placeholder="Tell us about your achievement(s)..."
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.achievements ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none resize-y`}
+                      className={`w-full px-3 py-2 bg-[#f5efe2] border ${errors.achievements ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-white focus:border-[#8c2817] focus:ring-2 focus:ring-[#8c2817]/20 text-xs sm:text-sm font-sans placeholder:text-[#1c1712]/45 transition-colors shadow-none outline-none rounded resize-y`}
                     />
                     {errors.achievements && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -638,9 +618,23 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                     )}
                   </div>
 
+                  {/* ── TORN TICKET STUB DIVIDER (desktop) ── */}
+                  <div className="hidden md:flex items-center gap-3 my-2 select-none pointer-events-none">
+                    <div className="flex-1 border-t-2 border-dashed border-[#2b2219]/25" />
+                    <div className="flex items-center gap-1.5 px-3 py-1 bg-[#d5c7ad] border border-[#2b2219]/30 transform -rotate-1">
+                      <span className="text-[#8c2817] text-[10px]">✂</span>
+                      <span className="font-serif italic text-[9px] text-[#1c1712]/60 tracking-wide">tear here</span>
+                    </div>
+                    <div className="flex-1 border-t-2 border-dashed border-[#2b2219]/25" />
+                  </div>
+
                   {/* 5. Achievement Picture Upload */}
-                  <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                  <div className="space-y-1 relative">
+                    {/* ── TINY TAPE STRIP on upload section (desktop) ── */}
+                    <div className="hidden md:block absolute -left-3 top-3 z-10 select-none pointer-events-none">
+                      <div className="w-6 h-10 bg-[#8c2817]/50 transform rotate-3 opacity-60" style={{ clipPath: 'polygon(5% 0%, 95% 2%, 100% 100%, 0% 98%)' }} />
+                    </div>
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <rect width="18" height="18" x="3" y="3" rx="2" />
                         <circle cx="9" cy="9" r="2" />
@@ -664,37 +658,39 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         onDragLeave={onDragLeave}
                         onDrop={onDrop}
                         onClick={() => fileInputRef.current?.click()}
-                        className={`border-2 border-dashed ${isDragging
-                            ? "border-[#8c2817] bg-[#dfcca9]"
+                        className={`border-2 border-dashed rounded-lg ${isDragging
+                            ? "border-[#8c2817] bg-[#8c2817]/10 scale-[1.02]"
                             : errors.picture
-                              ? "border-[#8c2817] bg-[#d7c9b0]/60"
-                              : "border-[#5c4f40]/80 bg-[#d4c7b0]/60 hover:bg-[#dcd0b9]"
-                          } p-4 sm:p-5 text-center transition-colors cursor-pointer`}
+                              ? "border-[#8c2817] bg-[#f5efe2]/60"
+                              : "border-[#8c2817]/30 bg-[#f5efe2]/70 hover:bg-[#f5efe2] hover:border-[#8c2817]/60"
+                          } p-6 sm:p-8 text-center transition-all duration-200 cursor-pointer group`}
                       >
-                        <div className="flex flex-col items-center justify-center gap-1.5">
-                          {/* Upload Cloud Icon */}
-                          <svg
-                            width="32"
-                            height="32"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-[#1c1712]/80"
-                          >
-                            <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
-                            <path d="M12 12v9" />
-                            <path d="m16 16-4-4-4 4" />
-                          </svg>
-
-                          <p className="font-mono text-xs font-bold text-[#1c1712]">
-                            Click to upload or drag and drop
-                          </p>
-                          <p className="font-mono text-[10px] text-[#1c1712]/60">
-                            (JPG, PNG, WebP — Max 8MB)
-                          </p>
+                        <div className="flex flex-col items-center justify-center gap-2.5">
+                          <div className="w-12 h-12 rounded-full bg-[#8c2817]/10 flex items-center justify-center group-hover:bg-[#8c2817]/20 group-hover:scale-110 transition-all duration-200">
+                            <svg
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="text-[#8c2817]"
+                            >
+                              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                              <path d="M12 12v9" />
+                              <path d="m16 16-4-4-4 4" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="font-mono text-xs font-bold text-[#1c1712]">
+                              Drop your photo here, or <span className="text-[#8c2817] underline underline-offset-2">browse</span>
+                            </p>
+                            <p className="font-mono text-[10px] text-[#1c1712]/50 mt-1">
+                              JPG, PNG or WebP · Max 8 MB
+                            </p>
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -729,7 +725,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
                   {/* 6. Date / Year */}
                   <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <rect x="3" y="4" width="18" height="18" rx="2" />
                         <line x1="16" y1="2" x2="16" y2="6" />
@@ -747,8 +743,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         if (errors.dateYear) setErrors((prev) => ({ ...prev, dateYear: "" }));
                       }}
                       placeholder="e.g. 2024 / 2025"
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.dateYear ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#f5efe2] border ${errors.dateYear ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-white focus:border-[#8c2817] focus:ring-2 focus:ring-[#8c2817]/20 text-xs sm:text-sm font-sans placeholder:text-[#1c1712]/45 transition-colors shadow-none outline-none rounded`}
                     />
                     {errors.dateYear && (
                       <p className="text-[10px] font-mono font-bold text-[#8c2817]">
@@ -757,9 +753,21 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                     )}
                   </div>
 
+                  {/* ── VINTAGE POSTAGE STAMP (desktop, between category and notes) ── */}
+                  <div className="hidden md:flex justify-end select-none pointer-events-none -my-1">
+                    <div className="w-20 h-24 bg-[#f5efe2] border-2 border-[#2b2219]/40 p-1.5 transform rotate-6 shadow-[1px_2px_4px_rgba(0,0,0,0.12)]" style={{ backgroundImage: 'radial-gradient(circle at 0% 0%, transparent 3px, #f5efe2 3px), radial-gradient(circle at 100% 0%, transparent 3px, #f5efe2 3px), radial-gradient(circle at 0% 100%, transparent 3px, #f5efe2 3px), radial-gradient(circle at 100% 100%, transparent 3px, #f5efe2 3px)' }}>
+                      <div className="w-full h-full border border-[#8c2817]/30 flex flex-col items-center justify-center gap-0.5">
+                        <span className="text-[#8c2817] text-lg leading-none">★</span>
+                        <span className="font-display text-[7px] uppercase tracking-wider text-[#1c1712]/70">RCC</span>
+                        <span className="font-serif italic text-[8px] text-[#8c2817]/80">Talkies</span>
+                        <span className="font-mono text-[6px] text-[#1c1712]/40 mt-0.5">2025</span>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* 7. Category */}
                   <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
                         <line x1="3" y1="6" x2="21" y2="6" />
@@ -774,8 +782,8 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                         setCategory(e.target.value);
                         if (errors.category) setErrors((prev) => ({ ...prev, category: "" }));
                       }}
-                      className={`w-full px-3 py-2 bg-[#d4c7b0]/80 border ${errors.category ? "border-[#8c2817]" : "border-[#5c4f40]/80"
-                        } focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none`}
+                      className={`w-full px-3 py-2 bg-[#f5efe2] border ${errors.category ? "border-[#8c2817]" : "border-[#5c4f40]/80"
+                        } focus:bg-white focus:border-[#8c2817] focus:ring-2 focus:ring-[#8c2817]/20 text-xs sm:text-sm font-sans transition-colors shadow-none outline-none rounded`}
                     >
                       <option value="">Select category</option>
                       {achievementCategories.map((cat) => (
@@ -793,7 +801,7 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
 
                   {/* 8. Additional Notes */}
                   <div className="space-y-1">
-                    <label className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide text-[#1c1712]">
+                    <label className="flex items-center gap-1.5 font-serif text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1c1712]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1c1712]">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>
@@ -804,15 +812,26 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
                       value={additionalNotes}
                       onChange={(e) => setAdditionalNotes(e.target.value)}
                       placeholder="Any extra details..."
-                      className="w-full px-3 py-2 bg-[#d4c7b0]/80 border border-[#5c4f40]/80 focus:bg-[#ede3d1] focus:border-[#1c1712] text-xs sm:text-sm font-mono text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)] outline-none resize-y"
+                      className="w-full px-3 py-2 bg-[#f5efe2] border border-[#5c4f40]/80 focus:bg-white focus:border-[#8c2817] focus:ring-2 focus:ring-[#8c2817]/20 text-xs sm:text-sm font-sans text-[#1c1712] placeholder:text-[#1c1712]/45 transition-colors shadow-none outline-none rounded resize-y"
                     />
+                  </div>
+
+                  {/* ── VINTAGE STAMP SEAL (desktop, beside submit) ── */}
+                  <div className="hidden md:flex items-center gap-4 mt-4 mb-1 select-none pointer-events-none">
+                    <div className="flex-1 h-px bg-[#2b2219]/25" />
+                    <div className="flex items-center gap-2 text-[#8c2817]/50">
+                      <span className="text-xs">✦</span>
+                      <span className="font-mono text-[9px] uppercase tracking-[0.2em] font-bold">Official RCC Talkies Dispatch</span>
+                      <span className="text-xs">✦</span>
+                    </div>
+                    <div className="flex-1 h-px bg-[#2b2219]/25" />
                   </div>
 
                   {/* ── RETRO SUBMIT BUTTON ── */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-2 py-3.5 px-4 bg-[#8c2817] hover:bg-[#721f11] active:translate-x-[1px] active:translate-y-[1px] text-[#f7f2e7] font-mono font-bold text-xs sm:text-sm tracking-widest uppercase flex items-center justify-center gap-2 border-2 border-[#1c1712] shadow-[3px_3px_0px_#14120e] disabled:opacity-50 cursor-pointer transition-all"
+                    className="w-full min-h-[48px] mt-2 py-4 px-4 bg-[#8c2817] hover:bg-[#721f11] hover:scale-[1.01] active:scale-[0.98] text-[#f7f2e7] font-mono font-bold text-sm sm:text-base tracking-widest uppercase flex items-center justify-center gap-2.5 border-2 border-[#1c1712] rounded-sm shadow-[3px_3px_0px_#14120e] hover:shadow-[5px_5px_0px_#14120e] disabled:opacity-50 cursor-pointer transition-all duration-200 touch-manipulation"
                   >
                     {isSubmitting ? (
                       <>
@@ -833,45 +852,17 @@ export default function AchievementForm({ onSuccess, className = "" }: Achieveme
               )}
             </div>
 
-            {/* ── RIGHT MARGIN COLLAGE ── */}
-            <div className="hidden md:flex md:col-span-3 flex-col justify-between self-stretch space-y-5 border-l-2 border-[#2b2219]/35 pl-3 select-none">
-              {/* Real People. Real Stories. headline */}
-              <div>
-                <h4 className="font-serif font-black text-base sm:text-lg uppercase leading-tight text-[#1c1712]">
-                  Real<br />People.<br />Real<br />Stories.
-                </h4>
-                <div className="w-12 h-1 bg-[#8c2817] mt-1" />
+            {/* ── DREAM·PLAN·ACHIEVE sticker (bottom-right, desktop) ── */}
+            <div className="hidden md:block absolute -bottom-3 right-6 z-20 select-none pointer-events-none">
+              <div className="transform rotate-2 bg-[#8c2817] text-[#f7f2e7] px-3 py-1.5 text-center border border-[#14120e] shadow-[2px_2px_0px_#14120e]">
+                <span className="font-display text-[10px] uppercase tracking-wider">Dream • Plan • Achieve</span>
               </div>
+            </div>
 
-              {/* Student Graduation Photo Thumbnail */}
-              <div className="relative aspect-[4/3] w-full border-2 border-[#2b2219] bg-[#14120e] overflow-hidden shadow-[2px_2px_0px_#2b2219]">
-                <Image
-                  src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
-                  alt="Students group"
-                  fill
-                  className="object-cover grayscale contrast-125 opacity-85"
-                />
-              </div>
-
-              {/* Vertical Directory list */}
-              <div className="text-center font-mono text-[10px] uppercase tracking-widest text-[#1c1712]/80 space-y-1 border-y border-[#2b2219]/30 py-2.5">
-                <p>Events</p>
-                <p className="text-[#8c2817]">✦</p>
-                <p>Clubs</p>
-                <p className="text-[#8c2817]">✦</p>
-                <p>Culture</p>
-                <p className="text-[#8c2817]">✦</p>
-                <p>Community</p>
-              </div>
-
-              {/* Stamped hand-drawn label */}
-              <div className="text-center p-2 border border-dashed border-[#2b2219]/60 bg-[#dcd0b9]/50">
-                <p className="font-serif italic text-sm font-bold text-[#1c1712]">
-                  RCC Talkies <span className="text-[#8c2817]">★</span>
-                </p>
-                <p className="font-mono text-[8px] uppercase tracking-widest text-[#1c1712]/60 mt-0.5">
-                  THE VOICE OF RCCIIT
-                </p>
+            {/* ── DIAGONAL VERIFIED WATERMARK (desktop) ── */}
+            <div className="hidden lg:flex absolute inset-0 items-center justify-center z-[1] select-none pointer-events-none overflow-hidden">
+              <div className="transform -rotate-12 border-4 border-[#8c2817]/[0.06] rounded-sm px-10 py-3">
+                <span className="font-display text-5xl tracking-[0.3em] text-[#8c2817]/[0.05] uppercase">Verified</span>
               </div>
             </div>
 

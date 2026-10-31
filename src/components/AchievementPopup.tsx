@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -168,6 +169,16 @@ export default function AchievementPopup() {
 
                 {/* Ornate Divider */}
                 <div className="w-16 h-[2px] bg-[#8b2512] mx-auto my-3 opacity-50" />
+
+                {/* CTA — Navigate to Achievements */}
+                <Link
+                  href="/achievements"
+                  onClick={handleClose}
+                  className="inline-flex items-center gap-2 mt-2 mb-3 px-5 py-2 border border-[#8b2512] text-[#8b2512] font-serif font-semibold text-sm uppercase tracking-[0.12em] hover:bg-[#8b2512] hover:text-[#f8f3ea] transition-all duration-200 cursor-pointer"
+                >
+                  View Acheivements
+                  <span className="text-xs leading-none">→</span>
+                </Link>
 
                 {/* Subtle footnote */}
                 <p className="font-serif italic text-xs text-[#1a140e]/60 tracking-wide mt-3">

@@ -340,13 +340,6 @@ export default function HomePage() {
                 <span>Submit Your Achievement</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
-              <Link
-                href="/achievements"
-                className="inline-flex items-center gap-2 border-2 border-[#14120e] bg-[#f5efe2] px-6 py-3.5 font-sans text-xs uppercase tracking-widest font-bold text-[#14120e] hover:bg-[#14120e] hover:text-[#e5e0d3] transition-all shadow-[3px_3px_0px_#14120e]"
-              >
-                <span>Explore Hall of Fame</span>
-                <span>↗</span>
-              </Link>
             </div>
           </div>
 
