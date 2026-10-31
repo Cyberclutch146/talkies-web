@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/firebase";
+import { agomoniDb as db } from "@/lib/firebase";
 import { collection, getDocs, updateDoc, doc, orderBy, query } from "firebase/firestore";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "rcc_talkies_admin2024";

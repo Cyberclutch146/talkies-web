@@ -61,6 +61,7 @@ export type AchievementFormData = z.infer<typeof achievementSchema>;
 
 export interface AchievementItem {
   id: string;
+  studentId?: string;
   fullName: string;
   department: string;
   rollNumber: string;
@@ -69,6 +70,7 @@ export interface AchievementItem {
   dateYear: string;
   category: string;
   additionalNotes?: string;
+  status?: string;
   featured?: boolean;
   createdAt: string;
 }

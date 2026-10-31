@@ -19,6 +19,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SocialWidget } from "@/components/SocialWidget";
+import AchievementPopup from "@/components/AchievementPopup";
 
 const unifraktur = UnifrakturMaguntia({
   weight: "400",
@@ -151,6 +152,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <SocialWidget />
+        <AchievementPopup />
       </body>
     </html>
   );

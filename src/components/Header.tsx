@@ -94,30 +94,7 @@ export function Header() {
         )}
 
         {/* Right: Minimalist Hamburger Menu Trigger */}
-        <div className={`${showFullHeader ? "w-[30%] sm:w-1/4" : ""} flex justify-end items-center gap-6 pointer-events-auto`}>
-          {/* Desktop Quick Nav Links */}
-          {showFullHeader && (
-            <nav className="hidden lg:flex items-center gap-5 text-xs font-sans uppercase tracking-[0.18em] font-medium" aria-label="Quick navigation">
-            {siteData.navLinks.slice(1).map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`transition-colors relative py-1 ${
-                    isActive ? "text-[#c83a1a] font-bold" : "text-[#14120e]/75 hover:text-[#14120e]"
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#c83a1a]" />
-                  )}
-                </Link>
-              );
-            })}
-            </nav>
-          )}
-
+        <div className={`${showFullHeader ? "w-[30%] sm:w-1/4" : ""} flex justify-end items-center pointer-events-auto`}>
           {/* Minimalist 2-line Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
