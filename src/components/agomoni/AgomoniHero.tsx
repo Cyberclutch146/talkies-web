@@ -216,16 +216,16 @@ export function AgomoniHero() {
           custom={5}
         >
           <a
-            href="#participate"
+            href="#drift-wall"
             className="inline-block bg-[#d4a24e] text-[#14120e] font-display text-sm sm:text-base uppercase tracking-tight px-8 py-3.5 hover:bg-[#c83a1a] hover:text-[#faf6ee] transition-colors duration-300"
           >
-            Participate
+            Explore
           </a>
           <a
-            href="#the-event"
+            href="#glimpses"
             className="inline-block border border-[#faf6ee]/30 text-[#faf6ee] font-sans text-xs sm:text-sm uppercase tracking-[0.15em] px-8 py-3.5 hover:border-[#d4a24e] hover:text-[#d4a24e] transition-colors duration-300"
           >
-            Learn More
+            Glimpses of Pujo
           </a>
         </motion.div>
       </div>

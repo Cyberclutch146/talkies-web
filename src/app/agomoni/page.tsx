@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { AgomoniHero } from "@/components/agomoni/AgomoniHero";
-import { AgomoniChapters } from "@/components/agomoni/AgomoniChapters";
-import { ParticipationForm } from "@/components/agomoni/ParticipationForm";
+import { AgomoniDriftSection } from "@/components/agomoni/AgomoniDriftSection";
+import { PujaDriftWall } from "@/components/agomoni/PujaDriftWall";
 import { AgomoniClosing } from "@/components/agomoni/AgomoniClosing";
 import { ChapterProgress } from "@/components/agomoni/ChapterProgress";
-import { PujaDriftWall } from "@/components/agomoni/PujaDriftWall";
+import { SmoothScroll } from "@/components/agomoni/SmoothScroll";
 
 /* ─── SEO & Open Graph ────────────────────────────────────────── */
 
@@ -34,8 +34,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { SmoothScroll } from "@/components/agomoni/SmoothScroll";
-
 /* ─── Page Component (Server Component) ──────────────────────── */
 
 export default function AgomoniPage() {
@@ -44,8 +42,7 @@ export default function AgomoniPage() {
       <div className="w-full">
         <ChapterProgress />
         <AgomoniHero />
-        <AgomoniChapters />
-        <ParticipationForm />
+        <AgomoniDriftSection />
         <PujaDriftWall />
         <AgomoniClosing />
       </div>

@@ -11,13 +11,13 @@ const columnFactor = (index: number, variance: number) => {
   return 1 + variance * pseudo;
 };
 
-interface DriftWallItem {
+export interface DriftWallItem {
   image: string;
   title?: string;
   href?: string;
 }
 
-interface DriftWallProps {
+export interface DriftWallProps {
   items?: DriftWallItem[];
   columns?: number;
   tileWidth?: number;
@@ -118,8 +118,8 @@ const DriftWall = ({
     });
   }, [columnItems, tileHeight, gap, containerHeight]);
 
-  useLayoutEffect(() => {
-    if (!containerRef.current) return;
+  useEffect(() => {
+    if (!containerRef.current || typeof ResizeObserver === 'undefined') return;
     const ro = new ResizeObserver(([entry]) => {
       setContainerHeight(entry.contentRect.height || 600);
     });
@@ -265,6 +265,7 @@ const DriftWall = ({
   const renderTile = (item: DriftWallItem, id: string, colIndex: number) => {
     const inner = (
       <span className="drift-wall__inner">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={item.image} alt={item.title ?? ''} loading="lazy" decoding="async" draggable={false} />
         <span className="drift-wall__overlay" aria-hidden="true" />
       </span>

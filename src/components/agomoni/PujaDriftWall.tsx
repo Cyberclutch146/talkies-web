@@ -164,7 +164,7 @@ export function PujaDriftWall() {
   }, [selectedPhoto, closeModal]);
 
   return (
-    <section className="relative w-full min-h-[100svh] bg-[#0d0b08] text-[#e5e0d3] overflow-hidden border-t border-[#d4a24e]/15 flex flex-col">
+    <section id="glimpses" className="relative w-full min-h-[100svh] bg-[#0d0b08] text-[#e5e0d3] overflow-hidden border-t border-[#d4a24e]/15 flex flex-col">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image

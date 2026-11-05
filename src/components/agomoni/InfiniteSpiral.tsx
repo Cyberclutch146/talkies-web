@@ -230,14 +230,13 @@ const InfiniteSpiral: React.FC<InfiniteSpiralProps> = ({
 
   const rootStyle: React.CSSProperties = {
     perspective: `${perspective}px`,
-    // @ts-expect-error CSS variable injection
     "--infinite-spiral-card-width": `${cardWidth}px`,
     "--infinite-spiral-card-height": `${cardHeight}px`,
     "--infinite-spiral-card-radius": `${cardRadius}px`,
     cursor: animationMode === "drag" || animationMode === "all" ? "grab" : "default",
     touchAction: animationMode === "drag" || animationMode === "all" ? "pan-x" : "auto",
     userSelect: animationMode === "drag" || animationMode === "all" ? "none" : "auto",
-  };
+  } as React.CSSProperties;
 
   const dragEnabled = animationMode === "drag" || animationMode === "all";
 
