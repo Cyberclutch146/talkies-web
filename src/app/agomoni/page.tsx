@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { AgomoniHero } from "@/components/agomoni/AgomoniHero";
 import { AgomoniDriftSection } from "@/components/agomoni/AgomoniDriftSection";
-import { PujaDriftWall } from "@/components/agomoni/PujaDriftWall";
 import { AgomoniClosing } from "@/components/agomoni/AgomoniClosing";
 import { ChapterProgress } from "@/components/agomoni/ChapterProgress";
 import { SmoothScroll } from "@/components/agomoni/SmoothScroll";
@@ -43,7 +42,6 @@ export default function AgomoniPage() {
         <ChapterProgress />
         <AgomoniHero />
         <AgomoniDriftSection />
-        <PujaDriftWall />
         <AgomoniClosing />
       </div>
     </SmoothScroll>

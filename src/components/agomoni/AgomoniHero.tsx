@@ -221,12 +221,6 @@ export function AgomoniHero() {
           >
             Explore
           </a>
-          <a
-            href="#glimpses"
-            className="inline-block border border-[#faf6ee]/30 text-[#faf6ee] font-sans text-xs sm:text-sm uppercase tracking-[0.15em] px-8 py-3.5 hover:border-[#d4a24e] hover:text-[#d4a24e] transition-colors duration-300"
-          >
-            Glimpses of Pujo
-          </a>
         </motion.div>
       </div>
 
