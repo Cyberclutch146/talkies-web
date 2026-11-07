@@ -69,7 +69,7 @@ export const AGOMONI_REPORT: {
     "The programme brought together students and members of the college community to celebrate the festive spirit of Agomoni — through dance, drama, music, and recitation that showcased student creativity and the essence of Bengali culture.",
   proceedings: [
     {
-      slot: "Lamplighting",
+      slot: "01",
       participants: ["Inaugural: Dona Guha", "Kasturi Bhattacharya"],
       performance: "Lamplighting / Inaugural",
       type: "Ceremony",

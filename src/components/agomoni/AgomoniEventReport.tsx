@@ -89,7 +89,6 @@ export function AgomoniEventReport() {
   const [view, setView] = useState<ViewMode>("timeline");
   const [expanded, setExpanded] = useState<string | null>("1");
   const [readObjectives, setReadObjectives] = useState<Set<number>>(new Set());
-  const [openMaterials, setOpenMaterials] = useState<Set<number>>(new Set([0]));
   const [reelMuted, setReelMuted] = useState(true);
   const [reelPaused, setReelPaused] = useState(false);
   const reelVideoRef = useRef<HTMLVideoElement>(null);
@@ -304,7 +303,7 @@ export function AgomoniEventReport() {
                 })}
               </div>
               <p className="mt-3 font-serif text-xs italic text-[#faf6ee]/50">
-                20 slots from lamplighting to dhak &amp; dhunuchi — counts include ceremonies.
+                20 slots from the opening to dhak &amp; dhunuchi — counts include ceremonies.
               </p>
             </div>
               </div>
@@ -845,50 +844,28 @@ export function AgomoniEventReport() {
               </motion.article>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:col-span-3">
-                {report.materials.map((group, index) => {
-                  const isOpen = openMaterials.has(index);
-                  return (
-                    <motion.article
-                      key={group.heading}
-                      {...fadeUp(index * 0.05)}
-                      className={`rounded-2xl border backdrop-blur-sm transition-colors ${isOpen ? "border-[#d4a24e]/40 bg-[#14120e]/70" : "border-[#faf6ee]/12 bg-[#14120e]/60"}`}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => toggleSet(setOpenMaterials, openMaterials, index)}
-                        aria-expanded={isOpen}
-                        className="flex w-full items-center gap-3 p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a24e] rounded-2xl"
-                      >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#d4a24e]/15 font-display text-sm text-[#d4a24e]" aria-hidden="true">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span className="font-sans text-[10px] font-bold uppercase tracking-[.22em] text-[#d4a24e]">{group.heading}</span>
-                        <span className="ml-auto shrink-0 font-sans text-xs text-[#faf6ee]/60" aria-hidden="true">{isOpen ? "−" : "+"}</span>
-                      </button>
-                      <AnimatePresence initial={false}>
-                        {isOpen && (
-                          <motion.div
-                            key="list"
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                            className="overflow-hidden"
-                          >
-                            <ul className="space-y-1.5 px-5 pb-5 pl-9 font-serif text-[13px] leading-relaxed text-[#faf6ee]/70">
-                              {group.items.map((item) => (
-                                <li key={item} className="relative">
-                                  <span className="absolute -left-4 top-[0.55em] h-1 w-1 rounded-full bg-[#d4a24e]/60" aria-hidden="true" />
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.article>
-                  );
-                })}
+                {report.materials.map((group, index) => (
+                  <motion.article
+                    key={group.heading}
+                    {...fadeUp(index * 0.05)}
+                    className="rounded-2xl border border-[#faf6ee]/12 bg-[#14120e]/60 backdrop-blur-sm"
+                  >
+                    <div className="flex w-full items-center gap-3 p-5 text-left rounded-2xl">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#d4a24e]/15 font-display text-sm text-[#d4a24e]" aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="font-sans text-[10px] font-bold uppercase tracking-[.22em] text-[#d4a24e]">{group.heading}</span>
+                    </div>
+                    <ul className="space-y-1.5 px-5 pb-5 pl-9 font-serif text-[13px] leading-relaxed text-[#faf6ee]/70">
+                      {group.items.map((item) => (
+                        <li key={item} className="relative">
+                          <span className="absolute -left-4 top-[0.55em] h-1 w-1 rounded-full bg-[#d4a24e]/60" aria-hidden="true" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.article>
+                ))}
               </div>
             </div>
             <motion.p {...fadeUp(0)} className="mb-14 font-serif text-xs italic leading-relaxed text-[#faf6ee]/50">
