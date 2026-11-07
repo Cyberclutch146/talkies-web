@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AgomoniDomeSection } from "@/components/agomoni/AgomoniDomeSection";
 import { AgomoniHero } from "@/components/agomoni/AgomoniHero";
 import { AgomoniDriftSection } from "@/components/agomoni/AgomoniDriftSection";
 import { AgomoniClosing } from "@/components/agomoni/AgomoniClosing";
@@ -40,6 +41,7 @@ export default function AgomoniPage() {
     <SmoothScroll>
       <div className="w-full">
         <ChapterProgress />
+        <AgomoniDomeSection />
         <AgomoniHero />
         <AgomoniDriftSection />
         <AgomoniClosing />

@@ -42,6 +42,7 @@ prisma/dev.db-journal
 
 # user uploads
 public/uploads/
+public/agomoni/glimpses/performances_originals/
 
 # vercel
 .vercel

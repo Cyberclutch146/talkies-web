@@ -41,6 +41,7 @@ export function AgomoniHero() {
         @font-face { font-family: 'Mukti'; src: url('/fonts/Mukti.ttf') format('truetype'); font-display: swap; }
       `}} />
       <section 
+        id="hero"
         onMouseMove={handleMouseMove}
         className="relative w-full min-h-[100svh] overflow-hidden bg-[#14120e] flex flex-col items-center justify-center border-b-2 border-[#d4a24e]/30"
       >
