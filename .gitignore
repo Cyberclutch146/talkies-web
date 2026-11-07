@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 .vscode/
+*.mp4
+lint_output*.txt
 
 # debug
 npm-debug.log*

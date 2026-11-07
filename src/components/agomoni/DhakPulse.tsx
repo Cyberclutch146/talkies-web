@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 /* ─── Dhak Pulse ─────────────────────────────────────────────────
    Concentric rings that pulse outward like a dhak beat.
@@ -8,12 +9,14 @@ import { motion, useReducedMotion } from "framer-motion";
 
 export function DhakPulse() {
   const prefersReduced = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { margin: "200px" });
 
   if (prefersReduced) return null;
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[1]" aria-hidden="true">
-      {[0, 1, 2].map((i) => (
+    <div ref={containerRef} className="absolute inset-0 flex items-center justify-center pointer-events-none z-[1]" aria-hidden="true">
+      {inView && [0, 1, 2].map((i) => (
         <motion.div
           key={i}
           className="absolute rounded-full border border-[#d4a24e]/20"

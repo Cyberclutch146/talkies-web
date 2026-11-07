@@ -9,12 +9,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    // Respect reduced-motion users: native scrolling is smoother for them.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const lenis = new Lenis({
-      duration: 1.2,
+      // Shorter duration avoids the "delayed / laggy" feeling while scrolling.
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
-      smoothWheel: true,
+      // Wheel smoothing is a desktop-only effect; touch scrolling stays native.
+      smoothWheel: window.matchMedia("(min-width: 1024px)").matches,
     });
 
     // Sync Lenis with GSAP ScrollTrigger

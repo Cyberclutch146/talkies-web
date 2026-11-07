@@ -197,7 +197,57 @@ main.sphere-main {
   bottom: 0;
 }
 
+/* Full-bleed hero: same sphere, scaled past the viewport, photos receding behind type. */
+.sphere-root--immersive {
+  overflow: hidden;
+}
+
+.sphere-root--immersive .item__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(20, 18, 14, 0.32);
+  pointer-events: none;
+}
+
+.sphere-root--immersive .item__image img {
+  filter: brightness(0.82) saturate(0.9) contrast(1.04);
+}
+
+.sphere-root--immersive .overlay {
+  background-image: radial-gradient(
+    ellipse 46% 52% at 50% 50%,
+    rgba(20, 18, 14, 0.62) 0%,
+    rgba(20, 18, 14, 0.3) 46%,
+    rgba(20, 18, 14, 0.08) 70%,
+    transparent 84%
+  );
+}
+
+.sphere-root--immersive .overlay--blur {
+  -webkit-mask-image: radial-gradient(ellipse 38% 42% at 50% 50%, #000 0%, transparent 74%);
+  mask-image: radial-gradient(ellipse 38% 42% at 50% 50%, #000 0%, transparent 74%);
+  backdrop-filter: blur(2px);
+}
+
+.sphere-root--immersive .edge-fade {
+  height: 72px;
+  background: linear-gradient(to bottom, transparent, rgba(20, 18, 14, 0.42));
+}
+
 body.dg-scroll-lock {
   overflow: hidden;
+}
+
+/* Display-only wall: still auto-rotates, but never grabs, never opens. */
+.sphere-root--non-interactive main.sphere-main {
+  touch-action: pan-y;
+  cursor: default;
+}
+
+.sphere-root--non-interactive .item__image {
+  cursor: default;
+  pointer-events: none;
 }
 

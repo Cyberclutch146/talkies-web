@@ -11,133 +11,133 @@ import "./InfiniteSpiral.css";
    ───────────────────────────────────────────────────────────── */
 const GALLERY_IMAGES: InfiniteSpiralItem[] = [
   {
-    src: "/agomoni/gallery/Aharna Hazra  CSE2026140.jpeg",
+    src: "/agomoni/gallery/Aharna Hazra  CSE2026140.webp",
     photographer: "Aharna Hazra",
     dept: "CSE · Roll 2026140",
     alt: "Durga Puja capture by Aharna Hazra",
   },
   {
-    src: "/agomoni/gallery/Ananya Giri  IT2026057.jpeg",
+    src: "/agomoni/gallery/Ananya Giri  IT2026057.webp",
     photographer: "Ananya Giri",
     dept: "IT · Roll 2026057",
     alt: "Durga Puja capture by Ananya Giri",
   },
   {
-    src: "/agomoni/gallery/Angikar Bose  CSEAI2026054.jpeg",
+    src: "/agomoni/gallery/Angikar Bose  CSEAI2026054.webp",
     photographer: "Angikar Bose",
     dept: "CSE-AI · Roll 2026054",
     alt: "Durga Puja capture by Angikar Bose",
   },
   {
-    src: "/agomoni/gallery/Anirban Shaw CSE2026088.jpeg",
+    src: "/agomoni/gallery/Anirban Shaw CSE2026088.webp",
     photographer: "Anirban Shaw",
     dept: "CSE · Roll 2026088",
     alt: "Durga Puja capture by Anirban Shaw",
   },
   {
-    src: "/agomoni/gallery/Ankit Karmakar.jpeg",
+    src: "/agomoni/gallery/Ankit Karmakar.webp",
     photographer: "Ankit Karmakar",
     dept: "RCCIIT",
     alt: "Durga Puja capture by Ankit Karmakar",
   },
   {
-    src: "/agomoni/gallery/deepjyoti.jpg",
+    src: "/agomoni/gallery/deepjyoti.webp",
     photographer: "Deepjyoti",
     dept: "RCCIIT",
     alt: "Durga Puja capture by Deepjyoti",
   },
   {
-    src: "/agomoni/gallery/deepjyoti1.jpg",
+    src: "/agomoni/gallery/deepjyoti1.webp",
     photographer: "Deepjyoti",
     dept: "RCCIIT",
     alt: "Durga Puja capture by Deepjyoti",
   },
   {
-    src: "/agomoni/gallery/Monjuri Paul  ECE2024074.jpeg",
+    src: "/agomoni/gallery/Monjuri Paul  ECE2024074.webp",
     photographer: "Monjuri Paul",
     dept: "ECE · Roll 2024074",
     alt: "Durga Puja capture by Monjuri Paul",
   },
   {
-    src: "/agomoni/gallery/Mouparna Gupta  CSEAI2026005.jpeg",
+    src: "/agomoni/gallery/Mouparna Gupta  CSEAI2026005.webp",
     photographer: "Mouparna Gupta",
     dept: "CSE-AI · Roll 2026005",
     alt: "Durga Puja capture by Mouparna Gupta",
   },
   {
-    src: "/agomoni/gallery/Name - Arkonil Sarkar (1st year).jpeg",
+    src: "/agomoni/gallery/Name - Arkonil Sarkar (1st year).webp",
     photographer: "Arkonil Sarkar",
     dept: "1st Year",
     alt: "Durga Puja capture by Arkonil Sarkar",
   },
   {
-    src: "/agomoni/gallery/Name-Dibyendu Maiti  Roll -cse2025028.jpeg",
+    src: "/agomoni/gallery/Name-Dibyendu Maiti  Roll -cse2025028.webp",
     photographer: "Dibyendu Maiti",
     dept: "CSE · Roll 2025028",
     alt: "Durga Puja capture by Dibyendu Maiti",
   },
   {
-    src: "/agomoni/gallery/OESHIK MAZUMDER  BCA2024028.jpeg",
+    src: "/agomoni/gallery/OESHIK MAZUMDER  BCA2024028.webp",
     photographer: "Oeshik Mazumder",
     dept: "BCA · Roll 2024028",
     alt: "Durga Puja capture by Oeshik Mazumder",
   },
   {
-    src: "/agomoni/gallery/Orly Roy CSE2025110.jpeg",
+    src: "/agomoni/gallery/Orly Roy CSE2025110.webp",
     photographer: "Orly Roy",
     dept: "CSE · Roll 2025110",
     alt: "Durga Puja capture by Orly Roy",
   },
   {
-    src: "/agomoni/gallery/Rajroop Mukhopadhyay  IT IT2026007.jpeg",
+    src: "/agomoni/gallery/Rajroop Mukhopadhyay  IT IT2026007.webp",
     photographer: "Rajroop Mukhopadhyay",
     dept: "IT · Roll 2026007",
     alt: "Durga Puja capture by Rajroop Mukhopadhyay",
   },
   {
-    src: "/agomoni/gallery/RUPKATHA DATTA  BCA2026033.jpeg",
+    src: "/agomoni/gallery/RUPKATHA DATTA  BCA2026033.webp",
     photographer: "Rupkatha Datta",
     dept: "BCA · Roll 2026033",
     alt: "Durga Puja capture by Rupkatha Datta",
   },
   {
-    src: "/agomoni/gallery/Soumik Talukder  CSE2025025.jpeg",
+    src: "/agomoni/gallery/Soumik Talukder  CSE2025025.webp",
     photographer: "Soumik Talukder",
     dept: "CSE · Roll 2025025",
     alt: "Durga Puja capture by Soumik Talukder",
   },
   {
-    src: "/agomoni/gallery/Soumojit Das CSE2025001.jpeg",
+    src: "/agomoni/gallery/Soumojit Das CSE2025001.webp",
     photographer: "Soumojit Das",
     dept: "CSE · Roll 2025001",
     alt: "Durga Puja capture by Soumojit Das",
   },
   {
-    src: "/agomoni/gallery/Sourasish Samanta  ECE2025029.jpeg",
+    src: "/agomoni/gallery/Sourasish Samanta  ECE2025029.webp",
     photographer: "Sourasish Samanta",
     dept: "ECE · Roll 2025029",
     alt: "Durga Puja capture by Sourasish Samanta",
   },
   {
-    src: "/agomoni/gallery/Sramanbrata Chatterjee ECE2025003.jpeg",
+    src: "/agomoni/gallery/Sramanbrata Chatterjee ECE2025003.webp",
     photographer: "Sramanbrata Chatterjee",
     dept: "ECE · Roll 2025003",
     alt: "Durga Puja capture by Sramanbrata Chatterjee",
   },
   {
-    src: "/agomoni/gallery/Suvranil Sinha Roy ece-2024084. (1).jpeg",
+    src: "/agomoni/gallery/Suvranil Sinha Roy ece-2024084. (1).webp",
     photographer: "Suvranil Sinha Roy",
     dept: "ECE · Roll 2024084",
     alt: "Durga Puja capture by Suvranil Sinha Roy",
   },
   {
-    src: "/agomoni/gallery/Suvranil Sinha Roy ece-2024084.jpeg",
+    src: "/agomoni/gallery/Suvranil Sinha Roy ece-2024084.webp",
     photographer: "Suvranil Sinha Roy",
     dept: "ECE · Roll 2024084",
     alt: "Durga Puja capture by Suvranil Sinha Roy",
   },
   {
-    src: "/agomoni/gallery/Swagata Biswas CSEAI2026030.jpeg",
+    src: "/agomoni/gallery/Swagata Biswas CSEAI2026030.webp",
     photographer: "Swagata Biswas",
     dept: "CSE-AI · Roll 2026030",
     alt: "Durga Puja capture by Swagata Biswas",
@@ -168,7 +168,7 @@ export function PujaDriftWall() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/agomoni/background of gallery.png"
+          src="/agomoni/background of gallery.webp"
           alt="Glimpses of Pujo Atmosphere Background"
           fill
           quality={90}

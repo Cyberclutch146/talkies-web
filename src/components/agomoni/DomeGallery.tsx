@@ -16,6 +16,10 @@ export interface DomeGalleryProps {
   minRadius?: number;
   maxRadius?: number;
   padFactor?: number;
+  /** Caps radius at `viewportHeight * heightGuardFactor`. Raise it when the wall should fill wide desktops. */
+  heightGuardFactor?: number;
+  /** Full-bleed hero treatment: larger curve, dimmed tiles, calm center. Does not change interaction. */
+  immersive?: boolean;
   overlayBlurColor?: string;
   maxVerticalRotationDeg?: number;
   dragSensitivity?: number;
@@ -27,6 +31,16 @@ export interface DomeGalleryProps {
   imageBorderRadius?: string;
   openedImageBorderRadius?: string;
   grayscale?: boolean;
+  autoplay?: boolean;
+  autoplayInterval?: number;
+  /** Rotation speed in degrees per second when `autoplay` is on. */
+  autoRotateSpeed?: number;
+  /**
+   * When false the wall is display-only: it auto-rotates (if `autoplay`),
+   * cannot be dragged with cursor/touch and tiles cannot be opened.
+   * Defaults to true for backward compatibility.
+   */
+  interactive?: boolean;
 }
 
 const DEFAULT_IMAGES: DomeGalleryImage[] = [
@@ -143,6 +157,8 @@ export default function DomeGallery({
   minRadius = 600,
   maxRadius = Infinity,
   padFactor = 0.25,
+  heightGuardFactor = 1.35,
+  immersive = false,
   overlayBlurColor = '#120F17',
   maxVerticalRotationDeg = DEFAULTS.maxVerticalRotationDeg,
   dragSensitivity = DEFAULTS.dragSensitivity,
@@ -153,7 +169,10 @@ export default function DomeGallery({
   openedImageHeight = '400px',
   imageBorderRadius = '30px',
   openedImageBorderRadius = '30px',
-  grayscale = true
+  grayscale = true,
+  autoplay = false,
+  autoRotateSpeed = 4,
+  interactive = true
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -169,6 +188,9 @@ export default function DomeGallery({
   const startPosRef = useRef<{ x: number; y: number } | null>(null);
   const draggingRef = useRef(false);
   const movedRef = useRef(false);
+  const autoRotationRAF = useRef<number | null>(null);
+  const autoRotationLastRef = useRef<number | null>(null);
+  const autoVisibleRef = useRef(true);
   const inertiaRAF = useRef<number | null>(null);
   const openingRef = useRef(false);
   const openStartedAtRef = useRef(0);
@@ -226,7 +248,7 @@ export default function DomeGallery({
           basis = aspect >= 1.3 ? w : minDim;
       }
       let radius = basis * fit;
-      const heightGuard = h * 1.35;
+      const heightGuard = h * heightGuardFactor;
       radius = Math.min(radius, heightGuard);
       radius = clamp(radius, minRadius, maxRadius);
       lockedRadiusRef.current = Math.round(radius);
@@ -274,6 +296,7 @@ export default function DomeGallery({
     minRadius,
     maxRadius,
     padFactor,
+    heightGuardFactor,
     overlayBlurColor,
     grayscale,
     imageBorderRadius,
@@ -285,6 +308,54 @@ export default function DomeGallery({
   useEffect(() => {
     applyTransform(rotationRef.current.x, rotationRef.current.y);
   }, []);
+
+  // Visibility gate so auto-rotation doesn't burn CPU off-screen.
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        autoVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          // Restart from a fresh timestamp so the wall doesn't jump.
+          autoRotationLastRef.current = null;
+        }
+      },
+      { rootMargin: '100px' }
+    );
+    io.observe(root);
+    return () => io.disconnect();
+  }, []);
+
+  // Auto-rotation — the only motion when interactive === false. Respects
+  // prefers-reduced-motion and pauses while a tile is opened.
+  useEffect(() => {
+    if (!autoplay) return;
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    if (!autoRotateSpeed || autoRotateSpeed <= 0) return;
+
+    const tick = (ts: number) => {
+      if (autoRotationLastRef.current == null) {
+        autoRotationLastRef.current = ts;
+      }
+      const dt = Math.min(0.1, Math.max(0, (ts - autoRotationLastRef.current) / 1000));
+      autoRotationLastRef.current = ts;
+
+      const paused = !autoVisibleRef.current || !!focusedElRef.current || draggingRef.current;
+      if (!paused && dt > 0) {
+        const nextY = wrapAngleSigned(rotationRef.current.y + autoRotateSpeed * dt);
+        rotationRef.current = { x: rotationRef.current.x, y: nextY };
+        applyTransform(rotationRef.current.x, nextY);
+      }
+      autoRotationRAF.current = requestAnimationFrame(tick);
+    };
+    autoRotationRAF.current = requestAnimationFrame(tick);
+    return () => {
+      if (autoRotationRAF.current != null) cancelAnimationFrame(autoRotationRAF.current);
+      autoRotationRAF.current = null;
+      autoRotationLastRef.current = null;
+    };
+  }, [autoplay, autoRotateSpeed]);
 
   const stopInertia = useCallback(() => {
     if (inertiaRAF.current) {
@@ -329,6 +400,7 @@ export default function DomeGallery({
   useGesture(
     {
       onDragStart: ({ event }) => {
+        if (!interactive) return;
         if (focusedElRef.current) return;
         stopInertia();
         const evt = event as PointerEvent | MouseEvent | TouchEvent;
@@ -340,6 +412,7 @@ export default function DomeGallery({
         startPosRef.current = { x: clientX, y: clientY };
       },
       onDrag: ({ event, last, velocity = [0, 0], direction = [0, 0], movement }) => {
+        if (!interactive) return;
         if (focusedElRef.current || !draggingRef.current || !startPosRef.current) return;
         const evt = event as PointerEvent | MouseEvent | TouchEvent;
         const clientX = 'clientX' in evt ? evt.clientX : (evt as TouchEvent).touches[0]?.clientX ?? 0;
@@ -599,17 +672,19 @@ export default function DomeGallery({
 
   const onTileClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
+      if (!interactive) return;
       if (draggingRef.current) return;
       if (movedRef.current) return;
       if (performance.now() - lastDragEndAt.current < 80) return;
       if (openingRef.current) return;
       openItemFromElement(e.currentTarget);
     },
-    [openItemFromElement]
+    [interactive, openItemFromElement]
   );
 
   const onTilePointerUp = useCallback(
     (e: React.PointerEvent<HTMLElement>) => {
+      if (!interactive) return;
       if (e.pointerType !== 'touch') return;
       if (draggingRef.current) return;
       if (movedRef.current) return;
@@ -617,7 +692,7 @@ export default function DomeGallery({
       if (openingRef.current) return;
       openItemFromElement(e.currentTarget);
     },
-    [openItemFromElement]
+    [interactive, openItemFromElement]
   );
 
   useEffect(() => {
@@ -629,7 +704,7 @@ export default function DomeGallery({
   return (
     <div
       ref={rootRef}
-      className="sphere-root"
+      className={`${immersive ? 'sphere-root sphere-root--immersive' : 'sphere-root'}${interactive ? '' : ' sphere-root--non-interactive'}`}
       style={{
         ['--segments-x' as string]: segments,
         ['--segments-y' as string]: segments,
@@ -660,11 +735,12 @@ export default function DomeGallery({
               >
                 <div
                   className="item__image"
-                  role="button"
-                  tabIndex={0}
-                  aria-label={it.alt || 'Open image'}
-                  onClick={onTileClick}
-                  onPointerUp={onTilePointerUp}
+                  role={interactive ? 'button' : 'img'}
+                  tabIndex={interactive ? 0 : -1}
+                  aria-label={it.alt || (interactive ? 'Open image' : undefined)}
+                  aria-hidden={interactive ? undefined : true}
+                  onClick={interactive ? onTileClick : undefined}
+                  onPointerUp={interactive ? onTilePointerUp : undefined}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={it.src} draggable={false} alt={it.alt} loading="lazy" decoding="async" />

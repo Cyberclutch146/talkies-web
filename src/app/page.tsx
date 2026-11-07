@@ -101,7 +101,7 @@ export default function HomePage() {
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#14120e]/30 via-transparent to-[#14120e]/60 pointer-events-none" />
 
         {/* Top dateline */}
-        <div className="absolute top-0 left-0 right-0 z-10 px-4 sm:px-8 py-4 flex flex-col sm:flex-row flex-wrap items-center justify-between gap-2 text-[9px] sm:text-xs font-sans uppercase tracking-[0.18em] text-[#e5e0d3]/80">
+        <div className="absolute top-0 left-0 right-0 z-10 px-4 sm:px-8 py-4 flex flex-col sm:flex-row flex-wrap items-center justify-between gap-2 text-[10px] sm:text-sm font-sans uppercase tracking-[0.18em] text-[#e5e0d3]/80">
           <div className="flex items-center gap-2">
             <span className="text-[#c83a1a]">✦</span>
             <span className="font-bold">EST. 2023</span>
@@ -126,22 +126,22 @@ export default function HomePage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <span className="mb-2 sm:mb-4 font-sans text-[10px] sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.5em] text-[#e5e0d3] mix-blend-difference text-center font-bold">
+          <span className="mb-3 sm:mb-5 font-sans text-xs sm:text-base uppercase tracking-[0.3em] sm:tracking-[0.5em] text-[#e5e0d3] mix-blend-difference text-center font-bold">
             PRESENTED BY
           </span>
-          <h1 className="font-display text-[17vw] sm:text-[14vw] lg:text-[12vw] leading-[0.85] tracking-tighter uppercase text-[#e5e0d3] mix-blend-difference text-center drop-shadow-2xl">
+          <h1 className="font-display text-[19vw] sm:text-[15vw] lg:text-[13.5vw] leading-[0.85] tracking-tighter uppercase text-[#e5e0d3] mix-blend-difference text-center drop-shadow-2xl">
             RCC
             <br />
             TALKIES
           </h1>
-          <p className="mt-4 sm:mt-6 font-sans text-[9px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#e5e0d3]/70 mix-blend-difference text-center max-w-[90%] mx-auto leading-relaxed">
+          <p className="mt-5 sm:mt-8 font-sans text-[11px] sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#e5e0d3]/70 mix-blend-difference text-center max-w-[90%] mx-auto leading-relaxed">
             THE OFFICIAL JOURNALISM CLUB OF RCCIIT
           </p>
         </motion.div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none animate-bounce">
-          <span className="text-[9px] sm:text-[10px] font-sans uppercase tracking-[0.25em] text-[#e5e0d3]/70 font-bold">
+          <span className="text-[10px] sm:text-xs font-sans uppercase tracking-[0.25em] text-[#e5e0d3]/70 font-bold">
             SCROLL DOWN
           </span>
           <div className="w-[1px] h-6 sm:h-8 bg-[#e5e0d3]/40" />

@@ -1,14 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState, useMemo } from "react";
+import { useReducedMotion, useInView } from "framer-motion";
+import { useEffect, useRef, useState, useMemo } from "react";
+import type { CSSProperties } from "react";
 
 /* ─── Shiuli Petal (Night Jasmine) ─────────────────────────────────
    Tiny white-orange flowers that drift down in pre-Puja mornings.
    Each petal is a simple CSS shape — no raster images needed.       */
 
 interface Petal {
-  id: number;
   x: number;        // start % from left
   delay: number;     // animation delay
   duration: number;  // fall duration
@@ -19,8 +19,7 @@ interface Petal {
 }
 
 function generatePetals(count: number): Petal[] {
-  return Array.from({ length: count }, (_, i) => ({
-    id: i,
+  return Array.from({ length: count }, () => ({
     x: Math.random() * 100,
     delay: Math.random() * 8,
     duration: 8 + Math.random() * 10,
@@ -31,9 +30,21 @@ function generatePetals(count: number): Petal[] {
   }));
 }
 
+// Compositor-friendly keyframes (transform + opacity only).
+const keyframes = `
+@keyframes shiuli-fall {
+  0%   { transform: translate3d(0, 0, 0) rotate(var(--petal-rot)); opacity: 0; }
+  8%   { opacity: var(--petal-op); }
+  50%  { transform: translate3d(var(--petal-drift), 50vh, 0) rotate(calc(var(--petal-rot) + 180deg)); opacity: var(--petal-op); }
+  100% { transform: translate3d(calc(var(--petal-drift) * -0.5), 105vh, 0) rotate(calc(var(--petal-rot) + 360deg)); opacity: 0; }
+}
+`;
+
 export function ShiuliFall({ count = 20 }: { count?: number }) {
   const prefersReduced = useReducedMotion();
   const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { margin: "200px" });
 
   useEffect(() => {
     setMounted(true);
@@ -41,33 +52,25 @@ export function ShiuliFall({ count = 20 }: { count?: number }) {
 
   const petals = useMemo(() => generatePetals(count), [count]);
 
-  if (prefersReduced || !mounted) return null;
+  if (prefersReduced) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-[2]" aria-hidden="true">
-      {petals.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute"
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none z-[2]" aria-hidden="true">
+      <style dangerouslySetInnerHTML={{ __html: keyframes }} />
+      {mounted && inView && petals.map((p, i) => (
+        <div
+          key={i}
+          className="absolute will-change-transform"
           style={{
             left: `${p.x}%`,
             top: "-20px",
             width: p.size,
             height: p.size,
-          }}
-          initial={{ y: -20, x: 0, rotate: p.rotation, opacity: 0 }}
-          animate={{
-            y: ["0vh", "105vh"],
-            x: [0, p.drift, -p.drift / 2, p.drift / 3],
-            rotate: [p.rotation, p.rotation + 360],
-            opacity: [0, p.opacity, p.opacity, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+            ["--petal-rot" as string]: `${p.rotation}deg`,
+            ["--petal-drift" as string]: `${p.drift}px`,
+            ["--petal-op" as string]: p.opacity,
+            animation: `shiuli-fall ${p.duration}s linear ${p.delay}s infinite`,
+          } as CSSProperties}
         >
           {/* Shiuli flower: white petals + orange stem */}
           <svg
@@ -86,7 +89,7 @@ export function ShiuliFall({ count = 20 }: { count?: number }) {
             {/* Center (orange stem dot) */}
             <circle cx="10" cy="10" r="2.5" fill="#e07028" />
           </svg>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
