@@ -50,6 +50,9 @@ importers:
       ogl:
         specifier: ^1.0.11
         version: 1.0.11
+      pdfjs-dist:
+        specifier: 5.4.296
+        version: 5.4.296
       react:
         specifier: 19.2.8
         version: 19.2.8

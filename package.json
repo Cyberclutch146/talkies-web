@@ -24,6 +24,7 @@
     "motion": "^13.1.1",
     "next": "^16.3.8",
     "ogl": "^1.0.11",
+    "pdfjs-dist": "5.4.296",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-pageflip": "^2.0.3",
