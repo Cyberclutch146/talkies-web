@@ -1,0 +1,13 @@
+.tech-text {
+  position: relative;
+  width: 100%;
+  /* Fallback before the canvas measures itself; replaced by an inline height. */
+  height: 76px;
+  overflow: hidden;
+}
+
+.tech-text canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

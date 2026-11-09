@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 .vscode/
+*.mp4
+lint_output*.txt
 
 # debug
 npm-debug.log*
@@ -42,6 +44,7 @@ prisma/dev.db-journal
 
 # user uploads
 public/uploads/
+public/agomoni/glimpses/performances_originals/
 
 # vercel
 .vercel

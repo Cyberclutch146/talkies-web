@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {
   UnifrakturMaguntia,
-  Pirata_One,
   Newsreader,
   Playfair_Display,
   Anton,
@@ -9,11 +8,6 @@ import {
   Galada,
   Tiro_Bangla,
   Atma,
-  Noto_Serif_Bengali,
-  Mina,
-  Baloo_Da_2,
-  Anek_Bangla,
-  Hind_Siliguri,
 } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
@@ -27,13 +21,7 @@ const unifraktur = UnifrakturMaguntia({
   subsets: ["latin"],
   variable: "--font-gothic",
   display: "swap",
-});
-
-const pirata = Pirata_One({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-pirata",
-  display: "swap",
+  preload: false,
 });
 
 const newsreader = Newsreader({
@@ -47,6 +35,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display-serif",
   display: "swap",
+  preload: false,
 });
 
 const anton = Anton({
@@ -54,6 +43,7 @@ const anton = Anton({
   subsets: ["latin"],
   variable: "--font-anton",
   display: "swap",
+  preload: false,
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -67,6 +57,7 @@ const galada = Galada({
   subsets: ["bengali", "latin"],
   variable: "--font-bengali-display",
   display: "swap",
+  preload: false,
 });
 
 const tiroBangla = Tiro_Bangla({
@@ -75,6 +66,7 @@ const tiroBangla = Tiro_Bangla({
   style: ["normal", "italic"],
   variable: "--font-bengali-serif",
   display: "swap",
+  preload: false,
 });
 
 const atma = Atma({
@@ -82,41 +74,7 @@ const atma = Atma({
   subsets: ["bengali", "latin"],
   variable: "--font-bengali-accent",
   display: "swap",
-});
-
-const notoBengali = Noto_Serif_Bengali({
-  weight: ["400", "700"],
-  subsets: ["bengali"],
-  variable: "--font-bengali-noto",
-  display: "swap",
-});
-
-const mina = Mina({
-  weight: ["400", "700"],
-  subsets: ["bengali"],
-  variable: "--font-bengali-mina",
-  display: "swap",
-});
-
-const baloo = Baloo_Da_2({
-  weight: ["400", "700"],
-  subsets: ["bengali"],
-  variable: "--font-bengali-baloo",
-  display: "swap",
-});
-
-const anek = Anek_Bangla({
-  weight: "400",
-  subsets: ["bengali"],
-  variable: "--font-bengali-anek",
-  display: "swap",
-});
-
-const hind = Hind_Siliguri({
-  weight: ["400", "700"],
-  subsets: ["bengali"],
-  variable: "--font-bengali-hind",
-  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -141,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${unifraktur.variable} ${pirata.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} ${galada.variable} ${tiroBangla.variable} ${atma.variable} ${notoBengali.variable} ${mina.variable} ${baloo.variable} ${anek.variable} ${hind.variable} h-full antialiased`}
+      className={`${unifraktur.variable} ${newsreader.variable} ${playfair.variable} ${anton.variable} ${spaceGrotesk.variable} ${galada.variable} ${tiroBangla.variable} ${atma.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-serif bg-[#e5e0d3] text-[#14120e] selection:bg-[#14120e] selection:text-[#e5e0d3] overflow-x-hidden">
         <a href="#main-content" className="skip-link">

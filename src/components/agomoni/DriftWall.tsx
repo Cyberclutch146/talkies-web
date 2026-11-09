@@ -11,13 +11,13 @@ const columnFactor = (index: number, variance: number) => {
   return 1 + variance * pseudo;
 };
 
-interface DriftWallItem {
+export interface DriftWallItem {
   image: string;
   title?: string;
   href?: string;
 }
 
-interface DriftWallProps {
+export interface DriftWallProps {
   items?: DriftWallItem[];
   columns?: number;
   tileWidth?: number;
@@ -41,6 +41,7 @@ interface DriftWallProps {
   overlayColor?: string;
   className?: string;
   style?: React.CSSProperties;
+  onItemClick?: (item: DriftWallItem) => void;
 }
 
 const DEFAULT_ITEMS: DriftWallItem[] = Array.from({ length: 15 }, (_, i) => {
@@ -75,7 +76,8 @@ const DriftWall = ({
   grayscale = false,
   overlayColor = '#060010',
   className = '',
-  style
+  style,
+  onItemClick
 }: DriftWallProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const planeRef = useRef<HTMLDivElement>(null);
@@ -89,6 +91,7 @@ const DriftWall = ({
   const pointerRef = useRef({ x: 0, y: 0 });
   const pointerDampedRef = useRef({ x: 0, y: 0 });
   const lastTsRef = useRef<number | null>(null);
+  const visibleRef = useRef(true);
 
   const [containerHeight, setContainerHeight] = useState(600);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -118,8 +121,8 @@ const DriftWall = ({
     });
   }, [columnItems, tileHeight, gap, containerHeight]);
 
-  useLayoutEffect(() => {
-    if (!containerRef.current) return;
+  useEffect(() => {
+    if (!containerRef.current || typeof ResizeObserver === 'undefined') return;
     const ro = new ResizeObserver(([entry]) => {
       setContainerHeight(entry.contentRect.height || 600);
     });
@@ -153,7 +156,25 @@ const DriftWall = ({
   );
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting;
+      },
+      { rootMargin: '300px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
     const animate = (ts: number) => {
+      if (!visibleRef.current) {
+        lastTsRef.current = null;
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
       if (lastTsRef.current === null) lastTsRef.current = ts;
       const dt = Math.min(0.05, Math.max(0, ts - lastTsRef.current) / 1000);
       lastTsRef.current = ts;
@@ -265,6 +286,7 @@ const DriftWall = ({
   const renderTile = (item: DriftWallItem, id: string, colIndex: number) => {
     const inner = (
       <span className="drift-wall__inner">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={item.image} alt={item.title ?? ''} loading="lazy" decoding="async" draggable={false} />
         <span className="drift-wall__overlay" aria-hidden="true" />
       </span>
@@ -274,7 +296,8 @@ const DriftWall = ({
       'data-tile-id': id,
       'data-col': colIndex,
       onFocus: () => activate(id, colIndex),
-      onBlur: release
+      onBlur: release,
+      onClick: onItemClick ? () => onItemClick(item) : undefined
     };
     if (item.href) {
       return (
@@ -284,7 +307,23 @@ const DriftWall = ({
       );
     }
     return (
-      <div key={id} tabIndex={0} role="button" aria-label={item.title ?? 'tile'} {...commonProps}>
+      <div
+        key={id}
+        tabIndex={0}
+        role="button"
+        aria-label={item.title ?? 'tile'}
+        {...commonProps}
+        onKeyDown={
+          onItemClick
+            ? e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onItemClick(item);
+                }
+              }
+            : undefined
+        }
+      >
         {inner}
       </div>
     );
