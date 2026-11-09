@@ -33,15 +33,14 @@ export const AGOMONI_REPORT: {
   submittedBy: readonly { name: string; role: string }[];
   stats: readonly { value: string; label: string }[];
 } = {
-  eyebrow: "Event Report · Agomoni 2026",
-  title: "Event Report",
+  eyebrow: "The Celebration · Agomoni 2026",
+  title: "About the Event",
   edition: "Agomoni 2026",
   standfirst:
     "A pre-Durga Puja celebration of Bengali culture, art and togetherness — organized and hosted by RCC Talkies and the Art and Cultural Club of RCCIIT.",
 
   meta: [
     { label: "Date", value: "9 October 2026" },
-    { label: "Time", value: "14:00 – 17:00" },
     { label: "Venue", value: "Dr. Jaya Deb Roy Auditorium" },
     { label: "Organized & Hosted By", value: "RCC Talkies and Art and Cultural Club of RCCIIT" },
   ] as const,
