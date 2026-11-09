@@ -25,6 +25,7 @@
 *.pem
 .vscode/
 *.mp4
+!public/agomoni/agomoni-reel.mp4
 lint_output*.txt
 
 # debug
