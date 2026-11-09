@@ -43,19 +43,48 @@ export function AgomoniEventReport() {
   const reelVideoRef = useRef<HTMLVideoElement>(null);
   const report = AGOMONI_REPORT;
 
-  // Keep the reel element in sync with the play/pause state; reduced-motion
-  // visitors get a paused reel with the play button.
+  // Sync mute state and try initial autoplay on mount
   useEffect(() => {
     const v = reelVideoRef.current;
     if (!v) return;
     v.muted = reelMuted;
-    if (reelPaused || prefersReduced) {
+    if (prefersReduced) {
       v.pause();
-      if (prefersReduced) setReelPaused(true);
-    } else {
-      v.play().catch(() => setReelPaused(true));
+      setReelPaused(true);
+      return;
     }
-  }, [reelPaused, reelMuted, prefersReduced]);
+    const playPromise = v.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => setReelPaused(false))
+        .catch(() => {
+          // Autoplay blocked by browser policy; show play button
+          setReelPaused(true);
+        });
+    }
+  }, [prefersReduced, reelMuted]);
+
+  const togglePlay = () => {
+    const v = reelVideoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play()
+        .then(() => setReelPaused(false))
+        .catch(() => setReelPaused(true));
+    } else {
+      v.pause();
+      setReelPaused(true);
+    }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const v = reelVideoRef.current;
+    if (!v) return;
+    const next = !reelMuted;
+    v.muted = next;
+    setReelMuted(next);
+  };
 
   const fadeUp = (delay: number) => ({
     initial: prefersReduced ? {} : { opacity: 0, y: 20 },
@@ -213,10 +242,13 @@ export function AgomoniEventReport() {
                     aria-hidden="true"
                   />
                   <Device label="Agomoni 2026 highlights reel — playing in the page" className="relative">
-                    <div className="relative h-full w-full overflow-hidden bg-black">
+                    <div
+                      className="relative h-full w-full cursor-pointer overflow-hidden bg-black"
+                      onClick={togglePlay}
+                    >
                       <video
                         ref={reelVideoRef}
-                        className="absolute inset-0 h-full w-full cursor-pointer object-contain"
+                        className="absolute inset-0 h-full w-full object-contain"
                         src="/agomoni/agomoni-reel.mp4"
                         poster="/agomoni/glimpses/performances/NIL_0219.webp"
                         autoPlay
@@ -224,7 +256,8 @@ export function AgomoniEventReport() {
                         muted={reelMuted}
                         playsInline
                         preload="auto"
-                        onClick={() => setReelPaused((p) => !p)}
+                        onPlay={() => setReelPaused(false)}
+                        onPause={() => setReelPaused(true)}
                         aria-label="Agomoni 2026 reel — tap to pause or play"
                       />
 
@@ -244,21 +277,24 @@ export function AgomoniEventReport() {
 
                       {/* paused indicator */}
                       {reelPaused && (
-                        <span className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
-                          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#d4a24e] text-[#14120e] shadow-[0_8px_24px_rgba(0,0,0,0.45)]">
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          <span
+                            className="flex h-14 w-14 items-center justify-center rounded-full bg-[#d4a24e] text-[#14120e] shadow-[0_8px_24px_rgba(0,0,0,0.45)] transition-transform hover:scale-110"
+                            aria-hidden="true"
+                          >
                             <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-current" aria-hidden="true">
                               <path d="M8 5.5v13l11-6.5-11-6.5Z" />
                             </svg>
                           </span>
-                        </span>
+                        </div>
                       )}
 
                       {/* mute / unmute */}
                       <button
                         type="button"
-                        onClick={() => setReelMuted((m) => !m)}
+                        onClick={toggleMute}
                         aria-label={reelMuted ? "Unmute the reel" : "Mute the reel"}
-                        className="absolute bottom-32 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white ring-1 ring-white/30 backdrop-blur-sm transition-colors hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a24e]"
+                        className="absolute bottom-32 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white ring-1 ring-white/30 backdrop-blur-sm transition-colors hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a24e]"
                       >
                         {reelMuted ? (
                           <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
